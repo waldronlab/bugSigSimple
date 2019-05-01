@@ -1,0 +1,163 @@
+# Installing packages
+install.packages("devtools")
+devtools::install_github("waldronlab/bugSigSimple")
+#loading library
+library (bugSigSimple)
+dat <- readCurationSheet("/Users/ftzohra22/Desktop/School/Spring 2019/capstone/capstone analysis/Microbial signatures curation - signatures.tsv")
+dim(dat)
+
+#subsetting all signatures by curator
+my.dat <- subsetByCurator(dat, curator="Fatima Zohra")
+# all conditions curated by curator
+table(my.dat[,"condition"])
+my.dat[,"condition"] <- sub(" $", "", my.dat[,"condition"])
+
+#restricting data to certain conditions for analysis
+ind <- my.dat[,"condition"] %in% c("chronic obstructive pulmonary disease","autism","drug dependence", "schizophrenia", "anorexia nervosa", "anxiety disorder", "post-traumic stress disorder", "attention deficit hyperactivity disorder", "psychosis", "gestational diabetes","alzheimer's disease","parkinson's disease","stimulus or stress design")
+my.dat2 <- my.dat[!ind,]
+dim(my.dat2)
+table(my.dat2[,"condition"])
+
+#removing one study from analysis
+my.pubmed.ids <- c("28035686","28620208")
+ind <- my.dat2[,"PMID"] %in% my.pubmed.ids
+my.dat3 <- my.dat2[!ind, ]
+
+# list of conditions included in analysis 
+table(my.dat3[,"condition"])
+
+#overall frequencies of taxa in up and down
+getMostFrequentTaxa(my.dat3, n=30)
+getMostFrequentTaxa(my.dat3,sig.type= "UP")
+getMostFrequentTaxa(my.dat3,sig.type= "DOWN")
+
+
+
+#binomial test in UP
+binom.test(x=4, n=6)
+binom.test(x=4, n=4)
+binom.test(x=4, n=4)
+binom.test(x=4, n=5)
+binom.test(x=4, n=5)
+binom.test(x=3, n=4)
+binom.test(x=3, n=5)
+binom.test(x=3, n=3)
+binom.test(x=3, n=3)
+binom.test(x=3, n=4)
+
+#binomial test in Down
+binom.test(x=7, n=8)
+binom.test(x=6, n=6)
+binom.test(x=4, n=5)
+binom.test(x=4, n=5)
+binom.test(x=3, n=5)
+binom.test(x=3, n=5)
+binom.test(x=2, n=6)
+binom.test(x=2, n=2)
+binom.test(x=2, n=3)
+binom.test(x=2, n=2)
+
+#adjusting p value by Bonferroni correction
+pvals <- c(0.6875, 0.125, 0.375, 0.625, 1, 0.25, 0.07031, 0.03125, 0.6875, 0.5)
+adj.pvals <- p.adjust(pvals, method="bonferroni")
+adj.pvals
+
+#subsutting only on MDD
+ind <- my.dat3[,"condition"] %in% c("bipolar disorder")
+my.dat.mdd <- my.dat3[!ind,]
+dim(my.dat.mdd)
+table(my.dat.mdd[,"condition"])
+
+getMostFrequentTaxa(my.dat.mdd, n=20)
+getMostFrequentTaxa(my.dat.mdd,sig.type= "UP")
+getMostFrequentTaxa(my.dat.mdd,sig.type= "DOWN")
+
+#binomial test in UP
+binom.test(x=3, n=3)
+binom.test(x=3, n=3)
+binom.test(x=3, n=4)
+binom.test(x=2, n=4)
+binom.test(x=2, n=3)
+binom.test(x=2, n=2)
+binom.test(x=2, n=4)
+binom.test(x=2, n=3)
+binom.test(x=2, n=4)
+binom.test(x=2, n=2)
+
+#binomial test in Down
+binom.test(x=4, n=5)
+binom.test(x=4, n=4)
+binom.test(x=4, n=5)
+binom.test(x=3, n=5)
+binom.test(x=2, n=4)
+binom.test(x=2, n=4)
+binom.test(x=2, n=4)
+binom.test(x=2, n=4)
+binom.test(x=2, n=2)
+binom.test(x=2, n=2)
+
+#adjusting p value by FDR correction
+pvals <- c(0.6875, 0.125, 0.375, 0.625, 1, 0.25, 0.07031, 0.03125, 0.6875, 0.5)
+adj.pvals <- p.adjust(pvals, method="fdr")
+adj.pvals
+
+
+#subsutting only on MDD
+ind <- my.dat3[,"condition"] %in% c("unipolar depression")
+my.dat.bd <- my.dat3[!ind,]
+dim(my.dat.bd)
+table(my.dat.bd[,"condition"])
+
+getMostFrequentTaxa(my.dat.bd, n=20)
+getMostFrequentTaxa(my.dat.bd,sig.type= "UP")
+getMostFrequentTaxa(my.dat.bd,sig.type= "DOWN")
+
+#binomial test in UP
+binom.test(x=4, n=4)
+binom.test(x=4, n=4)
+binom.test(x=4, n=4)
+binom.test(x=2, n=2)
+binom.test(x=2, n=2)
+binom.test(x=2, n=2)
+binom.test(x=2, n=3)
+binom.test(x=1, n=2)
+
+
+#binomial test in Down
+binom.test(x=4, n=5)
+binom.test(x=4, n=4)
+binom.test(x=4, n=5)
+binom.test(x=3, n=5)
+binom.test(x=2, n=4)
+binom.test(x=2, n=4)
+binom.test(x=2, n=4)
+binom.test(x=2, n=4)
+binom.test(x=2, n=2)
+binom.test(x=2, n=2)
+
+#faecalibacterium
+taxa.mdd <- c(up=1/7, down=4/7)
+taxa.bd <- c(up=0/4, down=3/4)
+barplot(rbind(taxa.mdd, taxa.bd), beside=TRUE, col=c("red","blue"), legend=TRUE, args.legend=list(x="topleft", legend=c("major depressive disorder", "bipolar disorder")), ylab="relative frequency", main="Frequency of Faecalibacterium")
+
+#Actinobacteria
+taxa.mdd <- c(up=2/7, down=2/7)
+taxa.bd <- c(up=2/4, down=0/4)
+barplot(rbind(taxa.mdd, taxa.bd), beside=TRUE, col=c("red","blue"), legend=TRUE, args.legend=list(x="topright", cex = 0.70, legend=c("major depressive disorder", "bipolar disorder")), ylab="relative frequency", main="Frequency of Actinobacteria")
+
+#Bacteroides
+
+taxa.mdd <- c(up=2/7, down=2/7)
+taxa.bd <- c(up=0/4, down=2/4)
+barplot(rbind(taxa.mdd, taxa.bd), beside=TRUE, col=c("red","blue"), legend=TRUE, args.legend=list(x="topleft", cex = 0.80, legend=c("major depressive disorder", "bipolar disorder")), ylab="relative frequency", main="Frequency of Bacteroides")
+
+#Ruminococcaceae
+taxa.mdd <- c(up=0/7, down=4/7)
+taxa.bd <- c(up=0/4, down=2/4)
+barplot(rbind(taxa.mdd, taxa.bd), beside=TRUE, col=c("red","blue"), legend=TRUE, args.legend=list(x="topleft", cex = 0.75, legend=c("major depressive disorder", "bipolar disorder")), ylab="relative frequency", main="Frequency of Ruminococcaceae")
+
+
+
+
+
+
