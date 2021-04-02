@@ -11,7 +11,10 @@ importFrom("utils", "available.packages", "browseURL",
 export( 
     extractSignatures,
     getMostFrequentTaxa,
-    readCurationSheet,
     subsetByCondition,
-    subsetByCurator
+    subsetByCurator,
+    frequencySigs,
+    extractBugSigs,
+    simulateSignatures,
+    getCriticalN
 )

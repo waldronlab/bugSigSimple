@@ -7,35 +7,122 @@
 # 
 ###########################################################
 
-readCurationSheet <- function(data.file)
-{
-    dat <- read.delim(data.file, skip=1, as.is=TRUE)
-    ind <- dat[,"PMID"] != ""
-    dat <- dat[ind,]
-    dat <- dat[-1,]
-    return(dat)
-}
 
-subsetByCondition <- function(dat, condition, condition.column="condition")
+#' Subset a data.frame of signatures by condition of interest
+#'
+#' @param dat data.frame produced by \code{\link{bugSigDB::importBugSigDB}}
+#' @param condition health condition or disease of interest to subset by
+#' @param condition.column name of column of conditions in data.frame
+#'
+#' @return data.frame subsetted by condition
+#' @export
+#'
+#' @examples
+#' full.dat <- bugSigDB::importBugSigDB()
+#' obese.dat <- subsetByCondition(full.dat, condition="obesity")
+
+subsetByCondition <- function(dat, condition, condition.column="Condition")
 {
     ind <- dat[,condition.column] == condition
     return(dat[ind,])
 }
 
-subsetByCurator <- function(dat, curator, curator.column="curator")
+#' Subset a data.frame of signatures by curator
+#'
+#' @param dat data.frame produced by \code{\link{bugSigDB::importBugSigDB}}
+#' @param curator curator to subset by
+#' @param curator.column name of column of curators in data.frame
+#'
+#' @return data.frame subsetted by curator
+#' @export
+#'
+#' @examples
+#' full.dat <- bugSigDB::importBugSigDB()
+#' fatima.dat <- subsetByCurator(full.dat, curator="Fatima Zohra")
+
+subsetByCurator <- function(dat, curator, curator.column="Curator")
 {
     ind <- dat[,curator.column] == curator
     return(dat[ind,])
 }
 
-extractSignatures <- function(dat)
+#' Create a list of signatures
+#' @param dat A table such as output by \code{\link{bugSigDB::importBugSigDB}}
+#' 
+#' @param tax.level Either "mixed" or any subset of c("kingdom", "phylum", "class", "order", "family", "genus", "species", "strain"). This full vector is equivalent to "mixed". 
+#' @param exact.tax.level If TRUE, return only the exact taxonomic levels specified by tax.level. FALSE is not working.
+#' @param col Column name containing signatures. "MetaPhlAn taxon names" for bugsigdb.org. 
+#'
+#' @export
+#' @return 
+#' A list of signatures, with PMIDs for list element names 
+#' @examples 
+#' full.dat <- importBugSigDB()
+#' extractSignatures(full.dat, tax.level="genus", exact.tax.level=TRUE, col = "MetaPhlAn taxon names")
+#' # extractSignatures(full.dat, tax.level="order", exact.tax.level=FALSE, col = "MetaPhlAn taxon names")
+
+#Will eventually be imported from bugSigDB package but it's not there yet
+extractSignatures <- function(dat, tax.level = "mixed", 
+                              exact.tax.level = TRUE, col = "MetaPhlAn taxon names")
 {
-    ind <- grep("^taxon.1$", colnames(dat))
-    ind <- ind:ncol(dat)
-    msc <- apply(as.matrix(dat[,ind]), 1, function(x) x[!is.na(x) & x != ""])
-    return(msc)
+    stopifnot(is.character(tax.level))
+    if("mixed" %in% tax.level) tax.level <- "mixed"
+    else if(!all(tax.level %in% TAX.LEVELS))
+        stop("tax.level must be a subset of { ", 
+             paste(TAX.LEVELS, collapse = ", "), " }")
+    
+    if(is.null(col))
+    {    
+        ind <- grep("^taxon.1$", colnames(dat))
+        ind <- ind:ncol(dat)
+        msc <- apply(as.matrix(dat[,ind]), 1, function(x) x[!is.na(x) & x != ""])
+    }
+    else msc <- strsplit(dat[,col], ",")    
+    
+    msc <- lapply(msc, unique)
+    n <- rle(dat[,"PMID"])$lengths
+    n <- unlist(lapply(n, seq_len))
+    names(msc) <- paste0("PMID:", dat[,"PMID"], "_", n)
+    
+    dupl.ind <- duplicated(names(msc))
+    dupl.pmids <- names(msc)[dupl.ind]
+    dupl.pmids <- sub("_[0-9]+$", "", dupl.pmids) 
+    dupl.pmids <- sub("^PMID:", "", dupl.pmids) 
+    dupl.pmids <- unique(dupl.pmids)
+    for(pmid in dupl.pmids)
+    {
+        pstr <- paste0("PMID:", pmid, "_")
+        ind <- grep(pstr, names(msc))
+        names(msc)[ind] <- paste0(pstr, seq_along(ind))
+    } 
+    
+    if(tax.level[1] != "mixed")
+    {
+        if(!exact.tax.level)
+            msc <- lapply(msc, .extractTaxLevelSig, tax.level = tax.level)
+        
+        bugs <- unique(unlist(msc))
+        ind <- lapply(msc, function(s) match(s, bugs))
+        istl <- vapply(bugs, .isTaxLevel, logical(1), tax.level = tax.level)
+        subind <- istl[unlist(ind)]
+        subind <- relist(subind, ind)
+        msc <- mapply(`[`, msc, subind)
+    }
+    return(msc) 
 }
 
+
+#' Get the most frequently occurring taxa in a table of signatures
+#' @param dat A table such as output by \code{\link{bugSigDB::importBugSigDB}}
+#' @param n Number of most frequently occurring taxa to return
+#' @param sig.type UP for increased in cases relative to controls, DOWN for decreased in cases relative to controls, BOTH for either
+#'
+#' @export
+#' @return 
+#' A list of signatures, with PMIDs for list element names 
+#' @examples 
+#' full.dat <- bugSigDB::importBugSigDB()
+#' getMostFrequentTaxa(full.dat)
 getMostFrequentTaxa <- function(dat, n=10, sig.type=c("BOTH", "UP", "DOWN"))
 {
     sig.type <- match.arg(sig.type)
