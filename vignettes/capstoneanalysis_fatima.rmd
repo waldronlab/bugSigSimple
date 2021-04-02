@@ -1,8 +1,18 @@
-# Installing packages
+# Setup phase
+Install and load relevant packages
+```{r, eval=FALSE}
 install.packages("devtools")
 devtools::install_github("waldronlab/bugSigSimple")
-#loading library
+devtools::install_github("waldronlab/bugSigDB")
+```
+
+Load bugSigSimple and bugSigDB
+```{r}
+#library(bugSigDB)
 library (bugSigSimple)
+```
+
+
 dat <- readCurationSheet("/Users/ftzohra22/Desktop/School/Spring 2019/capstone/capstone analysis/Microbial signatures curation - signatures.tsv")
 dim(dat)
 

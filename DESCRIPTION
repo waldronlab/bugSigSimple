@@ -5,8 +5,9 @@ Title: Simple exploratory analysis of curated microbe signatures
 Author: Ludwig Geistlinger, Levi Waldron
 Maintainer: Ludwig Geistlinger <ludwig.geistlinger@sph.cuny.edu>
 Depends: R(>= 3.5.0)
-Imports:  
+Imports: 
 Suggests: BiocStyle, knitr, rmarkdown
 Description: Simple exploratory analysis of curated microbe signatures  
 License: Artistic-2.0
 VignetteBuilder: knitr
+RoxygenNote: 7.1.1
