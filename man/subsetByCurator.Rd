@@ -7,7 +7,7 @@
 subsetByCurator(dat, curator, curator.column = "Curator")
 }
 \arguments{
-\item{dat}{data.frame produced by \code{\link{bugSigDB::importBugSigDB}}}
+\item{dat}{data.frame produced by \code{\link{bugsigdbr::importBugSigDB}}}
 
 \item{curator}{curator to subset by}
 

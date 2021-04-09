@@ -6,7 +6,7 @@ Author: Ludwig Geistlinger, Levi Waldron
 Maintainer: Ludwig Geistlinger <ludwig.geistlinger@sph.cuny.edu>
 Depends: R(>= 3.5.0)
 Remotes: github::waldronlab/bugsigdbr
-Imports: 
+Imports: dplyr
 Suggests: BiocStyle, knitr, rmarkdown
 Description: Simple exploratory analysis of curated microbe signatures  
 License: Artistic-2.0

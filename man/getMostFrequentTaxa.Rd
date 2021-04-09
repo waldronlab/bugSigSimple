@@ -4,14 +4,21 @@
 \alias{getMostFrequentTaxa}
 \title{Get the most frequently occurring taxa in a table of signatures}
 \usage{
-getMostFrequentTaxa(dat, n = 10, sig.type = c("BOTH", "UP", "DOWN"))
+getMostFrequentTaxa(
+  dat,
+  n = 10,
+  sig.type = c("both", "increased", "decreased"),
+  direction.column = "Abundance in Group 1"
+)
 }
 \arguments{
-\item{dat}{A table such as output by \code{\link{bugSigDB::importBugSigDB}}}
+\item{dat}{A table such as output by \code{\link{bugsigdbr::importBugSigDB}}}
 
 \item{n}{Number of most frequently occurring taxa to return}
 
-\item{sig.type}{UP for increased in cases relative to controls, DOWN for decreased in cases relative to controls, BOTH for either}
+\item{sig.type}{increased for increased in cases relative to controls, decreased for decreased in cases relative to controls, both for either}
+
+\item{direction.column}{column containing direction information in dat}
 }
 \value{
 A list of signatures, with PMIDs for list element names
