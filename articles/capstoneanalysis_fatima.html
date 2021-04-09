@@ -85,7 +85,7 @@
     
 <div id="setup-phase-install-and-load-relevant-packages" class="section level2">
 <h2 class="hasAnchor">
-<a href="#setup-phase-install-and-load-relevant-packages" class="anchor"></a>Setup phase Install and load relevant packages</h2>
+<a href="#setup-phase-install-and-load-relevant-packages" class="anchor"></a>Setup phase: Install and load relevant packages</h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"waldronlab/bugSigSimple"</span><span class="op">)</span>
@@ -100,7 +100,7 @@
 <a href="#read-curation-file" class="anchor"></a>Read curation file</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html">importBugSigDB</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>## using temporary cache /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmph1yKDm/BiocFileCache</code></pre>
+<pre><code>## using temporary cache /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpEk6o5B/BiocFileCache</code></pre>
 <pre><code>## 
 ## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
@@ -250,9 +250,9 @@
 ##    bipolar disorder unipolar depression 
 ##                  17                  19</code></pre>
 </div>
-<div id="overall-frequencies-of-taxa-in-up-and-down" class="section level2">
+<div id="overall-frequencies-of-taxa-increased-and-decreased-in-cases" class="section level2">
 <h2 class="hasAnchor">
-<a href="#overall-frequencies-of-taxa-in-up-and-down" class="anchor"></a>Overall frequencies of taxa in up and down</h2>
+<a href="#overall-frequencies-of-taxa-increased-and-decreased-in-cases" class="anchor"></a>Overall frequencies of taxa increased and decreased in cases</h2>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">my.dat.cond</span>,n<span class="op">=</span><span class="fl">30</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -640,9 +640,9 @@
 <span class="va">adj.pvals</span></code></pre></div>
 <pre><code>##  [1] 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 0.7031 0.3125 1.0000 1.0000</code></pre>
 </div>
-<div id="subsutting-only-on-bipolar-depression" class="section level2">
+<div id="subset-only-on-bipolar-disorder" class="section level2">
 <h2 class="hasAnchor">
-<a href="#subsutting-only-on-bipolar-depression" class="anchor"></a>Subsutting only on bipolar depression</h2>
+<a href="#subset-only-on-bipolar-disorder" class="anchor"></a>Subset only on bipolar disorder</h2>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ind</span> <span class="op">&lt;-</span> <span class="va">my.dat.cond</span><span class="op">[</span>,<span class="st">"Condition"</span><span class="op">]</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bipolar disorder"</span><span class="op">)</span>
 <span class="va">my.dat.mdd</span> <span class="op">&lt;-</span> <span class="va">my.dat.cond</span><span class="op">[</span><span class="op">!</span><span class="va">ind</span>,<span class="op">]</span>
@@ -743,9 +743,9 @@
 ##                                                                            k__Bacteria|p__Actinobacteria 
 ##                                                                                                        1</code></pre>
 </div>
-<div id="binomial-test-in-up" class="section level2">
+<div id="binomial-test-increased-in-bipolar" class="section level2">
 <h2 class="hasAnchor">
-<a href="#binomial-test-in-up" class="anchor"></a>Binomial test in UP</h2>
+<a href="#binomial-test-increased-in-bipolar" class="anchor"></a>Binomial test “Increased in bipolar”</h2>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -877,9 +877,9 @@
 ## probability of success 
 ##                      1</code></pre>
 </div>
-<div id="binomial-test-in-down" class="section level2">
+<div id="binomial-test-decreased-in-bipolar" class="section level2">
 <h2 class="hasAnchor">
-<a href="#binomial-test-in-down" class="anchor"></a>Binomial test in Down</h2>
+<a href="#binomial-test-decreased-in-bipolar" class="anchor"></a>Binomial test “decreased in bipolar”</h2>
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -1124,9 +1124,9 @@
 ##              k__Bacteria|p__Verrucomicrobia|c__Verrucomicrobiae|o__Verrucomicrobiales|f__Akkermansiaceae|g__Akkermansia 
 ##                                                                                                                       1</code></pre>
 </div>
-<div id="binomial-test-in-up-wout-mht" class="section level2">
+<div id="binomial-test-increased-in-mdd-wout-mht" class="section level2">
 <h2 class="hasAnchor">
-<a href="#binomial-test-in-up-wout-mht" class="anchor"></a>Binomial test in UP w/out MHT</h2>
+<a href="#binomial-test-increased-in-mdd-wout-mht" class="anchor"></a>Binomial test increased in MDD w/out MHT</h2>
 <div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
@@ -1232,9 +1232,9 @@
 ## probability of success 
 ##                    0.5</code></pre>
 </div>
-<div id="binomial-test-in-down-wout-mht" class="section level2">
+<div id="binomial-test-decreased-in-mdd-wout-mht" class="section level2">
 <h2 class="hasAnchor">
-<a href="#binomial-test-in-down-wout-mht" class="anchor"></a>Binomial test in Down w/out MHT</h2>
+<a href="#binomial-test-decreased-in-mdd-wout-mht" class="anchor"></a>Binomial test decreased in MDD w/out MHT</h2>
 <div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
 <pre><code>## 
