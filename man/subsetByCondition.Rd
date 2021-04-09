@@ -7,7 +7,7 @@
 subsetByCondition(dat, condition, condition.column = "Condition")
 }
 \arguments{
-\item{dat}{data.frame produced by \code{\link{bugsigdbr::importBugSigDB}}}
+\item{dat}{data.frame produced by \link[bugsigdbr]{importBugSigDB}}
 
 \item{condition}{health condition or disease of interest to subset by}
 

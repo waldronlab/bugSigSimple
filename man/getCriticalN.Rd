@@ -30,7 +30,7 @@ in a list of signatures
 E.g. for alpha = 0.05, we expect only a 5% chance that any taxon will be identified N times or more.
 }
 \examples{
-full.dat <- importBugSigDB()
+full.dat <- bugsigdbr::importBugSigDB()
 my.dat <- full.dat[full.dat$Curator == "Mst Afroza Parvin", ]
 relevant.dat <- full.dat[full.dat$`Body site` \%in\% my.dat$`Body site`, ]
 relevant.sigs <- extractBugSigs(my.dat)

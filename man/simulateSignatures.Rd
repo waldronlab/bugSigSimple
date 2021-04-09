@@ -21,7 +21,7 @@ A list of signatures of the same number and individual lengths as found in my.da
 Simulate a list of signatures based on a universe of taxa equal in size and length to some smaller set of signatures
 }
 \examples{
-full.dat <- importBugSigDB()
+full.dat <- bugsigdbr::importBugSigDB()
 my.dat <- full.dat[full.dat$Curator == "Mst Afroza Parvin", ]
 relevant.dat <- full.dat[full.dat$`Body site` \%in\% my.dat$`Body site`, ]
 relevant.sigs <- extractBugSigs(relevant.dat, tax.level = "genus")

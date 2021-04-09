@@ -12,7 +12,7 @@ extractSignatures(
 )
 }
 \arguments{
-\item{dat}{A table such as output by \code{\link{bugsigdbr::importBugSigDB}}}
+\item{dat}{A table such as output by \link[bugsigdbr]{importBugSigDB}}
 
 \item{tax.level}{Either "mixed" or any subset of c("kingdom", "phylum", "class", "order", "family", "genus", "species", "strain"). This full vector is equivalent to "mixed".}
 

@@ -17,7 +17,7 @@ MPA.REGEXP <- "^[kpcofgst]__"
 
 #' Subset a data.frame of signatures by condition of interest
 #'
-#' @param dat data.frame produced by \code{\link{bugsigdbr::importBugSigDB}}
+#' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}
 #' @param condition health condition or disease of interest to subset by
 #' @param condition.column name of column of conditions in data.frame
 #'
@@ -36,7 +36,7 @@ subsetByCondition <- function(dat, condition, condition.column="Condition")
 
 #' Subset a data.frame of signatures by curator
 #'
-#' @param dat data.frame produced by \code{\link{bugsigdbr::importBugSigDB}}
+#' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}
 #' @param curator curator to subset by
 #' @param curator.column name of column of curators in data.frame
 #'
@@ -54,7 +54,7 @@ subsetByCurator <- function(dat, curator, curator.column="Curator")
 }
 
 #' Create a list of signatures
-#' @param dat A table such as output by \code{\link{bugsigdbr::importBugSigDB}}
+#' @param dat A table such as output by \link[bugsigdbr]{importBugSigDB}
 #' 
 #' @param tax.level Either "mixed" or any subset of c("kingdom", "phylum", "class", "order", "family", "genus", "species", "strain"). This full vector is equivalent to "mixed". 
 #' @param exact.tax.level If TRUE, return only the exact taxonomic levels specified by tax.level. FALSE is not working.
@@ -134,7 +134,7 @@ extractSignatures <- function(dat, tax.level = "mixed",
 
 
 #' Get the most frequently occurring taxa in a table of signatures
-#' @param dat A table such as output by \code{\link{bugsigdbr::importBugSigDB}}
+#' @param dat A table such as output by \link[bugsigdbr]{importBugSigDB}
 #' @param n Number of most frequently occurring taxa to return
 #' @param sig.type increased for increased in cases relative to controls, decreased for decreased in cases relative to controls, both for either
 #' @param direction.column column containing direction information in dat

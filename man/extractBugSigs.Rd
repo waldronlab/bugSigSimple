@@ -12,7 +12,7 @@ extractBugSigs(
 )
 }
 \arguments{
-\item{dat}{data.frame produced by \code{\link{importBugSigDB}}}
+\item{dat}{data.frame produced by \link[bugsigdbr]{importBugSigDB}}
 
 \item{direction}{One or both of c("increased", "decreased")}
 
@@ -25,6 +25,6 @@ a list of signatures
 Extract a list of signatures from a bugsigdb.org table
 }
 \examples{
-dat <- importBugSigDB()
+dat <- bugsigdbr::importBugSigDB()
 extractBugSigs(dat, tax.level = "genus")
 }

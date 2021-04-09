@@ -12,7 +12,7 @@ getMostFrequentTaxa(
 )
 }
 \arguments{
-\item{dat}{A table such as output by \code{\link{bugsigdbr::importBugSigDB}}}
+\item{dat}{A table such as output by \link[bugsigdbr]{importBugSigDB}}
 
 \item{n}{Number of most frequently occurring taxa to return}
 

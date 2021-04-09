@@ -1,6 +1,6 @@
 #' Identify the most frequently recurring taxa in bugsigdb
 #'
-#' @param dat data.frame produced by \code{\link{importBugSigDB}}
+#' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}
 #' @param direction One or both of c("increased", "decreased")
 #' @param n Number of top taxa to return
 #'
@@ -8,7 +8,7 @@
 #' @export
 #'
 #' @examples
-#' dat <- importBugSigDB()
+#' dat <- bugsigdbr::importBugSigDB()
 #' sigs <- extractBugSigs(dat, direction = "increased", tax.level = "genus")
 #' frequencySigs(sigs)
 frequencySigs <- function(sigs, n = 10){
@@ -20,7 +20,7 @@ frequencySigs <- function(sigs, n = 10){
 
 #' Extract a list of signatures from a bugsigdb.org table
 #'
-#' @param dat data.frame produced by \code{\link{importBugSigDB}}
+#' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}
 #' @param tax.level Any subset of c("kingdom", "phylum", "class", "order", "family", "genus", "species", "strain")
 #' @param direction One or both of c("increased", "decreased")
 
@@ -28,7 +28,7 @@ frequencySigs <- function(sigs, n = 10){
 #' @export
 #'
 #' @examples
-#' dat <- importBugSigDB()
+#' dat <- bugsigdbr::importBugSigDB()
 #' extractBugSigs(dat, tax.level = "genus")
 
 extractBugSigs <-
@@ -65,7 +65,7 @@ extractBugSigs <-
 #' @export
 #'
 #' @examples
-#' full.dat <- importBugSigDB()
+#' full.dat <- bugsigdbr::importBugSigDB()
 #' my.dat <- full.dat[full.dat$Curator == "Mst Afroza Parvin", ]
 #' relevant.dat <- full.dat[full.dat$`Body site` %in% my.dat$`Body site`, ]
 #' relevant.sigs <- extractBugSigs(relevant.dat, tax.level = "genus")
@@ -103,7 +103,7 @@ simulateSignatures <-
 #' @details E.g. for alpha = 0.05, we expect only a 5% chance that any taxon will be identified N times or more.
 
 #' @examples
-#' full.dat <- importBugSigDB()
+#' full.dat <- bugsigdbr::importBugSigDB()
 #' my.dat <- full.dat[full.dat$Curator == "Mst Afroza Parvin", ]
 #' relevant.dat <- full.dat[full.dat$`Body site` %in% my.dat$`Body site`, ]
 #' relevant.sigs <- extractBugSigs(my.dat)
