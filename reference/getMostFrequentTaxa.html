@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bugSigSimple</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.2</span>
       </span>
     </div>
 
@@ -124,14 +124,19 @@
     <p>Get the most frequently occurring taxa in a table of signatures</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getMostFrequentTaxa</span><span class='op'>(</span><span class='va'>dat</span>, n <span class='op'>=</span> <span class='fl'>10</span>, sig.type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"BOTH"</span>, <span class='st'>"UP"</span>, <span class='st'>"DOWN"</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getMostFrequentTaxa</span><span class='op'>(</span>
+  <span class='va'>dat</span>,
+  n <span class='op'>=</span> <span class='fl'>10</span>,
+  sig.type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"both"</span>, <span class='st'>"increased"</span>, <span class='st'>"decreased"</span><span class='op'>)</span>,
+  direction.column <span class='op'>=</span> <span class='st'>"Abundance in Group 1"</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>dat</th>
-      <td><p>A table such as output by <code>bugSigDB::importBugSigDB</code></p></td>
+      <td><p>A table such as output by <a href='https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html'>importBugSigDB</a></p></td>
     </tr>
     <tr>
       <th>n</th>
@@ -139,7 +144,11 @@
     </tr>
     <tr>
       <th>sig.type</th>
-      <td><p>UP for increased in cases relative to controls, DOWN for decreased in cases relative to controls, BOTH for either</p></td>
+      <td><p>increased for increased in cases relative to controls, decreased for decreased in cases relative to controls, both for either</p></td>
+    </tr>
+    <tr>
+      <th>direction.column</th>
+      <td><p>column containing direction information in dat</p></td>
     </tr>
     </table>
 
@@ -148,9 +157,29 @@
     <p>A list of signatures, with PMIDs for list element names</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>full.dat</span> <span class='op'>&lt;-</span> <span class='fu'>bugsigdbr</span><span class='fu'>::</span><span class='fu'>importBugSigDB</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘bugsigdbr’</span></div><div class='input'><span class='fu'>getMostFrequentTaxa</span><span class='op'>(</span><span class='va'>full.dat</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in strsplit(dat[, col], ","): object 'full.dat' not found</span></div></pre>
+    <pre class="examples"><div class='input'><span class='va'>full.dat</span> <span class='op'>&lt;-</span> <span class='fu'>bugsigdbr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html'>importBugSigDB</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Using cached version from 2021-04-09 17:04:19</span></div><div class='input'><span class='fu'>getMostFrequentTaxa</span><span class='op'>(</span><span class='va'>full.dat</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; 
+#&gt;                  k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus 
+#&gt;                                                                                                           179 
+#&gt;                  k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella 
+#&gt;                                                                                                           167 
+#&gt;                 k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides 
+#&gt;                                                                                                           155 
+#&gt;                  k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus 
+#&gt;                                                                                                           148 
+#&gt;                                                                                     k__Bacteria|p__Firmicutes 
+#&gt;                                                                                                           137 
+#&gt;                                                                                  k__Bacteria|p__Bacteroidetes 
+#&gt;                                                                                                           129 
+#&gt;                                   k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Lachnospiraceae 
+#&gt;                                                                                                           121 
+#&gt; k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium 
+#&gt;                                                                                                           109 
+#&gt;               k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Faecalibacterium 
+#&gt;                                                                                                            99 
+#&gt;                                                                                 k__Bacteria|p__Proteobacteria 
+#&gt;                                                                                                            99 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">bugSigSimple</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.99.2</span>
       </span>
     </div>
 
@@ -93,34 +93,1263 @@
 <p>Load bugSigSimple and bugSigDB</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">#library(bugSigDB)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span> <span class="op">(</span><span class="va"><a href="http://waldronlab.io/bugSigSimple">bugSigSimple</a></span><span class="op">)</span></code></pre></div>
-<p>dat &lt;- readCurationSheet(“/Users/ftzohra22/Desktop/School/Spring 2019/capstone/capstone analysis/Microbial signatures curation - signatures.tsv”) dim(dat)</p>
-<p>#subsetting all signatures by curator my.dat &lt;- subsetByCurator(dat, curator=“Fatima Zohra”) # all conditions curated by curator table(my.dat[,“condition”]) my.dat[,“condition”] &lt;- sub(" $“,”", my.dat[,“condition”])</p>
-<p>#restricting data to certain conditions for analysis ind &lt;- my.dat[,“condition”] %in% c(“chronic obstructive pulmonary disease”,“autism”,“drug dependence”, “schizophrenia”, “anorexia nervosa”, “anxiety disorder”, “post-traumic stress disorder”, “attention deficit hyperactivity disorder”, “psychosis”, “gestational diabetes”,“alzheimer’s disease”,“parkinson’s disease”,“stimulus or stress design”) my.dat2 &lt;- my.dat[!ind,] dim(my.dat2) table(my.dat2[,“condition”])</p>
-<p>#removing one study from analysis my.pubmed.ids &lt;- c(“28035686”,“28620208”) ind &lt;- my.dat2[,“PMID”] %in% my.pubmed.ids my.dat3 &lt;- my.dat2[!ind, ]</p>
-</div>
-<div id="list-of-conditions-included-in-analysis" class="section level1">
-<h1 class="hasAnchor">
-<a href="#list-of-conditions-included-in-analysis" class="anchor"></a>list of conditions included in analysis</h1>
-<p>table(my.dat3[,“condition”])</p>
-<p>#overall frequencies of taxa in up and down getMostFrequentTaxa(my.dat3, n=30) getMostFrequentTaxa(my.dat3,sig.type= “UP”) getMostFrequentTaxa(my.dat3,sig.type= “DOWN”)</p>
-<p>#binomial test in UP binom.test(x=4, n=6) binom.test(x=4, n=4) binom.test(x=4, n=4) binom.test(x=4, n=5) binom.test(x=4, n=5) binom.test(x=3, n=4) binom.test(x=3, n=5) binom.test(x=3, n=3) binom.test(x=3, n=3) binom.test(x=3, n=4)</p>
-<p>#binomial test in Down binom.test(x=7, n=8) binom.test(x=6, n=6) binom.test(x=4, n=5) binom.test(x=4, n=5) binom.test(x=3, n=5) binom.test(x=3, n=5) binom.test(x=2, n=6) binom.test(x=2, n=2) binom.test(x=2, n=3) binom.test(x=2, n=2)</p>
-<p>#adjusting p value by Bonferroni correction pvals &lt;- c(0.6875, 0.125, 0.375, 0.625, 1, 0.25, 0.07031, 0.03125, 0.6875, 0.5) adj.pvals &lt;- p.adjust(pvals, method=“bonferroni”) adj.pvals</p>
-<p>#subsutting only on MDD ind &lt;- my.dat3[,“condition”] %in% c(“bipolar disorder”) my.dat.mdd &lt;- my.dat3[!ind,] dim(my.dat.mdd) table(my.dat.mdd[,“condition”])</p>
-<p>getMostFrequentTaxa(my.dat.mdd, n=20) getMostFrequentTaxa(my.dat.mdd,sig.type= “UP”) getMostFrequentTaxa(my.dat.mdd,sig.type= “DOWN”)</p>
-<p>#binomial test in UP binom.test(x=3, n=3) binom.test(x=3, n=3) binom.test(x=3, n=4) binom.test(x=2, n=4) binom.test(x=2, n=3) binom.test(x=2, n=2) binom.test(x=2, n=4) binom.test(x=2, n=3) binom.test(x=2, n=4) binom.test(x=2, n=2)</p>
-<p>#binomial test in Down binom.test(x=4, n=5) binom.test(x=4, n=4) binom.test(x=4, n=5) binom.test(x=3, n=5) binom.test(x=2, n=4) binom.test(x=2, n=4) binom.test(x=2, n=4) binom.test(x=2, n=4) binom.test(x=2, n=2) binom.test(x=2, n=2)</p>
-<p>#adjusting p value by FDR correction pvals &lt;- c(0.6875, 0.125, 0.375, 0.625, 1, 0.25, 0.07031, 0.03125, 0.6875, 0.5) adj.pvals &lt;- p.adjust(pvals, method=“fdr”) adj.pvals</p>
-<p>#subsutting only on MDD ind &lt;- my.dat3[,“condition”] %in% c(“unipolar depression”) my.dat.bd &lt;- my.dat3[!ind,] dim(my.dat.bd) table(my.dat.bd[,“condition”])</p>
-<p>getMostFrequentTaxa(my.dat.bd, n=20) getMostFrequentTaxa(my.dat.bd,sig.type= “UP”) getMostFrequentTaxa(my.dat.bd,sig.type= “DOWN”)</p>
-<p>#binomial test in UP binom.test(x=4, n=4) binom.test(x=4, n=4) binom.test(x=4, n=4) binom.test(x=2, n=2) binom.test(x=2, n=2) binom.test(x=2, n=2) binom.test(x=2, n=3) binom.test(x=1, n=2)</p>
-<p>#binomial test in Down binom.test(x=4, n=5) binom.test(x=4, n=4) binom.test(x=4, n=5) binom.test(x=3, n=5) binom.test(x=2, n=4) binom.test(x=2, n=4) binom.test(x=2, n=4) binom.test(x=2, n=4) binom.test(x=2, n=2) binom.test(x=2, n=2)</p>
-<p>#faecalibacterium taxa.mdd &lt;- c(up=1/7, down=4/7) taxa.bd &lt;- c(up=0/4, down=3/4) barplot(rbind(taxa.mdd, taxa.bd), beside=TRUE, col=c(“red”,“blue”), legend=TRUE, args.legend=list(x=“topleft”, legend=c(“major depressive disorder”, “bipolar disorder”)), ylab=“relative frequency”, main=“Frequency of Faecalibacterium”)</p>
-<p>#Actinobacteria taxa.mdd &lt;- c(up=2/7, down=2/7) taxa.bd &lt;- c(up=2/4, down=0/4) barplot(rbind(taxa.mdd, taxa.bd), beside=TRUE, col=c(“red”,“blue”), legend=TRUE, args.legend=list(x=“topright”, cex = 0.70, legend=c(“major depressive disorder”, “bipolar disorder”)), ylab=“relative frequency”, main=“Frequency of Actinobacteria”)</p>
-<p>#Bacteroides</p>
-<p>taxa.mdd &lt;- c(up=2/7, down=2/7) taxa.bd &lt;- c(up=0/4, down=2/4) barplot(rbind(taxa.mdd, taxa.bd), beside=TRUE, col=c(“red”,“blue”), legend=TRUE, args.legend=list(x=“topleft”, cex = 0.80, legend=c(“major depressive disorder”, “bipolar disorder”)), ylab=“relative frequency”, main=“Frequency of Bacteroides”)</p>
-<p>#Ruminococcaceae taxa.mdd &lt;- c(up=0/7, down=4/7) taxa.bd &lt;- c(up=0/4, down=2/4) barplot(rbind(taxa.mdd, taxa.bd), beside=TRUE, col=c(“red”,“blue”), legend=TRUE, args.legend=list(x=“topleft”, cex = 0.75, legend=c(“major depressive disorder”, “bipolar disorder”)), ylab=“relative frequency”, main=“Frequency of Ruminococcaceae”)</p>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span> <span class="op">(</span><span class="va"><a href="https://waldronlab.io/bugSigSimple">bugSigSimple</a></span><span class="op">)</span></code></pre></div>
+<p>Read curation file</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html">importBugSigDB</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code>## using temporary cache /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpErrFB2/BiocFileCache</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   `Signature page name` = col_character(),
+##   Experiment = col_character(),
+##   Study = col_character(),
+##   Source = col_character(),
+##   `Curated date` = col_character(),
+##   Curator = col_character(),
+##   `Revision editor` = col_character(),
+##   Description = col_character(),
+##   `Abundance in Group 1` = col_character(),
+##   `MetaPhlAn taxon names` = col_character(),
+##   `NCBI Taxonomy IDs` = col_character()
+## )</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   .default = col_character(),
+##   `Group 0 sample size` = col_double(),
+##   `Group 1 sample size` = col_number(),
+##   `16s variable region` = col_number(),
+##   `Significance threshold` = col_double(),
+##   `MHT correction` = col_logical(),
+##   `LDA Score above` = col_double()
+## )
+## ℹ Use `spec()` for the full column specifications.</code></pre>
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
+## cols(
+##   `Study page name` = col_character(),
+##   `Study design` = col_character(),
+##   PMID = col_double(),
+##   DOI = col_character(),
+##   URL = col_character(),
+##   Authors = col_character(),
+##   Title = col_character(),
+##   Journal = col_character(),
+##   Year = col_double(),
+##   Abstract = col_character()
+## )</code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 1718   45</code></pre>
+<p>#subsetting all signatures by curator and condition</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">my.dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/subsetByCurator.html">subsetByCurator</a></span><span class="op">(</span><span class="va">dat</span>, curator<span class="op">=</span><span class="st">"Fatima Zohra"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">my.dat</span><span class="op">[</span>,<span class="st">"Condition"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##                         alcohol drinking 
+##                                        4 
+##                      alzheimer's disease 
+##                                        2 
+##                         anorexia nervosa 
+##                                       10 
+##                         anxiety disorder 
+##                                        5 
+## attention deficit hyperactivity disorder 
+##                                        6 
+##                                   autism 
+##                                        5 
+##                         bipolar disorder 
+##                                       17 
+##                          cervical cancer 
+##                                        4 
+##      chronic hepatitis C virus infection 
+##                                        4 
+##                   chronic kidney disease 
+##                                        9 
+##    chronic obstructive pulmonary disease 
+##                                        2 
+##                        colorectal cancer 
+##                                        7 
+##                            crohn disease 
+##                                        3 
+##                       endometrial cancer 
+##                                        4 
+##                                 epilepsy 
+##                                        2 
+##         female reproductive organ cancer 
+##                                        2 
+##                   gastric adenocarcinoma 
+##                                        4 
+##                           gastric cancer 
+##                                       13 
+##                     gestational diabetes 
+##                                        2 
+##                     hepatitis, alcoholic 
+##                                        8 
+##                 hepatocellular carcinoma 
+##                                        4 
+##                            HIV infection 
+##                                       17 
+##          human papilloma virus infection 
+##                                        6 
+##               inflammatory bowel disease 
+##                                        2 
+##                                 leukemia 
+##                                        4 
+##                              lung cancer 
+##                                       19 
+##                       multiple sclerosis 
+##                                        4 
+##                necrotizing enterocolitis 
+##                                        3 
+##        non-alcoholic fatty liver disease 
+##                                        2 
+##            obsessive-compulsive disorder 
+##                                        1 
+##                           ovarian cancer 
+##                                        4 
+##                     pancreatic carcinoma 
+##                                        8 
+##                      parkinson's disease 
+##                                        2 
+##                                pneumonia 
+##                                        2 
+##                polycystic ovary syndrome 
+##                                        6 
+##                          prostate cancer 
+##                                        2 
+##                                psychosis 
+##                                        4 
+##                     rheumatoid arthritis 
+##                                        2 
+##                            schizophrenia 
+##                                       20 
+##                stimulus or stress design 
+##                                        3 
+##               substance related disorder 
+##                                        4 
+##                       ulcerative colitis 
+##                                        2 
+##                      unipolar depression 
+##                                       19 
+##                           vulvovaginitis 
+##                                        3</code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">condsnew</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bipolar disorder"</span>,<span class="st">"unipolar depression"</span><span class="op">)</span>
+
+<span class="va">my.dat.cond</span><span class="op">&lt;-</span> <span class="fu"><a href="../reference/subsetByCondition.html">subsetByCondition</a></span><span class="op">(</span><span class="va">my.dat</span>,<span class="va">condsnew</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">my.dat.cond</span><span class="op">[</span>,<span class="st">"Condition"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##    bipolar disorder unipolar depression 
+##                  17                  19</code></pre>
+<p>#overall frequencies of taxa in up and down</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">my.dat.cond</span>,n<span class="op">=</span><span class="fl">30</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##                                               k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Faecalibacterium 
+##                                                                                                                                             7 
+##                                                      k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae 
+##                                                                                                                                             6 
+##                                                                                                                 k__Bacteria|p__Actinobacteria 
+##                                                                                                                                             5 
+##                                                                    k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Clostridiaceae 
+##                                                                                                                                             5 
+##                                                                   k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae 
+##                                                                                                                                             4 
+##                                                  k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus 
+##                                                                                                                                             4 
+##                                                                   k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae 
+##                                                                                                                                             4 
+##                                 k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium 
+##                                                                                                                                             3 
+##                                                                           k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales 
+##                                                                                                                                             3 
+##                                                                                                                  k__Bacteria|p__Bacteroidetes 
+##                                                                                                                                             3 
+##                                                 k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides 
+##                                                                                                                                             3 
+##                                                                                                                     k__Bacteria|p__Firmicutes 
+##                                                                                                                                             3 
+##                                                  k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus 
+##                                                                                                                                             3 
+##                                                                   k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Lachnospiraceae 
+##                                                                                                                                             3 
+##                                                 k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Flavonifractor 
+##                                                                                                                                             3 
+##                                                   k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Ruminococcus 
+##                                                                                                                                             3 
+##                                                k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae 
+##                                                                                                                                             3 
+##                                                                        k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pasteurellales 
+##                                                                                                                                             3 
+##                                                     k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pasteurellales|f__Pasteurellaceae 
+##                                                                                                                                             3 
+## k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium adolescentis 
+##                                                                                                                                             2 
+##                                                                                               k__Bacteria|p__Actinobacteria|c__Coriobacteriia 
+##                                                                                                                                             2 
+##                                              k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae|g__Atopobium 
+##                                                                                                                                             2 
+##                                         k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Eggerthellales|f__Eggerthellaceae|g__Gordonibacter 
+##                                                                                                                                             2 
+##                                             k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Butyricimonas 
+##                                                                                                                                             2 
+##                                               k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter 
+##                                                                                                                                             2 
+##                                                            k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Porphyromonadaceae 
+##                                                                                                                                             2 
+##                                                  k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella 
+##                                                                                                                                             2 
+##                                                  k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Tannerella 
+##                                                                                                                                             2 
+##                                                     k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Clostridiaceae|g__Clostridium 
+##                                                                                                                                             2 
+##                                                     k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Eubacteriaceae|g__Eubacterium 
+##                                                                                                                                             2</code></pre>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">my.dat.cond</span>,sig.type<span class="op">=</span><span class="st">"increased"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##                      k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae 
+##                                                                                                             5 
+##                                                                                 k__Bacteria|p__Actinobacteria 
+##                                                                                                             4 
+##                                   k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae 
+##                                                                                                             4 
+##                  k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus 
+##                                                                                                             4 
+##                                           k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales 
+##                                                                                                             3 
+##                  k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus 
+##                                                                                                             3 
+##                 k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Flavonifractor 
+##                                                                                                             3 
+##                k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae 
+##                                                                                                             3 
+## k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium 
+##                                                                                                             2 
+##                                                               k__Bacteria|p__Actinobacteria|c__Coriobacteriia 
+##                                                                                                             2</code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">my.dat.cond</span>,sig.type<span class="op">=</span><span class="st">"decreased"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+## k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Faecalibacterium 
+##                                                                                               6 
+##                     k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae 
+##                                                                                               4 
+##                                                                    k__Bacteria|p__Bacteroidetes 
+##                                                                                               3 
+##                      k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Clostridiaceae 
+##                                                                                               3 
+##   k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides 
+##                                                                                               2 
+## k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter 
+##                                                                                               2 
+##    k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Tannerella 
+##                                                                                               2 
+##     k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Ruminococcus 
+##                                                                                               2 
+##                          k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pasteurellales 
+##                                                                                               2 
+##       k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pasteurellales|f__Pasteurellaceae 
+##                                                                                               2</code></pre>
+<p>#binomial test in UP</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">6</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 6
+## number of successes = 4, number of trials = 6, p-value = 0.6875
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2227781 0.9567281
+## sample estimates:
+## probability of success 
+##              0.6666667</code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 4
+## number of successes = 4, number of trials = 4, p-value = 0.125
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.3976354 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 4
+## number of successes = 4, number of trials = 4, p-value = 0.125
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.3976354 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 5
+## number of successes = 4, number of trials = 5, p-value = 0.375
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2835821 0.9949492
+## sample estimates:
+## probability of success 
+##                    0.8</code></pre>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 5
+## number of successes = 4, number of trials = 5, p-value = 0.375
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2835821 0.9949492
+## sample estimates:
+## probability of success 
+##                    0.8</code></pre>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 4
+## number of successes = 3, number of trials = 4, p-value = 0.625
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1941204 0.9936905
+## sample estimates:
+## probability of success 
+##                   0.75</code></pre>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 5
+## number of successes = 3, number of trials = 5, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1466328 0.9472550
+## sample estimates:
+## probability of success 
+##                    0.6</code></pre>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 3
+## number of successes = 3, number of trials = 3, p-value = 0.25
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2924018 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 3
+## number of successes = 3, number of trials = 3, p-value = 0.25
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2924018 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 4
+## number of successes = 3, number of trials = 4, p-value = 0.625
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1941204 0.9936905
+## sample estimates:
+## probability of success 
+##                   0.75</code></pre>
+<p>#binomial test in Down</p>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">7</span>, n<span class="op">=</span><span class="fl">8</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  7 and 8
+## number of successes = 7, number of trials = 8, p-value = 0.07031
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.4734903 0.9968403
+## sample estimates:
+## probability of success 
+##                  0.875</code></pre>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">6</span>, n<span class="op">=</span><span class="fl">6</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  6 and 6
+## number of successes = 6, number of trials = 6, p-value = 0.03125
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.5407419 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 5
+## number of successes = 4, number of trials = 5, p-value = 0.375
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2835821 0.9949492
+## sample estimates:
+## probability of success 
+##                    0.8</code></pre>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 5
+## number of successes = 4, number of trials = 5, p-value = 0.375
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2835821 0.9949492
+## sample estimates:
+## probability of success 
+##                    0.8</code></pre>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 5
+## number of successes = 3, number of trials = 5, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1466328 0.9472550
+## sample estimates:
+## probability of success 
+##                    0.6</code></pre>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 5
+## number of successes = 3, number of trials = 5, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1466328 0.9472550
+## sample estimates:
+## probability of success 
+##                    0.6</code></pre>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">6</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 6
+## number of successes = 2, number of trials = 6, p-value = 0.6875
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.04327187 0.77722190
+## sample estimates:
+## probability of success 
+##              0.3333333</code></pre>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 2
+## number of successes = 2, number of trials = 2, p-value = 0.5
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1581139 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 3
+## number of successes = 2, number of trials = 3, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.09429932 0.99159624
+## sample estimates:
+## probability of success 
+##              0.6666667</code></pre>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 2
+## number of successes = 2, number of trials = 2, p-value = 0.5
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1581139 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<p>#adjusting p value by Bonferroni correction</p>
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pvals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.6875</span>, <span class="fl">0.125</span>, <span class="fl">0.375</span>, <span class="fl">0.625</span>, <span class="fl">1</span>, <span class="fl">0.25</span>, <span class="fl">0.07031</span>, <span class="fl">0.03125</span>, <span class="fl">0.6875</span>, <span class="fl">0.5</span><span class="op">)</span>
+<span class="va">adj.pvals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">pvals</span>, method<span class="op">=</span><span class="st">"bonferroni"</span><span class="op">)</span>
+<span class="va">adj.pvals</span></code></pre></div>
+<pre><code>##  [1] 1.0000 1.0000 1.0000 1.0000 1.0000 1.0000 0.7031 0.3125 1.0000 1.0000</code></pre>
+<p>#subsutting only on bipolar depression</p>
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ind</span> <span class="op">&lt;-</span> <span class="va">my.dat.cond</span><span class="op">[</span>,<span class="st">"Condition"</span><span class="op">]</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bipolar disorder"</span><span class="op">)</span>
+<span class="va">my.dat.mdd</span> <span class="op">&lt;-</span> <span class="va">my.dat.cond</span><span class="op">[</span><span class="op">!</span><span class="va">ind</span>,<span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">my.dat.mdd</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 19 45</code></pre>
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">my.dat.mdd</span><span class="op">[</span>,<span class="st">"Condition"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+## unipolar depression 
+##                  19</code></pre>
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">my.dat.mdd</span>, n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##                                               k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Faecalibacterium 
+##                                                                                                                                             4 
+##                                                                                                                 k__Bacteria|p__Actinobacteria 
+##                                                                                                                                             3 
+##                                 k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium 
+##                                                                                                                                             3 
+##                                                                                                                     k__Bacteria|p__Firmicutes 
+##                                                                                                                                             3 
+##                                                   k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Ruminococcus 
+##                                                                                                                                             3 
+##                                                                        k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pasteurellales 
+##                                                                                                                                             3 
+##                                                     k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pasteurellales|f__Pasteurellaceae 
+##                                                                                                                                             3 
+## k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium adolescentis 
+##                                                                                                                                             2 
+##                                              k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae|g__Atopobium 
+##                                                                                                                                             2 
+##                                                      k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae 
+##                                                                                                                                             2 
+##                                         k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Eggerthellales|f__Eggerthellaceae|g__Gordonibacter 
+##                                                                                                                                             2 
+##                                                                                                                  k__Bacteria|p__Bacteroidetes 
+##                                                                                                                                             2 
+##                                                 k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides 
+##                                                                                                                                             2 
+##                                             k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Butyricimonas 
+##                                                                                                                                             2 
+##                                                            k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Porphyromonadaceae 
+##                                                                                                                                             2 
+##                                                  k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella 
+##                                                                                                                                             2 
+##                                                  k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus 
+##                                                                                                                                             2 
+##                                                                    k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Clostridiaceae 
+##                                                                                                                                             2 
+##                                                     k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Clostridiaceae|g__Clostridium 
+##                                                                                                                                             2 
+##                                                                   k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Lachnospiraceae 
+##                                                                                                                                             2</code></pre>
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">my.dat.mdd</span>,sig.type<span class="op">=</span> <span class="st">"increased"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##                                                                                 k__Bacteria|p__Actinobacteria 
+##                                                                                                             2 
+## k__Bacteria|p__Actinobacteria|c__Actinobacteria|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium 
+##                                                                                                             2 
+##              k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae|g__Atopobium 
+##                                                                                                             2 
+##             k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Butyricimonas 
+##                                                                                                             2 
+##                            k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Porphyromonadaceae 
+##                                                                                                             2 
+##                  k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella 
+##                                                                                                             2 
+##                                                                                     k__Bacteria|p__Firmicutes 
+##                                                                                                             2 
+##                  k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus 
+##                                                                                                             2 
+##                 k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Flavonifractor 
+##                                                                                                             2 
+##                k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae 
+##                                                                                                             2</code></pre>
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">my.dat.mdd</span>,sig.type<span class="op">=</span> <span class="st">"decreased"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##          k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Faecalibacterium 
+##                                                                                                        3 
+##                                                                             k__Bacteria|p__Bacteroidetes 
+##                                                                                                        2 
+##                               k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Clostridiaceae 
+##                                                                                                        2 
+##                              k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae 
+##                                                                                                        2 
+##              k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Ruminococcus 
+##                                                                                                        2 
+##                                   k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pasteurellales 
+##                                                                                                        2 
+##                k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pasteurellales|f__Pasteurellaceae 
+##                                                                                                        2 
+## k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pasteurellales|f__Pasteurellaceae|g__Haemophilus 
+##                                                                                                        2 
+##         k__Bacteria|p__Synergistetes|c__Synergistia|o__Synergistales|f__Synergistaceae|g__Pyramidobacter 
+##                                                                                                        2 
+##                                                                            k__Bacteria|p__Actinobacteria 
+##                                                                                                        1</code></pre>
+<p>#binomial test in UP</p>
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 3
+## number of successes = 3, number of trials = 3, p-value = 0.25
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2924018 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 3
+## number of successes = 3, number of trials = 3, p-value = 0.25
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2924018 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 4
+## number of successes = 3, number of trials = 4, p-value = 0.625
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1941204 0.9936905
+## sample estimates:
+## probability of success 
+##                   0.75</code></pre>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 4
+## number of successes = 2, number of trials = 4, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.06758599 0.93241401
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 3
+## number of successes = 2, number of trials = 3, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.09429932 0.99159624
+## sample estimates:
+## probability of success 
+##              0.6666667</code></pre>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 2
+## number of successes = 2, number of trials = 2, p-value = 0.5
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1581139 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 4
+## number of successes = 2, number of trials = 4, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.06758599 0.93241401
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 3
+## number of successes = 2, number of trials = 3, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.09429932 0.99159624
+## sample estimates:
+## probability of success 
+##              0.6666667</code></pre>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 4
+## number of successes = 2, number of trials = 4, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.06758599 0.93241401
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 2
+## number of successes = 2, number of trials = 2, p-value = 0.5
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1581139 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<p>#binomial test in Down</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 5
+## number of successes = 4, number of trials = 5, p-value = 0.375
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2835821 0.9949492
+## sample estimates:
+## probability of success 
+##                    0.8</code></pre>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 4
+## number of successes = 4, number of trials = 4, p-value = 0.125
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.3976354 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 5
+## number of successes = 4, number of trials = 5, p-value = 0.375
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2835821 0.9949492
+## sample estimates:
+## probability of success 
+##                    0.8</code></pre>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 5
+## number of successes = 3, number of trials = 5, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1466328 0.9472550
+## sample estimates:
+## probability of success 
+##                    0.6</code></pre>
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 4
+## number of successes = 2, number of trials = 4, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.06758599 0.93241401
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 4
+## number of successes = 2, number of trials = 4, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.06758599 0.93241401
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 4
+## number of successes = 2, number of trials = 4, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.06758599 0.93241401
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 4
+## number of successes = 2, number of trials = 4, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.06758599 0.93241401
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 2
+## number of successes = 2, number of trials = 2, p-value = 0.5
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1581139 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 2
+## number of successes = 2, number of trials = 2, p-value = 0.5
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1581139 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<p>#adjusting p value by FDR correction for BD</p>
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">pvals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.6875</span>, <span class="fl">0.125</span>, <span class="fl">0.375</span>, <span class="fl">0.625</span>, <span class="fl">1</span>, <span class="fl">0.25</span>, <span class="fl">0.07031</span>, <span class="fl">0.03125</span>, <span class="fl">0.6875</span>, <span class="fl">0.5</span><span class="op">)</span>
+<span class="va">adj.pvals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html">p.adjust</a></span><span class="op">(</span><span class="va">pvals</span>, method<span class="op">=</span><span class="st">"fdr"</span><span class="op">)</span>
+<span class="va">adj.pvals</span></code></pre></div>
+<pre><code>##  [1] 0.7638889 0.4166667 0.7500000 0.7638889 1.0000000 0.6250000 0.3515500
+##  [8] 0.3125000 0.7638889 0.7638889</code></pre>
+<p>#subsutting only on MDD</p>
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ind</span> <span class="op">&lt;-</span> <span class="va">my.dat.cond</span><span class="op">[</span>,<span class="st">"Condition"</span><span class="op">]</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"unipolar depression"</span><span class="op">)</span>
+<span class="va">my.dat.bd</span> <span class="op">&lt;-</span> <span class="va">my.dat.cond</span><span class="op">[</span><span class="op">!</span><span class="va">ind</span>,<span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span><span class="op">(</span><span class="va">my.dat.bd</span><span class="op">)</span></code></pre></div>
+<pre><code>## [1] 17 45</code></pre>
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">my.dat.bd</span><span class="op">[</span>,<span class="st">"Condition"</span><span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+## bipolar disorder 
+##               17</code></pre>
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">my.dat.bd</span>, n<span class="op">=</span><span class="fl">20</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##                                k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae 
+##                                                                                                                       4 
+##                                             k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae 
+##                                                                                                                       4 
+##                            k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus 
+##                                                                                                                       4 
+##                                              k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Clostridiaceae 
+##                                                                                                                       3 
+##                         k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Faecalibacterium 
+##                                                                                                                       3 
+##                                                                                           k__Bacteria|p__Actinobacteria 
+##                                                                                                                       2 
+##                                                                         k__Bacteria|p__Actinobacteria|c__Coriobacteriia 
+##                                                                                                                       2 
+##                                                     k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales 
+##                                                                                                                       2 
+##                                             k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae 
+##                                                                                                                       2 
+##                                                                                            k__Bacteria|p__Bacteroidetes 
+##                                                                                                                       1 
+##                           k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides 
+##                                                                                                                       1 
+## k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides helcogenes 
+##                                                                                                                       1 
+##                         k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter 
+##                                                                                                                       1 
+##                            k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Tannerella 
+##                                                                                                                       1 
+##                                                                                    k__Bacteria|p__Firmicutes|c__Bacilli 
+##                                                                                                                       1 
+##                                                                 k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales 
+##                                                                                                                       1 
+##                                             k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae 
+##                                                                                                                       1 
+##                            k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus 
+##                                                                                                                       1 
+##                               k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Eubacteriaceae|g__Eubacterium 
+##                                                                                                                       1 
+##                                             k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Lachnospiraceae 
+##                                                                                                                       1</code></pre>
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">my.dat.bd</span>,sig.type<span class="op">=</span> <span class="st">"increased"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##     k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae 
+##                                                                                            4 
+##                  k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae 
+##                                                                                            4 
+## k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus 
+##                                                                                            4 
+##                                                                k__Bacteria|p__Actinobacteria 
+##                                                                                            2 
+##                                              k__Bacteria|p__Actinobacteria|c__Coriobacteriia 
+##                                                                                            2 
+##                          k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales 
+##                                                                                            2 
+##                   k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Clostridiaceae 
+##                                                                                            2 
+##                                                         k__Bacteria|p__Firmicutes|c__Bacilli 
+##                                                                                            1 
+##                                      k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales 
+##                                                                                            1 
+##                  k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae 
+##                                                                                            1</code></pre>
+<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">my.dat.bd</span>,sig.type<span class="op">=</span> <span class="st">"decreased"</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##                         k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae|g__Faecalibacterium 
+##                                                                                                                       3 
+##                                             k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Ruminococcaceae 
+##                                                                                                                       2 
+##                                                                                            k__Bacteria|p__Bacteroidetes 
+##                                                                                                                       1 
+##                           k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides 
+##                                                                                                                       1 
+## k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides helcogenes 
+##                                                                                                                       1 
+##                         k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter 
+##                                                                                                                       1 
+##                            k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Tannerella 
+##                                                                                                                       1 
+##                                              k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Clostridiaceae 
+##                                                                                                                       1 
+##                                k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Lachnospiraceae|g__Roseburia 
+##                                                                                                                       1 
+##              k__Bacteria|p__Verrucomicrobia|c__Verrucomicrobiae|o__Verrucomicrobiales|f__Akkermansiaceae|g__Akkermansia 
+##                                                                                                                       1</code></pre>
+<p>#binomial test in UP w/out MHT</p>
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 4
+## number of successes = 4, number of trials = 4, p-value = 0.125
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.3976354 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 4
+## number of successes = 4, number of trials = 4, p-value = 0.125
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.3976354 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 4
+## number of successes = 4, number of trials = 4, p-value = 0.125
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.3976354 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 2
+## number of successes = 2, number of trials = 2, p-value = 0.5
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1581139 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 2
+## number of successes = 2, number of trials = 2, p-value = 0.5
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1581139 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 2
+## number of successes = 2, number of trials = 2, p-value = 0.5
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1581139 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 3
+## number of successes = 2, number of trials = 3, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.09429932 0.99159624
+## sample estimates:
+## probability of success 
+##              0.6666667</code></pre>
+<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">1</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  1 and 2
+## number of successes = 1, number of trials = 2, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.01257912 0.98742088
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<p>#binomial test in Down w/out MHT</p>
+<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 5
+## number of successes = 4, number of trials = 5, p-value = 0.375
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2835821 0.9949492
+## sample estimates:
+## probability of success 
+##                    0.8</code></pre>
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 4
+## number of successes = 4, number of trials = 4, p-value = 0.125
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.3976354 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">4</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  4 and 5
+## number of successes = 4, number of trials = 5, p-value = 0.375
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.2835821 0.9949492
+## sample estimates:
+## probability of success 
+##                    0.8</code></pre>
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">3</span>, n<span class="op">=</span><span class="fl">5</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  3 and 5
+## number of successes = 3, number of trials = 5, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1466328 0.9472550
+## sample estimates:
+## probability of success 
+##                    0.6</code></pre>
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 4
+## number of successes = 2, number of trials = 4, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.06758599 0.93241401
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 4
+## number of successes = 2, number of trials = 4, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.06758599 0.93241401
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 4
+## number of successes = 2, number of trials = 4, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.06758599 0.93241401
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">4</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 4
+## number of successes = 2, number of trials = 4, p-value = 1
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.06758599 0.93241401
+## sample estimates:
+## probability of success 
+##                    0.5</code></pre>
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 2
+## number of successes = 2, number of trials = 2, p-value = 0.5
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1581139 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/stats/binom.test.html">binom.test</a></span><span class="op">(</span>x<span class="op">=</span><span class="fl">2</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<pre><code>## 
+##  Exact binomial test
+## 
+## data:  2 and 2
+## number of successes = 2, number of trials = 2, p-value = 0.5
+## alternative hypothesis: true probability of success is not equal to 0.5
+## 95 percent confidence interval:
+##  0.1581139 1.0000000
+## sample estimates:
+## probability of success 
+##                      1</code></pre>
+<p>#faecalibacterium plot</p>
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">taxa.mdd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>up<span class="op">=</span><span class="fl">1</span><span class="op">/</span><span class="fl">7</span>, down<span class="op">=</span><span class="fl">4</span><span class="op">/</span><span class="fl">7</span><span class="op">)</span>
+<span class="va">taxa.bd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>up<span class="op">=</span><span class="fl">0</span><span class="op">/</span><span class="fl">4</span>, down<span class="op">=</span><span class="fl">3</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">taxa.mdd</span>, <span class="va">taxa.bd</span><span class="op">)</span>, beside<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>,<span class="st">"blue"</span><span class="op">)</span>, legend<span class="op">=</span><span class="cn">TRUE</span>, args.legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"topleft"</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"major depressive disorder"</span>, <span class="st">"bipolar disorder"</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"relative frequency"</span>, main<span class="op">=</span><span class="st">"Frequency of Faecalibacterium"</span><span class="op">)</span></code></pre></div>
+<p><img src="capstoneanalysis_fatima_files/figure-html/unnamed-chunk-16-1.png" width="700"></p>
+<p>#Actinobacteria plot</p>
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">taxa.mdd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>up<span class="op">=</span><span class="fl">2</span><span class="op">/</span><span class="fl">7</span>, down<span class="op">=</span><span class="fl">2</span><span class="op">/</span><span class="fl">7</span><span class="op">)</span>
+<span class="va">taxa.bd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>up<span class="op">=</span><span class="fl">2</span><span class="op">/</span><span class="fl">4</span>, down<span class="op">=</span><span class="fl">0</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">taxa.mdd</span>, <span class="va">taxa.bd</span><span class="op">)</span>, beside<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>,<span class="st">"blue"</span><span class="op">)</span>, legend<span class="op">=</span><span class="cn">TRUE</span>, args.legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"topright"</span>, cex <span class="op">=</span> <span class="fl">0.70</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"major depressive disorder"</span>, <span class="st">"bipolar disorder"</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"relative frequency"</span>, main<span class="op">=</span><span class="st">"Frequency of Actinobacteria"</span><span class="op">)</span></code></pre></div>
+<p><img src="capstoneanalysis_fatima_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
+<p>#Bacteroides plot</p>
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">taxa.mdd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>up<span class="op">=</span><span class="fl">2</span><span class="op">/</span><span class="fl">7</span>, down<span class="op">=</span><span class="fl">2</span><span class="op">/</span><span class="fl">7</span><span class="op">)</span>
+<span class="va">taxa.bd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>up<span class="op">=</span><span class="fl">0</span><span class="op">/</span><span class="fl">4</span>, down<span class="op">=</span><span class="fl">2</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">taxa.mdd</span>, <span class="va">taxa.bd</span><span class="op">)</span>, beside<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>,<span class="st">"blue"</span><span class="op">)</span>, legend<span class="op">=</span><span class="cn">TRUE</span>, args.legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"topleft"</span>, cex <span class="op">=</span> <span class="fl">0.80</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"major depressive disorder"</span>, <span class="st">"bipolar disorder"</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"relative frequency"</span>, main<span class="op">=</span><span class="st">"Frequency of Bacteroides"</span><span class="op">)</span></code></pre></div>
+<p><img src="capstoneanalysis_fatima_files/figure-html/unnamed-chunk-18-1.png" width="700"></p>
+<p>#Ruminococcaceae plot</p>
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">taxa.mdd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>up<span class="op">=</span><span class="fl">0</span><span class="op">/</span><span class="fl">7</span>, down<span class="op">=</span><span class="fl">4</span><span class="op">/</span><span class="fl">7</span><span class="op">)</span>
+<span class="va">taxa.bd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span>up<span class="op">=</span><span class="fl">0</span><span class="op">/</span><span class="fl">4</span>, down<span class="op">=</span><span class="fl">2</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">taxa.mdd</span>, <span class="va">taxa.bd</span><span class="op">)</span>, beside<span class="op">=</span><span class="cn">TRUE</span>, col<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"red"</span>,<span class="st">"blue"</span><span class="op">)</span>, legend<span class="op">=</span><span class="cn">TRUE</span>, args.legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>x<span class="op">=</span><span class="st">"topleft"</span>, cex <span class="op">=</span> <span class="fl">0.75</span>, legend<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"major depressive disorder"</span>, <span class="st">"bipolar disorder"</span><span class="op">)</span><span class="op">)</span>, ylab<span class="op">=</span><span class="st">"relative frequency"</span>, main<span class="op">=</span><span class="st">"Frequency of Ruminococcaceae"</span><span class="op">)</span></code></pre></div>
+<p><img src="capstoneanalysis_fatima_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
 </div>
   </div>
 
