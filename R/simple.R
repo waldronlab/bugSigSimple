@@ -7,6 +7,13 @@
 # 
 ###########################################################
 
+TAX.LEVELS <- c("kingdom", "phylum", "class", "order",
+                "family", "genus", "species", "strain")
+MPA.TAX.LEVELS <- c(substring(TAX.LEVELS[1:7], 1, 1), "t")
+names(MPA.TAX.LEVELS) <- TAX.LEVELS
+
+MPA.REGEXP <- "^[kpcofgst]__"
+
 
 #' Subset a data.frame of signatures by condition of interest
 #'
@@ -18,7 +25,7 @@
 #' @export
 #'
 #' @examples
-#' full.dat <- bugSigDB::importBugSigDB()
+#' full.dat <- bugsigdbr::importBugSigDB()
 #' obese.dat <- subsetByCondition(full.dat, condition="obesity")
 
 subsetByCondition <- function(dat, condition, condition.column="Condition")
@@ -37,7 +44,7 @@ subsetByCondition <- function(dat, condition, condition.column="Condition")
 #' @export
 #'
 #' @examples
-#' full.dat <- bugSigDB::importBugSigDB()
+#' full.dat <- bugsigdbr::importBugSigDB()
 #' fatima.dat <- subsetByCurator(full.dat, curator="Fatima Zohra")
 
 subsetByCurator <- function(dat, curator, curator.column="Curator")
@@ -57,9 +64,8 @@ subsetByCurator <- function(dat, curator, curator.column="Curator")
 #' @return 
 #' A list of signatures, with PMIDs for list element names 
 #' @examples 
-#' full.dat <- importBugSigDB()
+#' full.dat <- bugsigdbr::importBugSigDB()
 #' extractSignatures(full.dat, tax.level="genus", exact.tax.level=TRUE, col = "MetaPhlAn taxon names")
-#' # extractSignatures(full.dat, tax.level="order", exact.tax.level=FALSE, col = "MetaPhlAn taxon names")
 
 #Will eventually be imported from bugSigDB package but it's not there yet
 extractSignatures <- function(dat, tax.level = "mixed", 
@@ -111,6 +117,21 @@ extractSignatures <- function(dat, tax.level = "mixed",
     return(msc) 
 }
 
+.isTaxLevel <- function(s, tax.level)
+{
+    if(tax.level[1] == "mixed") return(s)
+    tip <- .getTip(s)
+    tip <- substring(tip, 1, 1)
+    mtl <- MPA.TAX.LEVELS[tax.level]
+    tip %in% mtl
+}
+
+.getTip <- function(n)
+{
+    spl <- unlist(strsplit(n, "\\|"))
+    spl[length(spl)]
+}
+
 
 #' Get the most frequently occurring taxa in a table of signatures
 #' @param dat A table such as output by \code{\link{bugSigDB::importBugSigDB}}
@@ -121,7 +142,7 @@ extractSignatures <- function(dat, tax.level = "mixed",
 #' @return 
 #' A list of signatures, with PMIDs for list element names 
 #' @examples 
-#' full.dat <- bugSigDB::importBugSigDB()
+#' full.dat <- bugsigdbr::importBugSigDB()
 #' getMostFrequentTaxa(full.dat)
 getMostFrequentTaxa <- function(dat, n=10, sig.type=c("BOTH", "UP", "DOWN"))
 {
