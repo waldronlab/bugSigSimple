@@ -12,41 +12,30 @@ Load bugSigSimple and bugSigDB
 library (bugSigSimple)
 ```
 
-Read csv curation file
+Read curation file
 ```{r}
-dat <- readCurationSheet("/Users/ftzohra22/Desktop/School/Spring 2019/capstone/capstone analysis/Microbial signatures curation - signatures.tsv")
+dat <- bugsigdbr::importBugSigDB()
 dim(dat)
 ```
 
 #subsetting all signatures by curator and condition
 ```{r}
 my.dat <- subsetByCurator(dat, curator="Fatima Zohra")
-table(my.dat[,"condition"])
-my.dat[,"condition"] <- sub(" $", "", my.dat[,"condition"])
+table(my.dat[,"Condition"])
+condsnew <-c("bipolar disorder","unipolar depression")
+
+my.dat.cond<- subsetByCondition(my.dat,condsnew)
+table(my.dat.cond[,"Condition"])
+
 ```
 
-#restricting data to certain conditions for analysis
-```{r}
-ind <- my.dat[,"condition"] %in% c("chronic obstructive pulmonary disease","autism","drug dependence", "schizophrenia", "anorexia nervosa", "anxiety disorder", "post-traumic stress disorder", "attention deficit hyperactivity disorder", "psychosis", "gestational diabetes","alzheimer's disease","parkinson's disease","stimulus or stress design")
-my.dat2 <- my.dat[!ind,]
-dim(my.dat2)
-table(my.dat2[,"condition"])
-```
 
-#removing one study from analysis
-```{r}
-my.pubmed.ids <- c("28035686","28620208")
-ind <- my.dat2[,"PMID"] %in% my.pubmed.ids
-my.dat3 <- my.dat2[!ind, ]
-
-table(my.dat3[,"condition"])
-```
 
 #overall frequencies of taxa in up and down
 ```{r}
-getMostFrequentTaxa(my.dat3, n=30)
-getMostFrequentTaxa(my.dat3,sig.type= "UP")
-getMostFrequentTaxa(my.dat3,sig.type= "DOWN")
+getMostFrequentTaxa(my.dat.cond,n=30)
+getMostFrequentTaxa(my.dat.cond,sig.type="increased")
+getMostFrequentTaxa(my.dat.cond,sig.type="decreased")
 ```
 
 
@@ -86,14 +75,14 @@ adj.pvals
 
 #subsutting only on bipolar depression
 ```{r}
-ind <- my.dat3[,"condition"] %in% c("bipolar disorder")
+ind <- my.dat3[,"Condition"] %in% c("bipolar disorder")
 my.dat.mdd <- my.dat3[!ind,]
 dim(my.dat.mdd)
-table(my.dat.mdd[,"condition"])
+table(my.dat.mdd[,"Condition"])
 
 getMostFrequentTaxa(my.dat.mdd, n=20)
-getMostFrequentTaxa(my.dat.mdd,sig.type= "UP")
-getMostFrequentTaxa(my.dat.mdd,sig.type= "DOWN")
+getMostFrequentTaxa(my.dat.mdd,sig.type= "increased")
+getMostFrequentTaxa(my.dat.mdd,sig.type= "decreased")
 ```
 #binomial test in UP
 ```{r}
@@ -132,14 +121,14 @@ adj.pvals
 
 #subsutting only on MDD 
 ```{r}
-ind <- my.dat3[,"condition"] %in% c("unipolar depression")
+ind <- my.dat3[,"Condition"] %in% c("unipolar depression")
 my.dat.bd <- my.dat3[!ind,]
 dim(my.dat.bd)
-table(my.dat.bd[,"condition"])
+table(my.dat.bd[,"Condition"])
 
 getMostFrequentTaxa(my.dat.bd, n=20)
-getMostFrequentTaxa(my.dat.bd,sig.type= "UP")
-getMostFrequentTaxa(my.dat.bd,sig.type= "DOWN")
+getMostFrequentTaxa(my.dat.bd,sig.type= "increased")
+getMostFrequentTaxa(my.dat.bd,sig.type= "decreased")
 ```
 
 #binomial test in UP w/out MHT
