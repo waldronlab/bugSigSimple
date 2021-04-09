@@ -3,7 +3,7 @@ title: "An analysis of Most frequent taxa in Major Depression and Bipolar Disord
 author: "Fatima Zohra"
 ---
 
-## Setup phase Install and load relevant packages
+## Setup phase: Install and load relevant packages
 
 ```{r, eval=FALSE}
 install.packages("devtools")
@@ -37,7 +37,7 @@ table(my.dat.cond[,"Condition"])
 
 ```
 
-## Overall frequencies of taxa in up and down
+## Overall frequencies of taxa increased and decreased in cases
 
 ```{r}
 getMostFrequentTaxa(my.dat.cond,n=30)
@@ -83,7 +83,7 @@ adj.pvals <- p.adjust(pvals, method="bonferroni")
 adj.pvals
 ```
 
-## Subsutting only on bipolar depression
+## Subset only on bipolar disorder
 
 ```{r}
 ind <- my.dat.cond[,"Condition"] %in% c("bipolar disorder")
@@ -96,7 +96,7 @@ getMostFrequentTaxa(my.dat.mdd,sig.type= "increased")
 getMostFrequentTaxa(my.dat.mdd,sig.type= "decreased")
 ```
 
-## Binomial test in UP
+## Binomial test "Increased in bipolar"
 
 ```{r}
 binom.test(x=3, n=3)
@@ -111,7 +111,7 @@ binom.test(x=2, n=4)
 binom.test(x=2, n=2)
 ```
 
-## Binomial test in Down
+## Binomial test "decreased in bipolar"
 
 ```{r}
 binom.test(x=4, n=5)
@@ -147,7 +147,7 @@ getMostFrequentTaxa(my.dat.bd,sig.type= "increased")
 getMostFrequentTaxa(my.dat.bd,sig.type= "decreased")
 ```
 
-## Binomial test in UP w/out MHT
+## Binomial test increased in MDD w/out MHT
 
 ```{r}
 binom.test(x=4, n=4)
@@ -160,7 +160,7 @@ binom.test(x=2, n=3)
 binom.test(x=1, n=2)
 ```
 
-## Binomial test in Down w/out MHT
+## Binomial test decreased in MDD w/out MHT
 
 ```{r}
 binom.test(x=4, n=5)
