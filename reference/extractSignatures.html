@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • bugSigSimple</title>
+<title>Create a list of signatures — extractSignatures • bugSigSimple</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Create a list of signatures — extractSignatures" />
+<meta property="og:description" content="Create a list of signatures" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -112,86 +113,54 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Create a list of signatures</h1>
+    
+    <div class="hidden name"><code>extractSignatures.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Create a list of signatures</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>extractSignatures</span><span class='op'>(</span>
+  <span class='va'>dat</span>,
+  tax.level <span class='op'>=</span> <span class='st'>"mixed"</span>,
+  exact.tax.level <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  col <span class='op'>=</span> <span class='st'>"MetaPhlAn taxon names"</span>
+<span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="extractBugSigs.html">extractBugSigs()</a></code> </p>
-        </td>
-        <td><p>Extract a list of signatures from a bugsigdb.org table</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="extractSignatures.html">extractSignatures()</a></code> </p>
-        </td>
-        <td><p>Create a list of signatures</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="frequencySigs.html">frequencySigs()</a></code> </p>
-        </td>
-        <td><p>Identify the most frequently recurring taxa in bugsigdb</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="getCriticalN.html">getCriticalN()</a></code> </p>
-        </td>
-        <td><p>countBug counts the frequency of the most commonly identified bug in a simulated signature.
-getCriticalN performs a Monte Carlo simulation to estimate the number of times the most frequent taxon is expected to be observed
-in a list of signatures</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="getMostFrequentTaxa.html">getMostFrequentTaxa()</a></code> </p>
-        </td>
-        <td><p>Get the most frequently occurring taxa in a table of signatures</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="simulateSignatures.html">simulateSignatures()</a></code> </p>
-        </td>
-        <td><p>Simulate a list of signatures based on a universe of taxa equal in size and length to some smaller set of signatures</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="subsetByCondition.html">subsetByCondition()</a></code> </p>
-        </td>
-        <td><p>Subset a data.frame of signatures by condition of interest</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="subsetByCurator.html">subsetByCurator()</a></code> </p>
-        </td>
-        <td><p>Subset a data.frame of signatures by curator</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>dat</th>
+      <td><p>A table such as output by <code>bugSigDB::importBugSigDB</code></p></td>
+    </tr>
+    <tr>
+      <th>tax.level</th>
+      <td><p>Either "mixed" or any subset of c("kingdom", "phylum", "class", "order", "family", "genus", "species", "strain"). This full vector is equivalent to "mixed".</p></td>
+    </tr>
+    <tr>
+      <th>exact.tax.level</th>
+      <td><p>If TRUE, return only the exact taxonomic levels specified by tax.level. FALSE is not working.</p></td>
+    </tr>
+    <tr>
+      <th>col</th>
+      <td><p>Column name containing signatures. "MetaPhlAn taxon names" for bugsigdb.org.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A list of signatures, with PMIDs for list element names</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>full.dat</span> <span class='op'>&lt;-</span> <span class='fu'>bugsigdbr</span><span class='fu'>::</span><span class='fu'>importBugSigDB</span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in loadNamespace(name): there is no package called ‘bugsigdbr’</span></div><div class='input'><span class='fu'>extractSignatures</span><span class='op'>(</span><span class='va'>full.dat</span>, tax.level<span class='op'>=</span><span class='st'>"genus"</span>, exact.tax.level<span class='op'>=</span><span class='cn'>TRUE</span>, col <span class='op'>=</span> <span class='st'>"MetaPhlAn taxon names"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in strsplit(dat[, col], ","): object 'full.dat' not found</span></div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

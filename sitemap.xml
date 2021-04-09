@@ -7,13 +7,25 @@
     <loc>http://waldronlab.io/bugSigSimple/reference/extractBugSigs.html</loc>
   </url>
   <url>
+    <loc>http://waldronlab.io/bugSigSimple/reference/extractSignatures.html</loc>
+  </url>
+  <url>
     <loc>http://waldronlab.io/bugSigSimple/reference/frequencySigs.html</loc>
   </url>
   <url>
     <loc>http://waldronlab.io/bugSigSimple/reference/getCriticalN.html</loc>
   </url>
   <url>
+    <loc>http://waldronlab.io/bugSigSimple/reference/getMostFrequentTaxa.html</loc>
+  </url>
+  <url>
     <loc>http://waldronlab.io/bugSigSimple/reference/simulateSignatures.html</loc>
+  </url>
+  <url>
+    <loc>http://waldronlab.io/bugSigSimple/reference/subsetByCondition.html</loc>
+  </url>
+  <url>
+    <loc>http://waldronlab.io/bugSigSimple/reference/subsetByCurator.html</loc>
   </url>
   <url>
     <loc>http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_fatima.html</loc>
