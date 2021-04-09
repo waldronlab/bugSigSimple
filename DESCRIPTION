@@ -11,3 +11,4 @@ Description: Simple exploratory analysis of curated microbe signatures
 License: Artistic-2.0
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
+URL: http://waldronlab.io/bugSigSimple
