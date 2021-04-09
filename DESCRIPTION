@@ -1,15 +1,20 @@
 Package: bugSigSimple
-Version: 0.99.0
+Version: 0.99.1
 Date: 2019-03-13
 Title: Simple exploratory analysis of curated microbe signatures 
 Author: Ludwig Geistlinger, Levi Waldron
 Maintainer: Ludwig Geistlinger <ludwig.geistlinger@sph.cuny.edu>
 Depends: R(>= 3.5.0)
 Remotes: github::waldronlab/bugsigdbr
-Imports: dplyr
-Suggests: BiocStyle, knitr, rmarkdown
+Imports: 
+    dplyr,
+    bugsigdbr
+Suggests: 
+    BiocStyle, 
+    knitr, 
+    rmarkdown
 Description: Simple exploratory analysis of curated microbe signatures  
 License: Artistic-2.0
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
-URL: http://waldronlab.io/bugSigSimple
+URL: https://waldronlab.io/bugSigSimple
