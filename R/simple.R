@@ -31,7 +31,7 @@ MPA.REGEXP <- "^[kpcofgst]__"
 
 subsetByCondition <- function(dat, condition, condition.column="Condition")
 {
-    dat %>% filter(!!as.name(condition.column) == !!condition) %>% return()
+    dat %>% filter(!!as.name(condition.column) %in% condition) %>% return()
 }
 
 #' Subset a data.frame of signatures by curator
@@ -50,7 +50,7 @@ subsetByCondition <- function(dat, condition, condition.column="Condition")
 
 subsetByCurator <- function(dat, curator, curator.column="Curator")
 {
-    dat %>% filter(!!as.name(curator.column) == !!curator) %>% return()
+    dat %>% filter(!!as.name(curator.column) %in% !!curator) %>% return()
 }
 
 #' Create a list of signatures
