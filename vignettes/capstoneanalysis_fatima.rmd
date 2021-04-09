@@ -75,8 +75,8 @@ adj.pvals
 
 #subsutting only on bipolar depression
 ```{r}
-ind <- my.dat3[,"Condition"] %in% c("bipolar disorder")
-my.dat.mdd <- my.dat3[!ind,]
+ind <- my.dat.cond[,"Condition"] %in% c("bipolar disorder")
+my.dat.mdd <- my.dat.cond[!ind,]
 dim(my.dat.mdd)
 table(my.dat.mdd[,"Condition"])
 
@@ -121,8 +121,8 @@ adj.pvals
 
 #subsutting only on MDD 
 ```{r}
-ind <- my.dat3[,"Condition"] %in% c("unipolar depression")
-my.dat.bd <- my.dat3[!ind,]
+ind <- my.dat.cond[,"Condition"] %in% c("unipolar depression")
+my.dat.bd <- my.dat.cond[!ind,]
 dim(my.dat.bd)
 table(my.dat.bd[,"Condition"])
 
