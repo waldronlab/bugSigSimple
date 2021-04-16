@@ -8,7 +8,9 @@ Depends: R(>= 3.5.0)
 Remotes: github::waldronlab/bugsigdbr
 Imports: 
     dplyr,
-    bugsigdbr
+    bugsigdbr,
+    tidyr,
+    kableExtra
 Suggests: 
     BiocStyle, 
     knitr, 
