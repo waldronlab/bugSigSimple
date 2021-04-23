@@ -4,7 +4,7 @@
 #' @param sig.type increased for increased in cases relative to controls, decreased for decreased in cases relative to controls, both for either
 #' @param n number of taxa to return (if sig.type=="both", this is the number of taxa to return for each direction)
 #'
-#' @importFrom dplyr filter %>%
+#' @importFrom dplyr filter %>% mutate rowwise n_distinct
 #' @importFrom kableExtra kbl kable_styling
 #' @importFrom tidyr separate
 #' @return kable table with increased and decreased taxa and a binomial test based on total number of studies in the data.frame
