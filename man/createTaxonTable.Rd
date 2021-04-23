@@ -14,7 +14,7 @@ createTaxonTable(dat, sig.type = c("increased, decreased, both"), n = 10)
 \item{n}{number of taxa to return (if sig.type=="both", this is the number of taxa to return for each direction)}
 }
 \value{
-kable table
+kable table with increased and decreased taxa and a binomial test based on total number of studies in the data.frame
 }
 \description{
 Create a table of most frequent taxa in a data.frame

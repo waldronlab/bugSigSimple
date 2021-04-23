@@ -7,7 +7,7 @@
 #' @importFrom dplyr filter %>%
 #' @importFrom kableExtra kbl kable_styling
 #' @importFrom tidyr separate
-#' @return kable table with increased and decreased taxa
+#' @return kable table with increased and decreased taxa and a binomial test based on total number of studies in the data.frame
 #' @export
 #'
 #' @examples
@@ -24,12 +24,18 @@ createTaxonTable <- function(dat, sig.type=c("increased, decreased, both"), n=10
   taxa <- rbind(inc,dec)
   if(sig.type %in% c("increased", "decreased")){taxa <- filter(taxa,direction==sig.type)}
   
-  taxa <- separate(data=taxa, col="Taxon", into=c("Taxonomic Level", "Taxon Name"), sep="__")
+  taxa <- tidyr::separate(data=taxa, col="Taxon", into=c("Taxonomic Level", "Taxon Name"), sep="__")
   dmap <- c("class", "phylum", "order", "family", "species", "genus")
   names(dmap) <- substring(dmap, 1, 1)
   taxa$`Taxonomic Level` <- unname(dmap[taxa$`Taxonomic Level`])
-  
+  nstudy <- dat$PMID %>% n_distinct()
+  taxa <- taxa  %>% rowwise() %>% mutate(`Binomial Test`=.createBinomTestSummary(Freq, nstudy))
   taxa %>% kbl() %>% kable_styling()
+}
+
+.createBinomTestSummary <- function(x, n, p=0.5){
+  bin.test <- binom.test(x=x, n=n, p=p)
+  paste0("p-value=", round(bin.test[[3]],4), " (x=", bin.test[[1]],", n=", bin.test[[2]], ")") %>% return()
 }
 
 

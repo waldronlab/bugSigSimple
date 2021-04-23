@@ -10,7 +10,7 @@ createStudyTable(dat)
 \item{dat}{data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired}
 }
 \value{
-kable table
+kable table of basic study information
 }
 \description{
 Create a table of all studies currently in data.frame
