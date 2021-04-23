@@ -7,7 +7,7 @@
 #' @importFrom dplyr filter %>%
 #' @importFrom kableExtra kbl kable_styling
 #' @importFrom tidyr separate
-#' @return kable table
+#' @return kable table with increased and decreased taxa
 #' @export
 #'
 #' @examples
@@ -41,4 +41,32 @@ createTaxonTable <- function(dat, sig.type=c("increased, decreased, both"), n=10
     leave <- spl[length(spl)]
   })
   tax.level %>% unlist() %>% data.frame(`Taxon`=., taxa) %>% return()
+}
+
+#' Create a table of all studies currently in data.frame
+#'
+#' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired
+#'
+#' @importFrom dplyr group_by summarize  %>%
+#' @importFrom kableExtra kbl kable_styling
+#' @return kable table of basic study information
+#' @export
+#'
+#' @examples
+#' full.dat <- bugsigdbr::importBugSigDB()
+#' createStudyTable(full.dat)
+
+createStudyTable <-function(dat){
+  studies <- data.frame(Study=paste0(str_extract(dat$Authors, "[A-Za-z]+[:space:]"), dat$Year),
+                        Condition=dat$Condition,
+                        Cases=dat$`Group 1 sample size`,
+                        Controls=dat$`Group 0 sample size`,
+                        `Study Design`=dat$`Study design`)
+  studies %>% group_by(Study) %>% summarize(Condition=first(Condition), 
+                                            Cases=max(Cases),
+                                            Controls=max(Controls), 
+                                            `Study Design`=first(`Study.Design`)) %>%
+    kbl() %>% 
+    kable_styling()
+  
 }
