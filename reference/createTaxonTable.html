@@ -149,45 +149,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>full.dat</span> <span class='op'>&lt;-</span> <span class='fu'>bugsigdbr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html'>importBugSigDB</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>using temporary cache /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp59HaTy/BiocFileCache</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Column specification</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span><span></span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  `Signature page name` = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  Experiment = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  Study = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  Source = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  `Curated date` = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  Curator = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  `Revision editor` = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  Description = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  `Abundance in Group 1` = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  `MetaPhlAn taxon names` = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  `NCBI Taxonomy IDs` = </span><span style='color: #BB0000;'>col_character()</span><span></span>
-#&gt; <span class='message'>)</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Column specification</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span><span></span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  .default = col_character(),</span>
-#&gt; <span class='message'>  `Group 0 sample size` = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  `Group 1 sample size` = </span><span style='color: #00BB00;'>col_number()</span><span>,</span>
-#&gt; <span class='message'>  `16s variable region` = </span><span style='color: #00BB00;'>col_number()</span><span>,</span>
-#&gt; <span class='message'>  `Significance threshold` = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  `MHT correction` = </span><span style='color: #BBBB00;'>col_logical()</span><span>,</span>
-#&gt; <span class='message'>  `LDA Score above` = </span><span style='color: #00BB00;'>col_double()</span><span></span>
-#&gt; <span class='message'>)</span>
-#&gt; <span class='message'></span><span style='color: #00BBBB;'>ℹ</span><span> Use </span><span style='color: #262626;background-color: #DADADA;'>`spec()`</span><span> for the full column specifications.</span></div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'></span><span style='color: #00BBBB;'>──</span><span> </span><span style='font-weight: bold;'>Column specification</span><span> </span><span style='color: #00BBBB;'>────────────────────────────────────────────────────────</span><span></span>
-#&gt; <span class='message'>cols(</span>
-#&gt; <span class='message'>  `Study page name` = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  `Study design` = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  PMID = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  DOI = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  URL = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  Authors = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  Title = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  Journal = </span><span style='color: #BB0000;'>col_character()</span><span>,</span>
-#&gt; <span class='message'>  Year = </span><span style='color: #00BB00;'>col_double()</span><span>,</span>
-#&gt; <span class='message'>  Abstract = </span><span style='color: #BB0000;'>col_character()</span><span></span>
-#&gt; <span class='message'>)</span></div><div class='input'><span class='fu'>createTaxonTable</span><span class='op'>(</span><span class='va'>full.dat</span>, n<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Using cached version from 2021-04-23 14:40:43</span></div><div class='input'><span class='fu'>createTaxonTable</span><span class='op'>(</span><span class='va'>full.dat</span>, n<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; &lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
 #&gt;  &lt;thead&gt;
 #&gt;   &lt;tr&gt;
@@ -439,7 +401,7 @@
 #&gt;    &lt;td style="text-align:right;"&gt; 39 &lt;/td&gt;
 #&gt;   &lt;/tr&gt;
 #&gt; &lt;/tbody&gt;
-#&gt; &lt;/table&gt;</div></span></pre>
+#&gt; &lt;/table&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
