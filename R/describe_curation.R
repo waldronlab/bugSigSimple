@@ -35,7 +35,7 @@ createTaxonTable <- function(dat, sig.type=c("increased, decreased, both"), n=10
 
 .createBinomTestSummary <- function(x, n, p=0.5){
   bin.test <- binom.test(x=x, n=n, p=p)
-  paste0("p-value=", round(bin.test[[3]],4), " (x=", bin.test[[1]],", n=", bin.test[[2]], ")") %>% return()
+  paste0("p-value=", round(bin.test[[3]],4), " (taxon freq=", bin.test[[1]],", total studies=", bin.test[[2]], ")") %>% return()
 }
 
 
