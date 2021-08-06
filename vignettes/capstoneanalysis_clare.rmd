@@ -1,0 +1,248 @@
+---
+title: "feces sigcomp"
+author: "clare"
+date: "8/2/2021"
+output: html_document
+---
+##load bugsigDB data##
+```{r}
+install.packages("devtools")
+devtools::install_github("waldronlab/bugSigSimple", force = TRUE)
+devtools::install_github("waldronlab/bugsigdbr", force = TRUE)
+```
+
+```{r}
+library(bugSigSimple)
+dat <- bugsigdbr::importBugSigDB(cache = FALSE) 
+dim(dat)
+names(dat)
+```
+
+```{r}
+library(tidyverse)
+library(Xmisc)
+library(Hmisc)
+condsnew <-c("COVID-19")
+covid_gut <- subsetByCondition(dat,condsnew) %>%
+    mutate(studyexp = paste(Study, Experiment, sep = "_")) %>%
+    mutate(site = with(covid_gut, ifelse(`Body site` == "feces" | `Body site` == "rectal", "Gut", 
+                       ifelse(`Body site` == "nasopharynx" | `Body site` == "nasopharynx,oropharynx" | `Body site` == "oropharynx", "aURT",`Body site`)))) %>%
+    mutate(comparison1 = paste(`Group 0 name`, `Group 1 name`, sep = " vs "))
+View(covid_gut)  
+```  
+  
+##subset by bodysite
+```{r}
+library(dplyr)
+gut_sigs <- subset(covid_gut, 
+                           site == "Gut") %>%
+    drop_na(Source)
+naso_sigs <- subset(covid_gut, 
+                           site == "aURT") %>%
+  drop_na(Source)
+View(gut_sigs)
+```
+
+##gut microbiota analysis##
+##look specifically at case-control comparisons
+```{r}
+library(dplyr)
+healthy <- grepl(".*(healthy.*COVID|COVID.*healthy).*", gut_sigs$comparison1, ignore.case = TRUE)
+
+cc_gut_sigs1 <- gut_sigs %>%
+      filter(healthy == TRUE) 
+view(cc_gut_sigs1)
+```
+
+## Overall frequencies of taxa increased in cases for case/control feces studies
+```{r}
+View(getMostFrequentTaxa(cc_gut_sigs1, n=40))
+
+View(getMostFrequentTaxa(cc_gut_sigs1,sig.type="increased"))
+```
+
+##binomial tests - significantly increased taxa in case-control comparisons
+```{r}
+
+increasedtaxa <- c("Enterococcus", "Streptococcus", "Rothia", "Enterococcaceae", "Lactobacillaceae", "Enterocloster citroniae", "Enterobacteriaceae", "Atopobium", "Lactobacillus", "Shigella")
+
+freq <- c("8 / 8", "8 / 8", "5 / 5", "5 / 5", "5 / 8", "5 / 5", "5 / 5", "4 / 4", "4 / 4", "4 / 4")
+
+binom.test(x=8, n=8) ##enterococcus
+binom.test(x=8, n=8) ##streptococcus
+binom.test(x=5, n=5) ##rothia
+binom.test(x=5, n=5) ##enterococcaceae
+binom.test(x=5, n=8) ##lactobacillaceae
+binom.test(x=5, n=5) ##enterocloster citroniae
+binom.test(x=5, n=5) ##enterobacteriaceae
+binom.test(x=4, n=4)##atopobium
+binom.test(x=4, n=4) ##lactobacillus
+binom.test(x=4, n=4) ##shigella
+
+
+## Adjusting p value by FDR correction for increased taxa
+
+pvals <- c(0.007812, 0.007812, 0.0625,  0.0625, 0.7266,  0.0625,  0.0625, 0.125, 0.125, 0.125)
+adj.pvals <- p.adjust(pvals, method="fdr")
+adj.pvals
+
+binom_inc <- data.frame(increasedtaxa, freq, pvals, adj.pvals)
+View(binom_inc)
+```
+##Monte-Carlo simulation for increased abundance taxa
+```{r}
+library(bugSigSimple)
+relevant.sigs <- extractBugSigs(cc_gut_sigs1)
+gut.sigs.increased <- extractBugSigs(cc_gut_sigs1, direction = "increased")
+(my.siglengths.inc <- sapply(gut.sigs.increased, length))
+
+getCriticalN(relevant.sigs, my.siglengths.inc)
+# Compare to observed - enterococcus & streptococcus are the only taxa that equal the critical limit
+frequencySigs(gut.sigs.increased)
+```
+## Overall frequencies of taxa decreased in cases for case/control feces studies
+```{r}
+View(getMostFrequentTaxa(cc_gut_sigs1, n=40))
+
+View(getMostFrequentTaxa(cc_gut_sigs1,sig.type="decreased"))
+```
+
+##binomial tests - significantly decreased taxa in case-control comparisons
+```{r}
+
+increasedtaxa1 <- c("Coprococcus", "Anaerostipes", "Roseburia", "Faecalibacterium", "Lachnospira", "Clostridium", "Dorea", "Anaerobutyricum hallii", "Coprococcus comes", "Dorea formicigenerans")
+ 
+frequency <- c("7 / 7", "7 / 8", "6 / 6", "6 / 7", "5 / 6", "4 / 6", "4 / 4", "4 / 6", "4 / 4", "4 / 4")
+
+binom.test(x=7, n=7) ##coprococcus
+binom.test(x=7, n=8) ##anaerostipes
+binom.test(x=6, n=6) ##roseburia
+binom.test(x=6, n=7) ##faecalibacterium
+binom.test(x=5, n=6) ##lachnospira
+binom.test(x=4, n=6) ##clostridium
+binom.test(x=4, n=4) ##dorea
+binom.test(x=4, n=6)##anaerobutyricum hallii
+binom.test(x=4, n=4) ##coprococcus comes
+binom.test(x=4, n=4) ##dorea formicigenerans
+
+## Adjusting p value by FDR correction for increased taxa
+
+pvals1 <- c(0.01563, 0.07031, 0.03125, 0.125,  0.2188, 0.6875,  0.125,  0.6875, 0.125, 0.125)
+adj.pvals1 <- p.adjust(pvals1, method="fdr")
+adj.pvals1
+
+binom_dec <- data.frame(increasedtaxa1, frequency, pvals1, adj.pvals1)
+View(binom_dec)
+```
+
+##Monte-Carlo simulation for decreased abundance taxa
+```{r}
+library(bugSigSimple)
+relevant.sigs <- extractBugSigs(cc_gut_sigs1)
+gut.sigs.decreased <- extractBugSigs(cc_gut_sigs1, direction = "decreased")
+(my.siglengths.inc <- sapply(gut.sigs.decreased, length))
+
+getCriticalN(relevant.sigs, my.siglengths.inc)
+# Compare to observed - no taxa reach critical limit
+frequencySigs(gut.sigs.decreased)
+```
+
+##nasopharyngeal microbiota analysis##
+##look specifically at case-control comparisons
+```{r}
+library(dplyr)
+healthy <- grepl(".*(control.*COVID|COVID.*control).*", naso_sigs$comparison1, ignore.case = TRUE)
+
+cc_naso_sigs1 <- naso_sigs %>%
+      filter(healthy == TRUE) %>%
+  subset(Study != "Study 458")
+view(cc_naso_sigs1)
+```
+
+## Overall frequencies of taxa increased in cases for case/control URT studies
+```{r}
+View(getMostFrequentTaxa(cc_URT_sigs1, n=40))
+
+View(getMostFrequentTaxa(cc_URT_sigs1,sig.type="increased"))
+```
+
+##binomial tests - significantly increased taxa in case-control comparisons
+```{r}
+
+increasedtaxa <- c("Veillonella", "Rothia mucilaginosa", "Prevotella ruminicola", "Staphylococcaceae", "Granulicatella", "Enterococcaceae")
+
+binom.test(x=4, n=5) ##veillonella
+binom.test(x=2, n=2) ##rothia mucilaginosa
+binom.test(x=2, n=2) ##prevotella ruminicola
+binom.test(x=2, n=2) ##staphylococcaceae
+binom.test(x=2, n=2) ##granulicatella
+binom.test(x=2, n=2) ##enterococcaceae
+
+
+
+## Adjusting p value by FDR correction for increased taxa
+
+pvals <- c(0.375, 0.5, 0.5, 0.5, 0.5, 0.5)
+adj.pvals <- p.adjust(pvals, method="fdr")
+adj.pvals
+
+binom_inc <- data.frame(increasedtaxa, pvals, adj.pvals)
+View(binom_inc)
+```
+
+##Monte-Carlo simulation for increased abundance taxa
+```{r}
+library(bugSigSimple)
+relevant.sigs <- extractBugSigs(cc_URT_sigs1)
+URT.sigs.increased <- extractBugSigs(cc_URT_sigs1, direction = "increased")
+(my.siglengths.inc <- sapply(URT.sigs.increased, length))
+
+getCriticalN(relevant.sigs, my.siglengths.inc)
+# Compare to observed - enterococcus & streptococcus are the only taxa that equal the critical limit
+frequencySigs(URT.sigs.increased)
+```
+
+## Overall frequencies of taxa decreased in cases for case/control URT studies
+```{r}
+View(getMostFrequentTaxa(cc_URT_sigs1, n=40))
+
+View(getMostFrequentTaxa(cc_URT_sigs1,sig.type="decreased"))
+```
+
+##binomial tests - significantly decreased taxa in case-control comparisons
+```{r}
+
+increasedtaxa1 <- c("Rothia", "Mobiluncus", "Bifidobacterium", "Intrasporangiaceae", "Arthrobacter", "Kocuria", "Arachnia", "Rubrobacteraceae", "Rubrobacter")
+
+binom.test(x=3, n=3) ##Rothia
+binom.test(x=2, n=2) ##Mobiluncus
+binom.test(x=2, n=2) ##Bifidobacterium
+binom.test(x=2, n=2) ##Corynebacterium
+binom.test(x=2, n=2) ##Intrasporangiaceae
+binom.test(x=2, n=2) ##Arthrobacter
+binom.test(x=2, n=2) ##Kocuria
+binom.test(x=2, n=2)##Arachnia
+binom.test(x=2, n=2) ##Rubrobacteraceae
+binom.test(x=2, n=2) ##Rubrobacter
+
+## Adjusting p value by FDR correction for increased taxa
+
+pvals1 <- c(0.25, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5)
+adj.pvals1 <- p.adjust(pvals1, method="fdr")
+adj.pvals1
+
+binom_dec <- data.frame(increasedtaxa1, pvals1, adj.pvals1)
+View(binom_dec)
+```
+
+##Monte-Carlo simulation for decreased abundance taxa
+```{r}
+library(bugSigSimple)
+relevant.sigs <- extractBugSigs(cc_URT_sigs1)
+URT.sigs.decreased <- extractBugSigs(cc_URT_sigs1, direction = "decreased")
+(my.siglengths.inc <- sapply(URT.sigs.decreased, length))
+
+getCriticalN(relevant.sigs, my.siglengths.inc)
+# Compare to observed 
+frequencySigs(URT.sigs.decreased)
+```
