@@ -26,7 +26,7 @@ condsnew <-c("COVID-19")
 covid_gut <- subsetByCondition(dat,condsnew) %>%
     mutate(studyexp = paste(Study, Experiment, sep = "_")) %>%
     mutate(site = with(covid_gut, ifelse(`Body site` == "feces" | `Body site` == "rectal", "Gut", 
-                       ifelse(`Body site` == "nasopharynx" | `Body site` == "nasopharynx,oropharynx" | `Body site` == "oropharynx", "aURT",`Body site`)))) %>%
+                       ifelse(`Body site` == "nasopharynx" | `Body site` == "nasopharynx,oropharynx", "aURT",`Body site`)))) %>%
     mutate(comparison1 = paste(`Group 0 name`, `Group 1 name`, sep = " vs "))
 View(covid_gut)  
 ```  
@@ -37,6 +37,7 @@ library(dplyr)
 gut_sigs <- subset(covid_gut, 
                            site == "Gut") %>%
     drop_na(Source)
+
 naso_sigs <- subset(covid_gut, 
                            site == "aURT") %>%
   drop_na(Source)
@@ -89,6 +90,33 @@ adj.pvals
 binom_inc <- data.frame(increasedtaxa, freq, pvals, adj.pvals)
 View(binom_inc)
 ```
+
+##output frequency/p-value table##
+```{r}
+library(gt)
+library(tidyverse)
+library(glue)
+
+inctable <- binom_inc %>%
+  gt(rowname_col = "row", groupname_col = "group") %>%
+  tab_header(
+    title = "Increased Taxa by Binomial Test - Gut Signatures"
+  ) %>%
+  cols_label(
+    increasedtaxa = "Taxon", 
+    freq = "Frequency", 
+    pvals = "P-value", 
+    adj.pvals="Adj. p-value") %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "lightgreen"),
+     cell_text(weight = "bold")),
+      locations = cells_body(
+      rows = adj.pvals < 0.05)
+      )
+
+gtsave(inctable, "increasedtaxatable_gut.png")
+```
 ##Monte-Carlo simulation for increased abundance taxa
 ```{r}
 library(bugSigSimple)
@@ -110,9 +138,9 @@ View(getMostFrequentTaxa(cc_gut_sigs1,sig.type="decreased"))
 ##binomial tests - significantly decreased taxa in case-control comparisons
 ```{r}
 
-increasedtaxa1 <- c("Coprococcus", "Anaerostipes", "Roseburia", "Faecalibacterium", "Lachnospira", "Clostridium", "Dorea", "Anaerobutyricum hallii", "Coprococcus comes", "Dorea formicigenerans")
+decreasedtaxa<- c("Coprococcus", "Anaerostipes", "Roseburia", "Faecalibacterium", "Lachnospira", "Clostridium", "Dorea", "Anaerobutyricum hallii", "Coprococcus comes", "Dorea formicigenerans")
  
-frequency <- c("7 / 7", "7 / 8", "6 / 6", "6 / 7", "5 / 6", "4 / 6", "4 / 4", "4 / 6", "4 / 4", "4 / 4")
+freq1 <- c("7 / 7", "7 / 8", "6 / 6", "6 / 7", "5 / 6", "4 / 6", "4 / 4", "4 / 6", "4 / 4", "4 / 4")
 
 binom.test(x=7, n=7) ##coprococcus
 binom.test(x=7, n=8) ##anaerostipes
@@ -131,8 +159,28 @@ pvals1 <- c(0.01563, 0.07031, 0.03125, 0.125,  0.2188, 0.6875,  0.125,  0.6875, 
 adj.pvals1 <- p.adjust(pvals1, method="fdr")
 adj.pvals1
 
-binom_dec <- data.frame(increasedtaxa1, frequency, pvals1, adj.pvals1)
+binom_dec <- data.frame(decreasedtaxa, freq1, pvals1, adj.pvals1)
 View(binom_dec)
+
+dectable <- binom_dec %>%
+  gt(rowname_col = "row", groupname_col = "group") %>%
+  tab_header(
+    title = "Decreased Taxa by Binomial Test - Gut Signatures"
+  ) %>%
+  cols_label(
+    decreasedtaxa = "Taxon", 
+    freq1 = "Frequency", 
+    pvals1 = "P-value", 
+    adj.pvals1 ="Adj. p-value") %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "lightgreen"),
+     cell_text(weight = "bold")),
+      locations = cells_body(
+      rows = adj.pvals1 < 0.05)
+      )
+
+gtsave(dectable, "decreasedtaxatable_gut.png")
 ```
 
 ##Monte-Carlo simulation for decreased abundance taxa
@@ -169,7 +217,9 @@ View(getMostFrequentTaxa(cc_URT_sigs1,sig.type="increased"))
 ##binomial tests - significantly increased taxa in case-control comparisons
 ```{r}
 
-increasedtaxa <- c("Veillonella", "Rothia mucilaginosa", "Prevotella ruminicola", "Staphylococcaceae", "Granulicatella", "Enterococcaceae")
+increasedtaxa_naso <- c("Veillonella", "Rothia mucilaginosa", "Prevotella ruminicola", "Staphylococcaceae", "Granulicatella", "Enterococcaceae")
+
+freq2 <- c("4 / 5", "2 / 2", "2 / 2", "2 / 2", "2 / 2", "2 / 2")
 
 binom.test(x=4, n=5) ##veillonella
 binom.test(x=2, n=2) ##rothia mucilaginosa
@@ -178,16 +228,34 @@ binom.test(x=2, n=2) ##staphylococcaceae
 binom.test(x=2, n=2) ##granulicatella
 binom.test(x=2, n=2) ##enterococcaceae
 
-
-
 ## Adjusting p value by FDR correction for increased taxa
 
-pvals <- c(0.375, 0.5, 0.5, 0.5, 0.5, 0.5)
-adj.pvals <- p.adjust(pvals, method="fdr")
-adj.pvals
+pvals2 <- c(0.375, 0.5, 0.5, 0.5, 0.5, 0.5)
+adj.pvals2 <- p.adjust(pvals2, method="fdr")
+adj.pvals2
 
-binom_inc <- data.frame(increasedtaxa, pvals, adj.pvals)
+binom_inc_naso <- data.frame(increasedtaxa_naso, freq2, pvals2, adj.pvals2)
 View(binom_inc)
+
+inctable.naso <- binom_inc_naso %>%
+  gt(rowname_col = "row", groupname_col = "group") %>%
+  tab_header(
+    title = "Increased Taxa by Binomial Test - Nasopharyngeal Signatures"
+  ) %>%
+  cols_label(
+    increasedtaxa_naso = "Taxon", 
+    freq2 = "Frequency", 
+    pvals2 = "P-value", 
+    adj.pvals2 ="Adj. p-value") %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "lightgreen"),
+     cell_text(weight = "bold")),
+      locations = cells_body(
+      rows = adj.pvals2 < 0.05)
+      )
+
+gtsave(inctable.naso, "increasedtaxatable_naso.png")
 ```
 
 ##Monte-Carlo simulation for increased abundance taxa
@@ -212,7 +280,9 @@ View(getMostFrequentTaxa(cc_URT_sigs1,sig.type="decreased"))
 ##binomial tests - significantly decreased taxa in case-control comparisons
 ```{r}
 
-increasedtaxa1 <- c("Rothia", "Mobiluncus", "Bifidobacterium", "Intrasporangiaceae", "Arthrobacter", "Kocuria", "Arachnia", "Rubrobacteraceae", "Rubrobacter")
+decreasedtaxa_naso <- c("Rothia", "Mobiluncus", "Bifidobacterium", "Corynebacterium", "Intrasporangiaceae", "Arthrobacter", "Kocuria", "Arachnia", "Rubrobacteraceae", "Rubrobacter")
+
+freq3 <- c("3 / 3", "2 / 2", "2 / 2", "2 / 2", "2 / 2", "2 / 2", "2 / 2", "2 / 2", "2 / 2", "2 / 2")
 
 binom.test(x=3, n=3) ##Rothia
 binom.test(x=2, n=2) ##Mobiluncus
@@ -227,12 +297,32 @@ binom.test(x=2, n=2) ##Rubrobacter
 
 ## Adjusting p value by FDR correction for increased taxa
 
-pvals1 <- c(0.25, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5)
-adj.pvals1 <- p.adjust(pvals1, method="fdr")
-adj.pvals1
+pvals3 <- c(0.25, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5)
+adj.pvals3 <- p.adjust(pvals3, method="fdr")
+adj.pvals3
 
-binom_dec <- data.frame(increasedtaxa1, pvals1, adj.pvals1)
-View(binom_dec)
+binom_dec_naso <- data.frame(decreasedtaxa_naso, freq3, pvals3, adj.pvals3)
+View(binom_dec_naso)
+
+dectable.naso <- binom_dec_naso %>%
+  gt(rowname_col = "row", groupname_col = "group") %>%
+  tab_header(
+    title = "Decreased Taxa by Binomial Test - Nasopharyngeal Signatures"
+  ) %>%
+  cols_label(
+    decreasedtaxa_naso = "Taxon", 
+    freq3 = "Frequency", 
+    pvals3 = "P-value", 
+    adj.pvals3 ="Adj. p-value") %>%
+  tab_style(
+    style = list(
+      cell_fill(color = "lightgreen"),
+     cell_text(weight = "bold")),
+      locations = cells_body(
+      rows = adj.pvals3 < 0.05)
+      )
+
+gtsave(dectable.naso, "decreasedtaxatable_naso.png")
 ```
 
 ##Monte-Carlo simulation for decreased abundance taxa
