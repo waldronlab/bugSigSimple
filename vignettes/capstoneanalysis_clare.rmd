@@ -63,11 +63,11 @@ bugSigSimple::createStudyTable(covid_all)
 
 ```{r}
 library(dplyr)
-gut_sigs <- filter(covid_gut, 
+gut_sigs <- filter(covid_all, 
                            site == "Gut") %>%
     drop_na(Source)
 
-naso_sigs <- filter(covid_gut, 
+naso_sigs <- filter(covid_all, 
                            site == "aURT") %>%
   drop_na(Source)
 ```
@@ -110,35 +110,25 @@ cc_gut_sigs1_taxontable
 
 
 ## Monte-Carlo simulation for increased abundance taxa
+
+Just for the increased cc_gut_sigs1 for now. I am inclined to skip this analysis in favor of the clustering and binomial test analysis.
+
 ```{r}
 library(bugSigSimple)
-relevant.sigs <- extractBugSigs(cc_gut_sigs1)
-gut.sigs.increased <- extractBugSigs(cc_gut_sigs1, direction = "increased")
-(my.siglengths.inc <- sapply(gut.sigs.increased, length))
+gut.sigs.increased <- filter(cc_gut_sigs1, `Abundance in Group 1` == "increased") %>% 
+  bugsigdbr::getSignatures(tax.id.type = "taxname")
+ my.siglengths.inc <- sapply(gut.sigs.increased, length)
 
-getCriticalN(relevant.sigs, my.siglengths.inc)
+getCriticalN(gut.sigs.increased, my.siglengths.inc)
 # Compare to observed - enterococcus & streptococcus are the only taxa that equal the critical limit
 frequencySigs(gut.sigs.increased)
 ```
 ## Overall frequencies of taxa decreased in cases for case/control feces studies
-```{r}
-View(getMostFrequentTaxa(cc_gut_sigs1, n=40))
-
-View(getMostFrequentTaxa(cc_gut_sigs1,sig.type="decreased"))
+```{r, eval = FALSE}
+createTaxonTable(cc_gut_sigs1, n=40)
 ```
 
 
-##Monte-Carlo simulation for decreased abundance taxa
-```{r}
-library(bugSigSimple)
-relevant.sigs <- extractBugSigs(cc_gut_sigs1)
-gut.sigs.decreased <- extractBugSigs(cc_gut_sigs1, direction = "decreased")
-(my.siglengths.inc <- sapply(gut.sigs.decreased, length))
-
-getCriticalN(relevant.sigs, my.siglengths.inc)
-# Compare to observed - no taxa reach critical limit
-frequencySigs(gut.sigs.decreased)
-```
 
 ## nasopharyngeal microbiota analysis
 
@@ -151,34 +141,6 @@ healthy <- grepl(".*(control.*COVID|COVID.*control).*", naso_sigs$comparison1, i
 cc_naso_sigs1 <- naso_sigs %>%
       filter(healthy == TRUE) %>%
   subset(Study != "Study 458")
-view(cc_naso_sigs1)
-```
-
-
-##Monte-Carlo simulation for increased abundance taxa
-```{r}
-library(bugSigSimple)
-relevant.sigs <- extractBugSigs(cc_URT_sigs1)
-URT.sigs.increased <- extractBugSigs(cc_URT_sigs1, direction = "increased")
-(my.siglengths.inc <- sapply(URT.sigs.increased, length))
-
-getCriticalN(relevant.sigs, my.siglengths.inc)
-# Compare to observed - enterococcus & streptococcus are the only taxa that equal the critical limit
-frequencySigs(URT.sigs.increased)
-```
-
-
-
-
-##Monte-Carlo simulation for decreased abundance taxa
-```{r}
-library(bugSigSimple)
-relevant.sigs <- extractBugSigs(cc_URT_sigs1)
-URT.sigs.decreased <- extractBugSigs(cc_URT_sigs1, direction = "decreased")
-(my.siglengths.inc <- sapply(URT.sigs.decreased, length))
-
-getCriticalN(relevant.sigs, my.siglengths.inc)
-# Compare to observed 
-frequencySigs(URT.sigs.decreased)
+cc_naso_sigs1
 ```
 
