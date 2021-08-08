@@ -1,0 +1,184 @@
+---
+title: "feces sigcomp"
+author: "clare"
+date: "8/2/2021"
+output: html_document
+---
+
+# Analysis objectives
+
+1. Import, recode, and subset data from bugsigdb.org    
+2. Create a table of studies
+3. Create a clustered heatmap showing similarity of signatures from independent studies
+4. Calculate the frequency of appearance of each taxa in independent signatures, and identify the most frequently reported taxa
+5. Estimate the probability of the most frequently identified taxa occuring so frequently by chance
+
+# Packages installation
+
+Install packages (not evaluated in vignette)
+
+```{r, eval=FALSE}
+install.packages(c("devtools", "tidyverse", "kableExtra", "gt", "glue"))
+devtools::install_github("waldronlab/bugSigSimple")
+devtools::install_github("waldronlab/BugSigDBStats")
+devtools::install_github("waldronlab/bugsigdbr")
+```
+
+# Data import, recoding, and subset
+
+```{r}
+library(bugSigSimple)
+dat <- bugsigdbr::importBugSigDB(cache = TRUE) 
+dim(dat)
+names(dat)
+```
+
+```{r}
+library(tidyverse)
+condsnew <- c("COVID-19")
+covid_all <- subsetByCondition(dat, condsnew) %>%
+  mutate(studyexp = paste(Study, Experiment, sep = "_")) %>%
+  mutate(
+    site = recode(`Body site`,
+      "feces" = "Gut",
+      "rectal" = "Gut",
+      "nasopharynx" = "aURT",
+      "oropharynx" = "aURT",
+      "nasopharynx,oropharynx" = "aURT",
+      "tongue" = "aURT"
+    )
+  ) %>%
+  mutate(comparison1 = paste(`Group 0 name`, `Group 1 name`, sep = " vs "))
+```  
+  
+
+## Table of studies
+
+```{r}
+bugSigSimple::createStudyTable(covid_all)
+```
+
+
+## Taxon frequency tables by body site
+
+```{r}
+library(dplyr)
+gut_sigs <- filter(covid_gut, 
+                           site == "Gut") %>%
+    drop_na(Source)
+
+naso_sigs <- filter(covid_gut, 
+                           site == "aURT") %>%
+  drop_na(Source)
+```
+
+In this table, the Binomial Test p-value corresponds to the null hypothesis
+
+H0: the proportion of signatures in which the taxon is reported increased or decreased, relative to the total number of signatures in which it is reported, is equal to 0.5
+
+```{r}
+kableExtra::kbl(bugSigSimple::createTaxonTable(gut_sigs))
+```
+
+```{r}
+kableExtra::kbl(bugSigSimple::createTaxonTable(naso_sigs))
+```
+
+# gut microbiota analysis
+
+Look specifically at case-control comparisons
+```{r}
+healthy <- grepl(".*(healthy.*COVID|COVID.*healthy).*", gut_sigs$comparison1, ignore.case = TRUE)
+
+cc_gut_sigs1 <- gut_sigs %>%
+      filter(healthy == TRUE) 
+cc_gut_sigs1
+```
+
+## Overall frequencies of taxa increased in cases for case/control feces studies
+
+Identifying a taxon reported consistently in 8 out of 8 studies is _much_ more compelling that the FDR value here would suggest, since this taxon also passed a significance threshold in every one of those studies.
+
+```{r}
+cc_gut_sigs1_taxontable <- bugSigSimple::createTaxonTable(cc_gut_sigs1) %>% 
+  mutate(FDR =  p.adjust(p = `Binomial Test pval`, method="fdr")) %>%
+  relocate(FDR, .after = `Binomial Test pval`)
+cc_gut_sigs1_taxontable
+```
+
+
+
+
+## Monte-Carlo simulation for increased abundance taxa
+```{r}
+library(bugSigSimple)
+relevant.sigs <- extractBugSigs(cc_gut_sigs1)
+gut.sigs.increased <- extractBugSigs(cc_gut_sigs1, direction = "increased")
+(my.siglengths.inc <- sapply(gut.sigs.increased, length))
+
+getCriticalN(relevant.sigs, my.siglengths.inc)
+# Compare to observed - enterococcus & streptococcus are the only taxa that equal the critical limit
+frequencySigs(gut.sigs.increased)
+```
+## Overall frequencies of taxa decreased in cases for case/control feces studies
+```{r}
+View(getMostFrequentTaxa(cc_gut_sigs1, n=40))
+
+View(getMostFrequentTaxa(cc_gut_sigs1,sig.type="decreased"))
+```
+
+
+##Monte-Carlo simulation for decreased abundance taxa
+```{r}
+library(bugSigSimple)
+relevant.sigs <- extractBugSigs(cc_gut_sigs1)
+gut.sigs.decreased <- extractBugSigs(cc_gut_sigs1, direction = "decreased")
+(my.siglengths.inc <- sapply(gut.sigs.decreased, length))
+
+getCriticalN(relevant.sigs, my.siglengths.inc)
+# Compare to observed - no taxa reach critical limit
+frequencySigs(gut.sigs.decreased)
+```
+
+## nasopharyngeal microbiota analysis
+
+Look specifically at case-control comparisons
+
+```{r}
+library(dplyr)
+healthy <- grepl(".*(control.*COVID|COVID.*control).*", naso_sigs$comparison1, ignore.case = TRUE)
+
+cc_naso_sigs1 <- naso_sigs %>%
+      filter(healthy == TRUE) %>%
+  subset(Study != "Study 458")
+view(cc_naso_sigs1)
+```
+
+
+##Monte-Carlo simulation for increased abundance taxa
+```{r}
+library(bugSigSimple)
+relevant.sigs <- extractBugSigs(cc_URT_sigs1)
+URT.sigs.increased <- extractBugSigs(cc_URT_sigs1, direction = "increased")
+(my.siglengths.inc <- sapply(URT.sigs.increased, length))
+
+getCriticalN(relevant.sigs, my.siglengths.inc)
+# Compare to observed - enterococcus & streptococcus are the only taxa that equal the critical limit
+frequencySigs(URT.sigs.increased)
+```
+
+
+
+
+##Monte-Carlo simulation for decreased abundance taxa
+```{r}
+library(bugSigSimple)
+relevant.sigs <- extractBugSigs(cc_URT_sigs1)
+URT.sigs.decreased <- extractBugSigs(cc_URT_sigs1, direction = "decreased")
+(my.siglengths.inc <- sapply(URT.sigs.decreased, length))
+
+getCriticalN(relevant.sigs, my.siglengths.inc)
+# Compare to observed 
+frequencySigs(URT.sigs.decreased)
+```
+
