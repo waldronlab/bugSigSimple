@@ -14,28 +14,59 @@
 #' full.dat <- bugsigdbr::importBugSigDB()
 #' createTaxonTable(full.dat, n=20)
 
-
-createTaxonTable <- function(dat, sig.type=c("increased, decreased, both"), n=10){
-  inc <- dat %>% getMostFrequentTaxa(., sig.type = "increased", n=n) %>% .getLowestTaxon(.) %>% {.[,-2]}
-  inc <- cbind(direction=rep("increased", nrow(inc)),inc)
-  dec <- dat %>% getMostFrequentTaxa(., sig.type = "decreased", n=n) %>% .getLowestTaxon(.) %>% {.[,-2]}
-  dec <- cbind(direction=rep("decreased", nrow(dec)),dec)
-
-  taxa <- rbind(inc,dec)
-  if(sig.type %in% c("increased", "decreased")){taxa <- filter(taxa,direction==sig.type)}
-  
-  taxa <- tidyr::separate(data=taxa, col="Taxon", into=c("Taxonomic Level", "Taxon Name"), sep="__")
-  dmap <- c("class", "phylum", "order", "family", "species", "genus")
+createTaxonTable <- function(dat, n=10){
+  dmap <- c("kingdom", "phylum", "class", "order", "family", "genus", "species")
   names(dmap) <- substring(dmap, 1, 1)
-  taxa$`Taxonomic Level` <- unname(dmap[taxa$`Taxonomic Level`])
-  nstudy <- dat$PMID %>% n_distinct()
-  taxa <- taxa  %>% rowwise() %>% mutate(`Binomial Test`=.createBinomTestSummary(Freq, nstudy))
-  taxa %>% kbl() %>% kable_styling()
+  output <-
+    data.frame(getMostFrequentTaxa(dat, sig.type = "both", n = n),
+               stringsAsFactors = FALSE) %>%
+    mutate(metaphlan_name = Var1) %>%
+    tidyr::separate(
+      col = Var1,
+      sep = "\\|",
+      into = dmap,
+      fill = "right"
+    ) %>%
+    mutate(across(kingdom:species, ~ str_replace(., ".__", ""))) %>%
+    rename(n_signatures = Freq)
+  output <-
+    output %>% mutate(n_signatures = sapply(output$metaphlan_name, function(x) {
+      sum(grepl(
+        pattern = x,
+        x = dat$`MetaPhlAn taxon names`,
+        fixed = TRUE
+      ))
+    })) %>%
+    mutate(total_signatures = sapply(metaphlan_name, function(x)
+      .countTaxon(dat = dat, x = x, direction = "both"))) %>%
+    mutate(increased_signatures = sapply(metaphlan_name, function(x)
+      .countTaxon(dat = dat, x = x, direction = "increased"))) %>%
+    mutate(decreased_signatures = sapply(metaphlan_name, function(x)
+      .countTaxon(dat = dat, x = x, direction = "decreased"))) %>%
+    mutate(Taxon = gsub(".+\\|", "", output$metaphlan_name))
+    output %>% tidyr::separate(col="Taxon", into=c("Taxonomic Level", "Taxon Name"), sep="__") %>%
+    mutate(`Taxonomic Level` = unname(dmap[`Taxonomic Level`])) %>%
+    rowwise() %>%    
+    mutate( `Binomial Test pval` = .createBinomTestSummary(increased_signatures, total_signatures, wordy = FALSE)) %>%
+      ungroup() %>%
+    relocate(`Taxon Name`, `Taxonomic Level`, total_signatures, increased_signatures, decreased_signatures, `Binomial Test pval`)
 }
 
-.createBinomTestSummary <- function(x, n, p=0.5){
+.countTaxon = function(dat, x, direction = c("both", "increased", "decreased")){
+  if (direction[1] %in% c("increased", "decreased")){
+    dat <- filter(dat, `Abundance in Group 1` == direction[1])
+  }
+  allnames <- bugsigdbr::getSignatures(dat, tax.id.type = "metaphlan")
+  sum(vapply(allnames, function(onesignames) x %in% onesignames, FUN.VALUE = 1L))
+}
+
+.createBinomTestSummary <- function(x, n, p=0.5, wordy = TRUE){
   bin.test <- binom.test(x=x, n=n, p=p)
-  paste0("p-value=", round(bin.test[[3]],4), " (taxon freq=", bin.test[[1]],", total studies=", bin.test[[2]], ")") %>% return()
+  if(wordy){
+    paste0("p-value=", signif(bin.test[[3]],2), " (increased freq=", bin.test[[1]],", total freq=", bin.test[[2]], ")") %>% return()
+  }else{
+    signif(bin.test[[3]], 2)
+  }
 }
 
 

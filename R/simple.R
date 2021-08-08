@@ -153,7 +153,7 @@ getMostFrequentTaxa <- function(dat, n=10, sig.type=c("both", "increased", "decr
     {
         dat <- dat %>% filter(!!as.name(direction.column) == !!sig.type)
     }
-    msc <- extractSignatures(dat)
+    msc <- bugsigdbr::getSignatures(dat, tax.id.type = "metaphlan")
     msc.tab <- sort(table(unlist(msc)), decreasing=TRUE)
     head(msc.tab, n=n) 
 }
