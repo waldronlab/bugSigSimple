@@ -92,7 +92,6 @@ healthy <- grepl(".*(healthy.*COVID|COVID.*healthy).*", gut_sigs$comparison1, ig
 
 cc_gut_sigs1 <- gut_sigs %>%
       filter(healthy == TRUE) 
-cc_gut_sigs1
 ```
 
 ## Overall frequencies of taxa increased in cases for case/control feces studies
@@ -103,7 +102,7 @@ Identifying a taxon reported consistently in 8 out of 8 studies is _much_ more c
 cc_gut_sigs1_taxontable <- bugSigSimple::createTaxonTable(cc_gut_sigs1) %>% 
   mutate(FDR =  p.adjust(p = `Binomial Test pval`, method="fdr")) %>%
   relocate(FDR, .after = `Binomial Test pval`)
-cc_gut_sigs1_taxontable
+kableExtra::kbl(cc_gut_sigs1_taxontable)
 ```
 
 
@@ -141,7 +140,6 @@ healthy <- grepl(".*(control.*COVID|COVID.*control).*", naso_sigs$comparison1, i
 cc_naso_sigs1 <- naso_sigs %>%
       filter(healthy == TRUE) %>%
   subset(Study != "Study 458")
-cc_naso_sigs1
 ```
 
 # Cluster analysis
@@ -185,10 +183,24 @@ hm <- Heatmap(
 hm
 ```
 
-Use this interactively to make an interactive heatmap:
+Use this interactively to make an interactive heatmap. Some expanding of the default size is required to see anything. Creating a sub-heatmap, then exporting it as a table, allows in-depth identification of the subgroups.
+
 ```{r, eval = FALSE}
 library(InteractiveComplexHeatmap)
+hm <- draw(hm)
 htShiny(hm)
+```
+
+```{r, fig.height=60, fig.width=20}
+hc <- hclust(as.dist(jmat))
+plot(hc)
+```
+
+This tree can be cut to show the clusters, for example. The clusters of more than 1 signature but less than ~10 signatures are most likely to be something interesting.
+
+```{r}
+clusts <- sort(cutree(hc, h = 0.05))
+lapply(unique(clusts), function(i) names(clusts)[clusts == i])
 ```
 
 # Create a wide-format dataframe
@@ -210,7 +222,8 @@ Note this has a number of columns that are mostly zeros, it could be filtered si
 table(cdf[["[Brevibacterium] frigoritolerans"]])
 ```
 
-Create another heatmap on correlations of presence/absence of taxa. 
+Create another heatmap on correlations of presence/absence of taxa. This is not necessary because the previous Jaccard Index heatmap is probably better, it is just a demonstration of doing something with the taxa presence/absence directly. 
+
 ```{r, fig.width=20, fig.height=20}
 sigcors <- cor(t(cmat))
 siglengths <- sapply(sigs, length)
@@ -226,9 +239,11 @@ hm <- Heatmap(
 )
 hm
 ```
+
 Use this interactively to make an interactive heatmap:
 ```{r, eval = FALSE}
 library(InteractiveComplexHeatmap)
+hm <- draw(hm)
 htShiny(hm)
 ```
 
