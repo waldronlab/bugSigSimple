@@ -1,5 +1,5 @@
 Package: bugSigSimple
-Version: 0.99.2
+Version: 0.99.3
 Date: 2020-04-09
 Title: Simple exploratory analysis of curated microbe signatures 
 Author: Ludwig Geistlinger, Levi Waldron, Chloe Mirzayi, Fatima Zohra
@@ -12,9 +12,17 @@ Imports:
     tidyr,
     kableExtra
 Suggests: 
+    safe,
+    ComplexHeatmap,
+    InteractiveComplexHeatmap,
     BiocStyle, 
-    knitr, 
+    knitr,
+    BugSigDBStats,
+    bugsigdbr,
     rmarkdown
+Remotes:
+    waldronlab/BugSigDBStats,
+    waldronlab/bugsigdbr
 Description: Simple exploratory analysis of curated microbe signatures  
 License: Artistic-2.0
 VignetteBuilder: knitr
