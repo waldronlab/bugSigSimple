@@ -1,0 +1,95 @@
+---
+title: "Fieldwork Analysis"
+name: "Samara Khan"
+output: html_document
+---
+
+# Analysis objectives
+
+1. Import, recode, and subset data from bugsigdb.org    
+2. Create a table of studies
+3. Calculate the frequency of appearance of each taxa in independent signatures and identify the most frequently reported taxa
+4. Estimate the probability of the most frequently identified taxa occuring by chance
+
+#Making sure packages are installed
+
+```{r, eval=FALSE, messages=FALSE}
+install.packages(c("devtools", "tidyverse", "kableExtra"))
+devtools::install_github("waldronlab/bugSigSimple")
+devtools::install_github("waldronlab/BugSigDBStats")
+devtools::install_github("waldronlab/bugsigdbr")
+```
+
+#Load and subset data
+
+```{r, messages=FALSE}
+library(bugSigSimple)
+library(BugSigDBStats)
+library(bugsigdbr)
+dat <- bugsigdbr::importBugSigDB(cache= TRUE)
+dim(dat)
+names(dat)
+```
+
+#Subsetting only studies done on humans - 6 of 17 studies were excluded because they were either done on mice or not statistically reliable (Cregger et. al)
+
+```{r, messages=FALSE}
+library(tidyverse)
+library(dplyr)
+
+subset.dat <-dat[which(dat$PMID=="30778155" | dat$PMID=="32192080" | dat$PMID=="31087436"| dat$PMID=="26901400"| dat$PMID=="33839907"| dat$PMID=="32046455"| dat$PMID=="33925708"| dat$PMID=="32299442"| dat$PMID=="33313185"| dat$PMID=="34268384"| dat$PMID=="33660232"),]
+```
+
+#Summary of studies and most frequent taxa increased and decreased in endometriosis patients for all studies
+
+```{r, messages=FALSE}
+bugSigSimple::createStudyTable(subset.dat)
+
+getMostFrequentTaxa(subset.dat,n=30)
+getMostFrequentTaxa(subset.dat,sig.type="increased")
+getMostFrequentTaxa(subset.dat,sig.type="decreased")
+
+```
+
+#Summary of studies and most frequent taxa in only samples from female reproductive tract, excluding feces samples
+```{r, messages=FALSE}
+
+install.packages("stringr")
+library(stringr)
+library(kableExtra)
+
+subset.dat2 <-dat[which(dat$PMID=="30778155" | dat$PMID=="32192080" | dat$PMID=="31087436"| dat$PMID=="26901400"| dat$PMID=="32046455"| dat$PMID=="33925708"| dat$PMID=="32299442"| dat$PMID=="33313185"| dat$PMID=="34268384"),]
+
+reproductive_sigs <-subset.dat2[which(subset.dat2$`Body site`!="feces" | is.na(subset.dat2$`Body site`)),]
+
+bugSigSimple::createStudyTable(reproductive_sigs)
+
+getMostFrequentTaxa(reproductive_sigs,n=30)
+getMostFrequentTaxa(reproductive_sigs,sig.type="increased")
+getMostFrequentTaxa(reproductive_sigs,sig.type="decreased")
+
+kableExtra::kbl(bugSigSimple::createTaxonTable(reproductive_sigs)) %>%
+kable_paper("hover", full_width = F)
+```
+
+
+#Summary of studies and most frequent taxa in only fecal samples
+
+```{r}
+
+subset.dat3 <-dat[which(dat$PMID=="33839907" | dat$PMID=="33660232"| dat$PMID=="30778155" ),]
+subset.dat4 <-subset.dat3[which(subset.dat3$`Body site`!="vagina"),]
+feces_sigs<-subset.dat4[which(subset.dat4$`Body site`!="uterine cervix"),]
+
+bugSigSimple::createStudyTable(feces_sigs)
+getMostFrequentTaxa(feces_sigs,n=30)
+getMostFrequentTaxa(feces_sigs,sig.type="increased")
+getMostFrequentTaxa(feces_sigs,sig.type="decreased")
+
+kableExtra::kbl(bugSigSimple::createTaxonTable(feces_sigs)) %>%
+kable_paper("hover", full_width = F)
+
+```
+
+
+
