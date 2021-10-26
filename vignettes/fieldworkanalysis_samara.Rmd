@@ -11,7 +11,7 @@ output: html_document
 3. Calculate the frequency of appearance of each taxa in independent signatures and identify the most frequently reported taxa
 4. Estimate the probability of the most frequently identified taxa occuring by chance
 
-#Making sure packages are installed
+# Making sure packages are installed
 
 ```{r, eval=FALSE, messages=FALSE}
 install.packages(c("devtools", "tidyverse", "kableExtra"))
@@ -20,27 +20,47 @@ devtools::install_github("waldronlab/BugSigDBStats")
 devtools::install_github("waldronlab/bugsigdbr")
 ```
 
-#Load and subset data
+# Load and subset data
 
 ```{r, messages=FALSE}
 library(bugSigSimple)
 library(BugSigDBStats)
 library(bugsigdbr)
+library(tidyverse)
+library(stringr)
+library(kableExtra)
+library(dplyr)
+```
+
+```{r}
 dat <- bugsigdbr::importBugSigDB(cache= TRUE)
 dim(dat)
 names(dat)
 ```
 
-#Subsetting only studies done on humans - 6 of 17 studies were excluded because they were either done on mice or not statistically reliable (Cregger et. al)
+# Subsetting
+
+Subsetting only studies done on humans - 6 of 17 studies were excluded because they were either done on mice or not statistically reliable (Cregger et. al)
 
 ```{r, messages=FALSE}
-library(tidyverse)
-library(dplyr)
-
-subset.dat <-dat[which(dat$PMID=="30778155" | dat$PMID=="32192080" | dat$PMID=="31087436"| dat$PMID=="26901400"| dat$PMID=="33839907"| dat$PMID=="32046455"| dat$PMID=="33925708"| dat$PMID=="32299442"| dat$PMID=="33313185"| dat$PMID=="34268384"| dat$PMID=="33660232"),]
+subset.dat <-
+  dat[which(
+    dat$PMID == "30778155" |
+      dat$PMID == "32192080" |
+      dat$PMID == "31087436" |
+      dat$PMID == "26901400" |
+      dat$PMID == "33839907" |
+      dat$PMID == "32046455" |
+      dat$PMID == "33925708" |
+      dat$PMID == "32299442" |
+      dat$PMID == "33313185" |
+      dat$PMID == "34268384" | dat$PMID == "33660232"
+  ), ]
 ```
 
-#Summary of studies and most frequent taxa increased and decreased in endometriosis patients for all studies
+# All studies
+
+Summary of studies and most frequent taxa increased and decreased in endometriosis patients for all studies
 
 ```{r, messages=FALSE}
 bugSigSimple::createStudyTable(subset.dat)
@@ -51,29 +71,67 @@ getMostFrequentTaxa(subset.dat,sig.type="decreased")
 
 ```
 
-#Summary of studies and most frequent taxa in only samples from female reproductive tract, excluding feces samples
+# Excluding feces samples
+
+Summary of studies and most frequent taxa in only samples from female reproductive tract, excluding feces samples
+
 ```{r, messages=FALSE}
+subset.dat2 <-
+  dat[which(
+    dat$PMID == "30778155" |
+      dat$PMID == "32192080" |
+      dat$PMID == "31087436" |
+      dat$PMID == "26901400" |
+      dat$PMID == "32046455" |
+      dat$PMID == "33925708" |
+      dat$PMID == "32299442" |
+      dat$PMID == "33313185" | dat$PMID == "34268384"
+  ), ]
 
-install.packages("stringr")
-library(stringr)
-library(kableExtra)
-
-subset.dat2 <-dat[which(dat$PMID=="30778155" | dat$PMID=="32192080" | dat$PMID=="31087436"| dat$PMID=="26901400"| dat$PMID=="32046455"| dat$PMID=="33925708"| dat$PMID=="32299442"| dat$PMID=="33313185"| dat$PMID=="34268384"),]
-
-reproductive_sigs <-subset.dat2[which(subset.dat2$`Body site`!="feces" | is.na(subset.dat2$`Body site`)),]
+reproductive_sigs <-
+  subset.dat2[which(subset.dat2$`Body site` != "feces" |
+                      is.na(subset.dat2$`Body site`)), ]
 
 bugSigSimple::createStudyTable(reproductive_sigs)
 
-getMostFrequentTaxa(reproductive_sigs,n=30)
-getMostFrequentTaxa(reproductive_sigs,sig.type="increased")
-getMostFrequentTaxa(reproductive_sigs,sig.type="decreased")
+allfreqs <- bugSigSimple::createTaxonTable(reproductive_sigs, n = 20) #%>% #could change number
+  arrange(I(decreased_signatures - increased_signatures))
+incfreqs <- filter(allfreqs, I(increased_signatures - decreased_signatures) > 0)
+decfreqs <- filter(allfreqs, I(increased_signatures - decreased_signatures) < 0)
+kableExtra::kbl(allfreqs) %>%
+  kable_paper("hover", full_width = FALSE)
+```
 
-kableExtra::kbl(bugSigSimple::createTaxonTable(reproductive_sigs)) %>%
-kable_paper("hover", full_width = F)
+## Load HMP data from curatedMetagenomicData
+
+```{r, message=FALSE}
+suppressPackageStartupMessages(library(curatedMetagenomicData))
+# hmp_vagina_metadata <- filter(sampleMetadata, study_name == "HMP_2012" & body_site == "vagina")
+all_healthy_adult_vagina_metadata <- filter(sampleMetadata, body_site == "vagina" & disease == "healthy" & age_category == "adult")
+se <-
+  curatedMetagenomicData::returnSamples(all_healthy_adult_vagina_metadata, dataType = "relative_abundance")
+```
+
+Get matrices of species and genus relative abundance
+```{r}
+allranks <- mia::splitByRanks(se)
+species_relab <- t(assay(allranks[["species"]]))
+genus_relab <- t(assay(allranks[["genus"]]))
+family_relab <- t(assay(allranks[["family"]]))
+```
+
+Calculate prevalences at genus level
+```{r}
+genus_prev <- apply(genus_relab, 2, function(x) sum(x > 0) / length(x))
+```
+
+```{r}
+genus_prev[names(genus_prev) %in% incfreqs$`Taxon Name`] #prevalence of genera increased in cases
+genus_prev[names(genus_prev) %in% decfreqs$`Taxon Name`] #prevalence of genera decreased in cases
 ```
 
 
-#Summary of studies and most frequent taxa in only fecal samples
+# Summary of studies and most frequent taxa in only fecal samples
 
 ```{r}
 
