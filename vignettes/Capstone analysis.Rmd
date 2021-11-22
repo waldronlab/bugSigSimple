@@ -1,0 +1,214 @@
+---
+title: "Capstone Analysis Samara Khan"
+output: html_document
+---
+
+# Analysis objectives
+
+1. Import, recode, and subset data from bugsigdb.org    
+2. Create a table of studies
+3. Calculate the frequency of appearance of each taxa in independent signatures and identify the most frequently reported taxa
+4. Conduct a Monte Carlo simulation to test significance of frequency of most recurrent taxa
+5. Fit a log-linear model to standardized HMP data 
+
+#Install packages
+```{r setup, eval=FALSE, messages=FALSE}
+install.packages(c("devtools", "tidyverse", "kableExtra", "gt", "glue"))
+devtools::install_github("waldronlab/bugSigSimple")
+devtools::install_github("waldronlab/BugSigDBStats")
+devtools::install_github("waldronlab/bugsigdbr")
+```
+
+#Load packages and subset data
+```{r}
+library(bugSigSimple)
+library(BugSigDBStats)
+library(bugsigdbr)
+library(tidyverse)
+library(devtools)
+library(kableExtra)
+library(dplyr)
+library(gt)
+library(glue)
+```
+
+
+#Loading and subsetting data to include only signatures from the female reproductive tract
+
+```{r}
+dat <- bugsigdbr::importBugSigDB(cache= TRUE)
+dim(dat)
+names(dat)
+
+subset.dat <-
+  dat[which(
+    dat$PMID == "30778155" |
+      dat$PMID == "32192080" |
+      dat$PMID == "31087436" |
+      dat$PMID == "26901400" |
+      dat$PMID == "33839907" |
+      dat$PMID == "32046455" |
+      dat$PMID == "33925708" |
+      dat$PMID == "32299442" |
+      dat$PMID == "33313185" |
+      dat$PMID == "34268384" | dat$PMID == "33660232"
+  ), ]
+
+subset.dat2 <-
+  dat[which(
+    dat$PMID == "30778155" |
+      dat$PMID == "32192080" |
+      dat$PMID == "31087436" |
+      dat$PMID == "26901400" |
+      dat$PMID == "32046455" |
+      dat$PMID == "33925708" |
+      dat$PMID == "32299442" |
+      dat$PMID == "33313185" | dat$PMID == "34268384"
+  ), ]
+
+reproductive_sigs <-
+  subset.dat2[which(subset.dat2$`Body site` != "feces" |
+                      is.na(subset.dat2$`Body site`)), ]
+
+```
+
+#Create table of studies
+```{r}
+bugSigSimple::createStudyTable(reproductive_sigs)
+
+kableExtra::kbl(bugSigSimple::createTaxonTable(reproductive_sigs))
+```
+
+#Monte Carlo simulation for increased and decreased taxa
+```{r}
+sigs.increased <- filter(reproductive_sigs, `Abundance in Group 1` == "increased") %>% 
+  bugsigdbr::getSignatures(tax.id.type = "taxname")
+
+my.siglengths.inc <- sapply(sigs.increased, length)
+
+getCriticalN(sigs.increased, my.siglengths.inc, alpha = 0.05, nsim = 1000)
+frequencySigs(sigs.increased)
+
+sigs.decreased <- filter(reproductive_sigs, `Abundance in Group 1` == "decreased") %>% 
+  bugsigdbr::getSignatures(tax.id.type = "taxname")
+
+my.siglengths.dec <- sapply(sigs.decreased, length)
+
+getCriticalN(sigs.decreased, my.siglengths.dec, alpha = 0.05, nsim = 1000)
+frequencySigs(sigs.decreased)
+
+```
+
+#Cluster analysis
+```{r}
+clustersigs <- bugsigdbr::getSignatures(reproductive_sigs, tax.id.type = "taxname")
+clustersigs <- clustersigs[sapply(clustersigs, length) > 1]
+dim(clustersigs)
+
+mydists <- BugSigDBStats::calcPairwiseOverlaps(clustersigs)
+dim(mydists)
+```
+
+#Create a matrix of Jaccard similarities (0 for no overlap, 1 for 100% overlap)
+
+```{r}
+signames <- unique(c(mydists$name1, mydists$name2))
+jmat <- matrix(NA, nrow=length(signames), ncol=length(signames), dimnames=list(signames, signames))
+diag(jmat) <- 1
+for (i in 1:nrow(mydists)){
+  jmat[mydists[i, "name2"], mydists[i, "name1"]] <- mydists[i, "jaccard"]
+  jmat[mydists[i, "name1"], mydists[i, "name2"]] <- mydists[i, "jaccard"]
+}
+```
+
+#Create a heatmap
+
+```{r}
+library(ComplexHeatmap)
+siglengths <- sapply(reproductive_sigs, length)
+ha <- HeatmapAnnotation(`Signature Length` = anno_barplot(siglengths))
+hr <- rowAnnotation(`Signature Length` = anno_barplot(siglengths))
+hm <- Heatmap(
+  jmat,
+  top_annotation = ha, left_annotation = hr,
+  row_names_max_width = unit(20, "cm"),
+  column_names_max_height = unit(20, "cm"),
+  row_labels = sub(".+:", "", rownames(jmat)),
+  column_labels = sub(".+:", "", colnames(jmat))
+)
+hm
+```
+
+#Create a data frame for regression analysis from healthy controls
+
+```{r}
+BiocManager::install("curatedMetagenomicData")
+install.packages("purrr")
+
+library(curatedMetagenomicData)
+library(dplyr)
+library(DT)
+library(purrr)
+
+taxon_strep <- c("1884" = "Streptococcus")
+taxon_lact <- c("1578" = "Lactobacillus")
+
+target_sample <- "vagina"
+sample_metadata <- sampleMetadata %>% 
+    filter(
+        grepl(target_sample, body_site) | grepl(target_sample, body_subsite)
+    ) %>% 
+    discard(~all(is.na(.x))) %>% 
+    as_tibble()
+dim(sample_metadata)
+unique(sample_metadata$study_name)
+
+taxa_data <- rowData(tse) %>% 
+    as.data.frame() %>% 
+    tibble::rownames_to_column(var = "tax_name")
+
+filtered_taxa <- taxa_data %>% 
+    filter(
+        tax_name == taxon_strep |
+            genus == taxon_strep |
+            genus == taxon_lact
+    )
+
+select_taxa <- filtered_taxa$tax_name
+
+tidy_abundance <- assay(filtered_taxa) %>% 
+    t() %>% 
+    as.data.frame() %>% 
+    tibble::rownames_to_column("SAMPLE") %>% 
+    as_tibble() %>% 
+    pivot_longer(
+        names_to = "GENUS", values_to = "ABUNDANCE", 
+        cols = 2:last_col()
+    ) %>% 
+    left_join(sample_metadata, by = c("SAMPLE" = "sample_id"))
+
+head(tidy_abundance)
+
+```
+
+#Examining and cleaning data for log-linear model
+
+```{r}
+
+str(tidy_abundance)
+
+nrow(data[is.na(tidy_abundance$age) | is.na(tidy_abundance$BMI),])
+data[is.na(tidy_abundance$age) | is.na(tidy_abundance$BMI),]
+
+
+
+```
+
+#Poisson regression
+```{r}
+poisson <- glm(taxon_lact ~ taxon_strep + study_name + age + BMI)
+summary (poisson)
+```
+
+Need to check for over/ under-dispersion (residual deviance >> df in model output)
+
