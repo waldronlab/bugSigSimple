@@ -149,5 +149,132 @@ kable_paper("hover", full_width = F)
 
 ```
 
+#Create a data frame for regression analysis from healthy controls for log-linear model
+
+```{r}
+BiocManager::install("curatedMetagenomicData")
+install.packages("purrr")
+
+library(curatedMetagenomicData)
+library(dplyr)
+library(DT)
+library(purrr)
+
+taxon_strep <- c("1884" = "Streptococcus")
+taxon_lact <- c("1578" = "Lactobacillus")
+
+target_sample <- "vagina"
+sample_metadata <- sampleMetadata %>% 
+    filter(
+        grepl(target_sample, body_site) | grepl(target_sample, body_subsite)
+    ) %>% 
+    discard(~all(is.na(.x))) %>% 
+    as_tibble()
+dim(sample_metadata)
+unique(sample_metadata$study_name)
+
+tse <- returnSamples(
+    sampleMetadata = sample_metadata,
+    dataType = "relative_abundance",
+    counts = TRUE,
+    rownames = "short"
+)
+tse
+
+taxa_data <- rowData(tse) %>% 
+    as.data.frame() %>% 
+    tibble::rownames_to_column(var = "tax_name")
+
+filtered_taxa <- taxa_data %>% 
+    filter(
+        tax_name == taxon_strep |
+            genus == taxon_strep |
+            genus == taxon_lact
+    )
+
+select_taxa <- filtered_taxa$tax_name
+filtered_tse <- tse[select_taxa, ]
+rownames(filtered_tse)
+assay(filtered_tse)
+
+data.frame(colData(filtered_tse))
+data.frame(t(assay(filtered_tse)))
+newdat <- cbind(data.frame(colData(filtered_tse)),
+data.frame(t(assay(filtered_tse))))
+
+View(newdat)
+
+newdat1<- newdat %>% 
+  rowwise() %>% 
+  mutate(Streptococcus_sum = sum(Streptococcus.salivarius, Streptococcus.peroris, Streptococcus.parasanguinis, Streptococcus.infantis, Streptococcus.oralis, Streptococcus.sp..F0442, Streptococcus.mitis, Streptococcus.pseudopneumoniae,
+                             Streptococcus.australis, Streptococcus.sp..A12, Streptococcus.sp..M334, Streptococcus.sp..HMSC067H01,
+                             Streptococcus.sanguinis, Streptococcus.sp..HMSC034E03, Streptococcus.sp..oral.taxon.058,
+                             Streptococcus.sp..HMSC071D03, Streptococcus.gordonii, Streptococcus.vestibularis, 
+                             Streptococcus.thermophilus, Streptococcus.sp..HMSC070B10, Streptococcus.salivarius,
+                             Streptococcus.peroris,Streptococcus.parasanguinis, Streptococcus.infantis, Streptococcus.oralis,
+                             Streptococcus.sp..F0442, Streptococcus.mitis, Streptococcus.pseudopneumoniae, Streptococcus.australis,
+                             Streptococcus.sp..A12, Streptococcus.sp..M334, Streptococcus.pneumoniae, 
+                             Streptococcus.sp..SK643, Streptococcus.sp..HPH0090, Streptococcus.cristatus, 
+                             Streptococcus.sp..oral.taxon.056, Streptococcus.pasteurianus, Streptococcus.milleri, 
+                             Streptococcus.gallolyticus, Streptococcus.equinus, Streptococcus.mutans,
+                             Streptococcus.sp..NLAE.zl.C503, Streptococcus.sinensis, Streptococcus.viridans, 
+                             Streptococcus.massiliensis, Streptococcus.salivarius.CAG.79, Streptococcus.agalactiae,
+                             Streptococcus.lutetiensis))
+
+View(newdat1)
+
+newdat2 <- newdat1 %>% 
+  rowwise() %>% 
+  mutate(Lactobacillus_sum = Lactobacillus.crispatus, Lactobacillus.jensenii, Lactobacillus.rogosae, 
+         Lactobacillus.gasseri, Lactobacillus.paragasseri, Lactobacillus.iners, Lactobacillus.helveticus, 
+         Lactobacillus.acidophilus, Lactobacillus.delbrueckii, Lactobacillus.ultunensis)
+
+View(newdat2)
+
+
+         
+
+```
+
+#Comparing mean to variance of the outcome variable
+```{r}
+
+library(ggplot2)
+
+mean(newdat2$Streptococcus_sum)
+var(newdat2$Streptococcus_sum)
+fraczeroes <- nrow(newdat2[newdat2$Streptococcus_sum == 0,])/nrow(newdat2)
+
+fraczeroes
+
+
+```
+
+#Fit log-linear models
+```{r}
+fit.pois <- glm(Streptococcus_sum ~ Lactobacillus_sum + age + BMI,
+                data = newdat2,
+                family = poisson(link = "log"))
+
+summary (fit.pois)
+
+library(pscl)
+fit.ZIpois <- zeroinfl(Streptococcus_sum ~ Lactobacillus_sum + age + BMI | 1,
+                data = newdat2,
+                dist = "poisson")
+
+summary (fit.ZIpois)
+
+library(MASS)
+fit.negbin <- glm.nb(Streptococcus_sum ~ Lactobacillus_sum + age + BMI, data = newdat2, maxit = 100)
+summary(fit.negbin)
+
+fit.ZInegbin <- zeroinfl(Streptococcus_sum ~ Lactobacillus_sum + age + BMI | 1,
+                data = newdat2,
+                dist = "negbin")
+
+summary(fit.ZInegbin)
+```
+
 
 
