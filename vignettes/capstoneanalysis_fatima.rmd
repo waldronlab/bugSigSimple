@@ -3,7 +3,7 @@ title: "An analysis of Most frequent taxa in Major Depression and Bipolar Disord
 author: "Fatima Zohra"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Clare Grieve capstone analysis}
+  %\VignetteIndexEntry{An analysis of Most frequent taxa in Major Depression and Bipolar Disorder}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

@@ -4,7 +4,7 @@ name: "Samara Khan"
 date: "8/2/2021"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Clare Grieve capstone analysis}
+  %\VignetteIndexEntry{The Endometriosis-associated Microbiome}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -100,7 +100,7 @@ reproductive_sigs <-
 
 bugSigSimple::createStudyTable(reproductive_sigs)
 
-allfreqs <- bugSigSimple::createTaxonTable(reproductive_sigs, n = 20) #%>% #could change number
+allfreqs <- bugSigSimple::createTaxonTable(reproductive_sigs, n = 20) %>% #could change number
   arrange(I(decreased_signatures - increased_signatures))
 incfreqs <- filter(allfreqs, I(increased_signatures - decreased_signatures) > 0)
 decfreqs <- filter(allfreqs, I(increased_signatures - decreased_signatures) < 0)
@@ -137,7 +137,7 @@ df$age <- se$age
 df$BMI <- se$BMI
 fit <- lm(Streptococcus ~ Lactobacillus + age + BMI, data = df)  
 summary(fit)
-summary(lm(Streptococcus ~ Lactobacillus, data = df)
+summary(lm(Streptococcus ~ Lactobacillus, data = df))
 wilcox.test(df$Streptococcus, df$Lactobacillus)
 t.test(df$Streptococcus, df$Lactobacillus)
 ```
@@ -152,7 +152,8 @@ df$BMI <- secount$BMI
 ```
 
 ```{r}
-fit.ZInegbin <- zeroinfl(Streptococcus ~ Lactobacillus + age + BMI | 1,
+library(pscl)
+fit.ZInegbin <- pscl::zeroinfl(Streptococcus ~ Lactobacillus + age + BMI | 1,
                 data = df,
                 dist = "negbin")
 ```
@@ -186,32 +187,30 @@ tse <- returnSamples(
     rownames = "short"
 )
 tse
+```
 
 
+## Comparing mean to variance of the outcome variable
 
-#Comparing mean to variance of the outcome variable
 ```{r}
-
 library(ggplot2)
-
-mean(newdat2$Streptococcus_sum)
-var(newdat2$Streptococcus_sum)
-fraczeroes <- nrow(newdat2[newdat2$Streptococcus_sum == 0,])/nrow(newdat2)
-
+mean(df$Streptococcus)
+var(df$Streptococcus)
+fraczeroes <- nrow(df[df$Streptococcus == 0,])/nrow(df)
 fraczeroes
 ```
 
 #Fit log-linear models
 ```{r}
-fit.pois <- glm(Streptococcus_sum ~ Lactobacillus_sum + age + BMI,
-                data = newdat2,
+fit.pois <- glm(Streptococcus ~ Lactobacillus + age + BMI,
+                data = df,
                 family = poisson(link = "log"))
 
 summary (fit.pois)
 
 library(pscl)
-fit.ZIpois <- zeroinfl(Streptococcus_sum ~ Lactobacillus_sum + age + BMI | 1,
-                data = newdat2,
+fit.ZIpois <- zeroinfl(Streptococcus ~ Lactobacillus + age + BMI | 1,
+                data = df,
                 dist = "poisson")
 
 summary (fit.ZIpois)
@@ -219,8 +218,8 @@ summary (fit.ZIpois)
 library(MASS)
 fit.negbin <-
   glm.nb(
-    Streptococcus_sum ~ Lactobacillus_sum + age + BMI,
-    data = newdat2,
+    Streptococcus ~ Lactobacillus + age + BMI,
+    data = df,
     control = glm.control(
       epsilon = 1e-8,
       maxit = 25,
@@ -229,8 +228,8 @@ fit.negbin <-
   )
 summary(fit.negbin)
 
-fit.ZInegbin <- zeroinfl(Streptococcus_sum ~ Lactobacillus_sum + age + BMI | 1,
-                data = newdat2,
+fit.ZInegbin <- zeroinfl(Streptococcus ~ Lactobacillus + age + BMI | 1,
+                data = df,
                 dist = "negbin")
 
 summary(fit.ZInegbin)

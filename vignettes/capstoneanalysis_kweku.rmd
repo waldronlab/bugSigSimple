@@ -4,7 +4,7 @@ author: "Kweku Amoo"
 date: "8/17/2021"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Clare Grieve capstone analysis}
+  %\VignetteIndexEntry{The Irritable Bowel Syndrome-associated Microbiome}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -39,7 +39,7 @@ names(dat)
 
 ```{r}
 library(tidyverse)
-condition_of_interest <- c("irritable bowel sydrome")
+condition_of_interest <- c("irritable bowel syndrome")
 dat_condition <- subsetByCondition(dat, condition_of_interest) %>%
   mutate(comparison1 = paste(`Group 0 name`, `Group 1 name`, sep = " vs "))
 ```  
@@ -94,13 +94,7 @@ table(siglengths)
 Create a matrix of Jaccard similarities (0 for no overlap, 1 for 100% overlap)
 
 ```{r}
-signames <- unique(c(mydists$name1, mydists$name2))
-jmat <- matrix(NA, nrow=length(signames), ncol=length(signames), dimnames=list(signames, signames))
-diag(jmat) <- 1
-for (i in 1:nrow(mydists)){
-  jmat[mydists[i, "name2"], mydists[i, "name1"]] <- mydists[i, "jaccard"]
-  jmat[mydists[i, "name1"], mydists[i, "name2"]] <- mydists[i, "jaccard"]
-}
+jmat <- BugSigDBStats::calcJaccardSimilarity(allsigs)
 ```
 
 ```{r, fig.width=20, fig.height=20}
