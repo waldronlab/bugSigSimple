@@ -1,9 +1,12 @@
 pandoc: 2.7.3
-pkgdown: 1.6.1
+pkgdown: 2.0.2
 pkgdown_sha: ~
 articles:
+  capstoneanalysis_clare: capstoneanalysis_clare.html
   capstoneanalysis_fatima: capstoneanalysis_fatima.html
-last_built: 2021-04-23T16:20Z
+  capstoneanalysis_kweku: capstoneanalysis_kweku.html
+  fieldworkanalysis_samara: fieldworkanalysis_samara.html
+last_built: 2022-02-23T20:33Z
 urls:
   reference: http://waldronlab.io/bugSigSimple/reference
   article: http://waldronlab.io/bugSigSimple/articles

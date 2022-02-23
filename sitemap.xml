@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://waldronlab.io/bugSigSimple/404.html</loc>
+  </url>
+  <url>
+    <loc>http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_clare.html</loc>
+  </url>
+  <url>
+    <loc>http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_fatima.html</loc>
+  </url>
+  <url>
+    <loc>http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_kweku.html</loc>
+  </url>
+  <url>
+    <loc>http://waldronlab.io/bugSigSimple/articles/fieldworkanalysis_samara.html</loc>
+  </url>
+  <url>
+    <loc>http://waldronlab.io/bugSigSimple/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>http://waldronlab.io/bugSigSimple/authors.html</loc>
+  </url>
+  <url>
     <loc>http://waldronlab.io/bugSigSimple/index.html</loc>
   </url>
   <url>
@@ -8,12 +29,6 @@
   </url>
   <url>
     <loc>http://waldronlab.io/bugSigSimple/reference/createTaxonTable.html</loc>
-  </url>
-  <url>
-    <loc>http://waldronlab.io/bugSigSimple/reference/extractBugSigs.html</loc>
-  </url>
-  <url>
-    <loc>http://waldronlab.io/bugSigSimple/reference/extractSignatures.html</loc>
   </url>
   <url>
     <loc>http://waldronlab.io/bugSigSimple/reference/frequencySigs.html</loc>
@@ -25,6 +40,9 @@
     <loc>http://waldronlab.io/bugSigSimple/reference/getMostFrequentTaxa.html</loc>
   </url>
   <url>
+    <loc>http://waldronlab.io/bugSigSimple/reference/index.html</loc>
+  </url>
+  <url>
     <loc>http://waldronlab.io/bugSigSimple/reference/simulateSignatures.html</loc>
   </url>
   <url>
@@ -32,8 +50,5 @@
   </url>
   <url>
     <loc>http://waldronlab.io/bugSigSimple/reference/subsetByCurator.html</loc>
-  </url>
-  <url>
-    <loc>http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_fatima.html</loc>
   </url>
 </urlset>
