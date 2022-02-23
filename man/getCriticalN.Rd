@@ -33,8 +33,8 @@ E.g. for alpha = 0.05, we expect only a 5% chance that any taxon will be identif
 full.dat <- bugsigdbr::importBugSigDB()
 my.dat <- full.dat[full.dat$Curator == "Mst Afroza Parvin", ]
 relevant.dat <- full.dat[full.dat$`Body site` \%in\% my.dat$`Body site`, ]
-relevant.sigs <- extractBugSigs(my.dat)
-my.sigs.increased <- extractBugSigs(my.dat, direction = "increased")
+relevant.sigs <- bugsigdbr::getSignatures(my.dat)
+my.sigs.increased <- relevant.sigs[grep("UP", names(relevant.sigs))]
 (my.siglengths <- sapply(my.sigs.increased, length))
 getCriticalN(relevant.sigs, my.siglengths)
 # Compare to observed

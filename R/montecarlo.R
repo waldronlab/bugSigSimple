@@ -1,7 +1,6 @@
 #' Identify the most frequently recurring taxa in bugsigdb
 #'
-#' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}
-#' @param direction One or both of c("increased", "decreased")
+#' @param sigs data.frame produced by \link[bugsigdbr]{importBugSigDB}
 #' @param n Number of top taxa to return
 #'
 #' @return integer vector of top most recurrent taxa
@@ -9,8 +8,9 @@
 #'
 #' @examples
 #' dat <- bugsigdbr::importBugSigDB()
-#' sigs <- extractBugSigs(dat, direction = "increased", tax.level = "genus")
-#' frequencySigs(sigs)
+#' dat.select <- bugsigdbr::getSignatures(dat, tax.level = "genus", exact.tax.level=TRUE)
+#' dat.select <- dat.select[grep("UP", names(dat.select))] #only "UP" signatures
+#' frequencySigs(sigs=dat.select, n = 10)
 frequencySigs <- function(sigs, n = 10){
   sigs.tab <- sort(table(unlist(sigs)), decreasing=TRUE)
   names(sigs.tab) <- vapply(names(sigs.tab), .getTip,
@@ -18,48 +18,12 @@ frequencySigs <- function(sigs, n = 10){
   head(sigs.tab, n=n) 
 }
 
-#' Extract a list of signatures from a bugsigdb.org table
-#'
-#' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}
-#' @param tax.level Any subset of c("kingdom", "phylum", "class", "order", "family", "genus", "species", "strain")
-#' @param direction One or both of c("increased", "decreased")
-
-#' @return a list of signatures
-#' @export
-#'
-#' @examples
-#' dat <- bugsigdbr::importBugSigDB()
-#' extractBugSigs(dat, tax.level = "genus")
-
-extractBugSigs <-
-  function(dat,
-           direction = c("increased", "decreased"),
-           tax.level = c("kingdom",
-                         "phylum",
-                         "class",
-                         "order",
-                         "family",
-                         "genus",
-                         "species",
-                         "strain")) {
-    dat <- dat[dat$`Abundance in Group 1` %in% direction, ]
-    res <- extractSignatures(dat,
-                             tax.level = tax.level,
-                             exact.tax.level = TRUE,
-                             col = "MetaPhlAn taxon names")
-    zerolen <- sapply(res, function(x) length(x) == 0)
-    if(any(zerolen)){
-      message("Zero length signatures dropped:", paste(names(res)[zerolen], collapse = " "))
-    }
-    res[!zerolen]
-  }
 
 #' Simulate a list of signatures based on a universe of taxa equal in size and length to some smaller set of signatures
 #'
 #' @param relevant.sigs A list of signatures providing a relevant background for drawing taxa
 #' @param siglengths An integer vector, the length of which provides the number of signatures to be simulated, and the 
 #' integers of which provide the number of taxa to be simulated in each signature
-#' @param tax.level Any subset of c("kingdom", "phylum", "class", "order", "family", "genus", "species", "strain")
 #'
 #' @return A list of signatures of the same number and individual lengths as found in my.dat
 #' @export
@@ -68,9 +32,9 @@ extractBugSigs <-
 #' full.dat <- bugsigdbr::importBugSigDB()
 #' my.dat <- full.dat[full.dat$Curator == "Mst Afroza Parvin", ]
 #' relevant.dat <- full.dat[full.dat$`Body site` %in% my.dat$`Body site`, ]
-#' relevant.sigs <- extractBugSigs(relevant.dat, tax.level = "genus")
+#' relevant.sigs <- bugsigdbr::getSignatures(relevant.dat, tax.level = "genus")
 #' siglengths <- sapply(my.dat, length)
-#' simulateSignatures(relevant.sigs, siglengths, tax.level = "genus")
+#' simulateSignatures(relevant.sigs, siglengths)
 
 simulateSignatures <-
   function(relevant.sigs,
@@ -106,8 +70,8 @@ simulateSignatures <-
 #' full.dat <- bugsigdbr::importBugSigDB()
 #' my.dat <- full.dat[full.dat$Curator == "Mst Afroza Parvin", ]
 #' relevant.dat <- full.dat[full.dat$`Body site` %in% my.dat$`Body site`, ]
-#' relevant.sigs <- extractBugSigs(my.dat)
-#' my.sigs.increased <- extractBugSigs(my.dat, direction = "increased")
+#' relevant.sigs <- bugsigdbr::getSignatures(my.dat)
+#' my.sigs.increased <- relevant.sigs[grep("UP", names(relevant.sigs))]
 #' (my.siglengths <- sapply(my.sigs.increased, length))
 #' getCriticalN(relevant.sigs, my.siglengths)
 #' # Compare to observed

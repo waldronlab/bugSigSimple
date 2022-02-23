@@ -1,12 +1,14 @@
 #' Create a table of most frequent taxa in a data.frame
 #'
 #' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired
-#' @param sig.type increased for increased in cases relative to controls, decreased for decreased in cases relative to controls, both for either
 #' @param n number of taxa to return (if sig.type=="both", this is the number of taxa to return for each direction)
 #'
-#' @importFrom dplyr filter %>% mutate rowwise n_distinct
+#' @importFrom dplyr filter %>% mutate rowwise n_distinct group_by relocate rename first ungroup across
+#' @importFrom utils relist head
+#' @importFrom stats quantile binom.test
 #' @importFrom kableExtra kbl kable_styling
 #' @importFrom tidyr separate
+#' @importFrom stringr str_replace str_extract
 #' @return kable table with increased and decreased taxa and a binomial test based on total number of studies in the data.frame
 #' @export
 #'
@@ -107,3 +109,27 @@ createStudyTable <-function(dat){
     kable_styling()
   
 }
+
+globalVariables(
+  c(
+    ".",
+    "Study",
+    "Condition",
+    "Cases",
+    "Controls",
+    "Study.Design",
+    "Taxon Name",
+    "Binomial Test pval",
+    "total_signatures",
+    "Abundance in Group 1",
+    "decreased_signatures",
+    "increased_signatures",
+    "Taxonomic Level",
+    "metaphlan_name",
+    "Freq",
+    "species",
+    "kingdom",
+    "Var1"
+  )
+)
+

@@ -7,11 +7,9 @@
 frequencySigs(sigs, n = 10)
 }
 \arguments{
+\item{sigs}{data.frame produced by \link[bugsigdbr]{importBugSigDB}}
+
 \item{n}{Number of top taxa to return}
-
-\item{dat}{data.frame produced by \link[bugsigdbr]{importBugSigDB}}
-
-\item{direction}{One or both of c("increased", "decreased")}
 }
 \value{
 integer vector of top most recurrent taxa
@@ -21,6 +19,7 @@ Identify the most frequently recurring taxa in bugsigdb
 }
 \examples{
 dat <- bugsigdbr::importBugSigDB()
-sigs <- extractBugSigs(dat, direction = "increased", tax.level = "genus")
-frequencySigs(sigs)
+dat.select <- bugsigdbr::getSignatures(dat, tax.level = "genus", exact.tax.level=TRUE)
+dat.select <- dat.select[grep("UP", names(dat.select))] #only "UP" signatures
+frequencySigs(sigs=dat.select, n = 10)
 }
