@@ -1,8 +1,12 @@
 ---
-title: "Irritable Bowel Syndrome"
+title: "The Irritable Bowel Syndrome-associated Microbiome"
 author: "Kweku Amoo"
 date: "8/17/2021"
-output: html_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Clare Grieve capstone analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 # Analysis objectives

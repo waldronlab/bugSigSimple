@@ -1,8 +1,14 @@
 ---
-title: "Fieldwork Analysis"
+title: "The Endometriosis-associated Microbiome"
 name: "Samara Khan"
-output: html_document
+date: "8/2/2021"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Clare Grieve capstone analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
+
 
 # Analysis objectives
 
