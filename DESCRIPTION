@@ -4,7 +4,7 @@ Date: 2020-04-09
 Title: Simple exploratory analysis of curated microbe signatures 
 Author: Ludwig Geistlinger, Levi Waldron, Chloe Mirzayi, Fatima Zohra
 Maintainer: Ludwig Geistlinger <ludwig.geistlinger@sph.cuny.edu>
-Depends: R(>= 3.5.0)
+Depends: R(>= 4.0.0)
 Remotes: github::waldronlab/bugsigdbr
 Imports: 
     dplyr,
