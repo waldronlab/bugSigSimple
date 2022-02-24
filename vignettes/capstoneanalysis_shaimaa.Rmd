@@ -1,0 +1,85 @@
+---
+title: "Delivery Mode and the Meconium Microbiome"
+name: "Shaimaa Elsafoury"
+date: "2/24/2022"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The Endometriosis-associated Microbiome}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+# Analysis objectives
+
+1. Import, recode, and subset data from bugsigdb.org    
+2. Create a table of studies
+3. Calculate the frequency of appearance of each taxa in independent signatures and identify the most frequently reported taxa
+
+# Making sure packages are installed
+
+```{r, eval=FALSE, messages=FALSE}
+install.packages(c("devtools", "tidyverse", "kableExtra"))
+devtools::install_github("waldronlab/bugSigSimple")
+devtools::install_github("waldronlab/BugSigDBStats")
+devtools::install_github("waldronlab/bugsigdbr")
+```
+
+# Load and subset data
+
+```{r, messages=FALSE}
+library(bugSigSimple)
+library(BugSigDBStats)
+library(bugsigdbr)
+library(tidyverse)
+library(stringr)
+library(kableExtra)
+library(dplyr)
+```
+
+```{r}
+# use version="devel" and cache = FALSE to take the latest version from bugsigdb.org
+dat <- bugsigdbr::importBugSigDB(version = "devel", cache = TRUE) 
+dim(dat)
+names(dat)
+```
+
+# Subsetting
+
+Subsetting only studies done on humans - 6 of 17 studies were excluded because they were either done on mice or not statistically reliable (Cregger et. al)
+
+```{r, messages=FALSE}
+subset.dat <-
+  dat[which(
+    dat$PMID == "30778155" |
+      dat$PMID == "32192080" |
+      dat$PMID == "31087436" |
+      dat$PMID == "26901400" |
+      dat$PMID == "33839907" |
+      dat$PMID == "32046455" |
+      dat$PMID == "33925708" |
+      dat$PMID == "32299442" |
+      dat$PMID == "33313185" |
+      dat$PMID == "34268384" | dat$PMID == "33660232"
+  ), ]
+```
+
+# All studies
+
+Summary of studies and most frequent taxa increased and decreased in endometriosis patients for all studies
+
+```{r, messages=FALSE}
+bugSigSimple::createStudyTable(subset.dat)
+```
+
+```{r}
+getMostFrequentTaxa(subset.dat,n=10)
+```
+
+```{r}
+getMostFrequentTaxa(subset.dat,sig.type="increased")
+```
+
+```{r}
+getMostFrequentTaxa(subset.dat,sig.type="decreased")
+```
