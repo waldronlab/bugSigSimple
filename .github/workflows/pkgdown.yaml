@@ -22,7 +22,7 @@ jobs:
         with:
           cache-version: 2
           extra-packages: |
-            pkgdown
+            any::pkgdown
             any::ggplot2
             any::rcmdcheck
           needs: |
