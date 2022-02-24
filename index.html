@@ -59,6 +59,9 @@
       <a href="articles/capstoneanalysis_kweku.html">The Irritable Bowel Syndrome-associated Microbiome</a>
     </li>
     <li>
+      <a href="articles/capstoneanalysis_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
+    </li>
+    <li>
       <a href="articles/fieldworkanalysis_samara.html">The Endometriosis-associated Microbiome</a>
     </li>
   </ul>
@@ -79,7 +82,20 @@
 <div class="section level1">
 <div class="page-header"><h1 id="bugsigsimple">bugSigSimple<a class="anchor" aria-label="anchor" href="#bugsigsimple"></a>
 </h1></div>
-<p>Simple exploratory analysis of curated microbe signatures</p>
+<p>This repo demonstrates several analyses of curated microbe signatures from <a href="https://bugsigdb.org" class="external-link uri">https://bugsigdb.org</a>. See “Articles” for existing analyses, and “Reference” for functions provided by this packages. To install this bugSigSimple and use these functions, do:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"waldronlab/bugSigSimple"</span><span class="op">)</span></code></pre></div>
+<p>In particular, look at:</p>
+<ol style="list-style-type: decimal">
+<li>
+<a href="http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_clare.html">The COVID-19 associated microbiome</a> by Clare Grieve: for professional tables, clustered heatmaps and interactive heatmaps for identifying similar signatures, and hierarchical dendrograms.</li>
+<li>
+<a href="http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_fatima.html">An analysis of Most frequent taxa in Major Depression and Bipolar Disorder</a> by Fatima Azhar: This analysis does not take advantage of current functionality provided by this package and by BugSigDBStats, but it demonstrates a manual binomial test that can be used to test <span class="math inline"><em>H</em><sub>0</sub></span>: a taxon is equally probable to be reported as increased abundance or decreased abundance. This is only a sufficiently powered test when the same taxon is reported in <em>at least</em> 6 different studies (<code>binom.test(0, 6) -&gt; p=0.03125)</code>)</li>
+<li>
+<a href="http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_kweku.html">The Irritable Bowel Syndrome-associated Microbiome</a> by Kweku Amoo: Similar to 1 in another context.</li>
+<li>
+<a href="http://waldronlab.io/bugSigSimple/articles/fieldworkanalysis_samara.html">The Endometriosis-associated Microbiome</a> by Samara Khan: This analysis generates a hypothesis based on frequently identified genera in bugsigdb.org, then tests the hypothesis with individual-participant data from curatedMetagenomicData, using linear regression, t-test, a Poisson model, and (zero-inflated) negative binomial log-linear models.</li>
+</ol>
 </div>
   </div>
 
