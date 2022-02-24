@@ -60,8 +60,9 @@ subset.dat <-
       dat$PMID == "33925708" |
       dat$PMID == "32299442" |
       dat$PMID == "33313185" |
-      dat$PMID == "34268384" | dat$PMID == "33660232"
-  ), ]
+      dat$PMID == "34268384" |
+      dat$PMID == "33660232"
+  ),]
 ```
 
 # All studies
