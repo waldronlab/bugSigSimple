@@ -185,190 +185,28 @@
 </h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">dat_condition</span><span class="op">)</span></code></pre></div>
-<table class="table table" style="margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:left;">
-Study
-</th>
-<th style="text-align:left;">
-Condition
-</th>
-<th style="text-align:right;">
-Cases
-</th>
-<th style="text-align:right;">
-Controls
-</th>
-<th style="text-align:left;">
-Study Design
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Biagi 2011
-</td>
-<td style="text-align:left;">
-irritable bowel syndrome
-</td>
-<td style="text-align:right;">
-62
-</td>
-<td style="text-align:right;">
-46
-</td>
-<td style="text-align:left;">
-case-control,prospective cohort
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Carroll 2012
-</td>
-<td style="text-align:left;">
-irritable bowel syndrome
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:right;">
-23
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Duboc 2012
-</td>
-<td style="text-align:left;">
-irritable bowel syndrome
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-18
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Kerckhoffs 2009
-</td>
-<td style="text-align:left;">
-irritable bowel syndrome
-</td>
-<td style="text-align:right;">
-41
-</td>
-<td style="text-align:right;">
-26
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Maccaferri 2012
-</td>
-<td style="text-align:left;">
-irritable bowel syndrome
-</td>
-<td style="text-align:right;">
-19
-</td>
-<td style="text-align:right;">
-24
-</td>
-<td style="text-align:left;">
-randomized controlled trial
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Mei 2021
-</td>
-<td style="text-align:left;">
-irritable bowel syndrome
-</td>
-<td style="text-align:right;">
-30
-</td>
-<td style="text-align:right;">
-30
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Saulnier 2011
-</td>
-<td style="text-align:left;">
-irritable bowel syndrome
-</td>
-<td style="text-align:right;">
-22
-</td>
-<td style="text-align:right;">
-22
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Shukla 2015
-</td>
-<td style="text-align:left;">
-irritable bowel syndrome
-</td>
-<td style="text-align:right;">
-47
-</td>
-<td style="text-align:right;">
-30
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Tana 2010
-</td>
-<td style="text-align:left;">
-irritable bowel syndrome
-</td>
-<td style="text-align:right;">
-26
-</td>
-<td style="text-align:right;">
-26
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-</tbody>
-</table>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 9 × 5</span></span>
+<span class="co">##   Study           Condition                Cases Controls `Study Design`        </span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span>
+<span class="co">## <span style="color: #BCBCBC;">1</span> Biagi 2011      irritable bowel syndrome    62       46 case-control,prospect…</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span> Carroll 2012    irritable bowel syndrome    23       23 case-control          </span>
+<span class="co">## <span style="color: #BCBCBC;">3</span> Duboc 2012      irritable bowel syndrome    14       18 case-control          </span>
+<span class="co">## <span style="color: #BCBCBC;">4</span> Kerckhoffs 2009 irritable bowel syndrome    41       26 case-control          </span>
+<span class="co">## <span style="color: #BCBCBC;">5</span> Maccaferri 2012 irritable bowel syndrome    19       24 randomized controlled…</span>
+<span class="co">## <span style="color: #BCBCBC;">6</span> Mei 2021        irritable bowel syndrome    30       30 case-control          </span>
+<span class="co">## <span style="color: #BCBCBC;">7</span> Saulnier 2011   irritable bowel syndrome    22       22 case-control          </span>
+<span class="co">## <span style="color: #BCBCBC;">8</span> Shukla 2015     irritable bowel syndrome    47       30 case-control          </span>
+<span class="co">## <span style="color: #BCBCBC;">9</span> Tana 2010       irritable bowel syndrome    26       26 case-control</span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="taxon-frequency-tables-by-body-site">Taxon frequency tables by body site<a class="anchor" aria-label="anchor" href="#taxon-frequency-tables-by-body-site"></a>
 </h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">gut_sigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat_condition</span>,
                    <span class="va">`Body site`</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"feces,mucosa of small intestine"</span>, <span class="st">"feces"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>In this table, the Binomial Test p-value corresponds to the null hypothesis</p>
 <p>H0: the proportion of signatures in which the taxon is reported increased or decreased, relative to the total number of signatures in which it is reported, is equal to 0.5</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">gut_sigs</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <table class="table">
 <thead><tr>
@@ -898,32 +736,32 @@ k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobac
 </h2>
 <p>Note, this EDA should really be done <em>before</em> hypothesis testing.</p>
 <p>First calculate pairwise overlaps for all signatures of length &gt; 1:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">allsigs</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat_condition</span>, tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span>
 <span class="va">allsigs</span> <span class="op">&lt;-</span> <span class="va">allsigs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsigs</span>, <span class="va">length</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span> <span class="co">#require length &gt; 1</span>
 <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## [1] 32</span></code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mydists</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcPairwiseOverlaps.html" class="external-link">calcPairwiseOverlaps</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mydists</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## [1] 126   8</span></code></pre>
 <p>What is the distribution of signature lengths?</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 <span class="va">siglengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsigs</span>, <span class="va">length</span><span class="op">)</span>
 <span class="va">siglengths.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>siglengths <span class="op">=</span> <span class="va">siglengths</span><span class="op">)</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">siglengths.df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p><img src="capstoneanalysis_kweku_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## siglengths</span>
 <span class="co">##  2  3  4  5  6  8  9 11 13 14 15 16 17 18 19 </span>
 <span class="co">##  7  5  3  2  2  1  2  2  1  1  1  2  1  1  1</span></code></pre>
 <p>Create a matrix of Jaccard similarities (0 for no overlap, 1 for 100% overlap)</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">jmat</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcJaccardSimilarity.html" class="external-link">calcJaccardSimilarity</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">jmat</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcJaccardSimilarity.html" class="external-link">calcJaccardSimilarity</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Loading required package: grid</span></code></pre>
 <pre><code><span class="co">## ========================================</span>
@@ -942,7 +780,7 @@ k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobac
 <span class="co">## This message can be suppressed by:</span>
 <span class="co">##   suppressPackageStartupMessages(library(ComplexHeatmap))</span>
 <span class="co">## ========================================</span></code></pre>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span>
 <span class="va">hr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/rowAnnotation.html" class="external-link">rowAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span>
 <span class="va">hm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html" class="external-link">Heatmap</a></span><span class="op">(</span>
@@ -956,16 +794,16 @@ k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobac
 <span class="va">hm</span></code></pre></div>
 <p><img src="capstoneanalysis_kweku_files/figure-html/unnamed-chunk-11-1.png" width="1920"></p>
 <p>Use this interactively to make an interactive heatmap. Some expanding of the default size is required to see anything. Creating a sub-heatmap, then exporting it as a table, allows in-depth identification of the subgroups.</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/InteractiveComplexHeatmap" class="external-link">InteractiveComplexHeatmap</a></span><span class="op">)</span>
 <span class="va">hm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/draw-dispatch.html" class="external-link">draw</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/InteractiveComplexHeatmap/man/htShiny.html" class="external-link">htShiny</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">jmat</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">hc</span><span class="op">)</span></code></pre></div>
 <p><img src="capstoneanalysis_kweku_files/figure-html/unnamed-chunk-13-1.png" width="1920"></p>
 <p>This tree can be cut to show the clusters, for example. The clusters of more than 1 signature but less than ~10 signatures are most likely to be something interesting.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">clusts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cutree.html" class="external-link">cutree</a></span><span class="op">(</span><span class="va">hc</span>, k <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span>  <span class="co">#set the number of clusters here with k</span>
 <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">clusts</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">clusts</span><span class="op">)</span><span class="op">[</span><span class="va">clusts</span> <span class="op">==</span> <span class="va">i</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## [[1]]</span>
@@ -1020,13 +858,13 @@ k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobac
 <h2 id="create-a-wide-format-dataframe">Create a wide-format dataframe<a class="anchor" aria-label="anchor" href="#create-a-wide-format-dataframe"></a>
 </h2>
 <p>This would be suitable for regression analysis.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dat_withsigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat_condition</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dat_condition</span><span class="op">$</span><span class="va">`NCBI Taxonomy IDs`</span><span class="op">)</span><span class="op">)</span>
 <span class="va">sigs</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat_withsigs</span>, tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span>
 <span class="va">cmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu">safe</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/safe/man/getCmatrix.html" class="external-link">getCmatrix</a></span><span class="op">(</span><span class="va">sigs</span>, as.matrix <span class="op">=</span> <span class="cn">TRUE</span>, min.size <span class="op">=</span> <span class="fl">0</span>, prune <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## WARNING: rows are sorted elements of keyword.list</span>
 <span class="co">## 40 categories formed</span></code></pre>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">cmat</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="va">cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">dat_withsigs</span>, <span class="va">cdf</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">cdf</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">54</span><span class="op">]</span></code></pre></div>
@@ -1058,13 +896,13 @@ k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobac
 <span class="co">## [51] "[Clostridium] leptum"       "[Clostridium] symbiosum"   </span>
 <span class="co">## [53] "[Eubacterium] rectale"      "[Ruminococcus] gnavus"</span></code></pre>
 <p>Note this has a number of columns that are mostly zeros, it could be filtered significantly for any regression or machine learning analysis:</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">cdf</span><span class="op">[[</span><span class="st">"Bifidobacterium catenulatum"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## </span>
 <span class="co">##  0  1 </span>
 <span class="co">## 33  7</span></code></pre>
 <p>Create another heatmap on correlations of presence/absence of taxa. This is not necessary because the previous Jaccard Index heatmap is probably better, it is just a demonstration of doing something with the taxa presence/absence directly.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">sigcors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">cmat</span><span class="op">)</span><span class="op">)</span>
 <span class="va">siglengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">sigs</span>, <span class="va">length</span><span class="op">)</span>
 <span class="va">ha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span>
@@ -1080,7 +918,7 @@ k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobac
 <span class="va">hm</span></code></pre></div>
 <p><img src="capstoneanalysis_kweku_files/figure-html/unnamed-chunk-17-1.png" width="1920"></p>
 <p>Use this interactively to make an interactive heatmap:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/InteractiveComplexHeatmap" class="external-link">InteractiveComplexHeatmap</a></span><span class="op">)</span>
 <span class="va">hm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/draw-dispatch.html" class="external-link">draw</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/InteractiveComplexHeatmap/man/htShiny.html" class="external-link">htShiny</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span></code></pre></div>
