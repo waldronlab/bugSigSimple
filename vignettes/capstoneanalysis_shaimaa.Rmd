@@ -42,7 +42,7 @@ suppressPackageStartupMessages({
 
 ```{r}
 # use version="devel" and cache = FALSE to take the latest version from bugsigdb.org
-dat <- bugsigdbr::importBugSigDB(version = "devel", cache = TRUE) 
+dat <- bugsigdbr::importBugSigDB(version = "devel", cache = FALSE) 
 dim(dat)
 names(dat)
 ```
@@ -92,8 +92,9 @@ included.group1 <-
 ```{r}
 subset.final <-
   filter(subset.dat, `Group 0 name` %in% included.group0 & `Group 1 name` %in% included.group1) %>%
-  filter(`Body site` == "meconium")
-dim(subset.final)
+  filter(`Body site` == "meconium") %>%
+  arrange(PMID)
+select(subset.final, all_of(c("PMID", "Source", "Group 0 name", "Group 1 name", "Abundance in Group 1")))
 ```
 
 # Summary of studies
@@ -105,13 +106,13 @@ bugSigSimple::createStudyTable(subset.final)
 # Most frequently identified taxa
 
 ```{r}
-getMostFrequentTaxa(subset.final,n=50)
+getMostFrequentTaxa(subset.final, n = 50)
 ```
 
 ```{r}
-getMostFrequentTaxa(subset.final,sig.type="increased")
+getMostFrequentTaxa(subset.final, sig.type = "increased")
 ```
 
 ```{r}
-getMostFrequentTaxa(subset.final,sig.type="decreased")
+getMostFrequentTaxa(subset.final, sig.type = "decreased")
 ```
