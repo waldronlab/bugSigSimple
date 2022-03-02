@@ -102,7 +102,7 @@ select(subset.final, all_of(c("PMID", "Source", "Group 0 name", "Group 1 name", 
 # Table of studies
 
 These are the studies included in the review:
-```{r, messages=FALSE}
+```{r}
 bugSigSimple::createStudyTable(subset.final)
 ```
 
@@ -110,7 +110,7 @@ bugSigSimple::createStudyTable(subset.final)
 
 This table summarizes the results for the top `n` most frequently identified taxa.
 ```{r}
-bugSigSimple::createTaxonTable(subset.final, n = 10)
+kable_styling(kbl(bugSigSimple::createTaxonTable(subset.final, n = 20)))
 ```
 
 
