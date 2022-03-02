@@ -105,6 +105,7 @@
 <div class="section level2">
 <h2 id="making-sure-packages-are-installed">Making sure packages are installed<a class="anchor" aria-label="anchor" href="#making-sure-packages-are-installed"></a>
 </h2>
+<p>Not evaluated in vignette:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"devtools"</span>, <span class="st">"tidyverse"</span>, <span class="st">"kableExtra"</span><span class="op">)</span><span class="op">)</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"waldronlab/bugSigSimple"</span><span class="op">)</span>
@@ -115,34 +116,21 @@
 <h2 id="load-and-subset-data">Load and subset data<a class="anchor" aria-label="anchor" href="#load-and-subset-data"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://waldronlab.io/bugSigSimple" class="external-link">bugSigSimple</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/BugSigDBStats" class="external-link">BugSigDBStats</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/bugsigdbr" class="external-link">bugsigdbr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## ── <span style="font-weight: bold;">Attaching packages</span> ─────────────────────────────────────── tidyverse 1.3.1 ──</span></code></pre>
-<pre><code><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2</span> 3.3.5     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr  </span> 0.3.4</span>
-<span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble </span> 3.1.6     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr  </span> 1.0.8</span>
-<span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr  </span> 1.2.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr</span> 1.4.0</span>
-<span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr  </span> 2.1.2     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats</span> 0.5.1</span></code></pre>
-<pre><code><span class="co">## ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span>
-<span class="co">## <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">filter()</span> masks <span style="color: #0000BB;">stats</span>::filter()</span>
-<span class="co">## <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">dplyr</span>::<span style="color: #00BB00;">lag()</span>    masks <span style="color: #0000BB;">stats</span>::lag()</span></code></pre>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## </span>
-<span class="co">## Attaching package: 'kableExtra'</span></code></pre>
-<pre><code><span class="co">## The following object is masked from 'package:dplyr':</span>
-<span class="co">## </span>
-<span class="co">##     group_rows</span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="op">{</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://waldronlab.io/bugSigSimple" class="external-link">bugSigSimple</a></span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/BugSigDBStats" class="external-link">BugSigDBStats</a></span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/bugsigdbr" class="external-link">bugsigdbr</a></span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://stringr.tidyverse.org" class="external-link">stringr</a></span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span>
+  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># use version="devel" and cache = FALSE to take the latest version from bugsigdb.org</span>
 <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>version <span class="op">=</span> <span class="st">"devel"</span>, cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> 
 <span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## [1] 2171   48</span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<pre><code><span class="co">## [1] 2173   48</span></code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##  [1] "Study"                      "Study design"              </span>
 <span class="co">##  [3] "PMID"                       "DOI"                       </span>
@@ -173,28 +161,84 @@
 <h2 id="subsetting">Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"></a>
 </h2>
 <p>Subsetting only studies done on humans - 6 of 17 studies were excluded because they were either done on mice or not statistically reliable (Cregger et. al)</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">included.pmid</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
+    <span class="fl">28018325</span>,
+    <span class="fl">24614698</span>,
+    <span class="fl">29207565</span>,
+    <span class="fl">29459704</span>,
+    <span class="fl">29538354</span>,
+    <span class="fl">32012716</span>,
+    <span class="fl">20566857</span>,
+    <span class="fl">28512451</span>,
+    <span class="fl">28112736</span>,
+    <span class="fl">27362264</span>
+  <span class="op">)</span>
+<span class="va">subset.dat</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">PMID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">included.pmid</span><span class="op">)</span> </code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">subset.dat</span><span class="op">$</span><span class="va">`Group 0 name`</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##  [1] "vaginal delivery in mecomium"               </span>
+<span class="co">##  [2] "vaginal delivery after 7 days of delivery"  </span>
+<span class="co">##  [3] "vaginal delivery after 3 months of delivery"</span>
+<span class="co">##  [4] "vaginal delivery after 6 months of delivery"</span>
+<span class="co">##  [5] "vaginally born controls"                    </span>
+<span class="co">##  [6] "&gt;/=33 weeks"                                </span>
+<span class="co">##  [7] "vaginal delivery at day 3"                  </span>
+<span class="co">##  [8] "vaginal delivery at day 5"                  </span>
+<span class="co">##  [9] "vaginal delivery at day 28"                 </span>
+<span class="co">## [10] "vaginal delivery at day 150"                </span>
+<span class="co">## [11] "vaginal delivery at day 365"                </span>
+<span class="co">## [12] "full-term delivery &gt;39 weeks at day 3"      </span>
+<span class="co">## [13] "vaginal delivery"                           </span>
+<span class="co">## [14] "vaginal delivery in transitional stools"    </span>
+<span class="co">## [15] "mecomium in vaginal delivery"               </span>
+<span class="co">## [16] "mecomium in C-section delivery"             </span>
+<span class="co">## [17] "no"                                         </span>
+<span class="co">## [18] "without prenatal antibiotics usages"        </span>
+<span class="co">## [19] "without peripartum antibiotics usages"</span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">included.group0</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
+    <span class="st">"vaginal delivery"</span>,
+    <span class="st">"vaginally born controls"</span>,
+    <span class="st">"vaginal delivery in mecomium"</span>,
+    <span class="st">"vaginally born controls"</span>
+  <span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">subset.dat</span><span class="op">$</span><span class="va">`Group 1 name`</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##  [1] "C-section delivery"                             </span>
+<span class="co">##  [2] "cesarean premature birth"                       </span>
+<span class="co">##  [3] "infants &lt;33 weeks gestational age"              </span>
+<span class="co">##  [4] "c-section"                                      </span>
+<span class="co">##  [5] "late preterm 34-36 weeks"                       </span>
+<span class="co">##  [6] "overall time point infants samples of c-section"</span>
+<span class="co">##  [7] "transitional stool"                             </span>
+<span class="co">##  [8] "Antimicrobials use during delivery yes"         </span>
+<span class="co">##  [9] "Maternal consumption of probiotics yes"         </span>
+<span class="co">## [10] "Furry pets at home yes"                         </span>
+<span class="co">## [11] "c-section delivery"                             </span>
+<span class="co">## [12] "C-section"                                      </span>
+<span class="co">## [13] "infants delivered to mothers with"</span></code></pre>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">included.group1</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"c-section"</span>,
+    <span class="st">"C-section"</span>,
+    <span class="st">"c-section delivery"</span>,
+    <span class="st">"C-section delivery"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">subset.dat</span> <span class="op">&lt;-</span>
-  <span class="va">dat</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span>
-    <span class="va">dat</span><span class="op">$</span><span class="va">PMID</span> <span class="op">==</span> <span class="st">"30778155"</span> <span class="op">|</span>
-      <span class="va">dat</span><span class="op">$</span><span class="va">PMID</span> <span class="op">==</span> <span class="st">"32192080"</span> <span class="op">|</span>
-      <span class="va">dat</span><span class="op">$</span><span class="va">PMID</span> <span class="op">==</span> <span class="st">"31087436"</span> <span class="op">|</span>
-      <span class="va">dat</span><span class="op">$</span><span class="va">PMID</span> <span class="op">==</span> <span class="st">"26901400"</span> <span class="op">|</span>
-      <span class="va">dat</span><span class="op">$</span><span class="va">PMID</span> <span class="op">==</span> <span class="st">"33839907"</span> <span class="op">|</span>
-      <span class="va">dat</span><span class="op">$</span><span class="va">PMID</span> <span class="op">==</span> <span class="st">"32046455"</span> <span class="op">|</span>
-      <span class="va">dat</span><span class="op">$</span><span class="va">PMID</span> <span class="op">==</span> <span class="st">"33925708"</span> <span class="op">|</span>
-      <span class="va">dat</span><span class="op">$</span><span class="va">PMID</span> <span class="op">==</span> <span class="st">"32299442"</span> <span class="op">|</span>
-      <span class="va">dat</span><span class="op">$</span><span class="va">PMID</span> <span class="op">==</span> <span class="st">"33313185"</span> <span class="op">|</span>
-      <span class="va">dat</span><span class="op">$</span><span class="va">PMID</span> <span class="op">==</span> <span class="st">"34268384"</span> <span class="op">|</span>
-      <span class="va">dat</span><span class="op">$</span><span class="va">PMID</span> <span class="op">==</span> <span class="st">"33660232"</span>
-  <span class="op">)</span>,<span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span class="va">subset.final</span> <span class="op">&lt;-</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">subset.dat</span>, <span class="va">`Group 0 name`</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">included.group0</span> <span class="op">&amp;</span> <span class="va">`Group 1 name`</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">included.group1</span><span class="op">)</span> <span class="op"><a href="https://stringr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">`Body site`</span> <span class="op">==</span> <span class="st">"meconium"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">subset.final</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## [1]  7 48</span></code></pre>
 </div>
 <div class="section level2">
-<h2 id="all-studies">All studies<a class="anchor" aria-label="anchor" href="#all-studies"></a>
+<h2 id="summary-of-studies">Summary of studies<a class="anchor" aria-label="anchor" href="#summary-of-studies"></a>
 </h2>
-<p>Summary of studies and most frequent taxa increased and decreased in endometriosis patients for all studies</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">subset.dat</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">subset.final</span><span class="op">)</span></code></pre></div>
 <table class="table table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
@@ -216,16 +260,16 @@ Study Design
 <tbody>
 <tr>
 <td style="text-align:left;">
-Akiyama 2019
+Martin 2016
 </td>
 <td style="text-align:left;">
-Endometriosis
+Cesarean section
 </td>
 <td style="text-align:right;">
-30
+28
 </td>
 <td style="text-align:right;">
-39
+80
 </td>
 <td style="text-align:left;">
 cross-sectional observational, not case-control
@@ -233,50 +277,16 @@ cross-sectional observational, not case-control
 </tr>
 <tr>
 <td style="text-align:left;">
-Ata 2019
+Nagpal 2016
 </td>
 <td style="text-align:left;">
-Endometriosis
+Cesarean section
 </td>
 <td style="text-align:right;">
-14
+17
 </td>
 <td style="text-align:right;">
-14
-</td>
-<td style="text-align:left;">
-prospective cohort
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Chao 2021
-</td>
-<td style="text-align:left;">
-Endometriosis
-</td>
-<td style="text-align:right;">
-37
-</td>
-<td style="text-align:right;">
-66
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Chen 2020
-</td>
-<td style="text-align:left;">
-Endometriosis
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-67
+134
 </td>
 <td style="text-align:left;">
 cross-sectional observational, not case-control
@@ -284,67 +294,16 @@ cross-sectional observational, not case-control
 </tr>
 <tr>
 <td style="text-align:left;">
-Hernandes 2020
+Shi 2018
 </td>
 <td style="text-align:left;">
-Endometriosis
+Cesarean section
 </td>
 <td style="text-align:right;">
 10
 </td>
 <td style="text-align:right;">
-11
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Khan 2016
-</td>
-<td style="text-align:left;">
-Endometriosis
-</td>
-<td style="text-align:right;">
-32
-</td>
-<td style="text-align:right;">
-32
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Lee 2021
-</td>
-<td style="text-align:left;">
-Endometriosis
-</td>
-<td style="text-align:right;">
-45
-</td>
-<td style="text-align:right;">
-45
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Perrotta 2020
-</td>
-<td style="text-align:left;">
-Endometriosis
-</td>
-<td style="text-align:right;">
-14
-</td>
-<td style="text-align:right;">
-21
+8
 </td>
 <td style="text-align:left;">
 cross-sectional observational, not case-control
@@ -352,50 +311,33 @@ cross-sectional observational, not case-control
 </tr>
 <tr>
 <td style="text-align:left;">
-Shan 2021
+Tapiainen 2018
 </td>
 <td style="text-align:left;">
-Endometriosis
+Cesarean section
 </td>
 <td style="text-align:right;">
-12
+40
 </td>
 <td style="text-align:right;">
-12
+172
 </td>
 <td style="text-align:left;">
-case-control
+cross-sectional observational, not case-control
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Svensson 2021
+Wong 2020
 </td>
 <td style="text-align:left;">
-Endometriosis
+Cesarean section
 </td>
 <td style="text-align:right;">
-66
+43
 </td>
 <td style="text-align:right;">
-198
-</td>
-<td style="text-align:left;">
-case-control
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Wei 2020
-</td>
-<td style="text-align:left;">
-Endometriosis
-</td>
-<td style="text-align:right;">
-36
-</td>
-<td style="text-align:right;">
-14
+62
 </td>
 <td style="text-align:left;">
 cross-sectional observational, not case-control
@@ -403,75 +345,159 @@ cross-sectional observational, not case-control
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">subset.dat</span>,n<span class="op">=</span><span class="fl">10</span><span class="op">)</span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="most-frequently-identified-taxa">Most frequently identified taxa<a class="anchor" aria-label="anchor" href="#most-frequently-identified-taxa"></a>
+</h2>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">subset.final</span>,n<span class="op">=</span><span class="fl">50</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## </span>
-<span class="co">##                                      k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae|g__Atopobium </span>
-<span class="co">##                                                                                                                                     7 </span>
-<span class="co">##                                          k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus </span>
-<span class="co">##                                                                                                                                     5 </span>
-<span class="co">##                                        k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae </span>
-<span class="co">##                                                                                                                                     5 </span>
-<span class="co">##                                              k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae </span>
-<span class="co">##                                                                                                                                     4 </span>
-<span class="co">##                                                           k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae </span>
-<span class="co">##                                                                                                                                     4 </span>
-<span class="co">##                    k__Bacteria|p__Proteobacteria|c__Epsilonproteobacteria|o__Campylobacterales|f__Campylobacteraceae|g__Campylobacter </span>
-<span class="co">##                                                                                                                                     4 </span>
-<span class="co">##            k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae|s__Escherichia/Shigella sp. </span>
-<span class="co">##                                                                                                                                     4 </span>
-<span class="co">## k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pseudomonadales|f__Pseudomonadaceae|g__Pseudomonas|s__Pseudomonas viridiflava </span>
-<span class="co">##                                                                                                                                     4 </span>
-<span class="co">##                              k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Gardnerella </span>
-<span class="co">##                                                                                                                                     3 </span>
-<span class="co">##                   k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus|s__Lactobacillus iners </span>
-<span class="co">##                                                                                                                                     3</span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">subset.dat</span>,sig.type<span class="op">=</span><span class="st">"increased"</span><span class="op">)</span></code></pre></div>
+<span class="co">##                                                                                      k__Bacteria|p__Firmicutes|c__Bacilli|o__Bacillales|f__Staphylococcaceae|g__Staphylococcus </span>
+<span class="co">##                                                                                                                                                                              3 </span>
+<span class="co">##                                                                   k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Corynebacteriales|f__Corynebacteriaceae|g__Corynebacterium </span>
+<span class="co">##                                                                                                                                                                              2 </span>
+<span class="co">##                                                             k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Propionibacteriales|f__Propionibacteriaceae|g__Propionibacterium </span>
+<span class="co">##                                                                                                                                                                              2 </span>
+<span class="co">##                                                                            k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|g__Phocaeicola|s__Phocaeicola vulgatus </span>
+<span class="co">##                                                                                                                                                                              2 </span>
+<span class="co">##                                                                                     k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus </span>
+<span class="co">##                                                                                                                                                                              2 </span>
+<span class="co">##                                                                                   k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus </span>
+<span class="co">##                                                                                                                                                                              2 </span>
+<span class="co">##                                                                                   k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus </span>
+<span class="co">##                                                                                                                                                                              2 </span>
+<span class="co">##                                                                          k__Bacteria|p__Proteobacteria|c__Betaproteobacteria|o__Burkholderiales|f__Comamonadaceae|g__Comamonas </span>
+<span class="co">##                                                                                                                                                                              2 </span>
+<span class="co">##                                                                  k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae|g__Citrobacter </span>
+<span class="co">##                                                                                                                                                                              2 </span>
+<span class="co">##                                                                k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Xanthomonadales|f__Xanthomonadaceae|g__Stenotrophomonas </span>
+<span class="co">##                                                                                                                                                                              2 </span>
+<span class="co">##                                                                                                                                                  k__Bacteria|p__Actinobacteria </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                                                 k__Bacteria|p__Actinobacteria|c__Actinomycetia </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                              k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Actinomycetales </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                   k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                    k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium catenulatum </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">## k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium longum|s__Bifidobacterium longum subsp. longum </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                   k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Pseudoscardovia </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                  k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Propionibacteriales|f__Propionibacteriaceae </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                          k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Propionibacteriales|f__Propionibacteriaceae|g__Cutibacterium|s__Cutibacterium acnes </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                      k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Pseudonocardiales|f__Pseudonocardiaceae </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                               k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae|g__Atopobium </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                  k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                            k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides caccae </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                          k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides fragilis </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                            k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides ovatus </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                      k__Bacteria|p__Bacteroidetes|c__Chitinophagia|o__Chitinophagales|f__Chitinophagaceae|g__Sediminibacterium </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                                                             k__Bacteria|p__Deinococcus-Thermus </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                                               k__Bacteria|p__Deinococcus-Thermus|c__Deinococci </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                              k__Bacteria|p__Deinococcus-Thermus|c__Deinococci|o__Deinococcales </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                            k__Bacteria|p__Deinococcus-Thermus|c__Deinococci|o__Deinococcales|f__Deinococcaceae </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                             k__Bacteria|p__Deinococcus-Thermus|c__Deinococci|o__Deinococcales|f__Deinococcaceae|g__Deinococcus </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                     k__Bacteria|p__Deinococcus-Thermus|c__Deinococci|o__Thermales|f__Thermaceae|g__Meiothermus </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                                                                      k__Bacteria|p__Firmicutes </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                                                           k__Bacteria|p__Firmicutes|c__Bacilli </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                                             k__Bacteria|p__Firmicutes|c__Bacilli|o__Bacillales </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                              k__Bacteria|p__Firmicutes|c__Bacilli|o__Bacillales|f__Bacillaceae </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                             k__Bacteria|p__Firmicutes|c__Bacilli|o__Bacillales|f__Bacillaceae|g__Anoxybacillus </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                  k__Bacteria|p__Firmicutes|c__Bacilli|o__Bacillales|f__Bacillaceae|g__Bacillus </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                    k__Bacteria|p__Firmicutes|c__Bacilli|o__Bacillales|f__Bacillaceae|g__Bacillus|s__Bacillus amyloliquefaciens </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                        k__Bacteria|p__Firmicutes|c__Bacilli|o__Bacillales|f__Bacillaceae|g__Bacillus|s__Bacillus licheniformis </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                 k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Carnobacteriaceae|g__Granulicatella </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                          k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus|s__Lactobacillus gasseri </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                     k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Lactococcus </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                      k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                           k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium|s__Clostridium perfringens </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                     k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales|f__Eubacteriaceae </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                      k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales|f__Eubacteriaceae|g__Eubacterium </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                           k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales|f__Lachnospiraceae|s__[Eubacterium] rectale </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                               k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                               k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium|s__Faecalibacterium prausnitzii </span>
+<span class="co">##                                                                                                                                                                              1</span></code></pre>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">subset.final</span>,sig.type<span class="op">=</span><span class="st">"increased"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## </span>
-<span class="co">##                                          k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus </span>
-<span class="co">##                                                                                                                                     5 </span>
-<span class="co">##                                        k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae </span>
-<span class="co">##                                                                                                                                     5 </span>
-<span class="co">##                                                           k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae </span>
-<span class="co">##                                                                                                                                     4 </span>
-<span class="co">##            k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae|s__Escherichia/Shigella sp. </span>
-<span class="co">##                                                                                                                                     4 </span>
-<span class="co">##                                              k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae </span>
-<span class="co">##                                                                                                                                     3 </span>
-<span class="co">##                                             k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium </span>
-<span class="co">##                                                                                                                                     3 </span>
-<span class="co">##                                           k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pseudomonadales|f__Pseudomonadaceae </span>
-<span class="co">##                                                                                                                                     3 </span>
-<span class="co">## k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Pseudomonadales|f__Pseudomonadaceae|g__Pseudomonas|s__Pseudomonas viridiflava </span>
-<span class="co">##                                                                                                                                     3 </span>
-<span class="co">##                          k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium </span>
-<span class="co">##                                                                                                                                     2 </span>
-<span class="co">##                              k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Gardnerella </span>
-<span class="co">##                                                                                                                                     2</span></code></pre>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">subset.dat</span>,sig.type<span class="op">=</span><span class="st">"decreased"</span><span class="op">)</span></code></pre></div>
+<span class="co">##    k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Xanthomonadales|f__Xanthomonadaceae|g__Stenotrophomonas </span>
+<span class="co">##                                                                                                                  2 </span>
+<span class="co">##       k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Pseudoscardovia </span>
+<span class="co">##                                                                                                                  1 </span>
+<span class="co">##       k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Corynebacteriales|f__Corynebacteriaceae|g__Corynebacterium </span>
+<span class="co">##                                                                                                                  1 </span>
+<span class="co">## k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Propionibacteriales|f__Propionibacteriaceae|g__Propionibacterium </span>
+<span class="co">##                                                                                                                  1 </span>
+<span class="co">##                k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|g__Phocaeicola|s__Phocaeicola vulgatus </span>
+<span class="co">##                                                                                                                  1 </span>
+<span class="co">##          k__Bacteria|p__Bacteroidetes|c__Chitinophagia|o__Chitinophagales|f__Chitinophagaceae|g__Sediminibacterium </span>
+<span class="co">##                                                                                                                  1 </span>
+<span class="co">##                                                                                 k__Bacteria|p__Deinococcus-Thermus </span>
+<span class="co">##                                                                                                                  1 </span>
+<span class="co">##                                                                   k__Bacteria|p__Deinococcus-Thermus|c__Deinococci </span>
+<span class="co">##                                                                                                                  1 </span>
+<span class="co">##                                                  k__Bacteria|p__Deinococcus-Thermus|c__Deinococci|o__Deinococcales </span>
+<span class="co">##                                                                                                                  1 </span>
+<span class="co">##                                k__Bacteria|p__Deinococcus-Thermus|c__Deinococci|o__Deinococcales|f__Deinococcaceae </span>
+<span class="co">##                                                                                                                  1</span></code></pre>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">subset.final</span>,sig.type<span class="op">=</span><span class="st">"decreased"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## </span>
-<span class="co">##                    k__Bacteria|p__Actinobacteria|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae|g__Atopobium </span>
-<span class="co">##                                                                                                                   5 </span>
-<span class="co">##                 k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Actinomycetales|f__Actinomycetaceae|g__Mobiluncus </span>
-<span class="co">##                                                                                                                   2 </span>
-<span class="co">##                                                        k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales </span>
-<span class="co">##                                                                                                                   2 </span>
-<span class="co">##                        k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella </span>
-<span class="co">##                                                                                                                   2 </span>
-<span class="co">## k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus|s__Lactobacillus iners </span>
-<span class="co">##                                                                                                                   2 </span>
-<span class="co">##                          k__Bacteria|p__Firmicutes|c__Clostridia|o__Eubacteriales|f__Lachnospiraceae|g__Lachnospira </span>
-<span class="co">##                                                                                                                   2 </span>
-<span class="co">##                      k__Bacteria|p__Firmicutes|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Megasphaera </span>
-<span class="co">##                                                                                                                   2 </span>
-<span class="co">##                     k__Bacteria|p__Fusobacteria|c__Fusobacteriia|o__Fusobacteriales|f__Leptotrichiaceae|g__Sneathia </span>
-<span class="co">##                                                                                                                   2 </span>
-<span class="co">##  k__Bacteria|p__Proteobacteria|c__Epsilonproteobacteria|o__Campylobacterales|f__Campylobacteraceae|g__Campylobacter </span>
-<span class="co">##                                                                                                                   2 </span>
-<span class="co">##                                                                                       k__Bacteria|p__Actinobacteria </span>
-<span class="co">##                                                                                                                   1</span></code></pre>
+<span class="co">##                                                                                      k__Bacteria|p__Firmicutes|c__Bacilli|o__Bacillales|f__Staphylococcaceae|g__Staphylococcus </span>
+<span class="co">##                                                                                                                                                                              2 </span>
+<span class="co">##                                                                                     k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus </span>
+<span class="co">##                                                                                                                                                                              2 </span>
+<span class="co">##                                                                                                                                                  k__Bacteria|p__Actinobacteria </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                                                 k__Bacteria|p__Actinobacteria|c__Actinomycetia </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                                              k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Actinomycetales </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                   k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                    k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium catenulatum </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">## k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium longum|s__Bifidobacterium longum subsp. longum </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                   k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Corynebacteriales|f__Corynebacteriaceae|g__Corynebacterium </span>
+<span class="co">##                                                                                                                                                                              1 </span>
+<span class="co">##                                                                                  k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Propionibacteriales|f__Propionibacteriaceae </span>
+<span class="co">##                                                                                                                                                                              1</span></code></pre>
 </div>
   </div>
 
