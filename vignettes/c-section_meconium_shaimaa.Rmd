@@ -49,8 +49,6 @@ names(dat)
 
 # Subsetting
 
-Subsetting only studies done on humans - 6 of 17 studies were excluded because they were either done on mice or not statistically reliable (Cregger et. al)
-
 ```{r, messages=FALSE}
 included.pmid <-
   c(
@@ -76,8 +74,7 @@ included.group0 <-
     "vaginal delivery",
     "vaginally born controls",
     "vaginal delivery in mecomium",
-    "vaginally born controls"
-  )
+    "vaginally born controls")
 ```
 
 ```{r group1}
