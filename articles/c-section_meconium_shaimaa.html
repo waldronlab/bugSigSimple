@@ -376,24 +376,999 @@ cross-sectional observational, not case-control
 </h2>
 <p>This table summarizes the results for the top <code>n</code> most frequently identified taxa.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">subset.final</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 10 × 15</span></span>
-<span class="co">##    `Taxon Name`         `Taxonomic Level` total_signatures increased_signatures</span>
-<span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;"> 1</span> Staphylococcus       genus                            3                    1</span>
-<span class="co">## <span style="color: #BCBCBC;"> 2</span> Corynebacterium      genus                            2                    1</span>
-<span class="co">## <span style="color: #BCBCBC;"> 3</span> Propionibacterium    genus                            2                    1</span>
-<span class="co">## <span style="color: #BCBCBC;"> 4</span> Phocaeicola vulgatus species                          2                    1</span>
-<span class="co">## <span style="color: #BCBCBC;"> 5</span> Enterococcus         genus                            2                    0</span>
-<span class="co">## <span style="color: #BCBCBC;"> 6</span> Lactobacillus        genus                            2                    1</span>
-<span class="co">## <span style="color: #BCBCBC;"> 7</span> Streptococcus        genus                            2                    1</span>
-<span class="co">## <span style="color: #BCBCBC;"> 8</span> Comamonas            genus                            2                    1</span>
-<span class="co">## <span style="color: #BCBCBC;"> 9</span> Citrobacter          genus                            2                    1</span>
-<span class="co">## <span style="color: #BCBCBC;">10</span> Stenotrophomonas     genus                            2                    2</span>
-<span class="co">## <span style="color: #949494;"># … with 11 more variables: decreased_signatures &lt;int&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   `Binomial Test pval` &lt;dbl&gt;, kingdom &lt;chr&gt;, phylum &lt;chr&gt;, class &lt;chr&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   order &lt;chr&gt;, family &lt;chr&gt;, genus &lt;chr&gt;, species &lt;chr&gt;, n_signatures &lt;int&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   metaphlan_name &lt;fct&gt;</span></span></code></pre>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">subset.final</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Warning: Expected 7 pieces. Additional pieces discarded in 1 rows [16].</span></code></pre>
+<table class="table table" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+Taxon Name
+</th>
+<th style="text-align:left;">
+Taxonomic Level
+</th>
+<th style="text-align:right;">
+total_signatures
+</th>
+<th style="text-align:right;">
+increased_signatures
+</th>
+<th style="text-align:right;">
+decreased_signatures
+</th>
+<th style="text-align:right;">
+Binomial Test pval
+</th>
+<th style="text-align:left;">
+kingdom
+</th>
+<th style="text-align:left;">
+phylum
+</th>
+<th style="text-align:left;">
+class
+</th>
+<th style="text-align:left;">
+order
+</th>
+<th style="text-align:left;">
+family
+</th>
+<th style="text-align:left;">
+genus
+</th>
+<th style="text-align:left;">
+species
+</th>
+<th style="text-align:right;">
+n_signatures
+</th>
+<th style="text-align:left;">
+metaphlan_name
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Staphylococcus
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Firmicutes
+</td>
+<td style="text-align:left;">
+Bacilli
+</td>
+<td style="text-align:left;">
+Bacillales
+</td>
+<td style="text-align:left;">
+Staphylococcaceae
+</td>
+<td style="text-align:left;">
+Staphylococcus
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Firmicutes|c__Bacilli|o__Bacillales|f__Staphylococcaceae|g__Staphylococcus
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Corynebacterium
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+Corynebacteriales
+</td>
+<td style="text-align:left;">
+Corynebacteriaceae
+</td>
+<td style="text-align:left;">
+Corynebacterium
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Corynebacteriales|f__Corynebacteriaceae|g__Corynebacterium
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Propionibacterium
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+Propionibacteriales
+</td>
+<td style="text-align:left;">
+Propionibacteriaceae
+</td>
+<td style="text-align:left;">
+Propionibacterium
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Propionibacteriales|f__Propionibacteriaceae|g__Propionibacterium
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Phocaeicola vulgatus
+</td>
+<td style="text-align:left;">
+species
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Bacteroidetes
+</td>
+<td style="text-align:left;">
+Bacteroidia
+</td>
+<td style="text-align:left;">
+Bacteroidales
+</td>
+<td style="text-align:left;">
+Phocaeicola
+</td>
+<td style="text-align:left;">
+Phocaeicola vulgatus
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Bacteroidetes|c__Bacteroidia|o__Bacteroidales|g__Phocaeicola|s__Phocaeicola vulgatus
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Enterococcus
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Firmicutes
+</td>
+<td style="text-align:left;">
+Bacilli
+</td>
+<td style="text-align:left;">
+Lactobacillales
+</td>
+<td style="text-align:left;">
+Enterococcaceae
+</td>
+<td style="text-align:left;">
+Enterococcus
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lactobacillus
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Firmicutes
+</td>
+<td style="text-align:left;">
+Bacilli
+</td>
+<td style="text-align:left;">
+Lactobacillales
+</td>
+<td style="text-align:left;">
+Lactobacillaceae
+</td>
+<td style="text-align:left;">
+Lactobacillus
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Streptococcus
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Firmicutes
+</td>
+<td style="text-align:left;">
+Bacilli
+</td>
+<td style="text-align:left;">
+Lactobacillales
+</td>
+<td style="text-align:left;">
+Streptococcaceae
+</td>
+<td style="text-align:left;">
+Streptococcus
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Comamonas
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Proteobacteria
+</td>
+<td style="text-align:left;">
+Betaproteobacteria
+</td>
+<td style="text-align:left;">
+Burkholderiales
+</td>
+<td style="text-align:left;">
+Comamonadaceae
+</td>
+<td style="text-align:left;">
+Comamonas
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Proteobacteria|c__Betaproteobacteria|o__Burkholderiales|f__Comamonadaceae|g__Comamonas
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Citrobacter
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Proteobacteria
+</td>
+<td style="text-align:left;">
+Gammaproteobacteria
+</td>
+<td style="text-align:left;">
+Enterobacterales
+</td>
+<td style="text-align:left;">
+Enterobacteriaceae
+</td>
+<td style="text-align:left;">
+Citrobacter
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae|g__Citrobacter
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Stenotrophomonas
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.5
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Proteobacteria
+</td>
+<td style="text-align:left;">
+Gammaproteobacteria
+</td>
+<td style="text-align:left;">
+Xanthomonadales
+</td>
+<td style="text-align:left;">
+Xanthomonadaceae
+</td>
+<td style="text-align:left;">
+Stenotrophomonas
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Proteobacteria|c__Gammaproteobacteria|o__Xanthomonadales|f__Xanthomonadaceae|g__Stenotrophomonas
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+phylum
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+class
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria|c__Actinomycetia
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Actinomycetales
+</td>
+<td style="text-align:left;">
+order
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+Actinomycetales
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Actinomycetales
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bifidobacterium
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+Bifidobacteriales
+</td>
+<td style="text-align:left;">
+Bifidobacteriaceae
+</td>
+<td style="text-align:left;">
+Bifidobacterium
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bifidobacterium catenulatum
+</td>
+<td style="text-align:left;">
+species
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+Bifidobacteriales
+</td>
+<td style="text-align:left;">
+Bifidobacteriaceae
+</td>
+<td style="text-align:left;">
+Bifidobacterium
+</td>
+<td style="text-align:left;">
+Bifidobacterium catenulatum
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium catenulatum
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bifidobacterium longum subsp. longum
+</td>
+<td style="text-align:left;">
+species
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+Bifidobacteriales
+</td>
+<td style="text-align:left;">
+Bifidobacteriaceae
+</td>
+<td style="text-align:left;">
+Bifidobacterium
+</td>
+<td style="text-align:left;">
+Bifidobacterium longum
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium longum|s__Bifidobacterium longum subsp. longum
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pseudoscardovia
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+Bifidobacteriales
+</td>
+<td style="text-align:left;">
+Bifidobacteriaceae
+</td>
+<td style="text-align:left;">
+Pseudoscardovia
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Pseudoscardovia
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Propionibacteriaceae
+</td>
+<td style="text-align:left;">
+family
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+Propionibacteriales
+</td>
+<td style="text-align:left;">
+Propionibacteriaceae
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Propionibacteriales|f__Propionibacteriaceae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cutibacterium acnes
+</td>
+<td style="text-align:left;">
+species
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+Propionibacteriales
+</td>
+<td style="text-align:left;">
+Propionibacteriaceae
+</td>
+<td style="text-align:left;">
+Cutibacterium
+</td>
+<td style="text-align:left;">
+Cutibacterium acnes
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Propionibacteriales|f__Propionibacteriaceae|g__Cutibacterium|s__Cutibacterium acnes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Pseudonocardiaceae
+</td>
+<td style="text-align:left;">
+family
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Actinobacteria
+</td>
+<td style="text-align:left;">
+Actinomycetia
+</td>
+<td style="text-align:left;">
+Pseudonocardiales
+</td>
+<td style="text-align:left;">
+Pseudonocardiaceae
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+k__Bacteria|p__Actinobacteria|c__Actinomycetia|o__Pseudonocardiales|f__Pseudonocardiaceae
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level2">
 <h2 id="long-list-of-most-frequently-identified-taxa">Long list of most frequently identified taxa<a class="anchor" aria-label="anchor" href="#long-list-of-most-frequently-identified-taxa"></a>
