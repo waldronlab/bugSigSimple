@@ -160,7 +160,6 @@
 <div class="section level2">
 <h2 id="subsetting">Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"></a>
 </h2>
-<p>Subsetting only studies done on humans - 6 of 17 studies were excluded because they were either done on mice or not statistically reliable (Cregger et. al)</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">included.pmid</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
@@ -204,8 +203,7 @@
     <span class="st">"vaginal delivery"</span>,
     <span class="st">"vaginally born controls"</span>,
     <span class="st">"vaginal delivery in mecomium"</span>,
-    <span class="st">"vaginally born controls"</span>
-  <span class="op">)</span></code></pre></div>
+    <span class="st">"vaginally born controls"</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">subset.dat</span><span class="op">$</span><span class="va">`Group 1 name`</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##  [1] "C-section delivery"                             </span>
