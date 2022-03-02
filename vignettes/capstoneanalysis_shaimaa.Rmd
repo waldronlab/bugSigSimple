@@ -18,6 +18,7 @@ vignette: >
 
 # Making sure packages are installed
 
+Not evaluated in vignette:
 ```{r, eval=FALSE, messages=FALSE}
 install.packages(c("devtools", "tidyverse", "kableExtra"))
 devtools::install_github("waldronlab/bugSigSimple")
@@ -28,13 +29,15 @@ devtools::install_github("waldronlab/bugsigdbr")
 # Load and subset data
 
 ```{r, messages=FALSE}
-library(bugSigSimple)
-library(BugSigDBStats)
-library(bugsigdbr)
-library(tidyverse)
-library(stringr)
-library(kableExtra)
-library(dplyr)
+suppressPackageStartupMessages({
+  library(bugSigSimple)
+  library(BugSigDBStats)
+  library(bugsigdbr)
+  library(tidyverse)
+  library(stringr)
+  library(kableExtra)
+  library(dplyr)
+})
 ```
 
 ```{r}
@@ -49,38 +52,66 @@ names(dat)
 Subsetting only studies done on humans - 6 of 17 studies were excluded because they were either done on mice or not statistically reliable (Cregger et. al)
 
 ```{r, messages=FALSE}
+included.pmid <-
+  c(
+    28018325,
+    24614698,
+    29207565,
+    29459704,
+    29538354,
+    32012716,
+    20566857,
+    28512451,
+    28112736,
+    27362264
+  )
 subset.dat <-
-  dat[which(
-    dat$PMID == "30778155" |
-      dat$PMID == "32192080" |
-      dat$PMID == "31087436" |
-      dat$PMID == "26901400" |
-      dat$PMID == "33839907" |
-      dat$PMID == "32046455" |
-      dat$PMID == "33925708" |
-      dat$PMID == "32299442" |
-      dat$PMID == "33313185" |
-      dat$PMID == "34268384" |
-      dat$PMID == "33660232"
-  ),]
+  filter(dat, PMID %in% included.pmid) 
 ```
 
-# All studies
+```{r group0}
+unique(subset.dat$`Group 0 name`)
+included.group0 <-
+  c(
+    "vaginal delivery",
+    "vaginally born controls",
+    "vaginal delivery in mecomium",
+    "vaginally born controls"
+  )
+```
 
-Summary of studies and most frequent taxa increased and decreased in endometriosis patients for all studies
+```{r group1}
+unique(subset.dat$`Group 1 name`)
+included.group1 <-
+  c("c-section",
+    "C-section",
+    "c-section delivery",
+    "C-section delivery")
+```
+
+```{r}
+subset.final <-
+  filter(subset.dat, `Group 0 name` %in% included.group0 & `Group 1 name` %in% included.group1) %>%
+  filter(`Body site` == "meconium")
+dim(subset.final)
+```
+
+# Summary of studies
 
 ```{r, messages=FALSE}
-bugSigSimple::createStudyTable(subset.dat)
+bugSigSimple::createStudyTable(subset.final)
+```
+
+# Most frequently identified taxa
+
+```{r}
+getMostFrequentTaxa(subset.final,n=50)
 ```
 
 ```{r}
-getMostFrequentTaxa(subset.dat,n=10)
+getMostFrequentTaxa(subset.final,sig.type="increased")
 ```
 
 ```{r}
-getMostFrequentTaxa(subset.dat,sig.type="increased")
-```
-
-```{r}
-getMostFrequentTaxa(subset.dat,sig.type="decreased")
+getMostFrequentTaxa(subset.final,sig.type="decreased")
 ```
