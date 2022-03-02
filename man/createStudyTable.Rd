@@ -10,12 +10,13 @@ createStudyTable(dat)
 \item{dat}{data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired}
 }
 \value{
-kable table of basic study information
+a data.frame of basic study information. Can be wrapped in 
+kable_styling(kbl(.)) to format nicely.
 }
 \description{
 Create a table of all studies currently in data.frame
 }
 \examples{
 full.dat <- bugsigdbr::importBugSigDB()
-createStudyTable(full.dat)
+kable_styling(kbl(createStudyTable(full.dat)))
 }

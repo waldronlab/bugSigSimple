@@ -88,12 +88,13 @@ createTaxonTable <- function(dat, n=10){
 #'
 #' @importFrom dplyr group_by summarize  %>%
 #' @importFrom kableExtra kbl kable_styling
-#' @return kable table of basic study information
+#' @return a data.frame of basic study information. Can be wrapped in 
+#' kable_styling(kbl(.)) to format nicely.
 #' @export
 #'
 #' @examples
 #' full.dat <- bugsigdbr::importBugSigDB()
-#' createStudyTable(full.dat)
+#' kable_styling(kbl(createStudyTable(full.dat)))
 
 createStudyTable <-function(dat){
   studies <- data.frame(Study=paste0(str_extract(dat$Authors, "[A-Za-z]+[:space:]"), dat$Year),
@@ -104,9 +105,7 @@ createStudyTable <-function(dat){
   studies %>% group_by(Study) %>% summarize(Condition=first(Condition), 
                                             Cases=max(Cases),
                                             Controls=max(Controls), 
-                                            `Study Design`=first(`Study.Design`)) %>%
-    kbl() %>% 
-    kable_styling()
+                                            `Study Design`=first(`Study.Design`))
   
 }
 
