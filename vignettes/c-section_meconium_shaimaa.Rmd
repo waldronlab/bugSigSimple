@@ -99,18 +99,24 @@ Show key characteristics of the included signatures:
 select(subset.final, all_of(c("PMID", "Source", "Group 0 name", "Group 1 name", "Abundance in Group 1")))
 ```
 
+# Table of studies
 
-# Summary of taxa reported
-
-```{r}
-bugSigSimple::createTaxonTable(subset.final)
-```
-
+These are the studies included in the review:
 ```{r, messages=FALSE}
 bugSigSimple::createStudyTable(subset.final)
 ```
 
-# Most frequently identified taxa
+# Summary of taxa reported
+
+This table summarizes the results for the top `n` most frequently identified taxa.
+```{r}
+bugSigSimple::createTaxonTable(subset.final, n = 10)
+```
+
+
+# Long list of most frequently identified taxa
+
+These are not needed because of the taxon table above, but they list a larger number of taxa.
 
 ```{r}
 getMostFrequentTaxa(subset.final, n = 50)
