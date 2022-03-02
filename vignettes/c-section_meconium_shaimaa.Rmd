@@ -20,10 +20,11 @@ vignette: >
 
 Not evaluated in vignette:
 ```{r, eval=FALSE, messages=FALSE}
-install.packages(c("devtools", "tidyverse", "kableExtra"))
-devtools::install_github("waldronlab/bugSigSimple")
-devtools::install_github("waldronlab/BugSigDBStats")
-devtools::install_github("waldronlab/bugsigdbr")
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("bugsigdbr")
+BiocManager::install(c("devtools", "tidyverse", "kableExtra"))
+BiocManager::install(c("waldronlab/bugSigSimple", "waldronlab/BugSigDBStats"))
 ```
 
 # Load and subset data
@@ -86,15 +87,24 @@ included.group1 <-
     "C-section delivery")
 ```
 
+
 ```{r}
 subset.final <-
   filter(subset.dat, `Group 0 name` %in% included.group0 & `Group 1 name` %in% included.group1) %>%
   filter(`Body site` == "meconium") %>%
   arrange(PMID)
+```
+Show key characteristics of the included signatures:
+```{r}
 select(subset.final, all_of(c("PMID", "Source", "Group 0 name", "Group 1 name", "Abundance in Group 1")))
 ```
 
-# Summary of studies
+
+# Summary of taxa reported
+
+```{r}
+bugSigSimple::createTaxonTable(subset.final)
+```
 
 ```{r, messages=FALSE}
 bugSigSimple::createStudyTable(subset.final)
