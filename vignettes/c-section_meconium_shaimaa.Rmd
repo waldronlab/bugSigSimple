@@ -75,6 +75,7 @@ included.group0 <-
     "vaginal delivery",
     "vaginally born controls",
     "vaginal delivery in mecomium",
+    "vaginally born controls", 
     "vaginally born controls")
 ```
 
@@ -84,7 +85,8 @@ included.group1 <-
   c("c-section",
     "C-section",
     "c-section delivery",
-    "C-section delivery")
+    "C-section delivery", 
+    "cesarean premature birth")
 ```
 
 
