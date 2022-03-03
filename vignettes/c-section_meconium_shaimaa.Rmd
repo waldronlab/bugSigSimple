@@ -22,9 +22,8 @@ Not evaluated in vignette:
 ```{r, eval=FALSE, messages=FALSE}
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
-BiocManager::install("bugsigdbr")
 BiocManager::install(c("devtools", "tidyverse", "kableExtra"))
-BiocManager::install(c("waldronlab/bugSigSimple", "waldronlab/BugSigDBStats"))
+BiocManager::install(c("waldronlab/bugSigSimple", "waldronlab/BugSigDBStats", "waldronlab/bugsigdbr"))
 ```
 
 # Load and subset data
@@ -103,7 +102,7 @@ select(subset.final, all_of(c("PMID", "Source", "Group 0 name", "Group 1 name", 
 
 These are the studies included in the review:
 ```{r}
-bugSigSimple::createStudyTable(subset.final)
+kable_styling(kbl(bugSigSimple::createStudyTable(subset.final)))
 ```
 
 # Summary of taxa reported

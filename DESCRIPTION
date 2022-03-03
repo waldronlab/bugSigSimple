@@ -29,7 +29,8 @@ Suggests:
     knitr,
     rmarkdown
 Remotes:
-    waldronlab/BugSigDBStats
+    waldronlab/BugSigDBStats,
+    waldronlab/bugsigdbr
 Description: bugSigSimple provides simple exploratory analysis of curated microbe signatures from bugsigdb.org.
 License: Artistic-2.0
 VignetteBuilder: knitr
