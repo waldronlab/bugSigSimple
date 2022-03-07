@@ -1,10 +1,13 @@
 Package: bugSigSimple
-Version: 0.99.4
-Date: 2022-02-23
+Version: 0.99.5
+Date: 2022-03-07
 Title: Simple exploratory analysis of curated microbe signatures 
-Author: Ludwig Geistlinger, Levi Waldron, Chloe Mirzayi, Fatima Zohra
+Authors@R: c(person("Ludwig", "Geistlinger", email = "Ludwig_Geistlinger@hms.harvard.edu", role = c("aut", "cre")),
+    person("Chloe", "Mirzayi", email = "chloe.mirzayi@sph.cuny.edu", role = c("aut")),
+    person("Fatima", "Zohra", email = "Fatima.Zohra85@sphmail.cuny.edu", role = "aut"),
+    person("Levi", "Waldron", email = "lwaldron.research@gmail.com", role = "aut"))
 Maintainer: Ludwig Geistlinger <ludwig.geistlinger@sph.cuny.edu>
-Depends: R(>= 4.0.0)
+Depends: R(>= 4.1.0)
 Imports: 
     curatedMetagenomicData,
     mia,
