@@ -94,7 +94,8 @@ createTaxonTable <- function(dat, n=10){
 #'
 #' @examples
 #' full.dat <- bugsigdbr::importBugSigDB()
-#' kable_styling(kbl(createStudyTable(full.dat)))
+#' createStudyTable(full.dat)
+#' ## kable_styling(kbl(createStudyTable(full.dat))) #for html styling
 
 createStudyTable <-function(dat){
   studies <- data.frame(Study=paste0(str_extract(dat$Authors, "[A-Za-z]+[:space:]"), dat$Year),
