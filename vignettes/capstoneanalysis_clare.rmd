@@ -1,7 +1,7 @@
 ---
 title: "COVID-19 associated microbiome"
 author: "Clare Grieve"
-date: "8/2/2021"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{COVID-19 associated microbiome}

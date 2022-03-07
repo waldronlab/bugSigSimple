@@ -1,7 +1,7 @@
 ---
 title: "Delivery Mode and the Meconium Microbiome"
 name: "Shaimaa Elsafoury"
-date: "2/24/2022"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Delivery Mode and the Meconium Microbiome}

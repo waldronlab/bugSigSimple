@@ -1,6 +1,7 @@
 ---
 title: "An analysis of Most frequent taxa in Major Depression and Bipolar Disorder"
 author: "Fatima Zohra"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{An analysis of Most frequent taxa in Major Depression and Bipolar Disorder}
