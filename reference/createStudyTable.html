@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Analyses based on bugsigdb.org</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
       </span>
     </div>
 
@@ -89,8 +89,22 @@ kable_styling(kbl(.)) to format nicely.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">full.dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">kable_styling</span><span class="op">(</span><span class="fu">kbl</span><span class="op">(</span><span class="fu">createStudyTable</span><span class="op">(</span><span class="va">full.dat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in kable_styling(kbl(createStudyTable(full.dat))):</span> could not find function "kable_styling"</span>
+<span class="r-in"><span class="fu">createStudyTable</span><span class="op">(</span><span class="va">full.dat</span><span class="op">)</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 460 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Study            Condition                      Cases Controls `Study Design`</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Aarts 2017       attention deficit hyperactivi…    19       77 case-control  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Abrahamsson 2012 atopic eczema                     20       20 prospective c…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Adamberg 2018    obesity                            9        9 case-control  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Aguilar 2020     obesity                           16       56 cross-section…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Ahn 2013         colorectal cancer                 47       94 case-control  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Aizawa 2016      unipolar depression               43       57 cross-section…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Akiyama 2019     endometriosis                     30       39 cross-section…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Alanee 2019      prostate cancer                   14       16 prospective c…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Allali 2018      colorectal cancer                 11       12 case-control  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Aloisio 2016     antimicrobial agent               10       10 prospective c…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 450 more rows</span></span>
+<span class="r-in"><span class="co">## kable_styling(kbl(createStudyTable(full.dat))) #for html styling</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -101,7 +115,7 @@ kable_styling(kbl(.)) to format nicely.</p>
 
 
       <footer><div class="copyright">
-  <p></p><p>Developed by Ludwig Geistlinger.</p>
+  <p></p><p>Developed by Ludwig Geistlinger, Chloe Mirzayi, Fatima Zohra, Levi Waldron.</p>
 </div>
 
 <div class="pkgdown">
