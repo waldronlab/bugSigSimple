@@ -18,5 +18,6 @@ Create a table of all studies currently in data.frame
 }
 \examples{
 full.dat <- bugsigdbr::importBugSigDB()
-kable_styling(kbl(createStudyTable(full.dat)))
+createStudyTable(full.dat)
+## kable_styling(kbl(createStudyTable(full.dat))) #for html styling
 }
