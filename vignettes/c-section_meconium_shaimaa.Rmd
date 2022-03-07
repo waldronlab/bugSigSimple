@@ -99,6 +99,14 @@ Show key characteristics of the included signatures:
 select(subset.final, all_of(c("PMID", "Source", "Group 0 name", "Group 1 name", "Abundance in Group 1")))
 ```
 
+Are any studies missing?
+
+```{r}
+sort(setdiff(included.pmid, subset.dat$PMID))
+sort(setdiff(included.pmid, subset.final$PMID))
+sort(setdiff(subset.dat$PMID, subset.final$PMID))
+```
+
 # Table of studies
 
 These are the studies included in the review:
