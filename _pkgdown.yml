@@ -1,10 +1,6 @@
 url: http://waldronlab.io/bugSigSimple
 
-title: "Analyses based on bugsigdb.org"
-
-template:
-  params:
-    bootswatch: flatly
+title: "Reviews of published signatures based on bugsigdb.org"
 
 navbar:
   title: ~
