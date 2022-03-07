@@ -1,0 +1,247 @@
+---
+title: "COVID-19 associated microbiome"
+author: "Clare Grieve"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{COVID-19 associated microbiome}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Analysis objectives
+
+1. Import, recode, and subset data from bugsigdb.org    
+2. Create a table of studies
+3. Create a clustered heatmap showing similarity of signatures from independent studies
+4. Calculate the frequency of appearance of each taxa in independent signatures, and identify the most frequently reported taxa
+5. Estimate the probability of the most frequently identified taxa occuring so frequently by chance
+
+# Packages installation
+
+Install packages (not evaluated in vignette)
+
+```{r, eval=FALSE}
+install.packages(c("devtools", "tidyverse", "kableExtra", "gt", "glue"))
+devtools::install_github("waldronlab/bugSigSimple")
+devtools::install_github("waldronlab/BugSigDBStats")
+devtools::install_github("waldronlab/bugsigdbr")
+```
+
+# Data import, recoding, and subset
+
+```{r}
+library(bugSigSimple)
+dat <- bugsigdbr::importBugSigDB(cache = TRUE) 
+dim(dat)
+names(dat)
+```
+
+```{r}
+library(tidyverse)
+condsnew <- c("COVID-19")
+covid_all <- subsetByCondition(dat, condsnew) %>%
+  mutate(studyexp = paste(Study, Experiment, sep = "_")) %>%
+  mutate(
+    site = recode(`Body site`,
+      "feces" = "Gut",
+      "rectal" = "Gut",
+      "nasopharynx" = "aURT",
+      "oropharynx" = "aURT",
+      "nasopharynx,oropharynx" = "aURT",
+      "tongue" = "aURT"
+    )
+  ) %>%
+  mutate(comparison1 = paste(`Group 0 name`, `Group 1 name`, sep = " vs "))
+```  
+  
+
+## Table of studies
+
+```{r}
+bugSigSimple::createStudyTable(covid_all)
+```
+
+
+## Taxon frequency tables by body site
+
+```{r}
+library(dplyr)
+gut_sigs <- filter(covid_all, 
+                           site == "Gut") %>%
+    drop_na(Source)
+
+naso_sigs <- filter(covid_all, 
+                           site == "aURT") %>%
+  drop_na(Source)
+```
+
+In this table, the Binomial Test p-value corresponds to the null hypothesis
+
+H0: the proportion of signatures in which the taxon is reported increased or decreased, relative to the total number of signatures in which it is reported, is equal to 0.5
+
+```{r}
+kableExtra::kbl(bugSigSimple::createTaxonTable(gut_sigs))
+```
+
+```{r}
+kableExtra::kbl(bugSigSimple::createTaxonTable(naso_sigs))
+```
+
+# gut microbiota analysis
+
+Look specifically at case-control comparisons
+```{r}
+healthy <- grepl(".*(healthy.*COVID|COVID.*healthy).*", gut_sigs$comparison1, ignore.case = TRUE)
+
+cc_gut_sigs1 <- gut_sigs %>%
+      filter(healthy == TRUE) 
+```
+
+## Overall frequencies of taxa increased in cases for case/control feces studies
+
+Identifying a taxon reported consistently in 8 out of 8 studies is _much_ more compelling that the FDR value here would suggest, since this taxon also passed a significance threshold in every one of those studies.
+
+```{r}
+cc_gut_sigs1_taxontable <- bugSigSimple::createTaxonTable(cc_gut_sigs1) %>% 
+  mutate(FDR =  p.adjust(p = `Binomial Test pval`, method="fdr")) %>%
+  relocate(FDR, .after = `Binomial Test pval`)
+kableExtra::kbl(cc_gut_sigs1_taxontable)
+```
+
+
+
+
+## Monte-Carlo simulation for increased abundance taxa
+
+Just for the increased cc_gut_sigs1 for now. I am inclined to skip this analysis in favor of the clustering and binomial test analysis.
+
+```{r}
+library(bugSigSimple)
+gut.sigs.increased <- filter(cc_gut_sigs1, `Abundance in Group 1` == "increased") %>% 
+  bugsigdbr::getSignatures(tax.id.type = "taxname")
+ my.siglengths.inc <- sapply(gut.sigs.increased, length)
+
+getCriticalN(gut.sigs.increased, my.siglengths.inc)
+# Compare to observed - enterococcus & streptococcus are the only taxa that equal the critical limit
+frequencySigs(gut.sigs.increased)
+```
+## Overall frequencies of taxa decreased in cases for case/control feces studies
+```{r, eval = FALSE}
+createTaxonTable(cc_gut_sigs1, n=40)
+```
+
+
+
+## nasopharyngeal microbiota analysis
+
+Look specifically at case-control comparisons
+
+```{r}
+library(dplyr)
+healthy <- grepl(".*(control.*COVID|COVID.*control).*", naso_sigs$comparison1, ignore.case = TRUE)
+
+cc_naso_sigs1 <- naso_sigs %>%
+      filter(healthy == TRUE) %>%
+  subset(Study != "Study 458")
+```
+
+# Cluster analysis
+
+Note, this EDA should really be done _before_ hypothesis testing. 
+
+First calculate pairwise overlaps for all signatures of length > 1:
+```{r}
+allsigs <- bugsigdbr::getSignatures(covid_all, tax.id.type = "taxname")
+allsigs <- allsigs[sapply(allsigs, length) > 1] #require length > 1
+dim(allsigs)
+mydists <- BugSigDBStats::calcPairwiseOverlaps(allsigs)
+dim(mydists)
+```
+
+Create a matrix of Jaccard similarities (0 for no overlap, 1 for 100% overlap)
+
+```{r}
+jmat <- BugSigDBStats::calcJaccardSimilarity(allsigs)
+```
+
+```{r, fig.width=20, fig.height=20}
+library(ComplexHeatmap)
+siglengths <- sapply(allsigs, length)
+ha <- HeatmapAnnotation(`Signature Length` = anno_barplot(siglengths))
+hr <- rowAnnotation(`Signature Length` = anno_barplot(siglengths))
+hm <- Heatmap(
+  jmat,
+  top_annotation = ha, left_annotation = hr,
+  row_names_max_width = unit(20, "cm"),
+  column_names_max_height = unit(20, "cm"),
+  row_labels = sub(".+:", "", rownames(jmat)),
+  column_labels = sub(".+:", "", colnames(jmat))
+)
+hm
+```
+
+Use this interactively to make an interactive heatmap (not evaluated in vignette). Some expanding of the default size is required to see anything. Creating a sub-heatmap, then exporting it as a table, allows in-depth identification of the subgroups.
+
+```{r, eval = FALSE}
+library(InteractiveComplexHeatmap)
+hm <- draw(hm)
+htShiny(hm)
+```
+
+```{r, fig.height=60, fig.width=20}
+hc <- hclust(as.dist(jmat))
+plot(hc)
+```
+
+This tree can be cut to show the clusters, for example. The clusters of more than 1 signature but less than ~10 signatures are most likely to be something interesting.
+
+```{r}
+clusts <- sort(cutree(hc, h = 0.05))
+lapply(unique(clusts), function(i) names(clusts)[clusts == i])
+```
+
+# Create a wide-format dataframe
+
+This would be suitable for regression analysis.
+
+```{r}
+covid_withsigs <- filter(covid_all, !is.na(covid_all$`NCBI Taxonomy IDs`))
+sigs <- bugsigdbr::getSignatures(covid_withsigs, tax.id.type = "taxname")
+cmat <- t(safe::getCmatrix(sigs, as.matrix = TRUE, min.size = 0, prune = FALSE))
+cdf <- data.frame(cmat, stringsAsFactors = FALSE, check.names = FALSE)
+cdf <- cbind(covid_withsigs, cdf)
+colnames(cdf)[1:54]
+```
+
+Note this has a number of columns that are mostly zeros, it could be filtered significantly for any regression or machine learning analysis:
+
+```{r}
+table(cdf[["[Brevibacterium] frigoritolerans"]])
+```
+
+Create another heatmap on correlations of presence/absence of taxa. This is not necessary because the previous Jaccard Index heatmap is probably better, it is just a demonstration of doing something with the taxa presence/absence directly. 
+
+```{r, fig.width=20, fig.height=20}
+sigcors <- cor(t(cmat))
+siglengths <- sapply(sigs, length)
+ha <- HeatmapAnnotation(`Signature Length` = anno_barplot(siglengths))
+hr <- rowAnnotation(`Signature Length` = anno_barplot(siglengths))
+hm <- Heatmap(
+  sigcors,
+  top_annotation = ha, left_annotation = hr,
+  row_names_max_width = unit(20, "cm"),
+  column_names_max_height = unit(20, "cm"),
+  row_labels = sub(".+:", "", rownames(sigcors)), ##removing study just to make signature names legible
+  column_labels = sub(".+:", "", colnames(sigcors))
+)
+hm
+```
+
+Use this interactively to make an interactive heatmap:
+```{r, eval = FALSE}
+library(InteractiveComplexHeatmap)
+hm <- draw(hm)
+htShiny(hm)
+```
+

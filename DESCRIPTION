@@ -1,0 +1,38 @@
+Package: bugSigSimple
+Version: 0.99.4
+Date: 2022-02-23
+Title: Simple exploratory analysis of curated microbe signatures 
+Author: Ludwig Geistlinger, Levi Waldron, Chloe Mirzayi, Fatima Zohra
+Maintainer: Ludwig Geistlinger <ludwig.geistlinger@sph.cuny.edu>
+Depends: R(>= 4.0.0)
+Imports: 
+    curatedMetagenomicData,
+    mia,
+    bugsigdbr,
+    BugSigDBStats,
+    safe,
+    ComplexHeatmap,
+    InteractiveComplexHeatmap,
+    Hotelling,
+    pscl,
+    MASS,
+    DT,
+    tidyverse,
+    dplyr,
+    tidyr,
+    purrr,
+    stringr,
+    ggplot2,
+    kableExtra
+Suggests: 
+    BiocStyle, 
+    knitr,
+    rmarkdown
+Remotes:
+    waldronlab/BugSigDBStats,
+    waldronlab/bugsigdbr
+Description: bugSigSimple provides simple exploratory analysis of curated microbe signatures from bugsigdb.org.
+License: Artistic-2.0
+VignetteBuilder: knitr
+RoxygenNote: 7.1.2
+URL: https://waldronlab.io/bugSigSimple
