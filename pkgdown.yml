@@ -1,0 +1,14 @@
+pandoc: 2.14.2
+pkgdown: 2.0.2
+pkgdown_sha: ~
+articles:
+  c-section_meconium_shaimaa: c-section_meconium_shaimaa.html
+  capstoneanalysis_clare: capstoneanalysis_clare.html
+  capstoneanalysis_fatima: capstoneanalysis_fatima.html
+  capstoneanalysis_kweku: capstoneanalysis_kweku.html
+  fieldworkanalysis_samara: fieldworkanalysis_samara.html
+last_built: 2022-03-07T21:07Z
+urls:
+  reference: http://waldronlab.io/bugSigSimple/reference
+  article: http://waldronlab.io/bugSigSimple/articles
+
