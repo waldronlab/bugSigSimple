@@ -90,7 +90,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Delivery Mode and the Meconium Microbiome</h1>
             
-            <h4 data-toc-skip class="date">07 March, 2022</h4>
+            <h4 data-toc-skip class="date">08 March, 2022</h4>
       
       
       <div class="hidden name"><code>c-section_meconium_shaimaa.Rmd</code></div>
@@ -203,12 +203,7 @@
 <span class="co">## [16] "without prenatal antibiotics usages"        </span>
 <span class="co">## [17] "without peripartum antibiotics usages"</span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">included.group0</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>
-    <span class="st">"vaginal delivery"</span>,
-    <span class="st">"vaginally born controls"</span>,
-    <span class="st">"vaginal delivery in mecomium"</span>,
-    <span class="st">"vaginally born controls"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">included.group0</span> <span class="op">&lt;-</span> <span class="st">"vaginal delivery"</span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">subset.dat</span><span class="op">$</span><span class="va">`Group 1 name`</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">##  [1] "C-section"                                      </span>
@@ -223,12 +218,7 @@
 <span class="co">## [10] "Furry pets at home yes"                         </span>
 <span class="co">## [11] "infants delivered to mothers with"</span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">included.group1</span> <span class="op">&lt;-</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"c-section"</span>,
-    <span class="st">"C-section"</span>,
-    <span class="st">"c-section delivery"</span>,
-    <span class="st">"C-section delivery"</span>, 
-    <span class="st">"cesarean premature birth"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">included.group1</span> <span class="op">&lt;-</span> <span class="st">"C-section"</span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">subset.final</span> <span class="op">&lt;-</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">subset.dat</span>, <span class="va">`Group 0 name`</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">included.group0</span> <span class="op">&amp;</span> <span class="va">`Group 1 name`</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">included.group1</span><span class="op">)</span> <span class="op"><a href="https://stringr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
