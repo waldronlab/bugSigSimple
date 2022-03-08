@@ -69,22 +69,13 @@ subset.dat <-
 
 ```{r group0}
 unique(subset.dat$`Group 0 name`)
-included.group0 <-
-  c(
-    "vaginal delivery",
-    "vaginally born controls",
-    "vaginal delivery in mecomium",
-    "vaginally born controls")
+included.group0 <- "vaginal delivery"
+    
 ```
 
 ```{r group1}
 unique(subset.dat$`Group 1 name`)
-included.group1 <-
-  c("c-section",
-    "C-section",
-    "c-section delivery",
-    "C-section delivery", 
-    "cesarean premature birth")
+included.group1 <- "C-section"
 ```
 
 
