@@ -13,6 +13,7 @@ Imports:
     mia,
     bugsigdbr,
     BugSigDBStats,
+    ggpubr,
     safe,
     ComplexHeatmap,
     InteractiveComplexHeatmap,
