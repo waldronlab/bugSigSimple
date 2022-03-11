@@ -21,7 +21,7 @@ BiocManager::install("remotes", dependencies = TRUE)
 BiocManager::install("waldronlab/bugSigSimple", dependencies = TRUE)
 ```
 
-In particular, look at:
+# Featured analyses
 
 1. [Delivery Mode and the Meconium Microbiome](https://waldronlab.io/bugSigSimple/articles/c-section_meconium_shaimaa.html) by Shaimaa Elsafoury for a basic creation of a study table and tables of the frequency of the most commonly identified taxa.
 2. [The COVID-19 associated microbiome](http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_clare.html) by Clare Grieve: for professional tables, clustered heatmaps and interactive heatmaps for identifying similar signatures, and hierarchical dendrograms.
