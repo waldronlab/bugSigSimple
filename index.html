@@ -89,12 +89,25 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
+
 <div class="section level1">
-<div class="page-header"><h1 id="bugsigsimple">bugSigSimple<a class="anchor" aria-label="anchor" href="#bugsigsimple"></a>
+<div class="page-header"><h1 id="bugsigsimple-analyses-of-bugsigdborg">bugSigSimple: analyses of bugsigdb.org<a class="anchor" aria-label="anchor" href="#bugsigsimple-analyses-of-bugsigdborg"></a>
 </h1></div>
-<p>This repo demonstrates several analyses of curated microbe signatures from <a href="https://bugsigdb.org" class="external-link uri">https://bugsigdb.org</a>. See “Articles” for existing analyses, and “Reference” for functions provided by this packages. To install this bugSigSimple and use these functions, do:</p>
+<p>This repo demonstrates several analyses of curated microbe signatures from <a href="https://bugsigdb.org" class="external-link uri">https://bugsigdb.org</a>. See “Articles” for existing analyses, and “Reference” for functions provided by this packages.</p>
+</div>
+<div class="section level1">
+<h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h1>
+<p>bugSigSimple requires Bioconductor version 3.14 or later:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"waldronlab/bugSigSimple"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st">"BiocManager"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"BiocManager"</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/version.html" class="external-link">version</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<p>To install this bugSigSimple and use these functions, do:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"remotes"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+<span class="fu">BiocManager</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BiocManager/man/install.html" class="external-link">install</a></span><span class="op">(</span><span class="st">"waldronlab/bugSigSimple"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p>In particular, look at:</p>
 <ol style="list-style-type: decimal">
 <li>
@@ -107,8 +120,11 @@
 <a href="http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_kweku.html">The Irritable Bowel Syndrome-associated Microbiome</a> by Kweku Amoo: Similar to 1 in another context.</li>
 <li>
 <a href="http://waldronlab.io/bugSigSimple/articles/fieldworkanalysis_samara.html">The Endometriosis-associated Microbiome</a> by Samara Khan: This analysis generates a hypothesis based on frequently identified genera in bugsigdb.org, then tests the hypothesis with individual-participant data from curatedMetagenomicData, using linear regression, t-test, a Poisson model, and (zero-inflated) negative binomial log-linear models.</li>
+<li>
+<a href="https://waldronlab.io/bugSigSimple/articles/healthysig.html" class="external-link">Analysis of prevalent stool genera in bugsigdb.org</a> by Haoyan Zhong: This analysis utilizes a set of signatures of prevalent species and genera found in healthy human microbiomes (<a href="https://bugsigdb.org/Study_562" class="external-link uri">https://bugsigdb.org/Study_562</a>) for overlap with other signatures in bugsigdb.org. It focuses on gut microbiome signatures, but there are signatures of healthy prevalent genera and species available for other body sites as well.</li>
 </ol>
 </div>
+
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
