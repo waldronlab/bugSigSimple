@@ -40,7 +40,8 @@ names(dat)
 ```{r}
 library(tidyverse)
 condition_of_interest <- c("irritable bowel syndrome")
-dat_condition <- subsetByCondition(dat, condition_of_interest) %>%
+efo <- bugsigdbr::getOntology("efo")
+dat_condition <- bugsigdbr::subsetByOntology(dat, column = "Condition", "irritable bowel syndrome", efo) %>%
   mutate(comparison1 = paste(`Group 0 name`, `Group 1 name`, sep = " vs "))
 ```  
   

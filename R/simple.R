@@ -14,26 +14,6 @@ names(MPA.TAX.LEVELS) <- TAX.LEVELS
 
 MPA.REGEXP <- "^[kpcofgst]__"
 
-
-#' Subset a data.frame of signatures by condition of interest
-#'
-#' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}
-#' @param condition health condition or disease of interest to subset by
-#' @param condition.column name of column of conditions in data.frame
-#'
-#' @importFrom dplyr filter %>%
-#' @return data.frame subsetted by condition
-#' @export
-#'
-#' @examples
-#' full.dat <- bugsigdbr::importBugSigDB()
-#' obese.dat <- subsetByCondition(full.dat, condition="obesity")
-
-subsetByCondition <- function(dat, condition, condition.column="Condition")
-{
-    dat %>% filter(!!as.name(condition.column) %in% condition) %>% return()
-}
-
 #' Subset a data.frame of signatures by curator
 #'
 #' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}

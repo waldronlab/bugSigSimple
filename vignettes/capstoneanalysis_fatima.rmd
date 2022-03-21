@@ -37,8 +37,12 @@ dim(dat)
 my.dat <- subsetByCurator(dat, curator="Fatima Zohra")
 table(my.dat[,"Condition"])
 condsnew <-c("bipolar disorder","unipolar depression")
+condsnew <-c("bipolar disorder")
 
-my.dat.cond<- subsetByCondition(my.dat,condsnew)
+efo <- bugsigdbr::getOntology("efo")
+dat.bpd <- bugsigdbr::subsetByOntology(dat, column = "Condition", "bipolar disorder", efo)
+dat.upd <- bugsigdbr::subsetByOntology(dat, column = "Condition", "unipolar depression", efo)
+my.dat.cond <- rbind(dat.bpd, dat.upd)
 table(my.dat.cond[,"Condition"])
 
 ```
