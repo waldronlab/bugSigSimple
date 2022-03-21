@@ -39,8 +39,8 @@ names(dat)
 
 ```{r}
 library(tidyverse)
-condsnew <- c("COVID-19")
-covid_all <- subsetByCondition(dat, condsnew) %>%
+ efo <- bugsigdbr::getOntology("efo")
+covid_all <- bugsigdbr::subsetByOntology(dat, column = "Condition", "COVID-19", efo) %>%
   mutate(studyexp = paste(Study, Experiment, sep = "_")) %>%
   mutate(
     site = recode(`Body site`,
