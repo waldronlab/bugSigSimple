@@ -90,7 +90,7 @@ diseasesig_increased2 <- purrr::map_df(diseasesig_increased, ~as.data.frame(.x),
          experiment_id= purrr::map_chr(name2_2, 2),
          signiture_id= purrr::map_chr(stringr::str_split(purrr::map_chr(name2_2, 3),'_'),1)
   ) %>%
-  select(-c("name2_1","name2_2"))
+  dplyr::select(-c("name2_1","name2_2"))
 
 #exclude studies does not return genus level abundance change
 bugall_increased <- merge(x = bugdisease_increased2, y = diseasesig_increased2, 
@@ -120,7 +120,7 @@ diseasesig_decreased2 <- purrr::map_df(diseasesig_decreased, ~as.data.frame(.x),
          experiment_id= purrr::map_chr(name2_2, 2),
          signiture_id= purrr::map_chr(stringr::str_split(purrr::map_chr(name2_2, 3),'_'),1)
   ) %>%
-  select(-c("name2_1","name2_2"))
+  dplyr::select(-c("name2_1","name2_2"))
 
 #exclude studies does not return genus level abundance change
 bugall_decreased <- merge(x = diseasesig_decreased2, y = bugdisease_decreased2, 
