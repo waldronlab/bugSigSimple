@@ -31,6 +31,7 @@ createTaxonTable <- function(dat, n=10){
     ) %>%
     mutate(across(kingdom:species, ~ str_replace(., ".__", ""))) %>%
     rename(n_signatures = Freq)
+  
   output <-
     output %>% mutate(n_signatures = sapply(output$metaphlan_name, function(x) {
       sum(grepl(
@@ -46,6 +47,7 @@ createTaxonTable <- function(dat, n=10){
     mutate(decreased_signatures = sapply(metaphlan_name, function(x)
       .countTaxon(dat = dat, x = x, direction = "decreased"))) %>%
     mutate(Taxon = gsub(".+\\|", "", output$metaphlan_name))
+  
     output %>% tidyr::separate(col="Taxon", into=c("Taxonomic Level", "Taxon Name"), sep="__") %>%
     mutate(`Taxonomic Level` = unname(dmap[`Taxonomic Level`])) %>%
     rowwise() %>%    
