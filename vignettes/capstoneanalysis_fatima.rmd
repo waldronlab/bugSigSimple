@@ -12,9 +12,12 @@ vignette: >
 ## Setup phase: Install and load relevant packages
 
 ```{r, eval=FALSE}
-install.packages("devtools")
-devtools::install_github("waldronlab/bugSigSimple")
-devtools::install_github("waldronlab/bugSigDB")
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install()
+BiocManager::version()
+BiocManager::install("remotes", dependencies = TRUE)
+BiocManager::install("waldronlab/bugSigSimple")
 ```
 
 Load bugSigSimple and bugSigDB
