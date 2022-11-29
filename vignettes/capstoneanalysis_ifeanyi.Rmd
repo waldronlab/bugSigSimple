@@ -168,8 +168,18 @@ cmat <- t(safe::getCmatrix(sigs, as.matrix = TRUE, min.size = 0, prune = FALSE))
 
 cdf <- data.frame(cmat, stringsAsFactors = FALSE, check.names = FALSE)
 cdf <- cbind(dat_withsigs, cdf)
-colnames(cdf)[1:25]
+dim(cdf)
+```
+An arbitrary example of meta-regression:
 
+```{r}
+fit <-
+  glm(
+    Prevotella ~ `Location of subjects` + `Sequencing type` + `Abundance in Group 1`,
+    family = binomial(link = "logit"),
+    data = cdf
+  )
+summary(fit)
 ```
 
 ## Create another heatmap on correlations of presence/absence of taxa.
