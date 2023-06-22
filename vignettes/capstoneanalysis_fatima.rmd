@@ -54,8 +54,8 @@ table(my.dat.cond[,"Condition"])
 
 ```{r}
 getMostFrequentTaxa(my.dat.cond,n=30)
-getMostFrequentTaxa(my.dat.cond,sig.type="increased")
-getMostFrequentTaxa(my.dat.cond,sig.type="decreased")
+getMostFrequentTaxa(my.dat.cond,, direction="UP")
+getMostFrequentTaxa(my.dat.cond,, direction="DOWN")
 ```
 
 ## Binomial test "Increased in Cases"
@@ -156,8 +156,8 @@ dim(my.dat.bd)
 table(my.dat.bd[,"Condition"])
 
 getMostFrequentTaxa(my.dat.bd, n=20)
-getMostFrequentTaxa(my.dat.bd,sig.type= "increased")
-getMostFrequentTaxa(my.dat.bd,sig.type= "decreased")
+getMostFrequentTaxa(my.dat.bd,, direction="UP")
+getMostFrequentTaxa(my.dat.bd,, direction="DOWN")
 ```
 
 ## Binomial test increased in MDD w/out MHT

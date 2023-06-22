@@ -82,7 +82,7 @@ included.group1 <- "C-section"
 ```{r}
 subset.final <-
   filter(subset.dat, `Group 0 name` %in% included.group0 & `Group 1 name` %in% included.group1) %>%
-  filter(`Body site` == "meconium") %>%
+  filter(`Body site` == "Meconium") %>%
   arrange(PMID)
 ```
 Show key characteristics of the included signatures:
@@ -122,9 +122,9 @@ getMostFrequentTaxa(subset.final, n = 50)
 ```
 
 ```{r}
-getMostFrequentTaxa(subset.final, sig.type = "increased")
+getMostFrequentTaxa(subset.final, direction="UP")
 ```
 
 ```{r}
-getMostFrequentTaxa(subset.final, sig.type = "decreased")
+getMostFrequentTaxa(subset.final, direction="DOWN"))
 ```

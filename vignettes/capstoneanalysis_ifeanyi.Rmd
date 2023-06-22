@@ -34,6 +34,8 @@ BiocManager::version()
 BiocManager::install("remotes", dependencies = TRUE)
 BiocManager::install("waldronlab/bugSigSimple")
 BiocManager::install("curatedMetagenomicData")
+devtools::install_github("waldronlab/BugSigDBStats")
+devtools::install_github("waldronlab/bugsigdbr")
 
 ```
 
@@ -53,7 +55,7 @@ suppressPackageStartupMessages({
 ## Import data from Bugsigdb database
 
 ```{r}
-dat <- bugsigdbr::importBugSigDB(version = '2e9e702', cache = FALSE) #11/27/2022
+dat <- bugsigdbr::importBugSigDB(version = 'devel', cache = FALSE) #11/27/2022
 dim(dat)
 ```
 
@@ -170,6 +172,7 @@ cdf <- data.frame(cmat, stringsAsFactors = FALSE, check.names = FALSE)
 cdf <- cbind(dat_withsigs, cdf)
 dim(cdf)
 ```
+
 An arbitrary example of meta-regression:
 
 ```{r}
