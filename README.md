@@ -29,3 +29,17 @@ BiocManager::install("waldronlab/bugSigSimple", dependencies = TRUE)
 4. [The Irritable Bowel Syndrome-associated Microbiome](http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_kweku.html) by Kweku Amoo: Similar to 1 in another context.
 5. [The Endometriosis-associated Microbiome](http://waldronlab.io/bugSigSimple/articles/fieldworkanalysis_samara.html) by Samara Khan: This analysis generates a hypothesis based on frequently identified genera in bugsigdb.org, then tests the hypothesis with individual-participant data from curatedMetagenomicData, using linear regression, t-test, a Poisson model, and (zero-inflated) negative binomial log-linear models. 
 6. [Analysis of prevalent stool genera in bugsigdb.org](https://waldronlab.io/bugSigSimple/articles/healthysig.html) by Haoyan Zhong: This analysis utilizes a set of signatures of prevalent species and genera found in healthy human microbiomes (https://bugsigdb.org/Study_562) for overlap with other signatures in bugsigdb.org. It focuses on gut microbiome signatures, but there are signatures of healthy prevalent genera and species available for other body sites as well.
+
+# bugsigdb-related links
+
+* [bugsigdb.org](https://bugsigdb.org): A Comprehensive Database of Published Microbial Signatures
+* [BugSigDB issue tracker](https://github.com/waldronlab/BugSigDB/issues): Report bugs or feature requests for bugsigdb.org
+* [BugSigDBExports](https://github.com/waldronlab/BugSigDBExports): Hourly data exports of bugsigdb.org
+* [Stable data releases](https://zenodo.org/records/6468009): Periodic manually-reviewed stable data releses on Zenodo
+* [bugsigdbr](https://bioconductor.org/packages/bugsigdbr/): R/Bioconductor access to published microbial signatures from BugSigDB
+* [Curation issues](https://github.com/waldronlab/BugSigDBcuration/issues): Report curation issues, requests studies to be added
+* [bugSigSimple](https://github.com/waldronlab/bugSigSimple): Simple analyses of BugSigDB data in R
+* [BugSigDBStats](https://github.com/waldronlab/BugSigDBStats): Statistics and trends of BugSigDB
+* [BugSigDBPaper](https://github.com/waldronlab/BugSigDBPaper): Reproduces analyses of the [Nature Biotechnology publication](https://www.nature.com/articles/s41587-023-01872-y)
+* [community-bioc Slack Team](https://slack.bioconductor.org/): Join #bugsigdb channel
+
