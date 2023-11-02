@@ -126,5 +126,5 @@ getMostFrequentTaxa(subset.final, direction="UP")
 ```
 
 ```{r}
-getMostFrequentTaxa(subset.final, direction="DOWN"))
+getMostFrequentTaxa(subset.final, direction="DOWN")
 ```
