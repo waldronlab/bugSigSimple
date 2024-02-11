@@ -39,6 +39,7 @@ library(dplyr)
 ```
 
 ```{r}
+library(bugSigSimple)
 dat <- bugsigdbr::importBugSigDB(cache= TRUE)
 dim(dat)
 names(dat)
@@ -72,8 +73,8 @@ Summary of studies and most frequent taxa increased and decreased in endometrios
 bugSigSimple::createStudyTable(subset.dat)
 
 getMostFrequentTaxa(subset.dat,n=30)
-getMostFrequentTaxa(subset.dat,sig.type="increased")
-getMostFrequentTaxa(subset.dat,sig.type="decreased")
+getMostFrequentTaxa(subset.dat,direction="UP")
+getMostFrequentTaxa(subset.dat,direction="DOWN")
 
 ```
 
@@ -222,7 +223,7 @@ fit.negbin <-
     data = df,
     control = glm.control(
       epsilon = 1e-8,
-      maxit = 25,
+      maxit = 70,
       trace = FALSE
     )
   )
