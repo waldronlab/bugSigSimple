@@ -39,6 +39,7 @@ library(dplyr)
 ```
 
 ```{r}
+library(bugSigSimple)
 dat <- bugsigdbr::importBugSigDB(cache= TRUE)
 dim(dat)
 names(dat)

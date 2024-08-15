@@ -45,6 +45,8 @@ head(healthysig50)
 
 # this code didn't work because experiment 10 has no signatures
 #prevalence threshold=0
+
+```
 bugs0<- (dat) %>%
   filter (Study=='Study 562') %>%
   filter (Experiment=="Experiment 10") %>%
@@ -52,6 +54,7 @@ bugs0<- (dat) %>%
   filter (grepl("genus",Description))
 healthysig0 <- bugsigdbr::getSignatures(bugs0)  
 head(healthysig0)
+```
 
 
 ```{r healthy70}
@@ -128,7 +131,10 @@ bugall_decreased <- merge(x = diseasesig_decreased2, y = bugdisease_decreased2,
 ```
 
 ## Calculate pairwise overlaps
+
 #this code didn't work because experiment 10 has no signatures, therefore line 130 - 180 were commented out ```{r overlap_prevelance=0}
+#```{r overlap_prevelance=0} experiment 10 has no signatures
+
 library(purrr)
 list0_decreased <- c(healthysig0, diseasesig_decreased)
 paircomp0_decreased <- calcPairwiseOverlaps(list0_decreased)
@@ -168,6 +174,7 @@ overlap0_increased<- merge(x = bugall_increased, y = paircheck0_increased, by =c
   filter(length_set2 > 4) #keep only bugsigdb studies that tested more than 4 increased or decreased
 overlap0_increased[is.na(overlap0_increased)] <- 0  
 ```
+
 
 #```{r comparison-increased_vs_decrease}
 t.test(overlap0_increased$overlap, overlap0_decreased$overlap)
