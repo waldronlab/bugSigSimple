@@ -71,11 +71,9 @@ Summary of studies and most frequent taxa increased and decreased in endometrios
 
 ```{r, messages=FALSE}
 bugSigSimple::createStudyTable(subset.dat)
-
-getMostFrequentTaxa(subset.dat,n=30)
-getMostFrequentTaxa(subset.dat,direction="UP")
-getMostFrequentTaxa(subset.dat,direction="DOWN")
-
+getMostFrequentTaxa(subset.dat, n=30)
+getMostFrequentTaxa(subset.dat, direction="UP")
+getMostFrequentTaxa(subset.dat, direction="DOWN")
 ```
 
 # Excluding feces samples

@@ -43,8 +43,10 @@ healthysig50 <- bugsigdbr::getSignatures(bugs50)
 head(healthysig50)
 ```
 
-```#{r healthy0}
-prevalence threshold=0
+# this code didn't work because experiment 10 has no signatures
+#prevalence threshold=0
+
+```
 bugs0<- (dat) %>%
   filter (Study=='Study 562') %>%
   filter (Experiment=="Experiment 10") %>%
@@ -53,6 +55,7 @@ bugs0<- (dat) %>%
 healthysig0 <- bugsigdbr::getSignatures(bugs0)  
 head(healthysig0)
 ```
+
 
 ```{r healthy70}
 #prevalence threshold=70%
@@ -128,7 +131,10 @@ bugall_decreased <- merge(x = diseasesig_decreased2, y = bugdisease_decreased2,
 ```
 
 ## Calculate pairwise overlaps
+
+#this code didn't work because experiment 10 has no signatures, therefore line 130 - 180 were commented out ```{r overlap_prevelance=0}
 #```{r overlap_prevelance=0} experiment 10 has no signatures
+
 library(purrr)
 list0_decreased <- c(healthysig0, diseasesig_decreased)
 paircomp0_decreased <- calcPairwiseOverlaps(list0_decreased)
@@ -154,7 +160,7 @@ paircheck0_increased <- paircomp0_increased %>%
           signature_id= purrr::map_chr(stringr::str_split(purrr::map_chr(name2_2, 3),'_'),1)
         ) 
 ```
-## merge jacard scores with disease study data
+# merge jacard scores with disease study data
 The issue why I need to merge overlap score back with all disease budsigdb studies is that calcPairwiseOverlaps drops all 0 intersect pairs
 
 #```{r merge overlap scores with all disease study data}
@@ -169,7 +175,8 @@ overlap0_increased<- merge(x = bugall_increased, y = paircheck0_increased, by =c
 overlap0_increased[is.na(overlap0_increased)] <- 0  
 ```
 
-```#{r comparison-increased_vs_decrease}
+
+#```{r comparison-increased_vs_decrease}
 t.test(overlap0_increased$overlap, overlap0_decreased$overlap)
 wilcox.test(overlap0_increased$overlap, overlap0_decreased$overlap)
 
@@ -178,6 +185,7 @@ p <- rbind(overlap0_increased,overlap0_decreased) %>%
     geom_histogram( color="#e9ecef", alpha=0.6, position = 'dodge',bins=20) 
 p
 ```
+
 
 ```{r overlap_prevelance=50}
 library(purrr)
