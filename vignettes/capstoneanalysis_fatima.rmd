@@ -39,12 +39,12 @@ dim(dat)
 ```{r}
 my.dat <- subsetByCurator(dat, curator="Fatima Zohra")
 table(my.dat[,"Condition"])
-condsnew <-c("bipolar disorder","unipolar depression")
+condsnew <-c("bipolar disorder","major depressive disorder")
 condsnew <-c("bipolar disorder")
 
 efo <- bugsigdbr::getOntology("efo")
 dat.bpd <- bugsigdbr::subsetByOntology(dat, column = "Condition", "bipolar disorder", efo)
-dat.upd <- bugsigdbr::subsetByOntology(dat, column = "Condition", "unipolar depression", efo)
+dat.upd <- bugsigdbr::subsetByOntology(dat, column = "Condition", "major depressive disorder", efo)
 my.dat.cond <- rbind(dat.bpd, dat.upd)
 table(my.dat.cond[,"Condition"])
 
@@ -104,9 +104,9 @@ my.dat.mdd <- my.dat.cond[!ind,]
 dim(my.dat.mdd)
 table(my.dat.mdd[,"Condition"])
 
-getMostFrequentTaxa(my.dat.mdd, n=20)
-getMostFrequentTaxa(my.dat.mdd,sig.type= "increased")
-getMostFrequentTaxa(my.dat.mdd,sig.type= "decreased")
+getMostFrequentTaxa(my.dat.mdd, n= 20)
+getMostFrequentTaxa(my.dat.mdd,, "UP")
+getMostFrequentTaxa(my.dat.mdd,, "DOWN")
 ```
 
 ## Binomial test "Increased in bipolar"

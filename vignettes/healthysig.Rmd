@@ -175,8 +175,8 @@ overlap0_increased<- merge(x = bugall_increased, y = paircheck0_increased, by =c
 overlap0_increased[is.na(overlap0_increased)] <- 0  
 ```
 
-
 #```{r comparison-increased_vs_decrease}
+```
 t.test(overlap0_increased$overlap, overlap0_decreased$overlap)
 wilcox.test(overlap0_increased$overlap, overlap0_decreased$overlap)
 

@@ -44,17 +44,22 @@ covid_all <- bugsigdbr::subsetByOntology(dat, column = "Condition", "COVID-19", 
   mutate(studyexp = paste(Study, Experiment, sep = "_")) %>%
   mutate(
     site = recode(`Body site`,
-      "feces" = "Gut",
-      "rectal" = "Gut",
-      "nasopharynx" = "aURT",
-      "oropharynx" = "aURT",
-      "nasopharynx,oropharynx" = "aURT",
-      "tongue" = "aURT"
+      "Feces" = "Gut",
+      "Rectum" = "Gut",
+      "Nasopharynx" = "aURT",
+      "Oropharynx" = "aURT",
+      "Nasopharynx,Oropharynx" = "aURT",
+      "Nasal cavity" = "aURT",
+      "Surface of tongue" = "aURT",
+      "Nasopharynx,Throat" = "aURT",
+      "Throat" = "aURT",
+      "Tongue" = "aURT",
+      "Lung" = "LRT",
+      "Sputum" = "LRT"
     )
   ) %>%
   mutate(comparison1 = paste(`Group 0 name`, `Group 1 name`, sep = " vs "))
 ```  
-  
 
 ## Table of studies
 
@@ -73,6 +78,10 @@ gut_sigs <- filter(covid_all,
 
 naso_sigs <- filter(covid_all, 
                            site == "aURT") %>%
+    drop_na(Source)
+  
+resp_sigs <- filter(covid_all, 
+                           site == "LRT") %>%
   drop_na(Source)
 ```
 
@@ -86,6 +95,10 @@ kableExtra::kbl(bugSigSimple::createTaxonTable(gut_sigs))
 
 ```{r}
 kableExtra::kbl(bugSigSimple::createTaxonTable(naso_sigs))
+```
+
+```{r}
+kableExtra::kbl(bugSigSimple::createTaxonTable(resp_sigs))
 ```
 
 # gut microbiota analysis
