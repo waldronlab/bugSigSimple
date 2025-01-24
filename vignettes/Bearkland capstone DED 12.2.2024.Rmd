@@ -292,9 +292,7 @@ draw(hm,
      annotation_legend_side = "right")
 dev.off()
 
-
-
-To better visualize
+```
 
 ```{r}
 library(InteractiveComplexHeatmap)
