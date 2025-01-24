@@ -192,7 +192,7 @@ To obtain signature lengths displayed in a bar graph and import to a word docume
 # Install and load necessary packages
 
 library(ggplot2)
-library(officer)
+
 
 # Create the bar graph
 # Calculate the lengths of signatures
@@ -213,15 +213,6 @@ print(plot)
 # Save the plot to a file
 ggsave("bar_graph.png", plot)
 
-# Create a new Word document
-doc <- read_docx()
-
-# Add the image to the document
-doc <- doc %>%
-  body_add_img(src = "bar_graph.png", width = 6, height = 4, style = "centered")
-
-# Save the document
-print(doc, target = "bar_graph.docx")
 
 ```
 
@@ -301,16 +292,7 @@ draw(hm,
      annotation_legend_side = "right")
 dev.off()
 
-# Create a new Word document
-doc <- read_docx()
 
-# Add the image to the document
-doc <- doc %>%
-  body_add_img(src = "heatmap.png", width = 6, height = 4, style = "centered")
-
-# Save the document
-print(doc, target = "heatmap.docx")
-```
 
 To better visualize
 
@@ -336,15 +318,6 @@ png("cluster_map.png", width = 12, height = 8, units = "in", res = 300)
 plot(hc, main = "Hierarchical Cluster Map of Signatures", xlab = "", sub = "", cex = 0.6)
 dev.off()
 
-# Create a new Word document
-doc <- read_docx()
-
-# Add the image to the document
-doc <- doc %>%
-  body_add_img(src = "cluster_map.png", width = 6, height = 4, style = "centered")
-
-# Save the document
-print(doc, target = "cluster_map.docx")
 
 ```
 
