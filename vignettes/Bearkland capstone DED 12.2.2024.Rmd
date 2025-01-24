@@ -303,7 +303,6 @@ htShiny(hm)
 ```{r}
 library(ComplexHeatmap)
 library(grid)
-library(officer)
 
 # Assuming jmat and other variables are already defined as before
 
