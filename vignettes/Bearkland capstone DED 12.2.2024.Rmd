@@ -81,7 +81,7 @@ dim(subset.dat)
 Confirm all studies included
 
 ```{r}
-View(subset.dat)
+subset.dat
 ```
 
 Examine group 0 names
@@ -101,14 +101,14 @@ To omit the double comparison in Study 856 by removing the ANOSIM analysis
 ```{r}
 subset.dat <- subset.dat %>%
   filter(`Statistical test` != "ANOSIM")
-view(subset.dat)
+subset.dat
 ```
 
 Final subset to include only those Group 0 names of interest (controls with no DED) and only those Group 1 names of interest (some variation on DED)
 
 ```{r}
 subset.final <- subset.dat[which(subset.dat$`Group 0 name` %in% c("Healthy Control", "Control", "control", "healthy controls", "Normal Control (NC)","Healthy control", "Healthy Controls","Normal healthy (NDM) children", "Healthy controls")& subset.dat$`Group 1 name`%in% c("Meibomian Gland Dysfunction + Lacrimal Dysfunction", "Meibomian Gland Dysfunction", "Dry Eye","ADDE", "DED patients", "MGD", "Meibomian Gland Dysfunction (MGD)", "Meibomian Gland Dysfunction (MGD) DED", "Meibomian Gland Dysfunction (MGD) Groups", "Mixed DED", "Sjogrens Syndrome Dry Eye (SSDE)", "Non Sjogrens Syndrome Dry Eye (NSSDE)", "Dry Eye Disease patients", "Sjogren's patients with Dry Eye Disease", "Dry Eye Disease patients without Sjogrens", "Diabetic children with Dry Eye Disease (DM-DE)", "Mild Dry Eye", "Mild and Moderate to Severe Dry Eye")),]
-View(subset.final)
+subset.final
 ```
 
 ```{r}
@@ -168,14 +168,14 @@ mostfreqdec<-bugSigSimple::getMostFrequentTaxa(subset.final, n=1000,sig.type = "
 ```
 
 ```{r}
-View(mostfreqdec)
+mostfreqdec
 ```
 
 Top 1000 taxa increased in relation to the control
 
 ```{r}
 mostfreqinc<-bugSigSimple::getMostFrequentTaxa(subset.final,n=1000, sig.type = "increased")
-View(mostfreqinc)
+mostfreqinc
 ```
 
 To obtain signatures
