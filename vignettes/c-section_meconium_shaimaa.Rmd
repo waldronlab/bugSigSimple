@@ -86,8 +86,14 @@ subset.final <-
   arrange(PMID)
 ```
 Show key characteristics of the included signatures:
+
 ```{r}
-select(subset.final, all_of(c("PMID", "Source", "Group 0 name", "Group 1 name", "Abundance in Group 1")))
+detach("package:dplyr", unload = TRUE)
+library(dplyr)
+```
+
+```{r}
+select(subset.final, "PMID", "Source", "Group 0 name", "Group 1 name", "Abundance in Group 1")
 ```
 
 Are any studies missing?

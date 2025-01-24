@@ -221,11 +221,12 @@ fit.negbin <-
     data = df,
     control = glm.control(
       epsilon = 1e-8,
-      maxit = 70,
+      maxit = 50,
       trace = FALSE
     )
   )
-summary(fit.negbin)
+library(broom)
+tidy(fit.negbin)
 
 fit.ZInegbin <- zeroinfl(Streptococcus ~ Lactobacillus + age + BMI | 1,
                 data = df,

@@ -57,7 +57,7 @@ bugSigSimple::createStudyTable(dat_condition)
 
 ```{r}
 gut_sigs <- filter(dat_condition,
-                   `Body site` %in% c("feces,mucosa of small intestine", "feces"))
+                   `Body site` %in% c("Feces, Mucosa of small intestine", "Feces"))
 ```
 
 In this table, the Binomial Test p-value corresponds to the null hypothesis
