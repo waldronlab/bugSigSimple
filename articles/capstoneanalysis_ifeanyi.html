@@ -173,7 +173,7 @@ as a 0/1 binary variable in a regression analysis.</p></li>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>version <span class="op">=</span> <span class="st">'devel'</span>, cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co">#11/27/2022</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 7115   50</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 7343   50</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="subset-signatures-by-curator-and-conditions">Subset Signatures by Curator and Conditions<a class="anchor" aria-label="anchor" href="#subset-signatures-by-curator-and-conditions"></a>
@@ -186,19 +186,17 @@ as a 0/1 binary variable in a regression analysis.</p></li>
 <span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">dat.sub</span><span class="op">[</span>,<span class="st">"Condition"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##                                ethnic group </span></span>
-<span><span class="co">##                                          30 </span></span>
-<span><span class="co">##     ethnic group,gut microbiome measurement </span></span>
-<span><span class="co">##                                           1 </span></span>
-<span><span class="co">## ethnic group,place of residence measurement </span></span>
+<span><span class="co">##                                          31 </span></span>
+<span><span class="co">## place of residence measurement,ethnic group </span></span>
 <span><span class="co">##                                           2 </span></span>
-<span><span class="co">##           ethnic group,socioeconomic status </span></span>
+<span><span class="co">##                                 risk factor </span></span>
 <span><span class="co">##                                           2 </span></span>
-<span><span class="co">##                  gut microbiome measurement </span></span>
-<span><span class="co">##                                           4 </span></span>
-<span><span class="co">##         seasonal gut microbiome measurement </span></span>
+<span><span class="co">##                               sampling time </span></span>
 <span><span class="co">##                                           2 </span></span>
 <span><span class="co">##                        socioeconomic status </span></span>
-<span><span class="co">##                                          23</span></span></code></pre>
+<span><span class="co">##                                          25 </span></span>
+<span><span class="co">##           socioeconomic status,ethnic group </span></span>
+<span><span class="co">##                                           2</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="table-of-studies">Table of studies<a class="anchor" aria-label="anchor" href="#table-of-studies"></a>
@@ -231,7 +229,7 @@ Study Design
 Amaruddin 2020
 </td>
 <td style="text-align:left;">
-gut microbiome measurement
+socioeconomic status
 </td>
 <td style="text-align:right;">
 74
@@ -265,7 +263,7 @@ cross-sectional observational, not case-control
 Balakrishnan 2021
 </td>
 <td style="text-align:left;">
-ethnic group,gut microbiome measurement
+ethnic group
 </td>
 <td style="text-align:right;">
 30
@@ -350,7 +348,7 @@ cross-sectional observational, not case-control
 De 2010
 </td>
 <td style="text-align:left;">
-ethnic group,place of residence measurement
+place of residence measurement,ethnic group
 </td>
 <td style="text-align:right;">
 14
@@ -435,7 +433,7 @@ cross-sectional observational, not case-control
 Kortekangas 2020
 </td>
 <td style="text-align:left;">
-seasonal gut microbiome measurement
+sampling time
 </td>
 <td style="text-align:right;">
 NA
@@ -469,7 +467,7 @@ cross-sectional observational, not case-control
 Levin 2016
 </td>
 <td style="text-align:left;">
-gut microbiome measurement
+risk factor
 </td>
 <td style="text-align:right;">
 168
@@ -503,7 +501,7 @@ cross-sectional observational, not case-control
 Lin 2013
 </td>
 <td style="text-align:left;">
-ethnic group,socioeconomic status
+socioeconomic status,ethnic group
 </td>
 <td style="text-align:right;">
 6
@@ -592,7 +590,7 @@ cross-sectional observational, not case-control
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat.sub_SES</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat.sub</span>, <span class="va">dat.sub</span><span class="op">$</span><span class="va">Condition</span> <span class="op">==</span> <span class="st">"socioeconomic status"</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat.sub_SES</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 23 50</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 25 50</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">dat.sub_SES</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -648,6 +646,147 @@ metaphlan_name
 <tbody>
 <tr>
 <td style="text-align:left;">
+Prevotella
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.37
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
+Bacteroidota
+</td>
+<td style="text-align:left;">
+Bacteroidia
+</td>
+<td style="text-align:left;">
+Bacteroidales
+</td>
+<td style="text-align:left;">
+Prevotellaceae
+</td>
+<td style="text-align:left;">
+Prevotella
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Eubacterium
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.63
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
+Bacillota
+</td>
+<td style="text-align:left;">
+Clostridia
+</td>
+<td style="text-align:left;">
+Eubacteriales
+</td>
+<td style="text-align:left;">
+Eubacteriaceae
+</td>
+<td style="text-align:left;">
+Eubacterium
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Eubacteriaceae|g__Eubacterium
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ruminococcus
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.63
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
+Bacillota
+</td>
+<td style="text-align:left;">
+Clostridia
+</td>
+<td style="text-align:left;">
+Eubacteriales
+</td>
+<td style="text-align:left;">
+Oscillospiraceae
+</td>
+<td style="text-align:left;">
+Ruminococcus
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -669,75 +808,28 @@ phylum
 Bacteria
 </td>
 <td style="text-align:left;">
-Bacteroidota
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-16
-</td>
-<td style="text-align:left;">
-k__Bacteria|p__Bacteroidota
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Prevotella
-</td>
-<td style="text-align:left;">
-genus
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-0.63
-</td>
-<td style="text-align:left;">
-Bacteria
+Pseudomonadati
 </td>
 <td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
-Bacteroidia
+NA
 </td>
 <td style="text-align:left;">
-Bacteroidales
+NA
 </td>
 <td style="text-align:left;">
-Prevotellaceae
-</td>
-<td style="text-align:left;">
-Prevotella
+NA
 </td>
 <td style="text-align:left;">
 NA
 </td>
 <td style="text-align:right;">
-4
+17
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota
 </td>
 </tr>
 <tr>
@@ -763,6 +855,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -777,22 +872,19 @@ Rikenellaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 5
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Eubacterium
+Lachnospiraceae
 </td>
 <td style="text-align:left;">
-genus
+family
 </td>
 <td style="text-align:right;">
 3
@@ -810,51 +902,7 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
-Bacillota
-</td>
-<td style="text-align:left;">
-Clostridia
-</td>
-<td style="text-align:left;">
-Eubacteriales
-</td>
-<td style="text-align:left;">
-Eubacteriaceae
-</td>
-<td style="text-align:left;">
-Eubacterium
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Eubacteriaceae|g__Eubacterium
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ruminococcus
-</td>
-<td style="text-align:left;">
-genus
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-1.00
-</td>
-<td style="text-align:left;">
-Bacteria
+Bacillati
 </td>
 <td style="text-align:left;">
 Bacillota
@@ -863,22 +911,19 @@ Bacillota
 Clostridia
 </td>
 <td style="text-align:left;">
-Eubacteriales
+Lachnospirales
 </td>
 <td style="text-align:left;">
-Oscillospiraceae
-</td>
-<td style="text-align:left;">
-Ruminococcus
+Lachnospiraceae
 </td>
 <td style="text-align:left;">
 NA
 </td>
 <td style="text-align:right;">
-3
+6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae
 </td>
 </tr>
 <tr>
@@ -902,6 +947,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Pseudomonadati
 </td>
 <td style="text-align:left;">
 Bacteroidota
@@ -918,14 +966,11 @@ Bacteroidaceae
 <td style="text-align:left;">
 Bacteroides
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 4
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides
 </td>
 </tr>
 <tr>
@@ -977,10 +1022,10 @@ k__Bacteria|c__Deltaproteobacteria
 </tr>
 <tr>
 <td style="text-align:left;">
-Bacillota
+Bifidobacterium
 </td>
 <td style="text-align:left;">
-phylum
+genus
 </td>
 <td style="text-align:right;">
 2
@@ -998,36 +1043,36 @@ phylum
 Bacteria
 </td>
 <td style="text-align:left;">
-Bacillota
+Bacillati
 </td>
 <td style="text-align:left;">
-NA
+Actinomycetota
 </td>
 <td style="text-align:left;">
-NA
+Actinomycetes
 </td>
 <td style="text-align:left;">
-NA
+Bifidobacteriales
 </td>
 <td style="text-align:left;">
-NA
+Bifidobacteriaceae
 </td>
 <td style="text-align:left;">
-NA
+Bifidobacterium
 </td>
 <td style="text-align:right;">
-18
+3
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Eubacteriales
+Atopobiaceae
 </td>
 <td style="text-align:left;">
-order
+family
 </td>
 <td style="text-align:right;">
 2
@@ -1045,76 +1090,28 @@ order
 Bacteria
 </td>
 <td style="text-align:left;">
-Bacillota
+Bacillati
 </td>
 <td style="text-align:left;">
-Clostridia
+Actinomycetota
 </td>
 <td style="text-align:left;">
-Eubacteriales
+Coriobacteriia
+</td>
+<td style="text-align:left;">
+Coriobacteriales
+</td>
+<td style="text-align:left;">
+Atopobiaceae
 </td>
 <td style="text-align:left;">
 NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-12
-</td>
-<td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Clostridium perfringens
-</td>
-<td style="text-align:left;">
-species
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0.50
-</td>
-<td style="text-align:left;">
-Bacteria
-</td>
-<td style="text-align:left;">
-Bacillota
-</td>
-<td style="text-align:left;">
-Clostridia
-</td>
-<td style="text-align:left;">
-Eubacteriales
-</td>
-<td style="text-align:left;">
-Clostridiaceae
-</td>
-<td style="text-align:left;">
-Clostridium
-</td>
-<td style="text-align:left;">
-Clostridium perfringens
 </td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium|s__Clostridium
-perfringens
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae
 </td>
 </tr>
 </tbody>
@@ -1126,7 +1123,7 @@ perfringens
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat.sub_ethnic</span> <span class="op">&lt;-</span> <span class="va">dat.sub</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat.sub</span><span class="op">$</span><span class="va">Condition</span> <span class="op">==</span> <span class="st">"ethnic group"</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat.sub_ethnic</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 30 50</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 31 50</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">dat.sub_ethnic</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1203,6 +1200,9 @@ order
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -1217,14 +1217,11 @@ NA
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-9
+10
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales
 </td>
 </tr>
 <tr>
@@ -1250,6 +1247,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1264,14 +1264,11 @@ Coriobacteriaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-6
+7
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae
 </td>
 </tr>
 <tr>
@@ -1297,6 +1294,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -1311,14 +1311,11 @@ Christensenellaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Christensenellales|f__Christensenellaceae
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Christensenellales|f__Christensenellaceae
 </td>
 </tr>
 <tr>
@@ -1342,6 +1339,9 @@ family
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Bacillota
@@ -1358,14 +1358,11 @@ Peptococcaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Peptococcaceae
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Peptococcaceae
 </td>
 </tr>
 <tr>
@@ -1389,6 +1386,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Bacillota
@@ -1405,14 +1405,11 @@ Veillonellaceae
 <td style="text-align:left;">
 Veillonella
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella
+k__Bacteria|k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella
 </td>
 </tr>
 <tr>
@@ -1438,6 +1435,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -1452,14 +1452,11 @@ Odoribacteraceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae
 </td>
 </tr>
 <tr>
@@ -1485,6 +1482,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -1499,14 +1499,11 @@ Odoribacteraceae
 <td style="text-align:left;">
 Odoribacter
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter
 </td>
 </tr>
 <tr>
@@ -1532,6 +1529,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -1546,14 +1546,11 @@ Rikenellaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
 </td>
 </tr>
 <tr>
@@ -1577,6 +1574,9 @@ family
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Pseudomonadati
 </td>
 <td style="text-align:left;">
 Lentisphaerota
@@ -1593,14 +1593,11 @@ Victivallaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Lentisphaerota|c__Lentisphaeria|o__Victivallales|f__Victivallaceae
+k__Bacteria|k__Pseudomonadati|p__Lentisphaerota|c__Lentisphaeria|o__Victivallales|f__Victivallaceae
 </td>
 </tr>
 <tr>
@@ -1626,6 +1623,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Verrucomicrobiota
 </td>
 <td style="text-align:left;">
@@ -1640,14 +1640,11 @@ Verrucomicrobiaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Verrucomicrobiota|c__Verrucomicrobiia|o__Verrucomicrobiales|f__Verrucomicrobiaceae
+k__Bacteria|k__Pseudomonadati|p__Verrucomicrobiota|c__Verrucomicrobiia|o__Verrucomicrobiales|f__Verrucomicrobiaceae
 </td>
 </tr>
 </tbody>
@@ -1661,6 +1658,8 @@ combined.<a class="anchor" aria-label="anchor" href="#taxon-frequency-table-by-a
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">dat.sub</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: Expected 7 pieces. Additional pieces discarded in 11 rows [19, 22, 23, 24, 28,</span></span>
+<span><span class="co">## 29, 34, 35, 36, 37, 44].</span></span></code></pre>
 <table class="table table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
@@ -1733,6 +1732,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -1747,14 +1749,11 @@ Prevotellaceae
 <td style="text-align:left;">
 Prevotella
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 13
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
 </td>
 </tr>
 <tr>
@@ -1780,6 +1779,9 @@ order
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -1794,14 +1796,11 @@ NA
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 32
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales
 </td>
 </tr>
 <tr>
@@ -1827,6 +1826,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -1841,14 +1843,11 @@ Rikenellaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 12
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
 </td>
 </tr>
 <tr>
@@ -1874,6 +1873,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -1888,14 +1890,11 @@ Bacteroidaceae
 <td style="text-align:left;">
 Bacteroides
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 14
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides
 </td>
 </tr>
 <tr>
@@ -1921,6 +1920,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1935,14 +1937,11 @@ Coriobacteriaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 9
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae
 </td>
 </tr>
 <tr>
@@ -1968,10 +1967,10 @@ phylum
 Bacteria
 </td>
 <td style="text-align:left;">
-Bacillota
+Bacillati
 </td>
 <td style="text-align:left;">
-NA
+Bacillota
 </td>
 <td style="text-align:left;">
 NA
@@ -1989,7 +1988,7 @@ NA
 47
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota
+k__Bacteria|k__Bacillati|p__Bacillota
 </td>
 </tr>
 <tr>
@@ -2015,6 +2014,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2029,14 +2031,11 @@ Oscillospiraceae
 <td style="text-align:left;">
 Ruminococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 7
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
 </td>
 </tr>
 <tr>
@@ -2062,6 +2061,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2076,14 +2078,11 @@ Veillonellaceae
 <td style="text-align:left;">
 Veillonella
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 7
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella
+k__Bacteria|k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella
 </td>
 </tr>
 <tr>
@@ -2109,6 +2108,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -2123,14 +2125,11 @@ Odoribacteraceae
 <td style="text-align:left;">
 Odoribacter
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 7
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter
 </td>
 </tr>
 <tr>
@@ -2156,6 +2155,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2170,14 +2172,11 @@ Christensenellaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Christensenellales|f__Christensenellaceae
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Christensenellales|f__Christensenellaceae
 </td>
 </tr>
 <tr>
@@ -2201,6 +2200,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Bacillota
@@ -2217,14 +2219,11 @@ Clostridiaceae
 <td style="text-align:left;">
 Clostridium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 8
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium
 </td>
 </tr>
 <tr>
@@ -2250,6 +2249,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2264,14 +2266,11 @@ Eubacteriaceae
 <td style="text-align:left;">
 Eubacterium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Eubacteriaceae|g__Eubacterium
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Eubacteriaceae|g__Eubacterium
 </td>
 </tr>
 <tr>
@@ -2297,6 +2296,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2311,14 +2313,11 @@ Peptococcaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Peptococcaceae
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Peptococcaceae
 </td>
 </tr>
 <tr>
@@ -2342,6 +2341,9 @@ family
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Pseudomonadati
 </td>
 <td style="text-align:left;">
 Bacteroidota
@@ -2358,14 +2360,11 @@ Odoribacteraceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 7
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae
 </td>
 </tr>
 <tr>
@@ -2391,6 +2390,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Lentisphaerota
 </td>
 <td style="text-align:left;">
@@ -2405,14 +2407,11 @@ Victivallaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Lentisphaerota|c__Lentisphaeria|o__Victivallales|f__Victivallaceae
+k__Bacteria|k__Pseudomonadati|p__Lentisphaerota|c__Lentisphaeria|o__Victivallales|f__Victivallaceae
 </td>
 </tr>
 <tr>
@@ -2438,6 +2437,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Verrucomicrobiota
 </td>
 <td style="text-align:left;">
@@ -2452,14 +2454,11 @@ Verrucomicrobiaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 6
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Verrucomicrobiota|c__Verrucomicrobiia|o__Verrucomicrobiales|f__Verrucomicrobiaceae
+k__Bacteria|k__Pseudomonadati|p__Verrucomicrobiota|c__Verrucomicrobiia|o__Verrucomicrobiales|f__Verrucomicrobiaceae
 </td>
 </tr>
 <tr>
@@ -2485,10 +2484,10 @@ phylum
 Bacteria
 </td>
 <td style="text-align:left;">
-Bacteroidota
+Pseudomonadati
 </td>
 <td style="text-align:left;">
-NA
+Bacteroidota
 </td>
 <td style="text-align:left;">
 NA
@@ -2506,7 +2505,7 @@ NA
 41
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota
 </td>
 </tr>
 <tr>
@@ -2532,6 +2531,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -2546,14 +2548,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 8
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
 </td>
 </tr>
 <tr>
@@ -2579,6 +2578,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -2593,14 +2595,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-Bifidobacterium longum
-</td>
 <td style="text-align:right;">
 4
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 longum
 </td>
 </tr>
@@ -2627,6 +2626,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2641,14 +2643,11 @@ Oscillospiraceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 19
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae
 </td>
 </tr>
 <tr>
@@ -2674,6 +2673,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2688,14 +2690,11 @@ Oscillospiraceae
 <td style="text-align:left;">
 Faecalibacterium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 7
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium
 </td>
 </tr>
 <tr>
@@ -2721,6 +2720,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2735,14 +2737,11 @@ Oscillospiraceae
 <td style="text-align:left;">
 Faecalibacterium
 </td>
-<td style="text-align:left;">
-Faecalibacterium prausnitzii
-</td>
 <td style="text-align:right;">
 4
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium|s__Faecalibacterium
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium|s__Faecalibacterium
 prausnitzii
 </td>
 </tr>
@@ -2769,6 +2768,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -2783,14 +2785,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-Bifidobacterium adolescentis
-</td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 adolescentis
 </td>
 </tr>
@@ -2817,6 +2816,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -2831,14 +2833,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-Bifidobacterium bifidum
-</td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 bifidum
 </td>
 </tr>
@@ -2865,6 +2864,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2879,14 +2881,11 @@ Lactobacillaceae
 <td style="text-align:left;">
 Lactobacillus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 4
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus
+k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus
 </td>
 </tr>
 <tr>
@@ -2912,6 +2911,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2926,14 +2928,11 @@ Lachnospiraceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 12
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae
 </td>
 </tr>
 <tr>
@@ -2959,6 +2958,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2973,14 +2975,11 @@ Lachnospiraceae
 <td style="text-align:left;">
 Blautia
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 4
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Blautia
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Blautia
 </td>
 </tr>
 <tr>
@@ -3006,6 +3005,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -3020,14 +3022,11 @@ Bacteroidaceae
 <td style="text-align:left;">
 Bacteroides
 </td>
-<td style="text-align:left;">
-Bacteroides fragilis
-</td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides
 fragilis
 </td>
 </tr>
@@ -3054,6 +3053,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -3068,14 +3070,11 @@ Bacteroidaceae
 <td style="text-align:left;">
 Bacteroides
 </td>
-<td style="text-align:left;">
-Bacteroides thetaiotaomicron
-</td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides
 thetaiotaomicron
 </td>
 </tr>
@@ -3102,6 +3101,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -3116,14 +3118,11 @@ Tannerellaceae
 <td style="text-align:left;">
 Parabacteroides
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Parabacteroides
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Parabacteroides
 </td>
 </tr>
 <tr>
@@ -3149,6 +3148,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -3163,14 +3165,11 @@ Enterobacteriaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 7
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae
+k__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae
 </td>
 </tr>
 <tr>
@@ -3243,10 +3242,10 @@ phylum
 Bacteria
 </td>
 <td style="text-align:left;">
-Actinomycetota
+Bacillati
 </td>
 <td style="text-align:left;">
-NA
+Actinomycetota
 </td>
 <td style="text-align:left;">
 NA
@@ -3264,7 +3263,7 @@ NA
 21
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota
+k__Bacteria|k__Bacillati|p__Actinomycetota
 </td>
 </tr>
 <tr>
@@ -3290,6 +3289,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -3304,14 +3306,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-Bifidobacterium breve
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 breve
 </td>
 </tr>
@@ -3338,6 +3337,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -3352,14 +3354,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-Bifidobacterium catenulatum
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 catenulatum
 </td>
 </tr>
@@ -3386,6 +3385,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -3400,14 +3402,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-Bifidobacterium pseudocatenulatum
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 pseudocatenulatum
 </td>
 </tr>
@@ -3434,6 +3433,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -3448,14 +3450,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-Bifidobacterium ruminantium
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 ruminantium
 </td>
 </tr>
@@ -3482,6 +3481,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -3496,14 +3498,11 @@ Atopobiaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae
 </td>
 </tr>
 <tr>
@@ -3527,6 +3526,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Actinomycetota
@@ -3543,14 +3545,11 @@ Eggerthellaceae
 <td style="text-align:left;">
 Slackia
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Coriobacteriia|o__Eggerthellales|f__Eggerthellaceae|g__Slackia
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Eggerthellales|f__Eggerthellaceae|g__Slackia
 </td>
 </tr>
 <tr>
@@ -3576,6 +3575,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -3590,14 +3592,11 @@ Staphylococcaceae
 <td style="text-align:left;">
 Staphylococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Bacillales|f__Staphylococcaceae|g__Staphylococcus
+k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Bacillales|f__Staphylococcaceae|g__Staphylococcus
 </td>
 </tr>
 <tr>
@@ -3623,6 +3622,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -3637,14 +3639,11 @@ Enterococcaceae
 <td style="text-align:left;">
 Enterococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
+k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
 </td>
 </tr>
 <tr>
@@ -3670,6 +3669,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -3684,14 +3686,11 @@ Streptococcaceae
 <td style="text-align:left;">
 Lactococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Lactococcus
+k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Lactococcus
 </td>
 </tr>
 <tr>
@@ -3717,6 +3716,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -3731,14 +3733,11 @@ Clostridiaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 11
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae
 </td>
 </tr>
 <tr>
@@ -3764,6 +3763,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -3778,14 +3780,11 @@ Clostridiaceae
 <td style="text-align:left;">
 Clostridium
 </td>
-<td style="text-align:left;">
-Clostridium perfringens
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium|s__Clostridium
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium|s__Clostridium
 perfringens
 </td>
 </tr>
@@ -3812,6 +3811,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -3826,14 +3828,11 @@ Oscillospiraceae
 <td style="text-align:left;">
 Anaerotruncus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Anaerotruncus
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Anaerotruncus
 </td>
 </tr>
 <tr>
@@ -3859,6 +3858,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -3873,14 +3875,11 @@ Oscillospiraceae
 <td style="text-align:left;">
 Oscillospira
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Oscillospira
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Oscillospira
 </td>
 </tr>
 <tr>
@@ -3906,6 +3905,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -3920,14 +3922,11 @@ butyrate-producing bacterium M21/2
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|s__butyrate-producing
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|s__butyrate-producing
 bacterium M21/2
 </td>
 </tr>
@@ -3954,6 +3953,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -3968,14 +3970,11 @@ Clostridiales bacterium
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|s__Clostridiales
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|s__Clostridiales
 bacterium
 </td>
 </tr>
@@ -4002,6 +4001,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -4016,14 +4018,11 @@ Lachnospiraceae
 <td style="text-align:left;">
 Anaerostipes
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Anaerostipes
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Anaerostipes
 </td>
 </tr>
 <tr>
@@ -4049,6 +4048,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -4063,14 +4065,11 @@ Lachnospiraceae
 <td style="text-align:left;">
 Butyrivibrio
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Butyrivibrio
+k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Butyrivibrio
 </td>
 </tr>
 </tbody>
@@ -4081,40 +4080,40 @@ k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__B
 decreased abundance in low SES calculated using Jaccard Distance to
 create a distance matrix.<a class="anchor" aria-label="anchor" href="#cluster-analysis-for-signatures-of-increased-abundance-and-of-decreased-abundance-in-low-ses-calculated-using-jaccard-distance-to-create-a-distance-matrix-"></a>
 </h2>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">allsigs</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat.sub_SES</span> , tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">allsigs</span> <span class="op">&lt;-</span> <span class="va">allsigs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsigs</span>, <span class="va">length</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span> <span class="co">#require length &gt; 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 17</span></span></code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## [1] 19</span></span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydists</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcPairwiseOverlaps.html" class="external-link">calcPairwiseOverlaps</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mydists</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 24  8</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 38  8</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="visualize-the-distribution-of-the-signature-lengths">Visualize the distribution of the signature lengths<a class="anchor" aria-label="anchor" href="#visualize-the-distribution-of-the-signature-lengths"></a>
 </h2>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="va">siglengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsigs</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">siglengths.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>siglengths <span class="op">=</span> <span class="va">siglengths</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">siglengths.df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="capstoneanalysis_ifeanyi_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## siglengths</span></span>
-<span><span class="co">## 2 3 4 5 6 7 8 </span></span>
-<span><span class="co">## 1 5 1 3 2 2 3</span></span></code></pre>
+<span><span class="co">##  2  3  4  5  6  7  8 10 15 </span></span>
+<span><span class="co">##  1  5  1  3  2  2  3  1  1</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="create-a-matrix-of-jaccard-similarities-0-for-no-overlap-1-for-100-overlap">Create a matrix of Jaccard similarities (0 for no overlap, 1 for
 100% overlap)<a class="anchor" aria-label="anchor" href="#create-a-matrix-of-jaccard-similarities-0-for-no-overlap-1-for-100-overlap"></a>
 </h2>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">jmat</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcJaccardSimilarity.html" class="external-link">calcJaccardSimilarity</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span></code></pre></div>
 <p>##Create a Clustered heatmap</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span></span>
@@ -4139,19 +4138,19 @@ create a distance matrix.<a class="anchor" aria-label="anchor" href="#cluster-an
 <div class="section level2">
 <h2 id="create-a-wide-format-dataframe-for-regression-analysis">Create a wide format dataframe for Regression Analysis<a class="anchor" aria-label="anchor" href="#create-a-wide-format-dataframe-for-regression-analysis"></a>
 </h2>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat_withsigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat.sub_SES</span> , <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dat.sub_SES</span><span class="op">$</span><span class="va">`NCBI Taxonomy IDs`</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sigs</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat_withsigs</span>, tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">cmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu">safe</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/safe/man/getCmatrix.html" class="external-link">getCmatrix</a></span><span class="op">(</span><span class="va">sigs</span>, as.matrix <span class="op">=</span> <span class="cn">TRUE</span>, min.size <span class="op">=</span> <span class="fl">0</span>, prune <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## WARNING: rows are sorted elements of keyword.list</span></span>
-<span><span class="co">## 23 categories formed</span></span></code></pre>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<span><span class="co">## 25 categories formed</span></span></code></pre>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">cmat</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">dat_withsigs</span>, <span class="va">cdf</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">cdf</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1]  23 117</span></span></code></pre>
+<pre><code><span><span class="co">## [1]  25 129</span></span></code></pre>
 <p>An arbitrary example of meta-regression:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
 <span>    <span class="va">Prevotella</span> <span class="op">~</span> <span class="va">`Location of subjects`</span> <span class="op">+</span> <span class="va">`Sequencing type`</span> <span class="op">+</span> <span class="va">`Abundance in Group 1`</span>,</span>
@@ -4167,35 +4166,39 @@ create a distance matrix.<a class="anchor" aria-label="anchor" href="#cluster-an
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
 <span><span class="co">##                                                  Estimate Std. Error z value</span></span>
-<span><span class="co">## (Intercept)                                    -1.989e+01  1.183e+04  -0.002</span></span>
-<span><span class="co">## `Location of subjects`China                     2.087e+01  1.183e+04   0.002</span></span>
-<span><span class="co">## `Location of subjects`Finland,Malawi            1.953e+01  2.048e+04   0.001</span></span>
-<span><span class="co">## `Location of subjects`Israel                    2.087e+01  1.183e+04   0.002</span></span>
-<span><span class="co">## `Location of subjects`Malaysia                  1.950e-08  1.448e+04   0.000</span></span>
-<span><span class="co">## `Location of subjects`Mexico                    2.087e+01  1.183e+04   0.002</span></span>
-<span><span class="co">## `Location of subjects`Papua New Guinea          1.276e+00  2.131e+04   0.000</span></span>
-<span><span class="co">## `Location of subjects`United Kingdom            1.949e-08  1.672e+04   0.000</span></span>
-<span><span class="co">## `Location of subjects`United States of America  1.953e+01  1.183e+04   0.002</span></span>
-<span><span class="co">## `Sequencing type`WMS                           -1.953e+01  1.183e+04  -0.002</span></span>
-<span><span class="co">## `Abundance in Group 1`increased                -1.954e+00  1.543e+00  -1.267</span></span>
-<span><span class="co">##                                                Pr(&gt;|z|)</span></span>
-<span><span class="co">## (Intercept)                                       0.999</span></span>
-<span><span class="co">## `Location of subjects`China                       0.999</span></span>
-<span><span class="co">## `Location of subjects`Finland,Malawi              0.999</span></span>
-<span><span class="co">## `Location of subjects`Israel                      0.999</span></span>
-<span><span class="co">## `Location of subjects`Malaysia                    1.000</span></span>
-<span><span class="co">## `Location of subjects`Mexico                      0.999</span></span>
-<span><span class="co">## `Location of subjects`Papua New Guinea            1.000</span></span>
-<span><span class="co">## `Location of subjects`United Kingdom              1.000</span></span>
-<span><span class="co">## `Location of subjects`United States of America    0.999</span></span>
-<span><span class="co">## `Sequencing type`WMS                              0.999</span></span>
-<span><span class="co">## `Abundance in Group 1`increased                   0.205</span></span>
+<span><span class="co">## (Intercept)                                    -1.977e+01  1.145e+04  -0.002</span></span>
+<span><span class="co">## `Location of subjects`China                     2.103e+01  1.145e+04   0.002</span></span>
+<span><span class="co">## `Location of subjects`Finland,Malawi            1.953e+01  1.983e+04   0.001</span></span>
+<span><span class="co">## `Location of subjects`Indonesia                 2.103e+01  1.145e+04   0.002</span></span>
+<span><span class="co">## `Location of subjects`Israel                    2.103e+01  1.145e+04   0.002</span></span>
+<span><span class="co">## `Location of subjects`Malaysia                  1.219e-09  1.402e+04   0.000</span></span>
+<span><span class="co">## `Location of subjects`Mexico                    2.103e+01  1.145e+04   0.002</span></span>
+<span><span class="co">## `Location of subjects`Papua New Guinea          1.729e+00  2.111e+04   0.000</span></span>
+<span><span class="co">## `Location of subjects`United Kingdom            1.224e-09  1.619e+04   0.000</span></span>
+<span><span class="co">## `Location of subjects`United States of America  1.953e+01  1.145e+04   0.002</span></span>
+<span><span class="co">## `Sequencing type`WMS                           -1.953e+01  1.145e+04  -0.002</span></span>
+<span><span class="co">## `Abundance in Group 1`increased                -2.527e+00  1.517e+00  -1.666</span></span>
+<span><span class="co">##                                                Pr(&gt;|z|)  </span></span>
+<span><span class="co">## (Intercept)                                      0.9986  </span></span>
+<span><span class="co">## `Location of subjects`China                      0.9985  </span></span>
+<span><span class="co">## `Location of subjects`Finland,Malawi             0.9992  </span></span>
+<span><span class="co">## `Location of subjects`Indonesia                  0.9985  </span></span>
+<span><span class="co">## `Location of subjects`Israel                     0.9985  </span></span>
+<span><span class="co">## `Location of subjects`Malaysia                   1.0000  </span></span>
+<span><span class="co">## `Location of subjects`Mexico                     0.9985  </span></span>
+<span><span class="co">## `Location of subjects`Papua New Guinea           0.9999  </span></span>
+<span><span class="co">## `Location of subjects`United Kingdom             1.0000  </span></span>
+<span><span class="co">## `Location of subjects`United States of America   0.9986  </span></span>
+<span><span class="co">## `Sequencing type`WMS                             0.9986  </span></span>
+<span><span class="co">## `Abundance in Group 1`increased                  0.0958 .</span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## (Dispersion parameter for binomial family taken to be 1)</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##     Null deviance: 21.254  on 22  degrees of freedom</span></span>
-<span><span class="co">## Residual deviance: 10.956  on 12  degrees of freedom</span></span>
-<span><span class="co">## AIC: 32.956</span></span>
+<span><span class="co">##     Null deviance: 25.020  on 24  degrees of freedom</span></span>
+<span><span class="co">## Residual deviance: 12.082  on 13  degrees of freedom</span></span>
+<span><span class="co">## AIC: 36.082</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Number of Fisher Scoring iterations: 19</span></span></code></pre>
 </div>
@@ -4203,7 +4206,7 @@ create a distance matrix.<a class="anchor" aria-label="anchor" href="#cluster-an
 <h2 id="create-another-heatmap-on-correlations-of-presenceabsence-of-taxa-">Create another heatmap on correlations of presence/absence of
 taxa.<a class="anchor" aria-label="anchor" href="#create-another-heatmap-on-correlations-of-presenceabsence-of-taxa-"></a>
 </h2>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sigcors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">cmat</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">siglengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">sigs</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">ha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span></span>
@@ -4224,43 +4227,43 @@ taxa.<a class="anchor" aria-label="anchor" href="#create-another-heatmap-on-corr
 decreased abundance in non-white/caucasions calculated using Jaccard
 Distance to create a distance matrix.<a class="anchor" aria-label="anchor" href="#cluster-analysis-for-signatures-of-increased-abundance-and-of-decreased-abundance-in-non-whitecaucasions-calculated-using-jaccard-distance-to-create-a-distance-matrix-"></a>
 </h2>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">allsige</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat.sub_ethnic</span> , tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">allsige</span> <span class="op">&lt;-</span> <span class="va">allsige</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsige</span>, <span class="va">length</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span> <span class="co">#require length &gt; 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">allsige</span> <span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 14</span></span></code></pre>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## [1] 15</span></span></code></pre>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydistse</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcPairwiseOverlaps.html" class="external-link">calcPairwiseOverlaps</a></span><span class="op">(</span><span class="va">allsige</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mydistse</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 51  8</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 52  8</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="visualize-the-distribution-of-the-signature-lengths-1">Visualize the distribution of the signature lengths<a class="anchor" aria-label="anchor" href="#visualize-the-distribution-of-the-signature-lengths-1"></a>
 </h2>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="va">siglengthse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsige</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">siglengthse.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>siglengthse <span class="op">=</span> <span class="va">siglengthse</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">siglengthse.df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">siglengthse</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="capstoneanalysis_ifeanyi_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">siglengthse</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## siglengthse</span></span>
-<span><span class="co">## 2 4 5 6 8 9 </span></span>
-<span><span class="co">## 4 1 4 2 2 1</span></span></code></pre>
+<span><span class="co">##  2  4  5  6  8  9 11 </span></span>
+<span><span class="co">##  4  1  4  2  2  1  1</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="create-a-matrix-of-jaccard-similarities-0-for-no-overlap-1-for-100-overlap-1">Create a matrix of Jaccard similarities (0 for no overlap, 1 for
 100% overlap)<a class="anchor" aria-label="anchor" href="#create-a-matrix-of-jaccard-similarities-0-for-no-overlap-1-for-100-overlap-1"></a>
 </h2>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">jmate</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcJaccardSimilarity.html" class="external-link">calcJaccardSimilarity</a></span><span class="op">(</span><span class="va">allsige</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="create-a-clustered-heatmap">Create a Clustered heatmap<a class="anchor" aria-label="anchor" href="#create-a-clustered-heatmap"></a>
 </h2>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">hae</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengthse</span><span class="op">)</span><span class="op">)</span></span>
@@ -4280,13 +4283,13 @@ Distance to create a distance matrix.<a class="anchor" aria-label="anchor" href=
 <div class="section level2">
 <h2 id="create-a-wide-format-dataframe">Create a wide format dataframe<a class="anchor" aria-label="anchor" href="#create-a-wide-format-dataframe"></a>
 </h2>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat_withsigse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat.sub_ethnic</span> , <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dat.sub_ethnic</span><span class="op">$</span><span class="va">`NCBI Taxonomy IDs`</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sigse</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat_withsigse</span>, tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">cmate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu">safe</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/safe/man/getCmatrix.html" class="external-link">getCmatrix</a></span><span class="op">(</span><span class="va">sigse</span>, as.matrix <span class="op">=</span> <span class="cn">TRUE</span>, min.size <span class="op">=</span> <span class="fl">0</span>, prune <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## WARNING: rows are sorted elements of keyword.list</span></span>
-<span><span class="co">## 30 categories formed</span></span></code></pre>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<span><span class="co">## 31 categories formed</span></span></code></pre>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cdfe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">cmate</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">cdfe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">dat_withsigse</span>, <span class="va">cdfe</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">cdfe</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">]</span></span></code></pre></div>
@@ -4304,7 +4307,7 @@ Distance to create a distance matrix.<a class="anchor" aria-label="anchor" href=
 <h2 id="create-another-heatmap-on-correlations-of-presenceabsence-of-taxa--1">Create another heatmap on correlations of presence/absence of
 taxa.<a class="anchor" aria-label="anchor" href="#create-another-heatmap-on-correlations-of-presenceabsence-of-taxa--1"></a>
 </h2>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sigcorse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">cmate</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">siglengthse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">sigse</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">hae</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengthse</span><span class="op">)</span><span class="op">)</span></span>

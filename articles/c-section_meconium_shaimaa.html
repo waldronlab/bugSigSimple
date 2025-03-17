@@ -98,7 +98,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Delivery Mode and the Meconium Microbiome</h1>
             
-            <h4 data-toc-skip class="date">30 January, 2025</h4>
+            <h4 data-toc-skip class="date">17 March, 2025</h4>
       
 
       <div class="hidden name"><code>c-section_meconium_shaimaa.Rmd</code></div>
@@ -145,7 +145,7 @@ signatures and identify the most frequently reported taxa</li>
 <code class="sourceCode R"><span><span class="co"># use version="devel" and cache = FALSE to take the latest version from bugsigdb.org</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>version <span class="op">=</span> <span class="st">"devel"</span>, cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 7115   50</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 7343   50</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "BSDB ID"                    "Study"                     </span></span>
@@ -195,42 +195,42 @@ signatures and identify the most frequently reported taxa</li>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">PMID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">included.pmid</span><span class="op">)</span> </span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">subset.dat</span><span class="op">$</span><span class="va">`Group 0 name`</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##  [1] "vaginal delivery after 7 days of delivery"    </span></span>
-<span><span class="co">##  [2] "vaginal delivery after 3 months of delivery"  </span></span>
-<span><span class="co">##  [3] "vaginal delivery after 6 months of delivery"  </span></span>
-<span><span class="co">##  [4] "vaginal delivery"                             </span></span>
-<span><span class="co">##  [5] "&gt;/=33 weeks"                                  </span></span>
-<span><span class="co">##  [6] "vaginal delivery at day 3"                    </span></span>
-<span><span class="co">##  [7] "vaginal delivery at day 5"                    </span></span>
-<span><span class="co">##  [8] "vaginal delivery at day 28"                   </span></span>
-<span><span class="co">##  [9] "vaginal delivery at day 150"                  </span></span>
-<span><span class="co">## [10] "vaginal delivery at day 365"                  </span></span>
-<span><span class="co">## [11] "full-term delivery &gt;39 weeks at day 3"        </span></span>
-<span><span class="co">## [12] "mecomium in vaginal delivery"                 </span></span>
-<span><span class="co">## [13] "mecomium in C-section delivery"               </span></span>
-<span><span class="co">## [14] "Antimicrobials use during delivery (no)"      </span></span>
-<span><span class="co">## [15] "Maternal consumption of probiotics (NO)"      </span></span>
-<span><span class="co">## [16] "Furry pets at home (NO)"                      </span></span>
-<span><span class="co">## [17] "Maternal samples taken at delivery."          </span></span>
-<span><span class="co">## [18] "Maternal samples taken at 6  weeks postpartum"</span></span>
-<span><span class="co">## [19] "vaginal delivery (Va)"</span></span></code></pre>
+<pre><code><span><span class="co">##  [1] "vaginal delivery (Va)"                        </span></span>
+<span><span class="co">##  [2] "vaginal delivery"                             </span></span>
+<span><span class="co">##  [3] "&gt;/=33 weeks"                                  </span></span>
+<span><span class="co">##  [4] "vaginal delivery after 7 days of delivery"    </span></span>
+<span><span class="co">##  [5] "vaginal delivery after 3 months of delivery"  </span></span>
+<span><span class="co">##  [6] "vaginal delivery after 6 months of delivery"  </span></span>
+<span><span class="co">##  [7] "Maternal samples taken at delivery."          </span></span>
+<span><span class="co">##  [8] "Maternal samples taken at 6  weeks postpartum"</span></span>
+<span><span class="co">##  [9] "vaginal delivery at day 3"                    </span></span>
+<span><span class="co">## [10] "vaginal delivery at day 5"                    </span></span>
+<span><span class="co">## [11] "vaginal delivery at day 28"                   </span></span>
+<span><span class="co">## [12] "vaginal delivery at day 150"                  </span></span>
+<span><span class="co">## [13] "vaginal delivery at day 365"                  </span></span>
+<span><span class="co">## [14] "full-term delivery &gt;39 weeks at day 3"        </span></span>
+<span><span class="co">## [15] "mecomium in vaginal delivery"                 </span></span>
+<span><span class="co">## [16] "mecomium in C-section delivery"               </span></span>
+<span><span class="co">## [17] "Antimicrobials use during delivery (no)"      </span></span>
+<span><span class="co">## [18] "Maternal consumption of probiotics (NO)"      </span></span>
+<span><span class="co">## [19] "Furry pets at home (NO)"</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">included.group0</span> <span class="op">&lt;-</span> <span class="st">"vaginal delivery"</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">subset.dat</span><span class="op">$</span><span class="va">`Group 1 name`</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##  [1] "C-section delivery"                             </span></span>
+<pre><code><span><span class="co">##  [1] "C-section (Cesarean section)"                   </span></span>
 <span><span class="co">##  [2] "C-section"                                      </span></span>
 <span><span class="co">##  [3] "infants &lt;33 weeks gestational age"              </span></span>
-<span><span class="co">##  [4] "c-section"                                      </span></span>
-<span><span class="co">##  [5] "late preterm 34-36 weeks"                       </span></span>
-<span><span class="co">##  [6] "overall time point infants samples of c-section"</span></span>
-<span><span class="co">##  [7] "transitional stool"                             </span></span>
-<span><span class="co">##  [8] "Antimicrobials use during delivery (yes)"       </span></span>
-<span><span class="co">##  [9] "Maternal consumption of probiotics (YES)"       </span></span>
-<span><span class="co">## [10] "Furry pets at home (YES)"                       </span></span>
-<span><span class="co">## [11] "Neonatal samples taken at delivery"             </span></span>
-<span><span class="co">## [12] "Infant samples taken at 6 weeks postpartum"     </span></span>
-<span><span class="co">## [13] "C-section (Cesarean section)"</span></span></code></pre>
+<span><span class="co">##  [4] "C-section delivery"                             </span></span>
+<span><span class="co">##  [5] "Neonatal samples taken at delivery"             </span></span>
+<span><span class="co">##  [6] "Infant samples taken at 6 weeks postpartum"     </span></span>
+<span><span class="co">##  [7] "c-section"                                      </span></span>
+<span><span class="co">##  [8] "late preterm 34-36 weeks"                       </span></span>
+<span><span class="co">##  [9] "overall time point infants samples of c-section"</span></span>
+<span><span class="co">## [10] "transitional stool"                             </span></span>
+<span><span class="co">## [11] "Antimicrobials use during delivery (yes)"       </span></span>
+<span><span class="co">## [12] "Maternal consumption of probiotics (YES)"       </span></span>
+<span><span class="co">## [13] "Furry pets at home (YES)"</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">included.group1</span> <span class="op">&lt;-</span> <span class="st">"C-section"</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -310,7 +310,8 @@ signatures and identify the most frequently reported taxa</li>
 frequently identified taxa.</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">subset.final</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: Expected 7 pieces. Additional pieces discarded in 1 rows [16].</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Expected 7 pieces. Additional pieces discarded in 5 rows [6,</span></span>
+<span><span class="co">## 14, 15, 16, 19].</span></span></code></pre>
 <table class="table table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
@@ -383,6 +384,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -397,14 +401,11 @@ Staphylococcaceae
 <td style="text-align:left;">
 Staphylococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 3
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Bacillales|f__Staphylococcaceae|g__Staphylococcus
+k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Bacillales|f__Staphylococcaceae|g__Staphylococcus
 </td>
 </tr>
 <tr>
@@ -428,6 +429,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Actinomycetota
@@ -444,14 +448,11 @@ Corynebacteriaceae
 <td style="text-align:left;">
 Corynebacterium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Mycobacteriales|f__Corynebacteriaceae|g__Corynebacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Mycobacteriales|f__Corynebacteriaceae|g__Corynebacterium
 </td>
 </tr>
 <tr>
@@ -477,6 +478,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -491,14 +495,11 @@ Propionibacteriaceae
 <td style="text-align:left;">
 Propionibacterium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae|g__Propionibacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae|g__Propionibacterium
 </td>
 </tr>
 <tr>
@@ -524,6 +525,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -538,14 +542,11 @@ Enterococcaceae
 <td style="text-align:left;">
 Enterococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
+k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
 </td>
 </tr>
 <tr>
@@ -571,6 +572,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -585,14 +589,11 @@ Streptococcaceae
 <td style="text-align:left;">
 Streptococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
+k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
 </td>
 </tr>
 <tr>
@@ -618,6 +619,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -632,14 +636,11 @@ Bacteroidaceae
 <td style="text-align:left;">
 Phocaeicola
 </td>
-<td style="text-align:left;">
-Phocaeicola vulgatus
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Phocaeicola|s__Phocaeicola
+k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Phocaeicola|s__Phocaeicola
 vulgatus
 </td>
 </tr>
@@ -666,6 +667,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -680,14 +684,11 @@ Comamonadaceae
 <td style="text-align:left;">
 Comamonas
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Betaproteobacteria|o__Burkholderiales|f__Comamonadaceae|g__Comamonas
+k__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Betaproteobacteria|o__Burkholderiales|f__Comamonadaceae|g__Comamonas
 </td>
 </tr>
 <tr>
@@ -713,6 +714,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -727,14 +731,11 @@ Enterobacteriaceae
 <td style="text-align:left;">
 Citrobacter
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae|g__Citrobacter
+k__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae|g__Citrobacter
 </td>
 </tr>
 <tr>
@@ -760,6 +761,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -774,14 +778,11 @@ Lysobacteraceae
 <td style="text-align:left;">
 Stenotrophomonas
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Gammaproteobacteria|o__Lysobacterales|f__Lysobacteraceae|g__Stenotrophomonas
+k__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Lysobacterales|f__Lysobacteraceae|g__Stenotrophomonas
 </td>
 </tr>
 <tr>
@@ -807,10 +808,10 @@ phylum
 Bacteria
 </td>
 <td style="text-align:left;">
-Actinomycetota
+Bacillati
 </td>
 <td style="text-align:left;">
-NA
+Actinomycetota
 </td>
 <td style="text-align:left;">
 NA
@@ -828,7 +829,7 @@ NA
 4
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota
+k__Bacteria|k__Bacillati|p__Actinomycetota
 </td>
 </tr>
 <tr>
@@ -854,6 +855,9 @@ class
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -868,14 +872,11 @@ NA
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 4
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes
 </td>
 </tr>
 <tr>
@@ -901,6 +902,9 @@ order
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -915,14 +919,11 @@ NA
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales
 </td>
 </tr>
 <tr>
@@ -948,6 +949,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -962,14 +966,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
 </td>
 </tr>
 <tr>
@@ -995,6 +996,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1009,14 +1013,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-Bifidobacterium bifidum
-</td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 bifidum
 </td>
 </tr>
@@ -1043,6 +1044,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1057,14 +1061,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-Bifidobacterium catenulatum
-</td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 catenulatum
 </td>
 </tr>
@@ -1091,6 +1092,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1105,14 +1109,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-Bifidobacterium longum
-</td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 longum|s__Bifidobacterium longum subsp. longum
 </td>
 </tr>
@@ -1139,6 +1140,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1153,14 +1157,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Pseudoscardovia
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Pseudoscardovia
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Pseudoscardovia
 </td>
 </tr>
 <tr>
@@ -1186,6 +1187,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1200,14 +1204,11 @@ Propionibacteriaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae
 </td>
 </tr>
 <tr>
@@ -1233,6 +1234,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1247,14 +1251,11 @@ Propionibacteriaceae
 <td style="text-align:left;">
 Cutibacterium
 </td>
-<td style="text-align:left;">
-Cutibacterium acnes
-</td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae|g__Cutibacterium|s__Cutibacterium
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae|g__Cutibacterium|s__Cutibacterium
 acnes
 </td>
 </tr>
@@ -1281,6 +1282,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1295,14 +1299,11 @@ Pseudonocardiaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Pseudonocardiales|f__Pseudonocardiaceae
+k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Pseudonocardiales|f__Pseudonocardiaceae
 </td>
 </tr>
 </tbody>
