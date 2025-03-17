@@ -111,6 +111,7 @@ createStudyTable <- function(bsdb.df, includeAlso = NULL) {
   }
   # Core of the change is in how study IDs are generated, see function in 
   # simple.R. NB: the function also fixes DOI links as side effect, now. 
+  
   bsdb_with_StudyCodes.df <- .make_unique_study_ID(bsdb.df)
   
   # some dplyr-fu to summarize tables, with more recent syntax
