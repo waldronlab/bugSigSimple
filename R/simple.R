@@ -74,3 +74,43 @@ getMostFrequentTaxa <- function(dat, n=10, sig.type=c("both", "increased", "decr
     msc.tab <- sort(table(unlist(msc)), decreasing=TRUE)
     head(msc.tab, n=n) 
 }
+
+
+#' Author: Giacomo Antonello
+#' Date: 2025-03-17
+#' 
+#' Description:
+#' 
+#' This function takes a raw bugSigDB input from `bugsigdbr` and generates a 
+#' unique idenfier as curatedMetagenomicsData does: full last name, initial(s) of 
+#' first name(s) and year of publication. Additionally, it checks if there are 
+#' more PMID codes associated with the same ID and adds a .1, .2, for each 
+#' duplication
+#' 
+
+.make_unique_study_ID <- function(bsdb.df){
+  bsdb_with_StudyCode <- bsdb.df %>% 
+    # fix DOIs
+    mutate(
+      DOI =  ifelse(
+        test = startsWith(DOI, "10."),
+        yes = paste0("https://doi.org/", DOI),
+        no = DOI
+      ),
+      # create a basic ID
+      BasicID = paste0(gsub(" ", "", sapply(strsplit(`Authors list`, ", "), "[", 1)), "_", Year)
+    ) %>% 
+    # For each ID found, seach if there are multiple studies
+    group_by(BasicID) %>% 
+    mutate(
+      # this is arbitrary, the point is to make sure you can split overlapping
+      # IDs into one
+      uniqueRank = as.numeric(as.factor(paste(PMID, DOI, URL, `Authors list`))),
+      `Study code` = ifelse(uniqueRank > 1, paste(BasicID, uniqueRank - 1, sep = "."), BasicID)
+    ) %>% 
+    ungroup() %>% 
+    select(- BasicID, - uniqueRank) %>% 
+    relocate(`Study code`) 
+  
+  return(bsdb_with_StudyCode)
+}

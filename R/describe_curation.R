@@ -99,17 +99,39 @@ createTaxonTable <- function(dat, n=10){
 #' createStudyTable(full.dat)
 #' ## kable_styling(kbl(createStudyTable(full.dat))) #for html styling
 
-createStudyTable <-function(dat){
-  studies <- data.frame(Study=paste0(str_extract(dat$Authors, "[A-Za-z]+[:space:]"), dat$Year),
-                        Condition=dat$Condition,
-                        Cases=dat$`Group 1 sample size`,
-                        Controls=dat$`Group 0 sample size`,
-                        `Study Design`=dat$`Study design`)
-  studies %>% group_by(Study) %>% summarize(Condition=first(Condition), 
-                                            Cases=max(Cases),
-                                            Controls=max(Controls), 
-                                            `Study Design`=first(`Study.Design`))
+createStudyTable <- function(bsdb.df, includeAlso = NULL) {
+  # input check
+  if (!is_null(includeAlso)) {
+    if (!all(includeAlso %in% colnames(bsdb.df))) {
+      stop(paste(
+        "The following columns are not found in the input data frame:",
+        paste(includeAlso[!(includeAlso %in% colnames(bsdb.df))], collapse = ", ")
+      ))
+    }
+  }
+  # Core of the change is in how study IDs are generated, see function in 
+  # simple.R. NB: the function also fixes DOI links as side effect, now. 
   
+  bsdb_with_StudyCodes.df <- .make_unique_study_ID(bsdb.df)
+  
+  # some dplyr-fu to summarize tables, with more recent syntax
+  study_table_fixed <- bsdb_with_StudyCodes.df %>%
+    group_by(`Study code`) %>%
+    reframe(
+      MaxCases = max(`Group 1 sample size`),
+      MaxControls = max(`Group 0 sample size`),
+      across(
+        all_of(
+          c("Study design", "Condition", "PMID", "DOI", "URL", includeAlso)
+        ),
+        .fns = function(x)
+          paste(unique(x), collapse = "; ")
+      ),
+      N_signatures = n()
+    ) %>%
+    relocate(N_signatures, .after = Condition)
+  
+  return(study_table_fixed)
 }
 
 globalVariables(
