@@ -101,22 +101,9 @@ kable_styling(kbl(.)) to format nicely.</p>
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">full.dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using cached version from 2025-03-17 23:53:35</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using cached version from 2025-03-19 16:39:02</span>
 <span class="r-in"><span><span class="fu">createStudyTable</span><span class="op">(</span><span class="va">full.dat</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 968 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Study            Condition                      Cases Controls `Study Design`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Aarts 2017       Attention deficit hyperactivi…    19       77 case-control  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Abotsi 2023      Azithromycin                     174      174 randomized co…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> Abrahamsson 2012 Atopic eczema                     20       20 prospective c…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Adamberg 2018    Obesity                            9        9 case-control  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Adebayo 2017     Urinary schistosomiasis           46       25 case-control  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Aguilar 2020     Obesity                           16       56 cross-section…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Ahn 2013         Colorectal cancer                 47       94 case-control  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Aho 2019         Parkinson's disease               64       64 case-control  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Aho 2021         Parkinson's disease               55       56 case-control  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Aho 2024         Parkinson's disease               60       90 case-control  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 958 more rows</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in is_null(includeAlso):</span> could not find function "is_null"</span>
 <span class="r-in"><span><span class="co">## kable_styling(kbl(createStudyTable(full.dat))) #for html styling</span></span></span>
 </code></pre></div>
     </div>

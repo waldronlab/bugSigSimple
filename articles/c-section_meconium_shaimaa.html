@@ -98,7 +98,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Delivery Mode and the Meconium Microbiome</h1>
             
-            <h4 data-toc-skip class="date">17 March, 2025</h4>
+            <h4 data-toc-skip class="date">19 March, 2025</h4>
       
 
       <div class="hidden name"><code>c-section_meconium_shaimaa.Rmd</code></div>
@@ -145,7 +145,7 @@ signatures and identify the most frequently reported taxa</li>
 <code class="sourceCode R"><span><span class="co"># use version="devel" and cache = FALSE to take the latest version from bugsigdb.org</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>version <span class="op">=</span> <span class="st">"devel"</span>, cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 7343   50</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 7349   50</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "BSDB ID"                    "Study"                     </span></span>
@@ -293,15 +293,16 @@ signatures and identify the most frequently reported taxa</li>
 <p>These are the studies included in the review:</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">subset.final</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 5</span></span></span>
-<span><span class="co">##   Study          Condition        Cases Controls `Study Design`                 </span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> Ardissone 2014 Cesarean section    33       19 cross-sectional observational,…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> Martin 2016    Cesarean section    28       80 cross-sectional observational,…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> Shi 2018       Cesarean section    10        8 cross-sectional observational,…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span> Tapiainen 2018 Cesarean section    40      172 cross-sectional observational,…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span> Wampach 2017   Cesarean section     6        4 time series / longitudinal obs…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">6</span> Wong 2020      Cesarean section    43       62 prospective cohort</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 9</span></span></span>
+<span><span class="co">##   `Study code`  MaxCases MaxControls `Study design` Condition N_signatures PMID </span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> ArdissoneAN_…       33          19 cross-section… Cesarean…            1 2461…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> MartinR_2016        28          80 cross-section… Cesarean…            1 2736…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> ShiYC_2018          10           8 cross-section… Cesarean…            2 2945…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> TapiainenT_2…       40         172 cross-section… Cesarean…            1 2953…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span> WampachL_2017        6           4 time series /… Cesarean…            1 2851…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">6</span> WongWSW_2020        43          62 prospective c… Cesarean…            2 3201…</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: DOI &lt;chr&gt;, URL &lt;chr&gt;</span></span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="summary-of-taxa-reported">Summary of taxa reported<a class="anchor" aria-label="anchor" href="#summary-of-taxa-reported"></a>

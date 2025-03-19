@@ -173,7 +173,7 @@ as a 0/1 binary variable in a regression analysis.</p></li>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>version <span class="op">=</span> <span class="st">'devel'</span>, cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co">#11/27/2022</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 7343   50</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 7349   50</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="subset-signatures-by-curator-and-conditions">Subset Signatures by Curator and Conditions<a class="anchor" aria-label="anchor" href="#subset-signatures-by-curator-and-conditions"></a>
@@ -208,28 +208,37 @@ as a 0/1 binary variable in a regression analysis.</p></li>
 <table class="table table" style="margin-left: auto; margin-right: auto;">
 <thead><tr>
 <th style="text-align:left;">
-Study
+Study code
+</th>
+<th style="text-align:right;">
+MaxCases
+</th>
+<th style="text-align:right;">
+MaxControls
+</th>
+<th style="text-align:left;">
+Study design
 </th>
 <th style="text-align:left;">
 Condition
 </th>
 <th style="text-align:right;">
-Cases
-</th>
-<th style="text-align:right;">
-Controls
+N_signatures
 </th>
 <th style="text-align:left;">
-Study Design
+PMID
+</th>
+<th style="text-align:left;">
+DOI
+</th>
+<th style="text-align:left;">
+URL
 </th>
 </tr></thead>
 <tbody>
 <tr>
 <td style="text-align:left;">
-Amaruddin 2020
-</td>
-<td style="text-align:left;">
-socioeconomic status
+AmaruddinAI_2020
 </td>
 <td style="text-align:right;">
 74
@@ -240,13 +249,25 @@ socioeconomic status
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+socioeconomic status
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+32604882
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.3390/microorganisms8060961" class="external-link uri">https://doi.org/10.3390/microorganisms8060961</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Ang 2021
-</td>
-<td style="text-align:left;">
-ethnic group
+AngQY_2021
 </td>
 <td style="text-align:right;">
 22
@@ -257,13 +278,25 @@ ethnic group
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+ethnic group
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+34617511
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.7554/eLife.70349" class="external-link uri">https://doi.org/10.7554/eLife.70349</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/34617511" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/34617511</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Balakrishnan 2021
-</td>
-<td style="text-align:left;">
-ethnic group
+BalakrishnanB_2021
 </td>
 <td style="text-align:right;">
 30
@@ -274,13 +307,25 @@ ethnic group
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+ethnic group; socioeconomic status
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+33596768
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1080/19490976.2021.1882926" class="external-link uri">https://doi.org/10.1080/19490976.2021.1882926</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Bowyer 2019
-</td>
-<td style="text-align:left;">
-socioeconomic status
+BowyerRCE_2019
 </td>
 <td style="text-align:right;">
 342
@@ -291,13 +336,25 @@ socioeconomic status
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+socioeconomic status
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+30641975
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.3390/microorganisms7010017" class="external-link uri">https://doi.org/10.3390/microorganisms7010017</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/30641975/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/30641975/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Brooks 2018
-</td>
-<td style="text-align:left;">
-ethnic group
+BrooksAW_2018
 </td>
 <td style="text-align:right;">
 88
@@ -308,13 +365,25 @@ ethnic group
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+ethnic group
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:left;">
+30513082
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1371/journal.pbio.2006842" class="external-link uri">https://doi.org/10.1371/journal.pbio.2006842</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/30513082/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/30513082/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Carson 2018
-</td>
-<td style="text-align:left;">
-ethnic group
+CarsonTL_2018
 </td>
 <td style="text-align:right;">
 47
@@ -325,13 +394,25 @@ ethnic group
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+ethnic group
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+29901485
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1097/PSY.0000000000000614" class="external-link uri">https://doi.org/10.1097/PSY.0000000000000614</a>.
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/29901485/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/29901485/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Chong 2015
-</td>
-<td style="text-align:left;">
-socioeconomic status
+ChongCW_2015
 </td>
 <td style="text-align:right;">
 20
@@ -342,13 +423,25 @@ socioeconomic status
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+socioeconomic status
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+26290472
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1038/srep13338" class="external-link uri">https://doi.org/10.1038/srep13338</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/26290472/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/26290472/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-De 2010
-</td>
-<td style="text-align:left;">
-place of residence measurement,ethnic group
+DeFilippoC_2010
 </td>
 <td style="text-align:right;">
 14
@@ -359,13 +452,25 @@ place of residence measurement,ethnic group
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+place of residence measurement,ethnic group
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+20679230
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1073/pnas.1005963107" class="external-link uri">https://doi.org/10.1073/pnas.1005963107</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/20679230/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/20679230/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Dwiyanto 2021
-</td>
-<td style="text-align:left;">
-ethnic group
+DwiyantoJ_2021
 </td>
 <td style="text-align:right;">
 54
@@ -376,13 +481,25 @@ ethnic group
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+ethnic group
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:left;">
+33514807
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1038/s41598-021-82311-3" class="external-link uri">https://doi.org/10.1038/s41598-021-82311-3</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/33514807/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/33514807/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Escobar 2014
-</td>
-<td style="text-align:left;">
-ethnic group
+EscobarJS_2014
 </td>
 <td style="text-align:right;">
 30
@@ -393,13 +510,25 @@ ethnic group
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+ethnic group
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+25495462
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1186/s12866-014-0311-6" class="external-link uri">https://doi.org/10.1186/s12866-014-0311-6</a>
+</td>
+<td style="text-align:left;">
+<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4275940/" class="external-link uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4275940/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Greenhill 2015
-</td>
-<td style="text-align:left;">
-socioeconomic status
+GreenhillAR_2015
 </td>
 <td style="text-align:right;">
 86
@@ -410,13 +539,54 @@ socioeconomic status
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+socioeconomic status
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+25658868
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1371/journal.pone.0117427" class="external-link uri">https://doi.org/10.1371/journal.pone.0117427</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/25658868/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/25658868/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-He 2018
+GrześkowiakŁ_2012
+</td>
+<td style="text-align:right;">
+44
+</td>
+<td style="text-align:right;">
+31
+</td>
+<td style="text-align:left;">
+cross-sectional observational, not case-control
 </td>
 <td style="text-align:left;">
 socioeconomic status
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+22228076
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1097/MPG.0b013e318249039c" class="external-link uri">https://doi.org/10.1097/MPG.0b013e318249039c</a>.
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/22228076/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/22228076/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HeY_2018
 </td>
 <td style="text-align:right;">
 7009
@@ -427,13 +597,25 @@ NA
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+socioeconomic status
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+30249275
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1186/s40168-018-0557-6" class="external-link uri">https://doi.org/10.1186/s40168-018-0557-6</a>.
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/30249275/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/30249275/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Kortekangas 2020
-</td>
-<td style="text-align:left;">
-sampling time
+KortekangasE_2020
 </td>
 <td style="text-align:right;">
 NA
@@ -444,13 +626,25 @@ NA
 <td style="text-align:left;">
 prospective cohort
 </td>
+<td style="text-align:left;">
+sampling time
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+32011017
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1111/ppe.12623" class="external-link uri">https://doi.org/10.1111/ppe.12623</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Lapidot 2021
-</td>
-<td style="text-align:left;">
-socioeconomic status
+LapidotY_2021
 </td>
 <td style="text-align:right;">
 70
@@ -461,13 +655,25 @@ socioeconomic status
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+socioeconomic status
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+34444813
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.3390/nu13082645" class="external-link uri">https://doi.org/10.3390/nu13082645</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/34444813/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/34444813/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Levin 2016
-</td>
-<td style="text-align:left;">
-risk factor
+LevinAM_2016
 </td>
 <td style="text-align:right;">
 168
@@ -478,13 +684,25 @@ risk factor
 <td style="text-align:left;">
 prospective cohort
 </td>
+<td style="text-align:left;">
+risk factor
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+27558272
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1038/srep31775" class="external-link uri">https://doi.org/10.1038/srep31775</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Lewis 2021
-</td>
-<td style="text-align:left;">
-socioeconomic status
+LewisCR_2021
 </td>
 <td style="text-align:right;">
 NA
@@ -495,13 +713,25 @@ NA
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+socioeconomic status
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+34442687
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.3390/microorganisms9081608" class="external-link uri">https://doi.org/10.3390/microorganisms9081608</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/34442687/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/34442687/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Lin 2013
-</td>
-<td style="text-align:left;">
-socioeconomic status,ethnic group
+LinA_2013
 </td>
 <td style="text-align:right;">
 6
@@ -512,13 +742,25 @@ socioeconomic status,ethnic group
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+socioeconomic status,ethnic group
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+23349750
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1371/journal.pone.0053838" class="external-link uri">https://doi.org/10.1371/journal.pone.0053838</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/23349750/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/23349750/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Mello 2016
-</td>
-<td style="text-align:left;">
-socioeconomic status
+MelloCS_2016
 </td>
 <td style="text-align:right;">
 100
@@ -529,13 +771,25 @@ socioeconomic status
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+socioeconomic status
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+26982745
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1097/MPG.0000000000001186" class="external-link uri">https://doi.org/10.1097/MPG.0000000000001186</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/26982745/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/26982745/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Miller 2016
-</td>
-<td style="text-align:left;">
-socioeconomic status
+MillerGE_2016
 </td>
 <td style="text-align:right;">
 NA
@@ -546,13 +800,25 @@ NA
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
+<td style="text-align:left;">
+socioeconomic status
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+26859894
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1371/journal.pone.0148952" class="external-link uri">https://doi.org/10.1371/journal.pone.0148952</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/26859894/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/26859894/</a>
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Ramos 2020
-</td>
-<td style="text-align:left;">
-socioeconomic status
+Moran-RamosS_2020
 </td>
 <td style="text-align:right;">
 NA
@@ -563,22 +829,20 @@ NA
 <td style="text-align:left;">
 cross-sectional observational, not case-control
 </td>
-</tr>
-<tr>
-<td style="text-align:left;">
-kowiak 2012
-</td>
 <td style="text-align:left;">
 socioeconomic status
 </td>
 <td style="text-align:right;">
-44
-</td>
-<td style="text-align:right;">
-31
+2
 </td>
 <td style="text-align:left;">
-cross-sectional observational, not case-control
+31973685
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1080/19490976.2020.1712985" class="external-link uri">https://doi.org/10.1080/19490976.2020.1712985</a>
+</td>
+<td style="text-align:left;">
+<a href="https://pubmed.ncbi.nlm.nih.gov/31973685/" class="external-link uri">https://pubmed.ncbi.nlm.nih.gov/31973685/</a>
 </td>
 </tr>
 </tbody>

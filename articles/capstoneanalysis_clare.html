@@ -100,7 +100,7 @@
                         <h4 data-toc-skip class="author">Clare
 Grieve</h4>
             
-            <h4 data-toc-skip class="date">17 March, 2025</h4>
+            <h4 data-toc-skip class="date">19 March, 2025</h4>
       
 
       <div class="hidden name"><code>capstoneanalysis_clare.rmd</code></div>
@@ -140,7 +140,7 @@ occuring so frequently by chance</li>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://waldronlab.io/bugSigSimple" class="external-link">bugSigSimple</a></span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span></code></pre></div>
-<pre><code><span><span class="co">## Using cached version from 2025-03-17 23:53:35</span></span></code></pre>
+<pre><code><span><span class="co">## Using cached version from 2025-03-19 16:39:02</span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 5520   50</span></span></code></pre>
@@ -186,7 +186,7 @@ occuring so frequently by chance</li>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="va">efo</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getOntology.html" class="external-link">getOntology</a></span><span class="op">(</span><span class="st">"efo"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Loading required namespace: ontologyIndex</span></span>
-<span><span class="co">## Using cached version from 2025-03-17 23:51:38</span></span></code></pre>
+<span><span class="co">## Using cached version from 2025-03-19 16:37:06</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">covid_all</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/subsetByOntology.html" class="external-link">subsetByOntology</a></span><span class="op">(</span><span class="va">dat</span>, column <span class="op">=</span> <span class="st">"Condition"</span>, <span class="st">"COVID-19"</span>, <span class="va">efo</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>studyexp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">Study</span>, <span class="va">Experiment</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -212,20 +212,21 @@ occuring so frequently by chance</li>
 </h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">covid_all</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 44 × 5</span></span></span>
-<span><span class="co">##    Study          Condition Cases Controls `Study Design`                       </span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Bellato 2023   COVID-19    156       36 cross-sectional observational, not c…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Braun 2021     COVID-19     26       29 cross-sectional observational, not c…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Cao 2021       COVID-19     13        8 case-control                         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Chen 2021      COVID-19     30       30 time series / longitudinal observati…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> De 2020        COVID-19     18       22 cross-sectional observational, not c…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Engen 2021     COVID-19      9       10 cross-sectional observational, not c…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Gaibani 2021   COVID-19     24       24 case-control                         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Galperine 2023 COVID-19     57       43 time series / longitudinal observati…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Gao 2021       COVID-19     94       48 prospective cohort                   </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> Gu 2020        COVID-19     30       30 cross-sectional observational, not c…</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 34 more rows</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 45 × 9</span></span></span>
+<span><span class="co">##    `Study code` MaxCases MaxControls `Study design` Condition N_signatures PMID </span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> BellatoM_20…      156          36 cross-section… COVID-19…            3 3780…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> BraunT_2021        26          29 cross-section… COVID-19             1 3390…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> CaoJ_2021          13           8 case-control   COVID-19             6 3367…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> ChenY_2021         30          30 time series /… COVID-19             2 3383…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> DeMaioF_2020       18          22 cross-section… COVID-19             1 3272…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> EngenPA_2021        9          10 cross-section… COVID-19             2 3405…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Feehan_2021        79          81 cross-section… COVID-19             3 NA   </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> GaibaniP_20…       24          24 case-control   COVID-19             2 3398…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> GalperineT_…       57          43 time series /… COVID-19             4 3759…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> GaoM_2021          94          48 prospective c… COVID-19             2 3442…</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 35 more rows</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: DOI &lt;chr&gt;, URL &lt;chr&gt;</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="taxon-frequency-tables-by-body-site">Taxon frequency tables by body site<a class="anchor" aria-label="anchor" href="#taxon-frequency-tables-by-body-site"></a>

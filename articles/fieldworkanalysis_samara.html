@@ -98,7 +98,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>The Endometriosis-associated Microbiome</h1>
             
-            <h4 data-toc-skip class="date">17 March, 2025</h4>
+            <h4 data-toc-skip class="date">19 March, 2025</h4>
       
 
       <div class="hidden name"><code>fieldworkanalysis_samara.Rmd</code></div>
@@ -167,7 +167,7 @@ occuring by chance</li>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://waldronlab.io/bugSigSimple" class="external-link">bugSigSimple</a></span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>cache<span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Using cached version from 2025-03-17 23:58:25</span></span></code></pre>
+<pre><code><span><span class="co">## Using cached version from 2025-03-19 16:43:45</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 5520   50</span></span></code></pre>
@@ -227,20 +227,21 @@ reliable (Cregger et. al)</p>
 endometriosis patients for all studies</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">subset.dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 11 × 5</span></span></span>
-<span><span class="co">##    Study          Condition                 Cases Controls `Study Design`       </span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Akiyama 2019   Endometriosis                30       39 cross-sectional obse…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Ata 2019       Endometriosis                14       14 prospective cohort   </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Chao 2021      Endometriosis                37       66 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Chen 2020      Adenomyosis,Endometriosis    14      120 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Hernandes 2020 Endometriosis                21       11 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Khan 2016      Endometriosis                32       32 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Lee 2021       Endometriosis                45       45 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Perrotta 2020  Endometriosis                 8       12 cross-sectional obse…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Shan 2021      Endometriosis                12       12 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> Svensson 2021  Endometriosis                66      198 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">11</span> Wei 2020       Endometriosis                36       14 cross-sectional obse…</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 11 × 9</span></span></span>
+<span><span class="co">##    `Study code` MaxCases MaxControls `Study design` Condition N_signatures PMID </span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> AkiyamaK_20…       30          39 cross-section… Endometr…            1 3108…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> AtaB_2019          14          14 prospective c… Endometr…            2 3077…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> ChaoX_2021         37          66 case-control   Endometr…            4 3426…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> ChenS_2020         14         120 case-control   Adenomyo…            3 3331…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> HernandesC_…       21          11 case-control   Endometr…            6 3219…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> KhanKN_2016        32          32 case-control   Endometr…            5 2690…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> LeeSR_2021         45          45 case-control   Endometr…            2 3392…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> PerrottaAR_…        8          12 cross-section… Endometr…            2 3204…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> ShanJ_2021         12          12 case-control   Endometr…            2 3383…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> SvenssonA_2…       66         198 case-control   Endometr…            4 3366…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">11</span> WeiW_2020          36          14 cross-section… Endometr…            2 3229…</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: DOI &lt;chr&gt;, URL &lt;chr&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">subset.dat</span>, n<span class="op">=</span><span class="fl">30</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    1301    1380    1578     194     543     838   84107  119852    1300    1350 </span></span>
@@ -281,18 +282,19 @@ reproductive tract, excluding feces samples</p>
 <span>                      <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">subset.dat2</span><span class="op">$</span><span class="va">`Body site`</span><span class="op">)</span><span class="op">)</span>, <span class="op">]</span></span>
 <span></span>
 <span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">reproductive_sigs</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 9 × 5</span></span></span>
-<span><span class="co">##   Study          Condition                 Cases Controls `Study Design`        </span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> Akiyama 2019   Endometriosis                30       39 cross-sectional obser…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> Ata 2019       Endometriosis                14       14 prospective cohort    </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> Chao 2021      Endometriosis                37       66 case-control          </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span> Chen 2020      Adenomyosis,Endometriosis    14      120 case-control          </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span> Hernandes 2020 Endometriosis                21       11 case-control          </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">6</span> Khan 2016      Endometriosis                32       32 case-control          </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">7</span> Lee 2021       Endometriosis                45       45 case-control          </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">8</span> Perrotta 2020  Endometriosis                 8       12 cross-sectional obser…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">9</span> Wei 2020       Endometriosis                36       14 cross-sectional obser…</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 9 × 9</span></span></span>
+<span><span class="co">##   `Study code`  MaxCases MaxControls `Study design` Condition N_signatures PMID </span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> AkiyamaK_2019       30          39 cross-section… Endometr…            1 3108…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> AtaB_2019           14          14 prospective c… Endometr…            2 3077…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> ChaoX_2021          37          66 case-control   Endometr…            4 3426…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> ChenS_2020          14         120 case-control   Adenomyo…            3 3331…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span> HernandesC_2…       21          11 case-control   Endometr…            6 3219…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">6</span> KhanKN_2016         32          32 case-control   Endometr…            5 2690…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">7</span> LeeSR_2021          45          45 case-control   Endometr…            2 3392…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">8</span> PerrottaAR_2…        8          12 cross-section… Endometr…            2 3204…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">9</span> WeiW_2020           36          14 cross-section… Endometr…            2 3229…</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: DOI &lt;chr&gt;, URL &lt;chr&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">allfreqs</span> <span class="op">&lt;-</span> <span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">reproductive_sigs</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co">#could change number</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/AsIs.html" class="external-link">I</a></span><span class="op">(</span><span class="va">decreased_signatures</span> <span class="op">-</span> <span class="va">increased_signatures</span><span class="op">)</span><span class="op">)</span></span>

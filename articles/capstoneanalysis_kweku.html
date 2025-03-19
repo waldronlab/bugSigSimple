@@ -100,7 +100,7 @@
 Microbiome</h1>
                         <h4 data-toc-skip class="author">Kweku Amoo</h4>
             
-            <h4 data-toc-skip class="date">17 March, 2025</h4>
+            <h4 data-toc-skip class="date">19 March, 2025</h4>
       
 
       <div class="hidden name"><code>capstoneanalysis_kweku.rmd</code></div>
@@ -185,7 +185,7 @@ occuring so frequently by chance</li>
 <code class="sourceCode R"><span><span class="va">condition_of_interest</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"irritable bowel syndrome"</span><span class="op">)</span></span>
 <span><span class="va">efo</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getOntology.html" class="external-link">getOntology</a></span><span class="op">(</span><span class="st">"efo"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Loading required namespace: ontologyIndex</span></span>
-<span><span class="co">## Using cached version from 2025-03-17 23:51:38</span></span></code></pre>
+<span><span class="co">## Using cached version from 2025-03-19 16:37:06</span></span></code></pre>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat_condition</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/subsetByOntology.html" class="external-link">subsetByOntology</a></span><span class="op">(</span><span class="va">dat</span>, column <span class="op">=</span> <span class="st">"Condition"</span>, <span class="st">"irritable bowel syndrome"</span>, <span class="va">efo</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>comparison1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">`Group 0 name`</span>, <span class="va">`Group 1 name`</span>, sep <span class="op">=</span> <span class="st">" vs "</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -194,26 +194,27 @@ occuring so frequently by chance</li>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">dat_condition</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 17 × 5</span></span></span>
-<span><span class="co">##    Study           Condition                Cases Controls `Study Design`       </span></span>
-<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> Barandouzi 2021 Irritable bowel syndrome    80       21 cross-sectional obse…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> Biagi 2011      Irritable bowel syndrome    62       46 case-control,prospec…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> Carroll 2011    Irritable bowel syndrome    16       21 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> Carroll 2012    Irritable bowel syndrome    23       23 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> Chassard 2012   Irritable bowel syndrome    14       12 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> Duboc 2012      Irritable bowel syndrome    14       18 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> Fourie 2016     Irritable bowel syndrome    11       20 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> Jacobs 2023     Irritable bowel syndrome   318      177 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> Kerckhoffs 2009 Irritable bowel syndrome    41       26 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> Maccaferri 2012 Irritable bowel syndrome    19       24 randomized controlle…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">11</span> Mei 2021        Irritable bowel syndrome    30       30 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">12</span> Mertsalmi 2017  Irritable bowel syndrome    18       56 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">13</span> Saulnier 2011   Irritable bowel syndrome    28       27 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">14</span> Shukla 2015     Irritable bowel syndrome    47       30 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">15</span> Su 2023         Irritable bowel syndrome   460      460 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">16</span> Tana 2010       Irritable bowel syndrome    26       26 case-control         </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">17</span> Zhu 2021        Irritable bowel syndrome    74       20 case-control</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 17 × 9</span></span></span>
+<span><span class="co">##    `Study code` MaxCases MaxControls `Study design` Condition N_signatures PMID </span></span>
+<span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> BarandouziZ…       80          21 cross-section… Irritabl…            2 3342…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> CarrollIM_2…       16          21 case-control   Irritabl…            1 2173…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> CarrollIM_2…       23          23 case-control   Irritabl…            3 2233…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> ChassardC_2…       14          12 case-control   Irritabl…            3 2231…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> DubocH_2012        14          18 case-control   Irritabl…            2 2235…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> FourieNH_20…       11          20 case-control   Irritabl…            4 2696…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> JacobsJP_20…      318         177 case-control   Irritabl…            2 3662…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> KerckhoffsA…       41          26 case-control   Irritabl…            4 1953…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> MaccaferriS…       19          24 randomized co… Irritabl…            7 2271…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> MeiL_2021          30          30 case-control   Irritabl…            2 3366…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">11</span> MertsalmiTH…       18          56 case-control   Irritabl…            1 2889…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">12</span> Rajilić-Sto…       62          46 case-control,… Irritabl…            8 2182…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">13</span> SaulnierDM_…       28          27 case-control   Irritabl…            2 2174…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">14</span> ShuklaR_2015       47          30 case-control   Irritabl…           11 2578…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">15</span> SuQ_2023          460         460 case-control   Irritabl…           12 3657…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">16</span> TanaC_2010         26          26 case-control   Irritabl…            2 1990…</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">17</span> ZhuX_2021          74          20 case-control   Irritabl…            8 3493…</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: DOI &lt;chr&gt;, URL &lt;chr&gt;</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="taxon-frequency-tables-by-body-site">Taxon frequency tables by body site<a class="anchor" aria-label="anchor" href="#taxon-frequency-tables-by-body-site"></a>
