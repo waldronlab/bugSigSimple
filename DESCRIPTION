@@ -38,5 +38,5 @@ Remotes:
 Description: bugSigSimple provides simple exploratory analysis of curated microbe signatures from bugsigdb.org.
 License: Artistic-2.0
 VignetteBuilder: knitr
-RoxygenNote: 7.1.2
+RoxygenNote: 7.3.2
 URL: https://waldronlab.io/bugSigSimple
