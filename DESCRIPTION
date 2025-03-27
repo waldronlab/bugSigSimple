@@ -41,4 +41,5 @@ Description: bugSigSimple provides simple exploratory analysis of curated microb
 License: Artistic-2.0
 VignetteBuilder: knitr
 RoxygenNote: 7.3.2
+Encoding: UTF-8
 URL: https://waldronlab.io/bugSigSimple
