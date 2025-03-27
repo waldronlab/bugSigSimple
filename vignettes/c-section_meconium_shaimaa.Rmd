@@ -110,7 +110,9 @@ sort(setdiff(subset.dat$PMID, subset.final$PMID))
 These are the studies included in the review:
 
 ```{r}
-bugSigSimple::createStudyTable(subset.final)
+createStudyTable(subset.final) %>% 
+  kbl() %>% 
+  kable_styling()
 ```
 
 # Summary of taxa reported
