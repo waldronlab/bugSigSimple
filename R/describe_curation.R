@@ -3,7 +3,7 @@
 #' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired
 #' @param n number of taxa to return (if sig.type=="both", this is the number of taxa to return for each direction)
 #'
-#' @importFrom dplyr filter %>% mutate rowwise n_distinct group_by relocate rename first ungroup across
+#' @importFrom dplyr filter %>% mutate rowwise n_distinct group_by relocate rename first ungroup across n
 #' @importFrom utils relist head
 #' @importFrom stats quantile binom.test
 #' @importFrom kableExtra kbl kable_styling
@@ -86,18 +86,19 @@ createTaxonTable <- function(dat, n=10){
 
 #' Create a table of all studies currently in data.frame
 #'
-#' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired
+#' @param bsdb.df \code{data.frame} produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired
+#' @param includeAlso \code{character} with column names to additionally include in the output table (default = `NULL`)
 #'
-#' @importFrom dplyr group_by summarize  %>%
+#' @importFrom dplyr group_by %>% select relocate reframe across n
+#' @importFrom tidyr all_of
 #' @importFrom kableExtra kbl kable_styling
 #' @return a data.frame of basic study information. Can be wrapped in 
-#' kable_styling(kbl(.)) to format nicely.
+#' kable_styling(kbl(...)) to format nicely.
 #' @export
 #'
 #' @examples
 #' full.dat <- bugsigdbr::importBugSigDB()
 #' createStudyTable(full.dat)
-#' ## kable_styling(kbl(createStudyTable(full.dat))) #for html styling
 
 createStudyTable <- function(bsdb.df, includeAlso = NULL) {
   # input check
@@ -153,7 +154,19 @@ globalVariables(
     "Freq",
     "species",
     "kingdom",
-    "Var1"
+    "Var1",
+    # the following are necessary after the merged data
+    "Authors",
+    "Year",
+    "BasicID",
+    "PMID",
+    "URL",
+    "uniqueRank",
+    "Study code",
+    "Group 0 sample size",
+    "Group 1 sample size",
+    "N_signatures",
+    
   )
 )
 
