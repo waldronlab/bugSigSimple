@@ -86,7 +86,7 @@ createTaxonTable <- function(dat, n=10){
 
 #' Create a table of all studies currently in data.frame
 #'
-#' @param bsdb.df \code{data.frame} produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired
+#' @param bsdb.df \code{data.frame} produced by \link[bugsigdbr]{importBugSigDB}, pre-filtered as desired
 #' @param includeAlso \code{character} with column names to additionally include in the output table (default = `NULL`)
 #'
 #' @importFrom dplyr group_by %>% select relocate reframe across n

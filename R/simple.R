@@ -87,6 +87,7 @@ getMostFrequentTaxa <- function(dat, n=10, sig.type=c("both", "increased", "decr
 #' more PMID codes associated with the same ID and adds a .1, .2, for each 
 #' duplication
 #' 
+#' @param bsdb.df \code{data.frame} produced by \link[bugsigdbr]{importBugSigDB}, pre-filtered as desired
 
 .make_unique_study_ID <- function(bsdb.df){
   bsdb_with_StudyCode <- bsdb.df %>% 
