@@ -23,14 +23,16 @@ BiocManager::install("waldronlab/bugSigSimple")
 Load bugSigSimple and bugSigDB
 
 ```{r}
-#library(bugSigDB)
-library (bugSigSimple)
+library(bugSigSimple)
+library(bugsigdbr)
+library(kableExtra)
+library(tidyverse)
 ```
 
 # Load latest BugSigDB data
 
 ```{r}
-dat <- bugsigdbr::importBugSigDB()
+dat <- importBugSigDB()
 dim(dat)
 ```
 
@@ -42,7 +44,7 @@ curatorName <- "Fatima Zohra"
 caption <- paste0("Overview of the studies initially selected based on curator name: ", curatorName, ". For convenience, only top 20 most frequently reported conditions are shown")
 ```
 
-```{r, tab.cap=caption}
+```{r}
 
 my.dat <- subsetByCurator(dat, curator = curatorName)
 
@@ -50,7 +52,7 @@ table(my.dat[,"Condition"]) %>%
   sort(decreasing = TRUE) %>% 
   as.data.frame() %>% 
   head(20) %>% 
-  kbl() %>% 
+  kbl(caption = caption) %>% 
   kable_styling()
 
 ```
