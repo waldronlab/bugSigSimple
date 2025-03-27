@@ -165,8 +165,7 @@ globalVariables(
     "Study code",
     "Group 0 sample size",
     "Group 1 sample size",
-    "N_signatures",
-    
+    "N_signatures"
   )
 )
 
