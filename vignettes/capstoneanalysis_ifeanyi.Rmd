@@ -49,7 +49,10 @@ suppressPackageStartupMessages({
   library(kableExtra)
   library(dplyr)
   library(ComplexHeatmap)
+  library(jtools) # to make a pretty glm summary output
 })
+
+theme_set(theme_light())
 ```
 
 ## Import data from Bugsigdb database
@@ -66,7 +69,12 @@ dat.sub <- subsetByCurator(dat, "Kaluifeanyi101") %>%
   dplyr::filter(`Body site` == "Feces") %>%
   mutate(`Body site` = tolower(`Body site`)) %>%
   mutate(`Condition` = tolower(`Condition`))
-table(dat.sub[,"Condition"])
+
+table(dat.sub[,"Condition"]) %>%
+  sort(decreasing = TRUE) %>% 
+  as.data.frame() %>% 
+  kbl() %>% 
+  kable_styling()
 ```
 
 ## Table of studies
@@ -182,12 +190,13 @@ fit <-
     family = binomial(link = "logit"),
     data = cdf
   )
-summary(fit)
+
+jtools::summ(fit)
 ```
 
 ## Create another heatmap on correlations of presence/absence of taxa.
 
-```{r}
+```{r, fig.height=6, fig.width=6}
 sigcors <- cor(t(cmat))
 siglengths <- sapply(sigs, length)
 ha <- HeatmapAnnotation(`Signature Length` = anno_barplot(siglengths))
@@ -195,8 +204,8 @@ hr <- rowAnnotation(`Signature Length` = anno_barplot(siglengths))
 hm <- Heatmap(
   sigcors,
   top_annotation = ha, left_annotation = hr,
-  row_names_max_width = unit(.05, "cm"),
-  column_names_max_height = unit(.1, "cm"),
+  # row_names_max_width = unit(.05, "cm"),
+  # column_names_max_height = unit(.1, "cm"),
  # row_labels = sub(".+:", "", rownames(sigcors)), ##removing study just to make signature names legible
   column_labels = sub(".+:", "", colnames(sigcors))
 )
@@ -236,7 +245,7 @@ jmate <- BugSigDBStats::calcJaccardSimilarity(allsige)
 
 ## Create a Clustered heatmap
 
-```{r}
+```{r, fig.height=6, fig.width=6}
 library(ComplexHeatmap)
 
 hae <- HeatmapAnnotation(`Signature Length` = anno_barplot(siglengthse))
@@ -244,7 +253,7 @@ hre <- rowAnnotation(`Signature Length` = anno_barplot(siglengthse))
 hme <- Heatmap(
   jmate,
   top_annotation = hae, left_annotation = hre,
-  row_names_max_width = unit(.10,"cm"),
+  #row_names_max_width = unit(.10,"cm"),
   column_names_max_height = unit(1.0, "cm"),
 #  row_labels = sub(".+:", "", rownames(jmate)),  #get rid of study labels
   column_labels = sub(".+:", "", colnames(jmate))
@@ -268,7 +277,7 @@ colnames(cdfe)[1:25]
 
 ## Create another heatmap on correlations of presence/absence of taxa.
 
-```{r}
+```{r, fig.height=6, fig.width=6}
 sigcorse <- cor(t(cmate))
 siglengthse <- sapply(sigse, length)
 hae <- HeatmapAnnotation(`Signature Length` = anno_barplot(siglengthse))
