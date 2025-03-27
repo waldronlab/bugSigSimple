@@ -71,6 +71,7 @@ head(healthysig70)
 ```
 
 ## Get changed in abundance disease genus
+
 ```{r increased disease genus}
 bugdisease_increased <-  dat %>%
   filter (`Host species` == 'Homo sapiens') %>%
@@ -101,6 +102,7 @@ diseasesig_increased2 <- purrr::map_df(diseasesig_increased, ~as.data.frame(.x),
 bugall_increased <- merge(x = bugdisease_increased2, y = diseasesig_increased2, 
                           by =c('study_id','experiment_id','signature_id'), all.x = TRUE)
 ```
+
 ```{r decreased disease genus}
 bugdisease_decreased <-  dat %>%
   filter (`Host species` == 'Homo sapiens') %>%
@@ -215,6 +217,7 @@ paircheck50_increased <- paircomp50_increased %>%
           signature_id= purrr::map_chr(stringr::str_split(purrr::map_chr(name2_2, 3),'_'),1)
         ) 
 ```
+
 ## merge jacard scores with disease study data
 
 ```{r merge jacard scores with disease study data}
