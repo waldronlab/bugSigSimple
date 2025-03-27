@@ -101,7 +101,7 @@ createTaxonTable <- function(dat, n=10){
 
 createStudyTable <- function(bsdb.df, includeAlso = NULL) {
   # input check
-  if (!is_null(includeAlso)) {
+  if (!is.null(includeAlso)) {
     if (!all(includeAlso %in% colnames(bsdb.df))) {
       stop(paste(
         "The following columns are not found in the input data frame:",
