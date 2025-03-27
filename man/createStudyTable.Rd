@@ -4,14 +4,16 @@
 \alias{createStudyTable}
 \title{Create a table of all studies currently in data.frame}
 \usage{
-createStudyTable(dat)
+createStudyTable(bsdb.df, includeAlso = NULL)
 }
 \arguments{
-\item{dat}{data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired}
+\item{bsdb.df}{\code{data.frame} produced by \link[bugsigdbr]{importBugSigDB}, pre-filtered as desired}
+
+\item{includeAlso}{\code{character} with column names to additionally include in the output table (default = `NULL`)}
 }
 \value{
 a data.frame of basic study information. Can be wrapped in 
-kable_styling(kbl(.)) to format nicely.
+kable_styling(kbl(...)) to format nicely.
 }
 \description{
 Create a table of all studies currently in data.frame
@@ -19,5 +21,4 @@ Create a table of all studies currently in data.frame
 \examples{
 full.dat <- bugsigdbr::importBugSigDB()
 createStudyTable(full.dat)
-## kable_styling(kbl(createStudyTable(full.dat))) #for html styling
 }

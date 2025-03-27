@@ -9,6 +9,8 @@
 #' @importFrom kableExtra kbl kable_styling
 #' @importFrom tidyr separate
 #' @importFrom stringr str_replace str_extract
+#' @importFrom bugsigdbr getSignatures
+#' 
 #' @return kable table with increased and decreased taxa and a binomial test based on total number of studies in the data.frame
 #' @export
 #'
@@ -23,7 +25,7 @@ createTaxonTable <- function(dat, n=10){
     data.frame(getMostFrequentTaxa(dat, sig.type = "both", n = n),
                stringsAsFactors = FALSE) %>%
     mutate(metaphlan_name = Var1) %>%
-    tidyr::separate(
+    separate(
       col = Var1,
       sep = "\\|",
       into = dmap,
@@ -48,7 +50,7 @@ createTaxonTable <- function(dat, n=10){
       .countTaxon(dat = dat, x = x, direction = "decreased"))) %>%
     mutate(Taxon = gsub(".+\\|", "", output$metaphlan_name))
   
-    output %>% tidyr::separate(col="Taxon", into=c("Taxonomic Level", "Taxon Name"), sep="__") %>%
+    output %>% separate(col="Taxon", into=c("Taxonomic Level", "Taxon Name"), sep="__") %>%
     mutate(`Taxonomic Level` = unname(dmap[`Taxonomic Level`])) %>%
     rowwise() %>%    
     mutate( `Binomial Test pval` = .createBinomTestSummary(increased_signatures, total_signatures, wordy = FALSE)) %>%
@@ -60,7 +62,7 @@ createTaxonTable <- function(dat, n=10){
   if (direction[1] %in% c("increased", "decreased")){
     dat <- filter(dat, `Abundance in Group 1` == direction[1])
   }
-  allnames <- bugsigdbr::getSignatures(dat, tax.id.type = "metaphlan")
+  allnames <- getSignatures(dat, tax.id.type = "metaphlan")
   sum(vapply(allnames, function(onesignames) x %in% onesignames, FUN.VALUE = 1L))
 }
 
