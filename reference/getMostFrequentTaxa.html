@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Reviews of published signatures based on bugsigdb.org</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
       </span>
     </div>
 
@@ -32,10 +32,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/Bearkland%20capstone%20DED%2012.2.2024.html">Differential Abundance in the ocular microbiome in DED</a>
+      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
     </li>
     <li>
-      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
+      <a href="../articles/capstoneanalysis_BearklandM.html">Differential Abundance in the ocular microbiome in Dry Eye Disaease</a>
     </li>
     <li>
       <a href="../articles/capstoneanalysis_clare.html">COVID-19 associated microbiome</a>
@@ -53,7 +53,7 @@
       <a href="../articles/fieldworkanalysis_samara.html">The Endometriosis-associated Microbiome</a>
     </li>
     <li>
-      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in bugsigdb.org</a>
+      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in BugSigDB</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
@@ -117,29 +117,29 @@
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">full.dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using cached version from 2025-03-19 16:39:02</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using cached version from 2025-05-05 19:21:34</span>
 <span class="r-in"><span><span class="fu">getMostFrequentTaxa</span><span class="op">(</span><span class="va">full.dat</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          520 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          481 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                 k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          458 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                  k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          428 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                  k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          399 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                     k__Bacteria|p__Bacillota </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          366 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          364 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>              k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          346 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                k__Bacteria|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          312 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                  k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                          304 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>            d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       631 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>             d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       624 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       594 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       579 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                  d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       521 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                  d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       456 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                     d__Bacteria|k__Bacillati|p__Bacillota </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       452 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       434 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       434 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                d__Bacteria|k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                                                                                       392 </span>
 </code></pre></div>
     </div>
   </div>
@@ -154,7 +154,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
       </footer></div>

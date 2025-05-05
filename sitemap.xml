@@ -1,7 +1,7 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>http://waldronlab.io/bugSigSimple/404.html</loc></url>
-<url><loc>http://waldronlab.io/bugSigSimple/articles/Bearkland capstone DED 12.2.2024.html</loc></url>
 <url><loc>http://waldronlab.io/bugSigSimple/articles/c-section_meconium_shaimaa.html</loc></url>
+<url><loc>http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_BearklandM.html</loc></url>
 <url><loc>http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_clare.html</loc></url>
 <url><loc>http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_fatima.html</loc></url>
 <url><loc>http://waldronlab.io/bugSigSimple/articles/capstoneanalysis_ifeanyi.html</loc></url>
@@ -13,6 +13,7 @@
 <url><loc>http://waldronlab.io/bugSigSimple/index.html</loc></url>
 <url><loc>http://waldronlab.io/bugSigSimple/reference/createStudyTable.html</loc></url>
 <url><loc>http://waldronlab.io/bugSigSimple/reference/createTaxonTable.html</loc></url>
+<url><loc>http://waldronlab.io/bugSigSimple/reference/dot-make_unique_study_ID.html</loc></url>
 <url><loc>http://waldronlab.io/bugSigSimple/reference/frequencySigs.html</loc></url>
 <url><loc>http://waldronlab.io/bugSigSimple/reference/getCriticalN.html</loc></url>
 <url><loc>http://waldronlab.io/bugSigSimple/reference/getMostFrequentTaxa.html</loc></url>

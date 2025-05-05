@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Reviews of published signatures based on bugsigdb.org</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
       </span>
     </div>
 
@@ -49,10 +49,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Bearkland%20capstone%20DED%2012.2.2024.html">Differential Abundance in the ocular microbiome in DED</a>
+      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
     </li>
     <li>
-      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
+      <a href="../articles/capstoneanalysis_BearklandM.html">Differential Abundance in the ocular microbiome in Dry Eye Disaease</a>
     </li>
     <li>
       <a href="../articles/capstoneanalysis_clare.html">COVID-19 associated microbiome</a>
@@ -70,7 +70,7 @@
       <a href="../articles/fieldworkanalysis_samara.html">The Endometriosis-associated Microbiome</a>
     </li>
     <li>
-      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in bugsigdb.org</a>
+      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in BugSigDB</a>
     </li>
   </ul>
 </li>
@@ -98,7 +98,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Delivery Mode and the Meconium Microbiome</h1>
             
-            <h4 data-toc-skip class="date">19 March, 2025</h4>
+            <h4 data-toc-skip class="date">05 May, 2025</h4>
       
 
       <div class="hidden name"><code>c-section_meconium_shaimaa.Rmd</code></div>
@@ -143,9 +143,9 @@ signatures and identify the most frequently reported taxa</li>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># use version="devel" and cache = FALSE to take the latest version from bugsigdb.org</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>version <span class="op">=</span> <span class="st">"devel"</span>, cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 7349   50</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 8163   50</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "BSDB ID"                    "Study"                     </span></span>
@@ -292,24 +292,223 @@ signatures and identify the most frequently reported taxa</li>
 </h2>
 <p>These are the studies included in the review:</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">subset.final</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 9</span></span></span>
-<span><span class="co">##   `Study code`  MaxCases MaxControls `Study design` Condition N_signatures PMID </span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> ArdissoneAN_…       33          19 cross-section… Cesarean…            1 2461…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> MartinR_2016        28          80 cross-section… Cesarean…            1 2736…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> ShiYC_2018          10           8 cross-section… Cesarean…            2 2945…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span> TapiainenT_2…       40         172 cross-section… Cesarean…            1 2953…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span> WampachL_2017        6           4 time series /… Cesarean…            1 2851…</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">6</span> WongWSW_2020        43          62 prospective c… Cesarean…            2 3201…</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: DOI &lt;chr&gt;, URL &lt;chr&gt;</span></span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">subset.final</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table table" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+Study code
+</th>
+<th style="text-align:right;">
+MaxCases
+</th>
+<th style="text-align:right;">
+MaxControls
+</th>
+<th style="text-align:left;">
+Study design
+</th>
+<th style="text-align:left;">
+Condition
+</th>
+<th style="text-align:right;">
+N_signatures
+</th>
+<th style="text-align:left;">
+PMID
+</th>
+<th style="text-align:left;">
+DOI
+</th>
+<th style="text-align:left;">
+URL
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ArdissoneAN_2014
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+19
+</td>
+<td style="text-align:left;">
+cross-sectional observational, not case-control
+</td>
+<td style="text-align:left;">
+Cesarean section
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+24614698
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1371/journal.pone.0090784" class="external-link uri">https://doi.org/10.1371/journal.pone.0090784</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MartinR_2016
+</td>
+<td style="text-align:right;">
+28
+</td>
+<td style="text-align:right;">
+80
+</td>
+<td style="text-align:left;">
+cross-sectional observational, not case-control
+</td>
+<td style="text-align:left;">
+Cesarean section
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+27362264
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1371/journal.pone.0158498" class="external-link uri">https://doi.org/10.1371/journal.pone.0158498</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ShiYC_2018
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+cross-sectional observational, not case-control
+</td>
+<td style="text-align:left;">
+Cesarean section
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+29459704
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1038/s41598-018-21657-7" class="external-link uri">https://doi.org/10.1038/s41598-018-21657-7</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+TapiainenT_2018
+</td>
+<td style="text-align:right;">
+40
+</td>
+<td style="text-align:right;">
+172
+</td>
+<td style="text-align:left;">
+cross-sectional observational, not case-control
+</td>
+<td style="text-align:left;">
+Cesarean section
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+29538354
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.1038/pr.2018.29" class="external-link uri">https://doi.org/10.1038/pr.2018.29</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WampachL_2017
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+time series / longitudinal observational
+</td>
+<td style="text-align:left;">
+Cesarean section
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+28512451
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.3389/fmicb.2017.00738" class="external-link uri">https://doi.org/10.3389/fmicb.2017.00738</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WongWSW_2020
+</td>
+<td style="text-align:right;">
+43
+</td>
+<td style="text-align:right;">
+62
+</td>
+<td style="text-align:left;">
+prospective cohort
+</td>
+<td style="text-align:left;">
+Cesarean section
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+32012716
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.3390/microorganisms8020179" class="external-link uri">https://doi.org/10.3390/microorganisms8020179</a>
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level2">
 <h2 id="summary-of-taxa-reported">Summary of taxa reported<a class="anchor" aria-label="anchor" href="#summary-of-taxa-reported"></a>
 </h2>
 <p>This table summarizes the results for the top <code>n</code> most
 frequently identified taxa.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">subset.final</span>, n <span class="op">=</span> <span class="fl">20</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning: Expected 7 pieces. Additional pieces discarded in 5 rows [6,</span></span>
 <span><span class="co">## 14, 15, 16, 19].</span></span></code></pre>
@@ -403,10 +602,10 @@ Staphylococcaceae
 Staphylococcus
 </td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Bacillales|f__Staphylococcaceae|g__Staphylococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Bacillales|f__Staphylococcaceae|g__Staphylococcus
 </td>
 </tr>
 <tr>
@@ -450,10 +649,10 @@ Corynebacteriaceae
 Corynebacterium
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Mycobacteriales|f__Corynebacteriaceae|g__Corynebacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Mycobacteriales|f__Corynebacteriaceae|g__Corynebacterium
 </td>
 </tr>
 <tr>
@@ -497,10 +696,10 @@ Propionibacteriaceae
 Propionibacterium
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae|g__Propionibacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae|g__Propionibacterium
 </td>
 </tr>
 <tr>
@@ -544,10 +743,10 @@ Enterococcaceae
 Enterococcus
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
 </td>
 </tr>
 <tr>
@@ -591,10 +790,10 @@ Streptococcaceae
 Streptococcus
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
 </td>
 </tr>
 <tr>
@@ -638,10 +837,10 @@ Bacteroidaceae
 Phocaeicola
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Phocaeicola|s__Phocaeicola
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Phocaeicola|s__Phocaeicola
 vulgatus
 </td>
 </tr>
@@ -686,10 +885,10 @@ Comamonadaceae
 Comamonas
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Betaproteobacteria|o__Burkholderiales|f__Comamonadaceae|g__Comamonas
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Betaproteobacteria|o__Burkholderiales|f__Comamonadaceae|g__Comamonas
 </td>
 </tr>
 <tr>
@@ -733,10 +932,10 @@ Enterobacteriaceae
 Citrobacter
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae|g__Citrobacter
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae|g__Citrobacter
 </td>
 </tr>
 <tr>
@@ -780,10 +979,10 @@ Lysobacteraceae
 Stenotrophomonas
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Lysobacterales|f__Lysobacteraceae|g__Stenotrophomonas
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Lysobacterales|f__Lysobacteraceae|g__Stenotrophomonas
 </td>
 </tr>
 <tr>
@@ -827,10 +1026,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota
+d__Bacteria|k__Bacillati|p__Actinomycetota
 </td>
 </tr>
 <tr>
@@ -874,10 +1073,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes
 </td>
 </tr>
 <tr>
@@ -921,10 +1120,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales
 </td>
 </tr>
 <tr>
@@ -968,10 +1167,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
 </td>
 </tr>
 <tr>
@@ -1015,10 +1214,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 bifidum
 </td>
 </tr>
@@ -1063,10 +1262,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 catenulatum
 </td>
 </tr>
@@ -1111,10 +1310,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 longum|s__Bifidobacterium longum subsp. longum
 </td>
 </tr>
@@ -1159,10 +1358,10 @@ Bifidobacteriaceae
 Pseudoscardovia
 </td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Pseudoscardovia
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Pseudoscardovia
 </td>
 </tr>
 <tr>
@@ -1206,10 +1405,10 @@ Propionibacteriaceae
 NA
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae
 </td>
 </tr>
 <tr>
@@ -1253,10 +1452,10 @@ Propionibacteriaceae
 Cutibacterium
 </td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae|g__Cutibacterium|s__Cutibacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae|g__Cutibacterium|s__Cutibacterium
 acnes
 </td>
 </tr>
@@ -1301,10 +1500,10 @@ Pseudonocardiaceae
 NA
 </td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Pseudonocardiales|f__Pseudonocardiaceae
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Pseudonocardiales|f__Pseudonocardiaceae
 </td>
 </tr>
 </tbody>
@@ -1315,7 +1514,7 @@ k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Pseudonocardiales
 </h2>
 <p>These are not needed because of the taxon table above, but they list
 a larger number of taxa.</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">subset.final</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##    1279    1301    1350    1716    1743     283   40323     544     821  114248 </span></span>
 <span><span class="co">##       3       2       2       2       2       2       2       2       2       1 </span></span>
@@ -1327,11 +1526,11 @@ a larger number of taxa.</p>
 <span><span class="co">##       1       1       1       1       1       1       1       1       1       1 </span></span>
 <span><span class="co">##  183710  186806  186817  188787  201174    2037    2070  216851     222    2737 </span></span>
 <span><span class="co">##       1       1       1       1       1       1       1       1       1       1</span></span></code></pre>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">subset.final</span>, direction<span class="op">=</span><span class="st">"UP"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  40323 114248 117563 118964   1239   1243   1279  12916   1297   1298 </span></span>
 <span><span class="co">##      2      1      1      1      1      1      1      1      1      1</span></span></code></pre>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/getMostFrequentTaxa.html">getMostFrequentTaxa</a></span><span class="op">(</span><span class="va">subset.final</span>, direction<span class="op">=</span><span class="st">"DOWN"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##   1279   1350   1236   1301   1380   1485   1502 158851   1596   1598 </span></span>
 <span><span class="co">##      2      2      1      1      1      1      1      1      1      1</span></span></code></pre>
@@ -1353,7 +1552,7 @@ a larger number of taxa.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
       </footer>

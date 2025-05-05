@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Reviews of published signatures based on bugsigdb.org</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
       </span>
     </div>
 
@@ -49,10 +49,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Bearkland%20capstone%20DED%2012.2.2024.html">Differential Abundance in the ocular microbiome in DED</a>
+      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
     </li>
     <li>
-      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
+      <a href="../articles/capstoneanalysis_BearklandM.html">Differential Abundance in the ocular microbiome in Dry Eye Disaease</a>
     </li>
     <li>
       <a href="../articles/capstoneanalysis_clare.html">COVID-19 associated microbiome</a>
@@ -70,7 +70,7 @@
       <a href="../articles/fieldworkanalysis_samara.html">The Endometriosis-associated Microbiome</a>
     </li>
     <li>
-      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in bugsigdb.org</a>
+      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in BugSigDB</a>
     </li>
   </ul>
 </li>
@@ -98,7 +98,7 @@
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>The Endometriosis-associated Microbiome</h1>
             
-            <h4 data-toc-skip class="date">19 March, 2025</h4>
+            <h4 data-toc-skip class="date">05 May, 2025</h4>
       
 
       <div class="hidden name"><code>fieldworkanalysis_samara.Rmd</code></div>
@@ -146,7 +146,7 @@ occuring by chance</li>
 <pre><code><span><span class="co">## ── <span style="font-weight: bold;">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr    </span> 1.1.4     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr    </span> 2.1.5</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats  </span> 1.0.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr  </span> 1.5.1</span></span>
-<span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.5.1     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span></span>
+<span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.5.2     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">lubridate</span> 1.9.4     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr    </span> 1.3.1</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr    </span> 1.0.4</span></span></code></pre>
 <pre><code><span><span class="co">## ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
@@ -167,10 +167,10 @@ occuring by chance</li>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://waldronlab.io/bugSigSimple" class="external-link">bugSigSimple</a></span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>cache<span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Using cached version from 2025-03-19 16:43:45</span></span></code></pre>
+<pre><code><span><span class="co">## Using cached version from 2025-05-05 19:25:55</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 5520   50</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 8163   50</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "BSDB ID"                    "Study"                     </span></span>
@@ -374,6 +374,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -388,14 +391,11 @@ Streptococcaceae
 <td style="text-align:left;">
 Streptococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
 </td>
 </tr>
 <tr>
@@ -419,6 +419,9 @@ family
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Actinomycetota
@@ -435,14 +438,11 @@ Coriobacteriaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae
 </td>
 </tr>
 <tr>
@@ -466,6 +466,9 @@ family
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Bacillota
@@ -482,14 +485,11 @@ Streptococcaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-9
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae
 </td>
 </tr>
 <tr>
@@ -515,6 +515,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -529,14 +532,11 @@ Enterobacteriaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae
 </td>
 </tr>
 <tr>
@@ -562,6 +562,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -576,14 +579,11 @@ Enterobacteriaceae
 <td style="text-align:left;">
 Escherichia/Shigella sp.
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae|s__Escherichia/Shigella
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae|s__Escherichia/Shigella
 sp.
 </td>
 </tr>
@@ -610,6 +610,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -624,14 +627,11 @@ Moraxellaceae
 <td style="text-align:left;">
 Acinetobacter
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Gammaproteobacteria|o__Moraxellales|f__Moraxellaceae|g__Acinetobacter
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Moraxellales|f__Moraxellaceae|g__Acinetobacter
 </td>
 </tr>
 <tr>
@@ -657,6 +657,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -671,14 +674,11 @@ Pseudomonadaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Gammaproteobacteria|o__Pseudomonadales|f__Pseudomonadaceae
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Pseudomonadales|f__Pseudomonadaceae
 </td>
 </tr>
 <tr>
@@ -704,6 +704,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -718,14 +721,11 @@ Pseudomonadaceae
 <td style="text-align:left;">
 Pseudomonas
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Gammaproteobacteria|o__Pseudomonadales|f__Pseudomonadaceae|g__Pseudomonas
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Pseudomonadales|f__Pseudomonadaceae|g__Pseudomonas
 </td>
 </tr>
 <tr>
@@ -751,6 +751,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -765,14 +768,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Alloscardovia
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Alloscardovia
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Alloscardovia
 </td>
 </tr>
 <tr>
@@ -796,6 +796,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Actinomycetota
@@ -812,14 +815,11 @@ Micrococcaceae
 <td style="text-align:left;">
 Arthrobacter
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Micrococcales|f__Micrococcaceae|g__Arthrobacter
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Micrococcales|f__Micrococcaceae|g__Arthrobacter
 </td>
 </tr>
 <tr>
@@ -843,6 +843,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Bacillota
@@ -859,14 +862,11 @@ Aerococcaceae
 <td style="text-align:left;">
 Aerococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Aerococcaceae|g__Aerococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Aerococcaceae|g__Aerococcus
 </td>
 </tr>
 <tr>
@@ -890,6 +890,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Bacillota
@@ -906,14 +909,11 @@ Lactobacillaceae
 <td style="text-align:left;">
 Lactobacillus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus
 </td>
 </tr>
 <tr>
@@ -939,6 +939,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -953,14 +956,11 @@ Veillonellaceae
 <td style="text-align:left;">
 Dialister
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Dialister
+d__Bacteria|k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Dialister
 </td>
 </tr>
 <tr>
@@ -984,6 +984,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Pseudomonadati
 </td>
 <td style="text-align:left;">
 Bacteroidota
@@ -1000,14 +1003,11 @@ Prevotellaceae
 <td style="text-align:left;">
 Prevotella
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
 </td>
 </tr>
 <tr>
@@ -1031,6 +1031,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Pseudomonadati
 </td>
 <td style="text-align:left;">
 Campylobacterota
@@ -1047,14 +1050,11 @@ Campylobacteraceae
 <td style="text-align:left;">
 Campylobacter
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Campylobacterota|c__Epsilonproteobacteria|o__Campylobacterales|f__Campylobacteraceae|g__Campylobacter
+d__Bacteria|k__Pseudomonadati|p__Campylobacterota|c__Epsilonproteobacteria|o__Campylobacterales|f__Campylobacteraceae|g__Campylobacter
 </td>
 </tr>
 <tr>
@@ -1078,6 +1078,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Actinomycetota
@@ -1094,14 +1097,11 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Gardnerella
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Gardnerella
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Gardnerella
 </td>
 </tr>
 <tr>
@@ -1125,6 +1125,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Actinomycetota
@@ -1141,14 +1144,11 @@ Propionibacteriaceae
 <td style="text-align:left;">
 Propionibacterium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae|g__Propionibacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Propionibacteriales|f__Propionibacteriaceae|g__Propionibacterium
 </td>
 </tr>
 <tr>
@@ -1172,6 +1172,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Actinomycetota
@@ -1188,14 +1191,11 @@ Atopobiaceae
 <td style="text-align:left;">
 Atopobium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-5
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae|g__Atopobium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae|g__Atopobium
 </td>
 </tr>
 <tr>
@@ -1219,6 +1219,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Actinomycetota
@@ -1235,14 +1238,11 @@ Actinomycetaceae
 <td style="text-align:left;">
 Mobiluncus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales|f__Actinomycetaceae|g__Mobiluncus
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales|f__Actinomycetaceae|g__Mobiluncus
 </td>
 </tr>
 <tr>
@@ -1268,6 +1268,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -1282,14 +1285,11 @@ Veillonellaceae
 <td style="text-align:left;">
 Megasphaera
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Megasphaera
+d__Bacteria|k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Megasphaera
 </td>
 </tr>
 </tbody>
@@ -1303,22 +1303,17 @@ k__Bacteria|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g
 <span><span class="va">all_healthy_adult_vagina_metadata</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">sampleMetadata</span>, <span class="va">body_site</span> <span class="op">==</span> <span class="st">"vagina"</span> <span class="op">&amp;</span> <span class="va">disease</span> <span class="op">==</span> <span class="st">"healthy"</span> <span class="op">&amp;</span> <span class="va">age_category</span> <span class="op">==</span> <span class="st">"adult"</span><span class="op">)</span></span>
 <span><span class="va">se</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu">curatedMetagenomicData</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/curatedMetagenomicData/man/returnSamples.html" class="external-link">returnSamples</a></span><span class="op">(</span><span class="va">all_healthy_adult_vagina_metadata</span>, dataType <span class="op">=</span> <span class="st">"relative_abundance"</span>, counts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: There was 1 warning in `mutate()`.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> In argument: `across(.fns = ~replace_na(.x, 0))`.</span></span>
-<span><span class="co">## Caused by warning:</span></span>
-<span><span class="co">## <span style="color: #BBBB00;">!</span> Using `across()` without supplying `.cols` was deprecated in dplyr 1.1.0.</span></span>
-<span><span class="co">## <span style="color: #00BBBB;">ℹ</span> Please supply `.cols` instead.</span></span></code></pre>
 <p>Get matrices of species and genus relative abundance</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">allranks</span> <span class="op">&lt;-</span> <span class="fu">mia</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mia/man/agglomerate-methods.html" class="external-link">splitByRanks</a></span><span class="op">(</span><span class="va">se</span><span class="op">)</span></span>
 <span><span class="co">#species_relab &lt;- t(assay(allranks[["species"]]))</span></span>
 <span><span class="va">genus_relab</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">allranks</span><span class="op">[[</span><span class="st">"genus"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#family_relab &lt;- t(assay(allranks[["family"]]))</span></span></code></pre></div>
 <p>Centered log-ratio transformation on genus level relative
 abundance:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">genus_relab_clr</span> <span class="op">&lt;-</span> <span class="fu">Hotelling</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/Hotelling/man/clr.html" class="external-link">clr</a></span><span class="op">(</span><span class="va">genus_relab</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">genus_relab_clr</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Streptococcus"</span>, <span class="st">"Lactobacillus"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">age</span> <span class="op">&lt;-</span> <span class="va">se</span><span class="op">$</span><span class="va">age</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">BMI</span> <span class="op">&lt;-</span> <span class="va">se</span><span class="op">$</span><span class="va">BMI</span></span>
@@ -1329,21 +1324,23 @@ abundance:</p>
 <span><span class="co">## lm(formula = Streptococcus ~ Lactobacillus + age + BMI, data = df)</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Residuals:</span></span>
-<span><span class="co">##      Min       1Q   Median       3Q      Max </span></span>
-<span><span class="co">## -0.06004 -0.02525 -0.01591 -0.00853  0.71736 </span></span>
+<span><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
+<span><span class="co">## -0.6728 -0.1875 -0.0264  0.0893  3.6729 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
-<span><span class="co">##                Estimate Std. Error t value Pr(&gt;|t|)</span></span>
-<span><span class="co">## (Intercept)   -0.112785   0.117024  -0.964    0.339</span></span>
-<span><span class="co">## Lactobacillus  0.008483   0.015007   0.565    0.574</span></span>
-<span><span class="co">## age            0.001061   0.003520   0.301    0.764</span></span>
-<span><span class="co">## BMI            0.001921   0.004362   0.440    0.661</span></span>
+<span><span class="co">##                Estimate Std. Error t value Pr(&gt;|t|)    </span></span>
+<span><span class="co">## (Intercept)   -0.386413   0.436694  -0.885 0.378987    </span></span>
+<span><span class="co">## Lactobacillus -0.078095   0.047933  -1.629 0.107344    </span></span>
+<span><span class="co">## age            0.035738   0.010073   3.548 0.000665 ***</span></span>
+<span><span class="co">## BMI           -0.009094   0.014295  -0.636 0.526581    </span></span>
+<span><span class="co">## ---</span></span>
+<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Residual standard error: 0.1149 on 61 degrees of freedom</span></span>
-<span><span class="co">##   (30 observations deleted due to missingness)</span></span>
-<span><span class="co">## Multiple R-squared:  0.01484,    Adjusted R-squared:  -0.03361 </span></span>
-<span><span class="co">## F-statistic: 0.3064 on 3 and 61 DF,  p-value: 0.8207</span></span></code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<span><span class="co">## Residual standard error: 0.4857 on 77 degrees of freedom</span></span>
+<span><span class="co">##   (14 observations deleted due to missingness)</span></span>
+<span><span class="co">## Multiple R-squared:  0.1799, Adjusted R-squared:  0.1479 </span></span>
+<span><span class="co">## F-statistic: 5.629 on 3 and 77 DF,  p-value: 0.00153</span></span></code></pre>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">Streptococcus</span> <span class="op">~</span> <span class="va">Lactobacillus</span>, data <span class="op">=</span> <span class="va">df</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Call:</span></span>
@@ -1363,7 +1360,7 @@ abundance:</p>
 <span><span class="co">## Residual standard error: 0.5642 on 93 degrees of freedom</span></span>
 <span><span class="co">## Multiple R-squared:  0.05839,    Adjusted R-squared:  0.04826 </span></span>
 <span><span class="co">## F-statistic: 5.767 on 1 and 93 DF,  p-value: 0.01832</span></span></code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/wilcox.test.html" class="external-link">wilcox.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Streptococcus</span>, <span class="va">df</span><span class="op">$</span><span class="va">Lactobacillus</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Wilcoxon rank sum test with continuity correction</span></span>
@@ -1371,7 +1368,7 @@ abundance:</p>
 <span><span class="co">## data:  df$Streptococcus and df$Lactobacillus</span></span>
 <span><span class="co">## W = 213.5, p-value &lt; 2.2e-16</span></span>
 <span><span class="co">## alternative hypothesis: true location shift is not equal to 0</span></span></code></pre>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/t.test.html" class="external-link">t.test</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Streptococcus</span>, <span class="va">df</span><span class="op">$</span><span class="va">Lactobacillus</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">##  Welch Two Sample t-test</span></span>
@@ -1384,7 +1381,7 @@ abundance:</p>
 <span><span class="co">## sample estimates:</span></span>
 <span><span class="co">## mean of x mean of y </span></span>
 <span><span class="co">## 0.0879008 4.0718280</span></span></code></pre>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">secount</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu">curatedMetagenomicData</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/curatedMetagenomicData/man/returnSamples.html" class="external-link">returnSamples</a></span><span class="op">(</span><span class="va">all_healthy_adult_vagina_metadata</span>, dataType <span class="op">=</span> <span class="st">"relative_abundance"</span>, counts <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
@@ -1417,13 +1414,13 @@ abundance:</p>
 <span><span class="co">##   k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Carnobacteriaceae|g__Granulicatella|s__Granulicatella_elegans</span></span>
 <span><span class="co">##   k__Bacteria|p__Proteobacteria|c__Betaproteobacteria|o__Burkholderiales|f__Sutterellaceae|g__Sutterella|s__Sutterella_parvirubra</span></span>
 <span><span class="co">##   k__Bacteria|p__Synergistetes|c__Synergistia|o__Synergistales|f__Synergistaceae|g__Cloacibacillus|s__Cloacibacillus_evryensis</span></span></code></pre>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">allranks</span> <span class="op">&lt;-</span> <span class="fu">mia</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/mia/man/agglomerate-methods.html" class="external-link">splitByRanks</a></span><span class="op">(</span><span class="va">secount</span><span class="op">)</span></span>
 <span><span class="va">genus_relab_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/SummarizedExperiment/man/SummarizedExperiment-class.html" class="external-link">assay</a></span><span class="op">(</span><span class="va">allranks</span><span class="op">[[</span><span class="st">"genus"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">genus_relab_count</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Streptococcus"</span>, <span class="st">"Lactobacillus"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">age</span> <span class="op">&lt;-</span> <span class="va">secount</span><span class="op">$</span><span class="va">age</span></span>
 <span><span class="va">df</span><span class="op">$</span><span class="va">BMI</span> <span class="op">&lt;-</span> <span class="va">secount</span><span class="op">$</span><span class="va">BMI</span></span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/atahk/pscl" class="external-link">pscl</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Classes and Methods for R originally developed in the</span></span>
 <span><span class="co">## Political Science Computational Laboratory</span></span>
@@ -1431,18 +1428,17 @@ abundance:</p>
 <span><span class="co">## Stanford University (2002-2015),</span></span>
 <span><span class="co">## by and under the direction of Simon Jackman.</span></span>
 <span><span class="co">## hurdle and zeroinfl functions by Achim Zeileis.</span></span></code></pre>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit.ZInegbin</span> <span class="op">&lt;-</span> <span class="fu">pscl</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/pscl/man/zeroinfl.html" class="external-link">zeroinfl</a></span><span class="op">(</span><span class="va">Streptococcus</span> <span class="op">~</span> <span class="va">Lactobacillus</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">BMI</span> <span class="op">|</span> <span class="fl">1</span>,</span>
 <span>                data <span class="op">=</span> <span class="va">df</span>,</span>
 <span>                dist <span class="op">=</span> <span class="st">"negbin"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
 <h2 id="create-a-data-frame-for-regression-analysis-from-healthy-controls-for-log-linear-model">Create a data frame for regression analysis from healthy controls
 for log-linear model<a class="anchor" aria-label="anchor" href="#create-a-data-frame-for-regression-analysis-from-healthy-controls-for-log-linear-model"></a>
 </h2>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/curatedMetagenomicData" class="external-link">curatedMetagenomicData</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/DT" class="external-link">DT</a></span><span class="op">)</span></span>
@@ -1460,10 +1456,10 @@ for log-linear model<a class="anchor" aria-label="anchor" href="#create-a-data-f
 <span>    <span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">sample_metadata</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 96 26</span></span></code></pre>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">sample_metadata</span><span class="op">$</span><span class="va">study_name</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "FerrettiP_2018" "HMP_2012"       "WampachL_2018"</span></span></code></pre>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/curatedMetagenomicData/man/returnSamples.html" class="external-link">returnSamples</a></span><span class="op">(</span></span>
 <span>    sampleMetadata <span class="op">=</span> <span class="va">sample_metadata</span>,</span>
 <span>    dataType <span class="op">=</span> <span class="st">"relative_abundance"</span>,</span>
@@ -1500,14 +1496,17 @@ for log-linear model<a class="anchor" aria-label="anchor" href="#create-a-data-f
 <span><span class="co">##   k__Bacteria|p__Firmicutes|c__Bacilli|o__Lactobacillales|f__Carnobacteriaceae|g__Granulicatella|s__Granulicatella_elegans</span></span>
 <span><span class="co">##   k__Bacteria|p__Proteobacteria|c__Betaproteobacteria|o__Burkholderiales|f__Sutterellaceae|g__Sutterella|s__Sutterella_parvirubra</span></span>
 <span><span class="co">##   k__Bacteria|p__Synergistetes|c__Synergistia|o__Synergistales|f__Synergistaceae|g__Cloacibacillus|s__Cloacibacillus_evryensis</span></span></code></pre>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## Warning in convertNode(tree = tree, node = labN, use.alias = FALSE, message =</span></span>
+<span><span class="co">## FALSE): Multiple nodes are found to have the same label.</span></span></code></pre>
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tse</span></span></code></pre></div>
 <pre><code><span><span class="co">## class: TreeSummarizedExperiment </span></span>
-<span><span class="co">## dim: 902 96 </span></span>
+<span><span class="co">## dim: 908 96 </span></span>
 <span><span class="co">## metadata(0):</span></span>
 <span><span class="co">## assays(1): relative_abundance</span></span>
-<span><span class="co">## rownames(902): [Clostridium] innocuum [Clostridium] leptum ... Rahnella</span></span>
-<span><span class="co">##   aquatilis Rothia kristinae</span></span>
+<span><span class="co">## rownames(908): species:Escherichia coli species:Klebsiella</span></span>
+<span><span class="co">##   michiganensis ... species:Pediococcus pentosaceus species:Rahnella</span></span>
+<span><span class="co">##   aquatilis</span></span>
 <span><span class="co">## rowData names(7): superkingdom phylum ... genus species</span></span>
 <span><span class="co">## colnames(96): CA_C10001MS2003VA_t0M15 CA_C10003MS2031VA_t0M15 ...</span></span>
 <span><span class="co">##   MV_C118 MV_C120</span></span>
@@ -1515,32 +1514,31 @@ for log-linear model<a class="anchor" aria-label="anchor" href="#create-a-data-f
 <span><span class="co">## reducedDimNames(0):</span></span>
 <span><span class="co">## mainExpName: NULL</span></span>
 <span><span class="co">## altExpNames(0):</span></span>
-<span><span class="co">## rowLinks: a LinkDataFrame (902 rows)</span></span>
+<span><span class="co">## rowLinks: a LinkDataFrame (908 rows)</span></span>
 <span><span class="co">## rowTree: 1 phylo tree(s) (10430 leaves)</span></span>
 <span><span class="co">## colLinks: NULL</span></span>
 <span><span class="co">## colTree: NULL</span></span></code></pre>
 <div class="section level3">
 <h3 id="comparing-mean-to-variance-of-the-outcome-variable">Comparing mean to variance of the outcome variable<a class="anchor" aria-label="anchor" href="#comparing-mean-to-variance-of-the-outcome-variable"></a>
 </h3>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Streptococcus</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 4049.558</span></span></code></pre>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">Streptococcus</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 509068831</span></span></code></pre>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fraczeroes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="va">df</span><span class="op">$</span><span class="va">Streptococcus</span> <span class="op">==</span> <span class="fl">0</span>,<span class="op">]</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
 <span><span class="va">fraczeroes</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 0.8736842</span></span></code></pre>
 <p>#Fit log-linear models</p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit.pois</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span><span class="va">Streptococcus</span> <span class="op">~</span> <span class="va">Lactobacillus</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">BMI</span>,</span>
 <span>                data <span class="op">=</span> <span class="va">df</span>,</span>
-<span>                family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span> <span class="op">(</span><span class="va">fit.pois</span><span class="op">)</span></span></code></pre></div>
+<span>                family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">poisson</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"log"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span> <span class="op">(</span><span class="va">fit.pois</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Call:</span></span>
 <span><span class="co">## glm(formula = Streptococcus ~ Lactobacillus + age + BMI, family = poisson(link = "log"), </span></span>
@@ -1548,29 +1546,28 @@ for log-linear model<a class="anchor" aria-label="anchor" href="#create-a-data-f
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients:</span></span>
 <span><span class="co">##                 Estimate Std. Error z value Pr(&gt;|z|)    </span></span>
-<span><span class="co">## (Intercept)    5.211e+00  3.056e-02 170.485  &lt; 2e-16 ***</span></span>
-<span><span class="co">## Lactobacillus  2.307e-08  6.221e-10  37.085  &lt; 2e-16 ***</span></span>
-<span><span class="co">## age            5.232e-02  1.049e-03  49.868  &lt; 2e-16 ***</span></span>
-<span><span class="co">## BMI           -4.464e-03  1.356e-03  -3.291 0.000999 ***</span></span>
+<span><span class="co">## (Intercept)   -5.313e-01  1.873e-02  -28.36   &lt;2e-16 ***</span></span>
+<span><span class="co">## Lactobacillus  5.141e-08  9.828e-10   52.32   &lt;2e-16 ***</span></span>
+<span><span class="co">## age            3.599e-01  4.136e-04  870.25   &lt;2e-16 ***</span></span>
+<span><span class="co">## BMI           -1.573e-01  6.453e-04 -243.77   &lt;2e-16 ***</span></span>
 <span><span class="co">## ---</span></span>
 <span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## (Dispersion parameter for poisson family taken to be 1)</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">##     Null deviance: 339596  on 64  degrees of freedom</span></span>
-<span><span class="co">## Residual deviance: 335673  on 61  degrees of freedom</span></span>
-<span><span class="co">##   (30 observations deleted due to missingness)</span></span>
-<span><span class="co">## AIC: 335733</span></span>
+<span><span class="co">##     Null deviance: 1929049  on 80  degrees of freedom</span></span>
+<span><span class="co">## Residual deviance:  632598  on 77  degrees of freedom</span></span>
+<span><span class="co">##   (14 observations deleted due to missingness)</span></span>
+<span><span class="co">## AIC: 632704</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Number of Fisher Scoring iterations: 25</span></span></code></pre>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<span><span class="co">## Number of Fisher Scoring iterations: 20</span></span></code></pre>
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/atahk/pscl" class="external-link">pscl</a></span><span class="op">)</span></span>
 <span><span class="va">fit.ZIpois</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pscl/man/zeroinfl.html" class="external-link">zeroinfl</a></span><span class="op">(</span><span class="va">Streptococcus</span> <span class="op">~</span> <span class="va">Lactobacillus</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">BMI</span> <span class="op">|</span> <span class="fl">1</span>,</span>
 <span>                data <span class="op">=</span> <span class="va">df</span>,</span>
-<span>                dist <span class="op">=</span> <span class="st">"poisson"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span> <span class="op">(</span><span class="va">fit.ZIpois</span><span class="op">)</span></span></code></pre></div>
+<span>                dist <span class="op">=</span> <span class="st">"poisson"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span> <span class="op">(</span><span class="va">fit.ZIpois</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Call:</span></span>
 <span><span class="co">## zeroinfl(formula = Streptococcus ~ Lactobacillus + age + BMI | 1, data = df, </span></span>
@@ -1578,29 +1575,29 @@ for log-linear model<a class="anchor" aria-label="anchor" href="#create-a-data-f
 <span><span class="co">## </span></span>
 <span><span class="co">## Pearson residuals:</span></span>
 <span><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
-<span><span class="co">## -0.3189 -0.3189 -0.3189 -0.3189  9.6361 </span></span>
+<span><span class="co">## -0.3753 -0.3753 -0.3752 -0.3750 27.8168 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Count model coefficients (poisson with log link):</span></span>
 <span><span class="co">##                 Estimate Std. Error z value Pr(&gt;|z|)</span></span>
-<span><span class="co">## (Intercept)    2.122e+01        NaN     NaN      NaN</span></span>
-<span><span class="co">## Lactobacillus -1.116e-07        NaN     NaN      NaN</span></span>
-<span><span class="co">## age           -7.023e-01        NaN     NaN      NaN</span></span>
-<span><span class="co">## BMI            3.252e-01        NaN     NaN      NaN</span></span>
+<span><span class="co">## (Intercept)    6.169e+00        NaN     NaN      NaN</span></span>
+<span><span class="co">## Lactobacillus  1.321e-07        NaN     NaN      NaN</span></span>
+<span><span class="co">## age            2.420e-01        NaN     NaN      NaN</span></span>
+<span><span class="co">## BMI           -2.116e-01        NaN     NaN      NaN</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Zero-inflation model coefficients (binomial with logit link):</span></span>
 <span><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
-<span><span class="co">## (Intercept)    2.286        NaN     NaN      NaN</span></span>
+<span><span class="co">## (Intercept)     1.96        NaN     NaN      NaN</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Number of iterations in BFGS optimization: 33 </span></span>
-<span><span class="co">## Log-likelihood: -3.134e+04 on 5 Df</span></span></code></pre>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<span><span class="co">## Number of iterations in BFGS optimization: 20 </span></span>
+<span><span class="co">## Log-likelihood: -1.02e+05 on 5 Df</span></span></code></pre>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">MASS</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Attaching package: 'MASS'</span></span></code></pre>
 <pre><code><span><span class="co">## The following object is masked from 'package:dplyr':</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##     select</span></span></code></pre>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit.negbin</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/MASS/man/glm.nb.html" class="external-link">glm.nb</a></span><span class="op">(</span></span>
 <span>    <span class="va">Streptococcus</span> <span class="op">~</span> <span class="va">Lactobacillus</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">BMI</span>,</span>
@@ -1611,178 +1608,112 @@ for log-linear model<a class="anchor" aria-label="anchor" href="#create-a-data-f
 <span>      trace <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
-<span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
-<pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in theta.ml(Y, mu, sum(w), w, limit = control$maxit, trace =</span></span>
 <span><span class="co">## control$trace &gt; : iteration limit reached</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in sqrt(1/i): NaNs produced</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in glm.nb(Streptococcus ~ Lactobacillus + age + BMI, data = df, :</span></span>
 <span><span class="co">## alternation limit reached</span></span></code></pre>
-<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://broom.tidymodels.org/" class="external-link">broom</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">fit.negbin</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
-<span><span class="co">##   term               estimate std.error statistic   p.value</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> (Intercept)    5.21          3.06<span style="color: #949494;">e</span><span style="color: #BB0000;">- 2</span>    170.   0   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> Lactobacillus  0.000<span style="text-decoration: underline;">000</span>022<span style="text-decoration: underline;">9</span>  6.52<span style="color: #949494;">e</span><span style="color: #BB0000;">-10</span>     35.1  1.77<span style="color: #949494;">e</span><span style="color: #BB0000;">-269</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> age            0.052<span style="text-decoration: underline;">4</span>        1.05<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span>     49.9  0   <span style="color: #949494;"> </span>    </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span> BMI           -<span style="color: #BB0000;">0.004</span><span style="color: #BB0000; text-decoration: underline;">53</span>       1.36<span style="color: #949494;">e</span><span style="color: #BB0000;">- 3</span>     -<span style="color: #BB0000;">3.32</span> 8.92<span style="color: #949494;">e</span><span style="color: #BB0000;">-  4</span></span></span></code></pre>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<span><span class="co">##   term               estimate   std.error statistic     p.value</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> (Intercept)   -<span style="color: #BB0000;">34.4</span>         8.11            -<span style="color: #BB0000;">4.24</span> 0.000<span style="text-decoration: underline;">022</span>4  </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> Lactobacillus   0.000<span style="text-decoration: underline;">000</span>889 0.000<span style="text-decoration: underline;">000</span>196      4.54 0.000<span style="text-decoration: underline;">005</span>70 </span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> age             1.09        0.207            5.30 0.000<span style="text-decoration: underline;">000</span>119</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> BMI             0.297       0.277            1.07 0.282</span></span></code></pre>
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit.ZInegbin</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/pscl/man/zeroinfl.html" class="external-link">zeroinfl</a></span><span class="op">(</span><span class="va">Streptococcus</span> <span class="op">~</span> <span class="va">Lactobacillus</span> <span class="op">+</span> <span class="va">age</span> <span class="op">+</span> <span class="va">BMI</span> <span class="op">|</span> <span class="fl">1</span>,</span>
 <span>                data <span class="op">=</span> <span class="va">df</span>,</span>
-<span>                dist <span class="op">=</span> <span class="st">"negbin"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning: glm.fit: algorithm did not converge</span></span></code></pre>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit.ZInegbin</span><span class="op">)</span></span></code></pre></div>
+<span>                dist <span class="op">=</span> <span class="st">"negbin"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit.ZInegbin</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
 <span><span class="co">## Call:</span></span>
 <span><span class="co">## zeroinfl(formula = Streptococcus ~ Lactobacillus + age + BMI | 1, data = df, </span></span>
@@ -1790,23 +1721,23 @@ for log-linear model<a class="anchor" aria-label="anchor" href="#create-a-data-f
 <span><span class="co">## </span></span>
 <span><span class="co">## Pearson residuals:</span></span>
 <span><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
-<span><span class="co">## -0.2128 -0.2128 -0.2128 -0.2127  6.3373 </span></span>
+<span><span class="co">## -0.1898 -0.1898 -0.1898 -0.1898  7.0569 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Count model coefficients (negbin with log link):</span></span>
 <span><span class="co">##                 Estimate Std. Error z value Pr(&gt;|z|)</span></span>
-<span><span class="co">## (Intercept)    2.478e+01        NaN     NaN      NaN</span></span>
-<span><span class="co">## Lactobacillus -5.468e-07        NaN     NaN      NaN</span></span>
-<span><span class="co">## age           -1.129e+00        NaN     NaN      NaN</span></span>
-<span><span class="co">## BMI            7.501e-01        NaN     NaN      NaN</span></span>
-<span><span class="co">## Log(theta)    -2.122e-01        NaN     NaN      NaN</span></span>
+<span><span class="co">## (Intercept)    1.945e+01        NaN     NaN      NaN</span></span>
+<span><span class="co">## Lactobacillus -2.787e-07        NaN     NaN      NaN</span></span>
+<span><span class="co">## age            2.839e-02        NaN     NaN      NaN</span></span>
+<span><span class="co">## BMI           -4.084e-01        NaN     NaN      NaN</span></span>
+<span><span class="co">## Log(theta)    -9.837e-01        NaN     NaN      NaN</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Zero-inflation model coefficients (binomial with logit link):</span></span>
 <span><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
-<span><span class="co">## (Intercept)    2.233        NaN     NaN      NaN</span></span>
+<span><span class="co">## (Intercept)    1.921        NaN     NaN      NaN</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Theta = 0.8088 </span></span>
-<span><span class="co">## Number of iterations in BFGS optimization: 39 </span></span>
-<span><span class="co">## Log-likelihood: -70.77 on 6 Df</span></span></code></pre>
+<span><span class="co">## Theta = 0.3739 </span></span>
+<span><span class="co">## Number of iterations in BFGS optimization: 40 </span></span>
+<span><span class="co">## Log-likelihood: -131.8 on 6 Df</span></span></code></pre>
 </div>
 </div>
   </div>
@@ -1826,7 +1757,7 @@ for log-linear model<a class="anchor" aria-label="anchor" href="#create-a-data-f
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
       </footer>

@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Reviews of published signatures based on bugsigdb.org</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
       </span>
     </div>
 
@@ -32,10 +32,10 @@
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu"><li>
-      <a href="../articles/Bearkland%20capstone%20DED%2012.2.2024.html">Differential Abundance in the ocular microbiome in DED</a>
+      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
     </li>
     <li>
-      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
+      <a href="../articles/capstoneanalysis_BearklandM.html">Differential Abundance in the ocular microbiome in Dry Eye Disaease</a>
     </li>
     <li>
       <a href="../articles/capstoneanalysis_clare.html">COVID-19 associated microbiome</a>
@@ -53,7 +53,7 @@
       <a href="../articles/fieldworkanalysis_samara.html">The Endometriosis-associated Microbiome</a>
     </li>
     <li>
-      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in bugsigdb.org</a>
+      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in BugSigDB</a>
     </li>
   </ul></li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
@@ -81,30 +81,47 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">createStudyTable</span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">createStudyTable</span><span class="op">(</span><span class="va">bsdb.df</span>, includeAlso <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
 
 
-<dl><dt id="arg-dat">dat<a class="anchor" aria-label="anchor" href="#arg-dat"></a></dt>
-<dd><p>data.frame produced by <a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a>, subsetted as desired</p></dd>
+<dl><dt id="arg-bsdb-df">bsdb.df<a class="anchor" aria-label="anchor" href="#arg-bsdb-df"></a></dt>
+<dd><p><code>data.frame</code> produced by <a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a>, pre-filtered as desired</p></dd>
+
+
+<dt id="arg-includealso">includeAlso<a class="anchor" aria-label="anchor" href="#arg-includealso"></a></dt>
+<dd><p><code>character</code> with column names to additionally include in the output table (default = `NULL`)</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
     <p>a data.frame of basic study information. Can be wrapped in
-kable_styling(kbl(.)) to format nicely.</p>
+kable_styling(kbl(...)) to format nicely.</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">full.dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> Using cached version from 2025-03-19 16:39:02</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Using cached version from 2025-05-05 19:21:34</span>
 <span class="r-in"><span><span class="fu">createStudyTable</span><span class="op">(</span><span class="va">full.dat</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in is_null(includeAlso):</span> could not find function "is_null"</span>
-<span class="r-in"><span><span class="co">## kable_styling(kbl(createStudyTable(full.dat))) #for html styling</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,384 × 9</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    `Study code` MaxCases MaxControls `Study design` Condition N_signatures PMID </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> AartiDarra_…       54          54 cross-section… Hypergly…            8 NA   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> AartsE_2017        19          77 case-control   Attentio…            2 2886…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> AbangeWB_20…       87          82 cross-section… HIV infe…            3 3382…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> AbotsiRE_20…      174         174 randomized co… Response…            5 3680…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Abrahamsson…       20          20 prospective c… Atopic e…            3 2215…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> AdambergK_2…        9           9 case-control   Obesity              6 2993…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> AdebayoAS_2…       46          25 case-control   Urinary …           14 2879…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Adu-OppongB…       51          51 cross-section… Urinary …            7 3503…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> AguilarT_20…       16          56 cross-section… Obesity              2 3242…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> AhmedAlaa_2…       46          35 case-control   Parkinso…            8 NA   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,374 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: DOI &lt;chr&gt;, URL &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </div>
@@ -119,7 +136,7 @@ kable_styling(kbl(.)) to format nicely.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
       </footer></div>

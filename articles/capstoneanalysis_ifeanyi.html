@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Reviews of published signatures based on bugsigdb.org</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
       </span>
     </div>
 
@@ -49,10 +49,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Bearkland%20capstone%20DED%2012.2.2024.html">Differential Abundance in the ocular microbiome in DED</a>
+      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
     </li>
     <li>
-      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
+      <a href="../articles/capstoneanalysis_BearklandM.html">Differential Abundance in the ocular microbiome in Dry Eye Disaease</a>
     </li>
     <li>
       <a href="../articles/capstoneanalysis_clare.html">COVID-19 associated microbiome</a>
@@ -70,7 +70,7 @@
       <a href="../articles/fieldworkanalysis_samara.html">The Endometriosis-associated Microbiome</a>
     </li>
     <li>
-      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in bugsigdb.org</a>
+      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in BugSigDB</a>
     </li>
   </ul>
 </li>
@@ -102,6 +102,7 @@ around the world</h1>
                         <h4 data-toc-skip class="author">Ifeanyi
 Kalu</h4>
             
+            <h4 data-toc-skip class="date">05 May, 2025</h4>
       
 
       <div class="hidden name"><code>capstoneanalysis_ifeanyi.Rmd</code></div>
@@ -165,15 +166,18 @@ as a 0/1 binary variable in a regression analysis.</p></li>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/" class="external-link">kableExtra</a></span><span class="op">)</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jtools.jacob-long.com" class="external-link">jtools</a></span><span class="op">)</span> <span class="co"># to make a pretty glm summary output</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_light</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="import-data-from-bugsigdb-database">Import data from Bugsigdb database<a class="anchor" aria-label="anchor" href="#import-data-from-bugsigdb-database"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>version <span class="op">=</span> <span class="st">'devel'</span>, cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co">#11/27/2022</span></span>
+<code class="sourceCode R"><span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="co">#11/27/2022</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 7349   50</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 8163   50</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="subset-signatures-by-curator-and-conditions">Subset Signatures by Curator and Conditions<a class="anchor" aria-label="anchor" href="#subset-signatures-by-curator-and-conditions"></a>
@@ -183,25 +187,77 @@ as a 0/1 binary variable in a regression analysis.</p></li>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">`Body site`</span> <span class="op">==</span> <span class="st">"Feces"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>`Body site` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></span><span class="op">(</span><span class="va">`Body site`</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>`Condition` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/chartr.html" class="external-link">tolower</a></span><span class="op">(</span><span class="va">`Condition`</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">dat.sub</span><span class="op">[</span>,<span class="st">"Condition"</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">##                                ethnic group </span></span>
-<span><span class="co">##                                          31 </span></span>
-<span><span class="co">## place of residence measurement,ethnic group </span></span>
-<span><span class="co">##                                           2 </span></span>
-<span><span class="co">##                                 risk factor </span></span>
-<span><span class="co">##                                           2 </span></span>
-<span><span class="co">##                               sampling time </span></span>
-<span><span class="co">##                                           2 </span></span>
-<span><span class="co">##                        socioeconomic status </span></span>
-<span><span class="co">##                                          25 </span></span>
-<span><span class="co">##           socioeconomic status,ethnic group </span></span>
-<span><span class="co">##                                           2</span></span></code></pre>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">dat.sub</span><span class="op">[</span>,<span class="st">"Condition"</span><span class="op">]</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span>decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table table" style="margin-left: auto; margin-right: auto;">
+<thead><tr>
+<th style="text-align:left;">
+Var1
+</th>
+<th style="text-align:right;">
+Freq
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+ethnic group
+</td>
+<td style="text-align:right;">
+31
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+socioeconomic status
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+place of residence measurement,ethnic group
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+risk factor
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+sampling time
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+socioeconomic status,ethnic group
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level2">
 <h2 id="table-of-studies">Table of studies<a class="anchor" aria-label="anchor" href="#table-of-studies"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">dat.sub</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -851,11 +907,11 @@ socioeconomic status
 <div class="section level2">
 <h2 id="taxon-frequency-table-by-ses">Taxon Frequency Table by SES<a class="anchor" aria-label="anchor" href="#taxon-frequency-table-by-ses"></a>
 </h2>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat.sub_SES</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat.sub</span>, <span class="va">dat.sub</span><span class="op">$</span><span class="va">Condition</span> <span class="op">==</span> <span class="st">"socioeconomic status"</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat.sub_SES</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 25 50</span></span></code></pre>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">dat.sub_SES</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -949,10 +1005,10 @@ Prevotellaceae
 Prevotella
 </td>
 <td style="text-align:right;">
-5
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
 </td>
 </tr>
 <tr>
@@ -996,10 +1052,10 @@ Eubacteriaceae
 Eubacterium
 </td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Eubacteriaceae|g__Eubacterium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Eubacteriaceae|g__Eubacterium
 </td>
 </tr>
 <tr>
@@ -1043,10 +1099,10 @@ Oscillospiraceae
 Ruminococcus
 </td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
 </td>
 </tr>
 <tr>
@@ -1090,10 +1146,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-17
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota
 </td>
 </tr>
 <tr>
@@ -1137,10 +1193,10 @@ Rikenellaceae
 NA
 </td>
 <td style="text-align:right;">
-5
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
 </td>
 </tr>
 <tr>
@@ -1184,10 +1240,10 @@ Lachnospiraceae
 NA
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae
 </td>
 </tr>
 <tr>
@@ -1231,10 +1287,10 @@ Bacteroidaceae
 Bacteroides
 </td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides
 </td>
 </tr>
 <tr>
@@ -1278,10 +1334,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|c__Deltaproteobacteria
+d__Bacteria|c__Deltaproteobacteria
 </td>
 </tr>
 <tr>
@@ -1325,10 +1381,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
 </td>
 </tr>
 <tr>
@@ -1372,10 +1428,10 @@ Atopobiaceae
 NA
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae
 </td>
 </tr>
 </tbody>
@@ -1384,11 +1440,11 @@ k__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales
 <div class="section level2">
 <h2 id="taxon-frequency-table-by-race-ethnicity">Taxon Frequency Table by Race-ethnicity<a class="anchor" aria-label="anchor" href="#taxon-frequency-table-by-race-ethnicity"></a>
 </h2>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat.sub_ethnic</span> <span class="op">&lt;-</span> <span class="va">dat.sub</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat.sub</span><span class="op">$</span><span class="va">Condition</span> <span class="op">==</span> <span class="st">"ethnic group"</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat.sub_ethnic</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 31 50</span></span></code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">dat.sub_ethnic</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1482,10 +1538,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-10
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales
 </td>
 </tr>
 <tr>
@@ -1529,10 +1585,10 @@ Coriobacteriaceae
 NA
 </td>
 <td style="text-align:right;">
-7
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae
 </td>
 </tr>
 <tr>
@@ -1576,10 +1632,10 @@ Christensenellaceae
 NA
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Christensenellales|f__Christensenellaceae
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Christensenellales|f__Christensenellaceae
 </td>
 </tr>
 <tr>
@@ -1623,10 +1679,10 @@ Peptococcaceae
 NA
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Peptococcaceae
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Peptococcaceae
 </td>
 </tr>
 <tr>
@@ -1670,10 +1726,10 @@ Veillonellaceae
 Veillonella
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella
+d__Bacteria|k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella
 </td>
 </tr>
 <tr>
@@ -1717,10 +1773,10 @@ Odoribacteraceae
 NA
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae
 </td>
 </tr>
 <tr>
@@ -1764,10 +1820,10 @@ Odoribacteraceae
 Odoribacter
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter
 </td>
 </tr>
 <tr>
@@ -1811,10 +1867,10 @@ Rikenellaceae
 NA
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
 </td>
 </tr>
 <tr>
@@ -1858,10 +1914,10 @@ Victivallaceae
 NA
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Lentisphaerota|c__Lentisphaeria|o__Victivallales|f__Victivallaceae
+d__Bacteria|k__Pseudomonadati|p__Lentisphaerota|c__Lentisphaeria|o__Victivallales|f__Victivallaceae
 </td>
 </tr>
 <tr>
@@ -1905,10 +1961,10 @@ Verrucomicrobiaceae
 NA
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Verrucomicrobiota|c__Verrucomicrobiia|o__Verrucomicrobiales|f__Verrucomicrobiaceae
+d__Bacteria|k__Pseudomonadati|p__Verrucomicrobiota|c__Verrucomicrobiia|o__Verrucomicrobiales|f__Verrucomicrobiaceae
 </td>
 </tr>
 </tbody>
@@ -1918,7 +1974,7 @@ k__Bacteria|k__Pseudomonadati|p__Verrucomicrobiota|c__Verrucomicrobiia|o__Verruc
 <h2 id="taxon-frequency-table-by-all-studies-ses-and-ethnicity-combined-">Taxon Frequency Table by all studies (SES and Ethnicity)
 combined.<a class="anchor" aria-label="anchor" href="#taxon-frequency-table-by-all-studies-ses-and-ethnicity-combined-"></a>
 </h2>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">dat.sub</span>, n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kable_styling.html" class="external-link">kable_styling</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -2014,10 +2070,10 @@ Prevotellaceae
 Prevotella
 </td>
 <td style="text-align:right;">
-13
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
 </td>
 </tr>
 <tr>
@@ -2061,10 +2117,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-32
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales
 </td>
 </tr>
 <tr>
@@ -2108,10 +2164,10 @@ Rikenellaceae
 NA
 </td>
 <td style="text-align:right;">
-12
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae
 </td>
 </tr>
 <tr>
@@ -2155,10 +2211,10 @@ Bacteroidaceae
 Bacteroides
 </td>
 <td style="text-align:right;">
-14
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides
 </td>
 </tr>
 <tr>
@@ -2202,10 +2258,10 @@ Coriobacteriaceae
 NA
 </td>
 <td style="text-align:right;">
-9
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Coriobacteriaceae
 </td>
 </tr>
 <tr>
@@ -2249,10 +2305,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-47
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota
+d__Bacteria|k__Bacillati|p__Bacillota
 </td>
 </tr>
 <tr>
@@ -2296,10 +2352,10 @@ Oscillospiraceae
 Ruminococcus
 </td>
 <td style="text-align:right;">
-7
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
 </td>
 </tr>
 <tr>
@@ -2343,10 +2399,10 @@ Veillonellaceae
 Veillonella
 </td>
 <td style="text-align:right;">
-7
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella
+d__Bacteria|k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella
 </td>
 </tr>
 <tr>
@@ -2390,10 +2446,10 @@ Odoribacteraceae
 Odoribacter
 </td>
 <td style="text-align:right;">
-7
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter
 </td>
 </tr>
 <tr>
@@ -2437,10 +2493,10 @@ Christensenellaceae
 NA
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Christensenellales|f__Christensenellaceae
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Christensenellales|f__Christensenellaceae
 </td>
 </tr>
 <tr>
@@ -2484,10 +2540,10 @@ Clostridiaceae
 Clostridium
 </td>
 <td style="text-align:right;">
-8
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium
 </td>
 </tr>
 <tr>
@@ -2531,10 +2587,10 @@ Eubacteriaceae
 Eubacterium
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Eubacteriaceae|g__Eubacterium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Eubacteriaceae|g__Eubacterium
 </td>
 </tr>
 <tr>
@@ -2578,10 +2634,10 @@ Peptococcaceae
 NA
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Peptococcaceae
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Peptococcaceae
 </td>
 </tr>
 <tr>
@@ -2625,10 +2681,10 @@ Odoribacteraceae
 NA
 </td>
 <td style="text-align:right;">
-7
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae
 </td>
 </tr>
 <tr>
@@ -2672,10 +2728,10 @@ Victivallaceae
 NA
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Lentisphaerota|c__Lentisphaeria|o__Victivallales|f__Victivallaceae
+d__Bacteria|k__Pseudomonadati|p__Lentisphaerota|c__Lentisphaeria|o__Victivallales|f__Victivallaceae
 </td>
 </tr>
 <tr>
@@ -2719,10 +2775,10 @@ Verrucomicrobiaceae
 NA
 </td>
 <td style="text-align:right;">
-6
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Verrucomicrobiota|c__Verrucomicrobiia|o__Verrucomicrobiales|f__Verrucomicrobiaceae
+d__Bacteria|k__Pseudomonadati|p__Verrucomicrobiota|c__Verrucomicrobiia|o__Verrucomicrobiales|f__Verrucomicrobiaceae
 </td>
 </tr>
 <tr>
@@ -2766,10 +2822,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-41
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota
 </td>
 </tr>
 <tr>
@@ -2813,10 +2869,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-8
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
 </td>
 </tr>
 <tr>
@@ -2860,10 +2916,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 longum
 </td>
 </tr>
@@ -2908,10 +2964,10 @@ Oscillospiraceae
 NA
 </td>
 <td style="text-align:right;">
-19
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae
 </td>
 </tr>
 <tr>
@@ -2955,10 +3011,10 @@ Oscillospiraceae
 Faecalibacterium
 </td>
 <td style="text-align:right;">
-7
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium
 </td>
 </tr>
 <tr>
@@ -3002,10 +3058,10 @@ Oscillospiraceae
 Faecalibacterium
 </td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium|s__Faecalibacterium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium|s__Faecalibacterium
 prausnitzii
 </td>
 </tr>
@@ -3050,10 +3106,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 adolescentis
 </td>
 </tr>
@@ -3098,10 +3154,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 bifidum
 </td>
 </tr>
@@ -3146,10 +3202,10 @@ Lactobacillaceae
 Lactobacillus
 </td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus
 </td>
 </tr>
 <tr>
@@ -3193,10 +3249,10 @@ Lachnospiraceae
 NA
 </td>
 <td style="text-align:right;">
-12
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae
 </td>
 </tr>
 <tr>
@@ -3240,10 +3296,10 @@ Lachnospiraceae
 Blautia
 </td>
 <td style="text-align:right;">
-4
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Blautia
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Blautia
 </td>
 </tr>
 <tr>
@@ -3287,10 +3343,10 @@ Bacteroidaceae
 Bacteroides
 </td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides
 fragilis
 </td>
 </tr>
@@ -3335,10 +3391,10 @@ Bacteroidaceae
 Bacteroides
 </td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides
 thetaiotaomicron
 </td>
 </tr>
@@ -3383,10 +3439,10 @@ Tannerellaceae
 Parabacteroides
 </td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Parabacteroides
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Parabacteroides
 </td>
 </tr>
 <tr>
@@ -3430,10 +3486,10 @@ Enterobacteriaceae
 NA
 </td>
 <td style="text-align:right;">
-7
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae
 </td>
 </tr>
 <tr>
@@ -3477,10 +3533,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|c__Deltaproteobacteria
+d__Bacteria|c__Deltaproteobacteria
 </td>
 </tr>
 <tr>
@@ -3524,10 +3580,10 @@ NA
 NA
 </td>
 <td style="text-align:right;">
-21
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota
+d__Bacteria|k__Bacillati|p__Actinomycetota
 </td>
 </tr>
 <tr>
@@ -3571,10 +3627,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 breve
 </td>
 </tr>
@@ -3619,10 +3675,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 catenulatum
 </td>
 </tr>
@@ -3667,10 +3723,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 pseudocatenulatum
 </td>
 </tr>
@@ -3715,10 +3771,10 @@ Bifidobacteriaceae
 Bifidobacterium
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium
 ruminantium
 </td>
 </tr>
@@ -3763,10 +3819,10 @@ Atopobiaceae
 NA
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Coriobacteriales|f__Atopobiaceae
 </td>
 </tr>
 <tr>
@@ -3810,10 +3866,10 @@ Eggerthellaceae
 Slackia
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Eggerthellales|f__Eggerthellaceae|g__Slackia
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Coriobacteriia|o__Eggerthellales|f__Eggerthellaceae|g__Slackia
 </td>
 </tr>
 <tr>
@@ -3857,10 +3913,10 @@ Staphylococcaceae
 Staphylococcus
 </td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Bacillales|f__Staphylococcaceae|g__Staphylococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Bacillales|f__Staphylococcaceae|g__Staphylococcus
 </td>
 </tr>
 <tr>
@@ -3904,10 +3960,10 @@ Enterococcaceae
 Enterococcus
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
 </td>
 </tr>
 <tr>
@@ -3951,10 +4007,10 @@ Streptococcaceae
 Lactococcus
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Lactococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Lactococcus
 </td>
 </tr>
 <tr>
@@ -3998,10 +4054,10 @@ Clostridiaceae
 NA
 </td>
 <td style="text-align:right;">
-11
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae
 </td>
 </tr>
 <tr>
@@ -4045,10 +4101,10 @@ Clostridiaceae
 Clostridium
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium|s__Clostridium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium|s__Clostridium
 perfringens
 </td>
 </tr>
@@ -4093,10 +4149,10 @@ Oscillospiraceae
 Anaerotruncus
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Anaerotruncus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Anaerotruncus
 </td>
 </tr>
 <tr>
@@ -4140,10 +4196,10 @@ Oscillospiraceae
 Oscillospira
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Oscillospira
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Oscillospira
 </td>
 </tr>
 <tr>
@@ -4187,10 +4243,10 @@ butyrate-producing bacterium M21/2
 NA
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|s__butyrate-producing
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|s__butyrate-producing
 bacterium M21/2
 </td>
 </tr>
@@ -4235,10 +4291,10 @@ Clostridiales bacterium
 NA
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|s__Clostridiales
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|s__Clostridiales
 bacterium
 </td>
 </tr>
@@ -4283,10 +4339,10 @@ Lachnospiraceae
 Anaerostipes
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Anaerostipes
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Anaerostipes
 </td>
 </tr>
 <tr>
@@ -4330,10 +4386,10 @@ Lachnospiraceae
 Butyrivibrio
 </td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Butyrivibrio
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Butyrivibrio
 </td>
 </tr>
 </tbody>
@@ -4344,12 +4400,12 @@ k__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnos
 decreased abundance in low SES calculated using Jaccard Distance to
 create a distance matrix.<a class="anchor" aria-label="anchor" href="#cluster-analysis-for-signatures-of-increased-abundance-and-of-decreased-abundance-in-low-ses-calculated-using-jaccard-distance-to-create-a-distance-matrix-"></a>
 </h2>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">allsigs</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat.sub_SES</span> , tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">allsigs</span> <span class="op">&lt;-</span> <span class="va">allsigs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsigs</span>, <span class="va">length</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span> <span class="co">#require length &gt; 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 19</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydists</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcPairwiseOverlaps.html" class="external-link">calcPairwiseOverlaps</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mydists</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 38  8</span></span></code></pre>
@@ -4357,14 +4413,14 @@ create a distance matrix.<a class="anchor" aria-label="anchor" href="#cluster-an
 <div class="section level2">
 <h2 id="visualize-the-distribution-of-the-signature-lengths">Visualize the distribution of the signature lengths<a class="anchor" aria-label="anchor" href="#visualize-the-distribution-of-the-signature-lengths"></a>
 </h2>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="va">siglengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsigs</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">siglengths.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>siglengths <span class="op">=</span> <span class="va">siglengths</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">siglengths.df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="capstoneanalysis_ifeanyi_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## siglengths</span></span>
 <span><span class="co">##  2  3  4  5  6  7  8 10 15 </span></span>
@@ -4374,10 +4430,10 @@ create a distance matrix.<a class="anchor" aria-label="anchor" href="#cluster-an
 <h2 id="create-a-matrix-of-jaccard-similarities-0-for-no-overlap-1-for-100-overlap">Create a matrix of Jaccard similarities (0 for no overlap, 1 for
 100% overlap)<a class="anchor" aria-label="anchor" href="#create-a-matrix-of-jaccard-similarities-0-for-no-overlap-1-for-100-overlap"></a>
 </h2>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">jmat</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcJaccardSimilarity.html" class="external-link">calcJaccardSimilarity</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span></code></pre></div>
 <p>##Create a Clustered heatmap</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">ha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span></span>
@@ -4402,75 +4458,354 @@ create a distance matrix.<a class="anchor" aria-label="anchor" href="#cluster-an
 <div class="section level2">
 <h2 id="create-a-wide-format-dataframe-for-regression-analysis">Create a wide format dataframe for Regression Analysis<a class="anchor" aria-label="anchor" href="#create-a-wide-format-dataframe-for-regression-analysis"></a>
 </h2>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat_withsigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat.sub_SES</span> , <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dat.sub_SES</span><span class="op">$</span><span class="va">`NCBI Taxonomy IDs`</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sigs</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat_withsigs</span>, tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">cmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu">safe</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/safe/man/getCmatrix.html" class="external-link">getCmatrix</a></span><span class="op">(</span><span class="va">sigs</span>, as.matrix <span class="op">=</span> <span class="cn">TRUE</span>, min.size <span class="op">=</span> <span class="fl">0</span>, prune <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## WARNING: rows are sorted elements of keyword.list</span></span>
 <span><span class="co">## 25 categories formed</span></span></code></pre>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">cmat</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">dat_withsigs</span>, <span class="va">cdf</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">cdf</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1]  25 129</span></span></code></pre>
 <p>An arbitrary example of meta-regression:</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fit</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/glm.html" class="external-link">glm</a></span><span class="op">(</span></span>
 <span>    <span class="va">Prevotella</span> <span class="op">~</span> <span class="va">`Location of subjects`</span> <span class="op">+</span> <span class="va">`Sequencing type`</span> <span class="op">+</span> <span class="va">`Abundance in Group 1`</span>,</span>
 <span>    family <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/family.html" class="external-link">binomial</a></span><span class="op">(</span>link <span class="op">=</span> <span class="st">"logit"</span><span class="op">)</span>,</span>
 <span>    data <span class="op">=</span> <span class="va">cdf</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## </span></span>
-<span><span class="co">## Call:</span></span>
-<span><span class="co">## glm(formula = Prevotella ~ `Location of subjects` + `Sequencing type` + </span></span>
-<span><span class="co">##     `Abundance in Group 1`, family = binomial(link = "logit"), </span></span>
-<span><span class="co">##     data = cdf)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Coefficients:</span></span>
-<span><span class="co">##                                                  Estimate Std. Error z value</span></span>
-<span><span class="co">## (Intercept)                                    -1.977e+01  1.145e+04  -0.002</span></span>
-<span><span class="co">## `Location of subjects`China                     2.103e+01  1.145e+04   0.002</span></span>
-<span><span class="co">## `Location of subjects`Finland,Malawi            1.953e+01  1.983e+04   0.001</span></span>
-<span><span class="co">## `Location of subjects`Indonesia                 2.103e+01  1.145e+04   0.002</span></span>
-<span><span class="co">## `Location of subjects`Israel                    2.103e+01  1.145e+04   0.002</span></span>
-<span><span class="co">## `Location of subjects`Malaysia                  1.219e-09  1.402e+04   0.000</span></span>
-<span><span class="co">## `Location of subjects`Mexico                    2.103e+01  1.145e+04   0.002</span></span>
-<span><span class="co">## `Location of subjects`Papua New Guinea          1.729e+00  2.111e+04   0.000</span></span>
-<span><span class="co">## `Location of subjects`United Kingdom            1.224e-09  1.619e+04   0.000</span></span>
-<span><span class="co">## `Location of subjects`United States of America  1.953e+01  1.145e+04   0.002</span></span>
-<span><span class="co">## `Sequencing type`WMS                           -1.953e+01  1.145e+04  -0.002</span></span>
-<span><span class="co">## `Abundance in Group 1`increased                -2.527e+00  1.517e+00  -1.666</span></span>
-<span><span class="co">##                                                Pr(&gt;|z|)  </span></span>
-<span><span class="co">## (Intercept)                                      0.9986  </span></span>
-<span><span class="co">## `Location of subjects`China                      0.9985  </span></span>
-<span><span class="co">## `Location of subjects`Finland,Malawi             0.9992  </span></span>
-<span><span class="co">## `Location of subjects`Indonesia                  0.9985  </span></span>
-<span><span class="co">## `Location of subjects`Israel                     0.9985  </span></span>
-<span><span class="co">## `Location of subjects`Malaysia                   1.0000  </span></span>
-<span><span class="co">## `Location of subjects`Mexico                     0.9985  </span></span>
-<span><span class="co">## `Location of subjects`Papua New Guinea           0.9999  </span></span>
-<span><span class="co">## `Location of subjects`United Kingdom             1.0000  </span></span>
-<span><span class="co">## `Location of subjects`United States of America   0.9986  </span></span>
-<span><span class="co">## `Sequencing type`WMS                             0.9986  </span></span>
-<span><span class="co">## `Abundance in Group 1`increased                  0.0958 .</span></span>
-<span><span class="co">## ---</span></span>
-<span><span class="co">## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## (Dispersion parameter for binomial family taken to be 1)</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">##     Null deviance: 25.020  on 24  degrees of freedom</span></span>
-<span><span class="co">## Residual deviance: 12.082  on 13  degrees of freedom</span></span>
-<span><span class="co">## AIC: 36.082</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## Number of Fisher Scoring iterations: 19</span></span></code></pre>
+<span></span>
+<span><span class="fu">jtools</span><span class="fu">::</span><span class="fu"><a href="https://jtools.jacob-long.com/reference/summ.html" class="external-link">summ</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
+<table class="table table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;"><tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Observations
+</td>
+<td style="text-align:right;">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Dependent variable
+</td>
+<td style="text-align:right;">
+Prevotella
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Type
+</td>
+<td style="text-align:right;">
+Generalized linear model
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Family
+</td>
+<td style="text-align:right;">
+binomial
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Link
+</td>
+<td style="text-align:right;">
+logit
+</td>
+</tr>
+</tbody></table>
+<table class="table table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;"><tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+𝛘²(11)
+</td>
+<td style="text-align:right;">
+12.94
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+p
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Pseudo-R² (Cragg-Uhler)
+</td>
+<td style="text-align:right;">
+0.64
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+Pseudo-R² (McFadden)
+</td>
+<td style="text-align:right;">
+0.52
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+AIC
+</td>
+<td style="text-align:right;">
+36.08
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+BIC
+</td>
+<td style="text-align:right;">
+50.71
+</td>
+</tr>
+</tbody></table>
+<table class="table table table-striped table-hover table-condensed table-responsive" style="width: auto !important; margin-left: auto; margin-right: auto;border-bottom: 0;">
+<thead><tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Est.
+</th>
+<th style="text-align:right;">
+S.E.
+</th>
+<th style="text-align:right;">
+z val.
+</th>
+<th style="text-align:right;">
+p
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+(Intercept)
+</td>
+<td style="text-align:right;">
+-19.77
+</td>
+<td style="text-align:right;">
+11449.37
+</td>
+<td style="text-align:right;">
+-0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<code>Location of subjects</code>China
+</td>
+<td style="text-align:right;">
+21.03
+</td>
+<td style="text-align:right;">
+11449.37
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<code>Location of subjects</code>Finland,Malawi
+</td>
+<td style="text-align:right;">
+19.53
+</td>
+<td style="text-align:right;">
+19830.89
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<code>Location of subjects</code>Indonesia
+</td>
+<td style="text-align:right;">
+21.03
+</td>
+<td style="text-align:right;">
+11449.37
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<code>Location of subjects</code>Israel
+</td>
+<td style="text-align:right;">
+21.03
+</td>
+<td style="text-align:right;">
+11449.37
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<code>Location of subjects</code>Malaysia
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+14022.55
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<code>Location of subjects</code>Mexico
+</td>
+<td style="text-align:right;">
+21.03
+</td>
+<td style="text-align:right;">
+11449.37
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<code>Location of subjects</code>Papua New Guinea
+</td>
+<td style="text-align:right;">
+1.73
+</td>
+<td style="text-align:right;">
+21105.78
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<code>Location of subjects</code>United Kingdom
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+16191.85
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<code>Location of subjects</code>United States of America
+</td>
+<td style="text-align:right;">
+19.53
+</td>
+<td style="text-align:right;">
+11449.37
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<code>Sequencing type</code>WMS
+</td>
+<td style="text-align:right;">
+-19.53
+</td>
+<td style="text-align:right;">
+11449.37
+</td>
+<td style="text-align:right;">
+-0.00
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;">
+<code>Abundance in Group 1</code>increased
+</td>
+<td style="text-align:right;">
+-2.53
+</td>
+<td style="text-align:right;">
+1.52
+</td>
+<td style="text-align:right;">
+-1.67
+</td>
+<td style="text-align:right;">
+0.10
+</td>
+</tr>
+</tbody>
+<tfoot><tr>
+<td style="padding: 0; " colspan="100%">
+<sup></sup> Standard errors: MLE
+</td>
+</tr></tfoot>
+</table>
 </div>
 <div class="section level2">
 <h2 id="create-another-heatmap-on-correlations-of-presenceabsence-of-taxa-">Create another heatmap on correlations of presence/absence of
 taxa.<a class="anchor" aria-label="anchor" href="#create-another-heatmap-on-correlations-of-presenceabsence-of-taxa-"></a>
 </h2>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sigcors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">cmat</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">siglengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">sigs</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">ha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span></span>
@@ -4478,25 +4813,25 @@ taxa.<a class="anchor" aria-label="anchor" href="#create-another-heatmap-on-corr
 <span><span class="va">hm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html" class="external-link">Heatmap</a></span><span class="op">(</span></span>
 <span>  <span class="va">sigcors</span>,</span>
 <span>  top_annotation <span class="op">=</span> <span class="va">ha</span>, left_annotation <span class="op">=</span> <span class="va">hr</span>,</span>
-<span>  row_names_max_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">.05</span>, <span class="st">"cm"</span><span class="op">)</span>,</span>
-<span>  column_names_max_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">.1</span>, <span class="st">"cm"</span><span class="op">)</span>,</span>
+<span>  <span class="co"># row_names_max_width = unit(.05, "cm"),</span></span>
+<span>  <span class="co"># column_names_max_height = unit(.1, "cm"),</span></span>
 <span> <span class="co"># row_labels = sub(".+:", "", rownames(sigcors)), ##removing study just to make signature names legible</span></span>
 <span>  column_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">".+:"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">sigcors</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">hm</span></span></code></pre></div>
-<p><img src="capstoneanalysis_ifeanyi_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<p><img src="capstoneanalysis_ifeanyi_files/figure-html/unnamed-chunk-15-1.png" width="576"></p>
 </div>
 <div class="section level2">
 <h2 id="cluster-analysis-for-signatures-of-increased-abundance-and-of-decreased-abundance-in-non-whitecaucasions-calculated-using-jaccard-distance-to-create-a-distance-matrix-">Cluster Analysis for signatures of increased abundance and of
 decreased abundance in non-white/caucasions calculated using Jaccard
 Distance to create a distance matrix.<a class="anchor" aria-label="anchor" href="#cluster-analysis-for-signatures-of-increased-abundance-and-of-decreased-abundance-in-non-whitecaucasions-calculated-using-jaccard-distance-to-create-a-distance-matrix-"></a>
 </h2>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">allsige</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat.sub_ethnic</span> , tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">allsige</span> <span class="op">&lt;-</span> <span class="va">allsige</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsige</span>, <span class="va">length</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span> <span class="co">#require length &gt; 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">allsige</span> <span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 15</span></span></code></pre>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydistse</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcPairwiseOverlaps.html" class="external-link">calcPairwiseOverlaps</a></span><span class="op">(</span><span class="va">allsige</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mydistse</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 52  8</span></span></code></pre>
@@ -4504,14 +4839,14 @@ Distance to create a distance matrix.<a class="anchor" aria-label="anchor" href=
 <div class="section level2">
 <h2 id="visualize-the-distribution-of-the-signature-lengths-1">Visualize the distribution of the signature lengths<a class="anchor" aria-label="anchor" href="#visualize-the-distribution-of-the-signature-lengths-1"></a>
 </h2>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="va">siglengthse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsige</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">siglengthse.df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>siglengthse <span class="op">=</span> <span class="va">siglengthse</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">siglengthse.df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">siglengthse</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html" class="external-link">geom_bar</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="capstoneanalysis_ifeanyi_files/figure-html/unnamed-chunk-17-1.png" width="700"></p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">siglengthse</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## siglengthse</span></span>
 <span><span class="co">##  2  4  5  6  8  9 11 </span></span>
@@ -4521,13 +4856,13 @@ Distance to create a distance matrix.<a class="anchor" aria-label="anchor" href=
 <h2 id="create-a-matrix-of-jaccard-similarities-0-for-no-overlap-1-for-100-overlap-1">Create a matrix of Jaccard similarities (0 for no overlap, 1 for
 100% overlap)<a class="anchor" aria-label="anchor" href="#create-a-matrix-of-jaccard-similarities-0-for-no-overlap-1-for-100-overlap-1"></a>
 </h2>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">jmate</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcJaccardSimilarity.html" class="external-link">calcJaccardSimilarity</a></span><span class="op">(</span><span class="va">allsige</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="create-a-clustered-heatmap">Create a Clustered heatmap<a class="anchor" aria-label="anchor" href="#create-a-clustered-heatmap"></a>
 </h2>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">hae</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengthse</span><span class="op">)</span><span class="op">)</span></span>
@@ -4535,25 +4870,25 @@ Distance to create a distance matrix.<a class="anchor" aria-label="anchor" href=
 <span><span class="va">hme</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/Heatmap.html" class="external-link">Heatmap</a></span><span class="op">(</span></span>
 <span>  <span class="va">jmate</span>,</span>
 <span>  top_annotation <span class="op">=</span> <span class="va">hae</span>, left_annotation <span class="op">=</span> <span class="va">hre</span>,</span>
-<span>  row_names_max_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">.10</span>,<span class="st">"cm"</span><span class="op">)</span>,</span>
+<span>  <span class="co">#row_names_max_width = unit(.10,"cm"),</span></span>
 <span>  column_names_max_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">1.0</span>, <span class="st">"cm"</span><span class="op">)</span>,</span>
 <span><span class="co">#  row_labels = sub(".+:", "", rownames(jmate)),  #get rid of study labels</span></span>
 <span>  column_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">".+:"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">jmate</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">hme</span></span></code></pre></div>
-<p><img src="capstoneanalysis_ifeanyi_files/figure-html/unnamed-chunk-19-1.png" width="700"></p>
+<p><img src="capstoneanalysis_ifeanyi_files/figure-html/unnamed-chunk-19-1.png" width="576"></p>
 </div>
 <div class="section level2">
 <h2 id="create-a-wide-format-dataframe">Create a wide format dataframe<a class="anchor" aria-label="anchor" href="#create-a-wide-format-dataframe"></a>
 </h2>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat_withsigse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat.sub_ethnic</span> , <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dat.sub_ethnic</span><span class="op">$</span><span class="va">`NCBI Taxonomy IDs`</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sigse</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat_withsigse</span>, tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">cmate</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu">safe</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/safe/man/getCmatrix.html" class="external-link">getCmatrix</a></span><span class="op">(</span><span class="va">sigse</span>, as.matrix <span class="op">=</span> <span class="cn">TRUE</span>, min.size <span class="op">=</span> <span class="fl">0</span>, prune <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## WARNING: rows are sorted elements of keyword.list</span></span>
 <span><span class="co">## 31 categories formed</span></span></code></pre>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cdfe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">cmate</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">cdfe</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">dat_withsigse</span>, <span class="va">cdfe</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">cdfe</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">25</span><span class="op">]</span></span></code></pre></div>
@@ -4571,7 +4906,7 @@ Distance to create a distance matrix.<a class="anchor" aria-label="anchor" href=
 <h2 id="create-another-heatmap-on-correlations-of-presenceabsence-of-taxa--1">Create another heatmap on correlations of presence/absence of
 taxa.<a class="anchor" aria-label="anchor" href="#create-another-heatmap-on-correlations-of-presenceabsence-of-taxa--1"></a>
 </h2>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sigcorse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">cmate</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">siglengthse</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">sigse</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">hae</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengthse</span><span class="op">)</span><span class="op">)</span></span>
@@ -4585,7 +4920,7 @@ taxa.<a class="anchor" aria-label="anchor" href="#create-another-heatmap-on-corr
 <span>  column_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">".+:"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">sigcorse</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">hme</span></span></code></pre></div>
-<p><img src="capstoneanalysis_ifeanyi_files/figure-html/unnamed-chunk-21-1.png" width="700"></p>
+<p><img src="capstoneanalysis_ifeanyi_files/figure-html/unnamed-chunk-21-1.png" width="576"></p>
 </div>
   </div>
 
@@ -4604,7 +4939,7 @@ taxa.<a class="anchor" aria-label="anchor" href="#create-another-heatmap-on-corr
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
       </footer>

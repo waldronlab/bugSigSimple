@@ -32,7 +32,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Reviews of published signatures based on bugsigdb.org</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.99.6</span>
       </span>
     </div>
 
@@ -49,10 +49,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Bearkland%20capstone%20DED%2012.2.2024.html">Differential Abundance in the ocular microbiome in DED</a>
+      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
     </li>
     <li>
-      <a href="../articles/c-section_meconium_shaimaa.html">Delivery Mode and the Meconium Microbiome</a>
+      <a href="../articles/capstoneanalysis_BearklandM.html">Differential Abundance in the ocular microbiome in Dry Eye Disaease</a>
     </li>
     <li>
       <a href="../articles/capstoneanalysis_clare.html">COVID-19 associated microbiome</a>
@@ -70,7 +70,7 @@
       <a href="../articles/fieldworkanalysis_samara.html">The Endometriosis-associated Microbiome</a>
     </li>
     <li>
-      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in bugsigdb.org</a>
+      <a href="../articles/healthysig.html">Analysis of prevalent stool genera in BugSigDB</a>
     </li>
   </ul>
 </li>
@@ -100,7 +100,7 @@
                         <h4 data-toc-skip class="author">Clare
 Grieve</h4>
             
-            <h4 data-toc-skip class="date">19 March, 2025</h4>
+            <h4 data-toc-skip class="date">05 May, 2025</h4>
       
 
       <div class="hidden name"><code>capstoneanalysis_clare.rmd</code></div>
@@ -140,10 +140,10 @@ occuring so frequently by chance</li>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://waldronlab.io/bugSigSimple" class="external-link">bugSigSimple</a></span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> </span></code></pre></div>
-<pre><code><span><span class="co">## Using cached version from 2025-03-19 16:39:02</span></span></code></pre>
+<pre><code><span><span class="co">## Using cached version from 2025-05-05 19:22:53</span></span></code></pre>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 5520   50</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 8163   50</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "BSDB ID"                    "Study"                     </span></span>
@@ -176,7 +176,7 @@ occuring so frequently by chance</li>
 <pre><code><span><span class="co">## ── <span style="font-weight: bold;">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr    </span> 1.1.4     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr    </span> 2.1.5</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats  </span> 1.0.0     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr  </span> 1.5.1</span></span>
-<span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.5.1     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span></span>
+<span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 3.5.2     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.2.1</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">lubridate</span> 1.9.4     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr    </span> 1.3.1</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr    </span> 1.0.4     </span></span>
 <span><span class="co">## ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
@@ -186,7 +186,7 @@ occuring so frequently by chance</li>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span> <span class="va">efo</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getOntology.html" class="external-link">getOntology</a></span><span class="op">(</span><span class="st">"efo"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Loading required namespace: ontologyIndex</span></span>
-<span><span class="co">## Using cached version from 2025-03-19 16:37:06</span></span></code></pre>
+<span><span class="co">## Using cached version from 2025-05-05 19:17:56</span></span></code></pre>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">covid_all</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/subsetByOntology.html" class="external-link">subsetByOntology</a></span><span class="op">(</span><span class="va">dat</span>, column <span class="op">=</span> <span class="st">"Condition"</span>, <span class="st">"COVID-19"</span>, <span class="va">efo</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>studyexp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">Study</span>, <span class="va">Experiment</span>, sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -212,7 +212,7 @@ occuring so frequently by chance</li>
 </h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">covid_all</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 45 × 9</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 47 × 9</span></span></span>
 <span><span class="co">##    `Study code` MaxCases MaxControls `Study design` Condition N_signatures PMID </span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 1</span> BellatoM_20…      156          36 cross-section… COVID-19…            3 3780…</span></span>
@@ -225,7 +225,7 @@ occuring so frequently by chance</li>
 <span><span class="co">## <span style="color: #BCBCBC;"> 8</span> GaibaniP_20…       24          24 case-control   COVID-19             2 3398…</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;"> 9</span> GalperineT_…       57          43 time series /… COVID-19             4 3759…</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span> GaoM_2021          94          48 prospective c… COVID-19             2 3442…</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 35 more rows</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 37 more rows</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: DOI &lt;chr&gt;, URL &lt;chr&gt;</span></span></span></code></pre>
 </div>
 <div class="section level3">
@@ -251,6 +251,7 @@ increased or decreased, relative to the total number of signatures in
 which it is reported, is equal to 0.5</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">gut_sigs</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: Expected 7 pieces. Additional pieces discarded in 1 rows [4].</span></span></code></pre>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -302,6 +303,53 @@ metaphlan_name
 <tbody>
 <tr>
 <td style="text-align:left;">
+Clostridium
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0.61000
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
+Bacillota
+</td>
+<td style="text-align:left;">
+Clostridia
+</td>
+<td style="text-align:left;">
+Eubacteriales
+</td>
+<td style="text-align:left;">
+Clostridiaceae
+</td>
+<td style="text-align:left;">
+Clostridium
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 Faecalibacterium
 </td>
 <td style="text-align:left;">
@@ -323,6 +371,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -337,14 +388,11 @@ Oscillospiraceae
 <td style="text-align:left;">
 Faecalibacterium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-21
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium
 </td>
 </tr>
 <tr>
@@ -370,6 +418,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -384,14 +435,106 @@ Lachnospiraceae
 <td style="text-align:left;">
 Anaerostipes
 </td>
+<td style="text-align:right;">
+0
+</td>
 <td style="text-align:left;">
-NA
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Anaerostipes
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Faecalibacterium prausnitzii
+</td>
+<td style="text-align:left;">
+species
 </td>
 <td style="text-align:right;">
-17
+13
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+0.00024
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Anaerostipes
+Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
+Bacillota
+</td>
+<td style="text-align:left;">
+Clostridia
+</td>
+<td style="text-align:left;">
+Eubacteriales
+</td>
+<td style="text-align:left;">
+Oscillospiraceae
+</td>
+<td style="text-align:left;">
+Faecalibacterium
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium|s__Faecalibacterium
+prausnitzii
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ruminococcus
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+0.09200
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
+Bacillota
+</td>
+<td style="text-align:left;">
+Clostridia
+</td>
+<td style="text-align:left;">
+Eubacteriales
+</td>
+<td style="text-align:left;">
+Oscillospiraceae
+</td>
+<td style="text-align:left;">
+Ruminococcus
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
 </td>
 </tr>
 <tr>
@@ -417,6 +560,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -431,37 +577,37 @@ Streptococcaceae
 <td style="text-align:left;">
 Streptococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-18
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Clostridium
+Lachnospiraceae
 </td>
 <td style="text-align:left;">
-genus
+family
 </td>
 <td style="text-align:right;">
 12
 </td>
 <td style="text-align:right;">
-6
+4
 </td>
 <td style="text-align:right;">
-6
+8
 </td>
 <td style="text-align:right;">
-1.00000
+0.39000
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
 </td>
 <td style="text-align:left;">
 Bacillota
@@ -470,22 +616,113 @@ Bacillota
 Clostridia
 </td>
 <td style="text-align:left;">
-Eubacteriales
+Lachnospirales
 </td>
 <td style="text-align:left;">
-Clostridiaceae
-</td>
-<td style="text-align:left;">
-Clostridium
+Lachnospiraceae
 </td>
 <td style="text-align:left;">
 NA
 </td>
 <td style="text-align:right;">
-18
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Coprococcus
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+0.00049
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
+Bacillota
+</td>
+<td style="text-align:left;">
+Clostridia
+</td>
+<td style="text-align:left;">
+Lachnospirales
+</td>
+<td style="text-align:left;">
+Lachnospiraceae
+</td>
+<td style="text-align:left;">
+Coprococcus
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Coprococcus
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Dorea
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+0.39000
+</td>
+<td style="text-align:left;">
+Bacteria
+</td>
+<td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
+Bacillota
+</td>
+<td style="text-align:left;">
+Clostridia
+</td>
+<td style="text-align:left;">
+Lachnospirales
+</td>
+<td style="text-align:left;">
+Lachnospiraceae
+</td>
+<td style="text-align:left;">
+Dorea
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Dorea
 </td>
 </tr>
 <tr>
@@ -511,6 +748,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -525,256 +765,16 @@ Lachnospiraceae
 <td style="text-align:left;">
 Roseburia
 </td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-19
-</td>
-<td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Roseburia
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Enterococcus
-</td>
-<td style="text-align:left;">
-genus
-</td>
-<td style="text-align:right;">
-11
-</td>
-<td style="text-align:right;">
-11
-</td>
 <td style="text-align:right;">
 0
 </td>
-<td style="text-align:right;">
-0.00098
-</td>
 <td style="text-align:left;">
-Bacteria
-</td>
-<td style="text-align:left;">
-Bacillota
-</td>
-<td style="text-align:left;">
-Bacilli
-</td>
-<td style="text-align:left;">
-Lactobacillales
-</td>
-<td style="text-align:left;">
-Enterococcaceae
-</td>
-<td style="text-align:left;">
-Enterococcus
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-18
-</td>
-<td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ruminococcus
-</td>
-<td style="text-align:left;">
-genus
-</td>
-<td style="text-align:right;">
-10
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-0.34000
-</td>
-<td style="text-align:left;">
-Bacteria
-</td>
-<td style="text-align:left;">
-Bacillota
-</td>
-<td style="text-align:left;">
-Clostridia
-</td>
-<td style="text-align:left;">
-Eubacteriales
-</td>
-<td style="text-align:left;">
-Oscillospiraceae
-</td>
-<td style="text-align:left;">
-Ruminococcus
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-20
-</td>
-<td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Lactobacillaceae
-</td>
-<td style="text-align:left;">
-family
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-1.00000
-</td>
-<td style="text-align:left;">
-Bacteria
-</td>
-<td style="text-align:left;">
-Bacillota
-</td>
-<td style="text-align:left;">
-Bacilli
-</td>
-<td style="text-align:left;">
-Lactobacillales
-</td>
-<td style="text-align:left;">
-Lactobacillaceae
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:right;">
-19
-</td>
-<td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Faecalibacterium prausnitzii
-</td>
-<td style="text-align:left;">
-species
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-0.00390
-</td>
-<td style="text-align:left;">
-Bacteria
-</td>
-<td style="text-align:left;">
-Bacillota
-</td>
-<td style="text-align:left;">
-Clostridia
-</td>
-<td style="text-align:left;">
-Eubacteriales
-</td>
-<td style="text-align:left;">
-Oscillospiraceae
-</td>
-<td style="text-align:left;">
-Faecalibacterium
-</td>
-<td style="text-align:left;">
-Faecalibacterium prausnitzii
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium|s__Faecalibacterium
-prausnitzii
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Anaerobutyricum hallii
-</td>
-<td style="text-align:left;">
-species
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-0.51000
-</td>
-<td style="text-align:left;">
-Bacteria
-</td>
-<td style="text-align:left;">
-Bacillota
-</td>
-<td style="text-align:left;">
-Clostridia
-</td>
-<td style="text-align:left;">
-Lachnospirales
-</td>
-<td style="text-align:left;">
-Lachnospiraceae
-</td>
-<td style="text-align:left;">
-Anaerobutyricum
-</td>
-<td style="text-align:left;">
-Anaerobutyricum hallii
-</td>
-<td style="text-align:right;">
-9
-</td>
-<td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Anaerobutyricum|s__Anaerobutyricum
-hallii
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Roseburia
 </td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">naso_sigs</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
@@ -848,6 +848,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -862,14 +865,11 @@ Veillonellaceae
 <td style="text-align:left;">
 Veillonella
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-17
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella
+d__Bacteria|k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella
 </td>
 </tr>
 <tr>
@@ -895,6 +895,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -909,14 +912,11 @@ Prevotellaceae
 <td style="text-align:left;">
 Prevotella
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-22
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Prevotella
 </td>
 </tr>
 <tr>
@@ -942,6 +942,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -956,14 +959,11 @@ Pasteurellaceae
 <td style="text-align:left;">
 Haemophilus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-13
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Gammaproteobacteria|o__Pasteurellales|f__Pasteurellaceae|g__Haemophilus
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Pasteurellales|f__Pasteurellaceae|g__Haemophilus
 </td>
 </tr>
 <tr>
@@ -989,6 +989,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -1003,14 +1006,11 @@ Streptococcaceae
 <td style="text-align:left;">
 Streptococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-15
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
 </td>
 </tr>
 <tr>
@@ -1036,6 +1036,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -1050,14 +1053,11 @@ Lachnospiraceae
 <td style="text-align:left;">
 Oribacterium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-10
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Oribacterium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Oribacterium
 </td>
 </tr>
 <tr>
@@ -1083,6 +1083,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1097,14 +1100,11 @@ Micrococcaceae
 <td style="text-align:left;">
 Rothia
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-12
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Micrococcales|f__Micrococcaceae|g__Rothia
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Micrococcales|f__Micrococcaceae|g__Rothia
 </td>
 </tr>
 <tr>
@@ -1130,6 +1130,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -1144,14 +1147,11 @@ Neisseriaceae
 <td style="text-align:left;">
 Neisseria
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-13
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Betaproteobacteria|o__Neisseriales|f__Neisseriaceae|g__Neisseria
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Betaproteobacteria|o__Neisseriales|f__Neisseriaceae|g__Neisseria
 </td>
 </tr>
 <tr>
@@ -1177,6 +1177,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -1191,14 +1194,11 @@ Filifactoraceae
 <td style="text-align:left;">
 Filifactor
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-8
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Peptostreptococcales|f__Filifactoraceae|g__Filifactor
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Peptostreptococcales|f__Filifactoraceae|g__Filifactor
 </td>
 </tr>
 <tr>
@@ -1224,6 +1224,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -1238,14 +1241,11 @@ Prevotellaceae
 <td style="text-align:left;">
 Alloprevotella
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-8
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Alloprevotella
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Alloprevotella
 </td>
 </tr>
 <tr>
@@ -1271,6 +1271,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1285,20 +1288,19 @@ Bifidobacteriaceae
 <td style="text-align:left;">
 Bifidobacterium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-7
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium
 </td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">resp_sigs</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: Expected 7 pieces. Additional pieces discarded in 4 rows [1, 3,</span></span>
+<span><span class="co">## 9, 10].</span></span></code></pre>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1371,6 +1373,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1385,14 +1390,11 @@ Micrococcaceae
 <td style="text-align:left;">
 Rothia
 </td>
-<td style="text-align:left;">
-Rothia mucilaginosa
-</td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Micrococcales|f__Micrococcaceae|g__Rothia|s__Rothia
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Micrococcales|f__Micrococcaceae|g__Rothia|s__Rothia
 mucilaginosa
 </td>
 </tr>
@@ -1419,6 +1421,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -1433,14 +1438,11 @@ Streptococcaceae
 <td style="text-align:left;">
 Streptococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-3
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
 </td>
 </tr>
 <tr>
@@ -1466,6 +1468,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -1480,14 +1485,11 @@ Lachnospiraceae
 <td style="text-align:left;">
 Lachnoclostridium
 </td>
-<td style="text-align:left;">
-Lachnoclostridium phytofermentans
-</td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Lachnoclostridium|s__Lachnoclostridium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Lachnoclostridium|s__Lachnoclostridium
 phytofermentans
 </td>
 </tr>
@@ -1514,6 +1516,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -1528,14 +1533,11 @@ Porphyromonadaceae
 <td style="text-align:left;">
 Porphyromonas
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Porphyromonadaceae|g__Porphyromonas
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Porphyromonadaceae|g__Porphyromonas
 </td>
 </tr>
 <tr>
@@ -1559,6 +1561,9 @@ genus
 </td>
 <td style="text-align:left;">
 Bacteria
+</td>
+<td style="text-align:left;">
+Pseudomonadati
 </td>
 <td style="text-align:left;">
 Bacteroidota
@@ -1575,14 +1580,11 @@ Tannerellaceae
 <td style="text-align:left;">
 Tannerella
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Tannerella
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Tannerella
 </td>
 </tr>
 <tr>
@@ -1608,6 +1610,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Bacteroidota
 </td>
 <td style="text-align:left;">
@@ -1622,14 +1627,11 @@ Flavobacteriaceae
 <td style="text-align:left;">
 Capnocytophaga
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacteroidota|c__Flavobacteriia|o__Flavobacteriales|f__Flavobacteriaceae|g__Capnocytophaga
+d__Bacteria|k__Pseudomonadati|p__Bacteroidota|c__Flavobacteriia|o__Flavobacteriales|f__Flavobacteriaceae|g__Capnocytophaga
 </td>
 </tr>
 <tr>
@@ -1655,6 +1657,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Pseudomonadati
+</td>
+<td style="text-align:left;">
 Pseudomonadota
 </td>
 <td style="text-align:left;">
@@ -1669,14 +1674,11 @@ Neisseriaceae
 <td style="text-align:left;">
 Neisseria
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Pseudomonadota|c__Betaproteobacteria|o__Neisseriales|f__Neisseriaceae|g__Neisseria
+d__Bacteria|k__Pseudomonadati|p__Pseudomonadota|c__Betaproteobacteria|o__Neisseriales|f__Neisseriaceae|g__Neisseria
 </td>
 </tr>
 <tr>
@@ -1702,6 +1704,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1716,14 +1721,11 @@ Actinomycetaceae
 <td style="text-align:left;">
 Actinomyces
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-2
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces
 </td>
 </tr>
 <tr>
@@ -1749,6 +1751,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1763,14 +1768,11 @@ Actinomycetaceae
 <td style="text-align:left;">
 Actinomyces
 </td>
-<td style="text-align:left;">
-Actinomyces pacaensis
-</td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales|f__Actinomycetaceae|g__Actinomyces|s__Actinomyces
 pacaensis
 </td>
 </tr>
@@ -1797,6 +1799,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Actinomycetota
 </td>
 <td style="text-align:left;">
@@ -1811,14 +1816,11 @@ Actinomycetaceae
 <td style="text-align:left;">
 Schaalia
 </td>
-<td style="text-align:left;">
-Schaalia meyeri
-</td>
 <td style="text-align:right;">
-1
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales|f__Actinomycetaceae|g__Schaalia|s__Schaalia
+d__Bacteria|k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Actinomycetales|f__Actinomycetaceae|g__Schaalia|s__Schaalia
 meyeri
 </td>
 </tr>
@@ -1830,7 +1832,7 @@ meyeri
 <h2 id="gut-microbiota-analysis">gut microbiota analysis<a class="anchor" aria-label="anchor" href="#gut-microbiota-analysis"></a>
 </h2>
 <p>Look specifically at case-control comparisons</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">healthy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">".*(healthy.*COVID|COVID.*healthy).*"</span>, <span class="va">gut_sigs</span><span class="op">$</span><span class="va">comparison1</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">cc_gut_sigs1</span> <span class="op">&lt;-</span> <span class="va">gut_sigs</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -1843,11 +1845,13 @@ feces studies<a class="anchor" aria-label="anchor" href="#overall-frequencies-of
 <em>much</em> more compelling that the FDR value here would suggest,
 since this taxon also passed a significance threshold in every one of
 those studies.</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cc_gut_sigs1_taxontable</span> <span class="op">&lt;-</span> <span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">cc_gut_sigs1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>FDR <span class="op">=</span>  <span class="fu"><a href="https://rdrr.io/r/stats/p.adjust.html" class="external-link">p.adjust</a></span><span class="op">(</span>p <span class="op">=</span> <span class="va">`Binomial Test pval`</span>, method<span class="op">=</span><span class="st">"fdr"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="va">FDR</span>, .after <span class="op">=</span> <span class="va">`Binomial Test pval`</span><span class="op">)</span></span>
-<span><span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="va">cc_gut_sigs1_taxontable</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="va">FDR</span>, .after <span class="op">=</span> <span class="va">`Binomial Test pval`</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: Expected 7 pieces. Additional pieces discarded in 1 rows [10].</span></span></code></pre>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/kbl.html" class="external-link">kbl</a></span><span class="op">(</span><span class="va">cc_gut_sigs1_taxontable</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr>
 <th style="text-align:left;">
@@ -1926,6 +1930,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -1940,14 +1947,11 @@ Oscillospiraceae
 <td style="text-align:left;">
 Faecalibacterium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-14
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium
 </td>
 </tr>
 <tr>
@@ -1976,6 +1980,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -1990,14 +1997,11 @@ Lachnospiraceae
 <td style="text-align:left;">
 Anaerostipes
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-10
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Anaerostipes
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Anaerostipes
 </td>
 </tr>
 <tr>
@@ -2026,6 +2030,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2040,14 +2047,11 @@ Lachnospiraceae
 <td style="text-align:left;">
 Roseburia
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-11
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Roseburia
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Roseburia
 </td>
 </tr>
 <tr>
@@ -2076,6 +2080,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2090,14 +2097,11 @@ Enterococcaceae
 <td style="text-align:left;">
 Enterococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-11
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Enterococcaceae|g__Enterococcus
 </td>
 </tr>
 <tr>
@@ -2126,6 +2130,9 @@ family
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2140,14 +2147,11 @@ Lactobacillaceae
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-12
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae
 </td>
 </tr>
 <tr>
@@ -2176,6 +2180,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2190,14 +2197,11 @@ Streptococcaceae
 <td style="text-align:left;">
 Streptococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-10
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae|g__Streptococcus
 </td>
 </tr>
 <tr>
@@ -2226,6 +2230,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2240,14 +2247,11 @@ Clostridiaceae
 <td style="text-align:left;">
 Clostridium
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-8
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium
 </td>
 </tr>
 <tr>
@@ -2276,6 +2280,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2290,14 +2297,11 @@ Lachnospiraceae
 <td style="text-align:left;">
 Coprococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-13
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Coprococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Coprococcus
 </td>
 </tr>
 <tr>
@@ -2326,6 +2330,9 @@ genus
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2340,14 +2347,11 @@ Oscillospiraceae
 <td style="text-align:left;">
 Ruminococcus
 </td>
-<td style="text-align:left;">
-NA
-</td>
 <td style="text-align:right;">
-14
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Ruminococcus
 </td>
 </tr>
 <tr>
@@ -2376,6 +2380,9 @@ species
 Bacteria
 </td>
 <td style="text-align:left;">
+Bacillati
+</td>
+<td style="text-align:left;">
 Bacillota
 </td>
 <td style="text-align:left;">
@@ -2390,14 +2397,11 @@ Lachnospiraceae
 <td style="text-align:left;">
 Blautia
 </td>
-<td style="text-align:left;">
-Blautia obeum
-</td>
 <td style="text-align:right;">
-7
+0
 </td>
 <td style="text-align:left;">
-k__Bacteria|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Blautia|s__Blautia
+d__Bacteria|k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae|g__Blautia|s__Blautia
 obeum
 </td>
 </tr>
@@ -2409,7 +2413,7 @@ obeum
 </h3>
 <p>Just for the increased cc_gut_sigs1 for now. I am inclined to skip
 this analysis in favor of the clustering and binomial test analysis.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://waldronlab.io/bugSigSimple" class="external-link">bugSigSimple</a></span><span class="op">)</span></span>
 <span><span class="va">gut.sigs.increased</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">cc_gut_sigs1</span>, <span class="va">`Abundance in Group 1`</span> <span class="op">==</span> <span class="st">"increased"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span>tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
@@ -2418,7 +2422,7 @@ this analysis in favor of the clustering and binomial test analysis.</p>
 <span><span class="fu"><a href="../reference/getCriticalN.html">getCriticalN</a></span><span class="op">(</span><span class="va">gut.sigs.increased</span>, <span class="va">my.siglengths.inc</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 95% </span></span>
 <span><span class="co">##  10</span></span></code></pre>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compare to observed - enterococcus &amp; streptococcus are the only taxa that equal the critical limit</span></span>
 <span><span class="fu"><a href="../reference/frequencySigs.html">frequencySigs</a></span><span class="op">(</span><span class="va">gut.sigs.increased</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##            Enterococcus           Streptococcus      Enterobacteriaceae </span></span>
@@ -2434,14 +2438,14 @@ this analysis in favor of the clustering and binomial test analysis.</p>
 <h3 id="overall-frequencies-of-taxa-decreased-in-cases-for-casecontrol-feces-studies">Overall frequencies of taxa decreased in cases for case/control
 feces studies<a class="anchor" aria-label="anchor" href="#overall-frequencies-of-taxa-decreased-in-cases-for-casecontrol-feces-studies"></a>
 </h3>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/createTaxonTable.html">createTaxonTable</a></span><span class="op">(</span><span class="va">cc_gut_sigs1</span>, n<span class="op">=</span><span class="fl">40</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="nasopharyngeal-microbiota-analysis">nasopharyngeal microbiota analysis<a class="anchor" aria-label="anchor" href="#nasopharyngeal-microbiota-analysis"></a>
 </h3>
 <p>Look specifically at case-control comparisons</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="va">healthy</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">".*(control.*COVID|COVID.*control).*"</span>, <span class="va">naso_sigs</span><span class="op">$</span><span class="va">comparison1</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
@@ -2457,24 +2461,24 @@ feces studies<a class="anchor" aria-label="anchor" href="#overall-frequencies-of
 testing.</p>
 <p>First calculate pairwise overlaps for all signatures of length &gt;
 1:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">allsigs</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">covid_all</span>, tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">allsigs</span> <span class="op">&lt;-</span> <span class="va">allsigs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsigs</span>, <span class="va">length</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span> <span class="co">#require length &gt; 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## NULL</span></span></code></pre>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydists</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcPairwiseOverlaps.html" class="external-link">calcPairwiseOverlaps</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mydists</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 2722    8</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 3020    8</span></span></code></pre>
 <p>Create a matrix of Jaccard similarities (0 for no overlap, 1 for 100%
 overlap)</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">jmat</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcJaccardSimilarity.html" class="external-link">calcJaccardSimilarity</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Loading required package: grid</span></span></code></pre>
 <pre><code><span><span class="co">## ========================================</span></span>
-<span><span class="co">## ComplexHeatmap version 2.22.0</span></span>
+<span><span class="co">## ComplexHeatmap version 2.24.0</span></span>
 <span><span class="co">## Bioconductor page: http://bioconductor.org/packages/ComplexHeatmap/</span></span>
 <span><span class="co">## Github page: https://github.com/jokergoo/ComplexHeatmap</span></span>
 <span><span class="co">## Documentation: http://jokergoo.github.io/ComplexHeatmap-reference</span></span>
@@ -2491,7 +2495,7 @@ overlap)</p>
 <span><span class="co">## This message can be suppressed by:</span></span>
 <span><span class="co">##   suppressPackageStartupMessages(library(ComplexHeatmap))</span></span>
 <span><span class="co">## ========================================</span></span></code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">siglengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsigs</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">ha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">hr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/rowAnnotation.html" class="external-link">rowAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span></span>
@@ -2509,236 +2513,255 @@ overlap)</p>
 <span><span class="co">## to `col` argument.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Use `suppressMessages()` to turn off this message.</span></span></code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hm</span></span></code></pre></div>
 <p><img src="capstoneanalysis_clare_files/figure-html/unnamed-chunk-16-1.png" width="1920"></p>
 <p>Use this interactively to make an interactive heatmap (not evaluated
 in vignette). Some expanding of the default size is required to see
 anything. Creating a sub-heatmap, then exporting it as a table, allows
 in-depth identification of the subgroups.</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/InteractiveComplexHeatmap" class="external-link">InteractiveComplexHeatmap</a></span><span class="op">)</span></span>
 <span><span class="va">hm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/draw-dispatch.html" class="external-link">draw</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/InteractiveComplexHeatmap/man/htShiny.html" class="external-link">htShiny</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">as.dist</a></span><span class="op">(</span><span class="va">jmat</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">hc</span><span class="op">)</span></span></code></pre></div>
 <p><img src="capstoneanalysis_clare_files/figure-html/unnamed-chunk-18-1.png" width="1920"></p>
 <p>This tree can be cut to show the clusters, for example. The clusters
 of more than 1 signature but less than ~10 signatures are most likely to
 be something interesting.</p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">clusts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cutree.html" class="external-link">cutree</a></span><span class="op">(</span><span class="va">hc</span>, h <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">clusts</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">clusts</span><span class="op">)</span><span class="op">[</span><span class="va">clusts</span> <span class="op">==</span> <span class="va">i</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
-<span><span class="co">##  [1] "bsdb:428/1/1_COVID-19:COVID-19-cases_vs_Healthy-controls_UP"                                                                                       </span></span>
-<span><span class="co">##  [2] "bsdb:428/1/2_COVID-19:COVID-19-cases_vs_Healthy-controls_DOWN"                                                                                     </span></span>
-<span><span class="co">##  [3] "bsdb:428/3/1_COVID-19:Recovered-COVID-19-cases_vs_Healthy-controls_UP"                                                                             </span></span>
-<span><span class="co">##  [4] "bsdb:430/1/1_COVID-19:Patients-with-high-SARS-CoV-2-infectivity_vs_Patients-with-low-to-none-SARS-CoV-2-infectivity_DOWN"                          </span></span>
-<span><span class="co">##  [5] "bsdb:441/1/1_COVID-19:COVID-19-cases_vs_Healthy-controls_UP"                                                                                       </span></span>
-<span><span class="co">##  [6] "bsdb:441/3/2_COVID-19:COVID-19-patients_vs_H1N1-patients_DOWN"                                                                                     </span></span>
-<span><span class="co">##  [7] "bsdb:449/1/2_COVID-19:COVID-19-cases_vs_Healthy-controls_DOWN"                                                                                     </span></span>
-<span><span class="co">##  [8] "bsdb:453/3/1_COVID-19:Recovered-COVID-19-patients_vs_Non-infected-patients-with-unrelated-respiratory-medical-conditions_UP"                       </span></span>
-<span><span class="co">##  [9] "bsdb:453/3/2_COVID-19:Recovered-COVID-19-patients_vs_Non-infected-patients-with-unrelated-respiratory-medical-conditions_DOWN"                     </span></span>
-<span><span class="co">## [10] "bsdb:458/1/1_COVID-19:COVID-19-patients_vs_Non-intubated-patients-with-non-incubation-viral-pneumonia-or-non-incubation-non-infectious-diseases_UP"</span></span>
-<span><span class="co">## [11] "bsdb:459/1/2_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls_UP"                                                                 </span></span>
-<span><span class="co">## [12] "bsdb:464/1/2_COVID-19:Confirmed-COVID-19-patients_vs_Healthy-controls_UP"                                                                          </span></span>
-<span><span class="co">## [13] "bsdb:469/1/1_COVID-19:COVID-19-patients_vs_Non-COVID-19-controls_DOWN"                                                                             </span></span>
-<span><span class="co">## [14] "bsdb:474/1/2_COVID-19:COVID-19-patients_vs_Non-COVID-patients-with-URTI-or-COPD_DOWN"                                                              </span></span>
-<span><span class="co">## [15] "bsdb:479/2/2_COVID-19:Mild-moderate-COVID-19-patients_vs_Healthy-controls_UP"                                                                      </span></span>
-<span><span class="co">## [16] "bsdb:482/1/2_COVID-19:Severe-COVID-19-patients_vs_Mild-COVID-19-patients_UP"                                                                       </span></span>
-<span><span class="co">## [17] "bsdb:483/1/1_COVID-19:Antibiotic-naive-COVID-19-patients_vs_Uninfected-controls,-pneumonia-patients,-antibiotics-treated-COVID-19-patients_UP"     </span></span>
-<span><span class="co">## [18] "bsdb:483/3/1_COVID-19:Pneumonia-controls_vs_Uninfected-controls,-COVID-19-patients_DOWN"                                                           </span></span>
-<span><span class="co">## [19] "bsdb:484/1/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-patients-with-fever-and-cough_UP"                                            </span></span>
-<span><span class="co">## [20] "bsdb:485/1/1_COVID-19:COVID-19-patients-with-fever_vs_COVID-19-patients-without-fever_UP"                                                          </span></span>
-<span><span class="co">## [21] "bsdb:511/1/2_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                                                                  </span></span>
-<span><span class="co">## [22] "bsdb:512/3/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-healthcare-workers-(controls)_UP"                                            </span></span>
-<span><span class="co">## [23] "bsdb:513/3/1_COVID-19:COVID-19-positive-patients-with-antibiotic-use_vs_COVID-19-positive-patients-without-antibiotic-use_UP"                      </span></span>
-<span><span class="co">## [24] "bsdb:734/1/1_COVID-19:COVID-19-infection-cases._vs_Control-group_UP"                                                                               </span></span>
-<span><span class="co">## [25] "bsdb:734/1/2_COVID-19:COVID-19-infection-cases._vs_Control-group_DOWN"                                                                             </span></span>
-<span><span class="co">## [26] "bsdb:831/1/1_COVID-19:COVID-19-Patients_vs_Non-Covid-19-Patients---pneumonia-patients_UP"                                                          </span></span>
-<span><span class="co">## [27] "bsdb:940/1/2_COVID-19:Covid-19-group_vs_Control-group_DOWN"                                                                                        </span></span>
-<span><span class="co">## [28] "bsdb:940/2/1_COVID-19:Post-Covid-19-group_vs_Covid-19-group_UP"                                                                                    </span></span>
+<span><span class="co">##  [1] "bsdb:513/1/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls_UP"                                                                             </span></span>
+<span><span class="co">##  [2] "bsdb:32442562/1/1_COVID-19:Antibiotic-naive-COVID-19-patients_vs_Uninfected-controls,-pneumonia-patients,-antibiotics-treated-COVID-19-patients_UP"            </span></span>
+<span><span class="co">##  [3] "bsdb:32442562/2/1_COVID-19:Antibiotic-treated-COVID-19-patients_vs_Antibiotic-naive-COVID-19-patients,-pneumonia-patients,-uninfected-controls_DOWN"           </span></span>
+<span><span class="co">##  [4] "bsdb:32497191/3/2_COVID-19:COVID-19-patients_vs_H1N1-patients_DOWN"                                                                                            </span></span>
+<span><span class="co">##  [5] "bsdb:32497191/4/1_COVID-19:COVID-19-cases_vs_Healthy-controls_UP"                                                                                              </span></span>
+<span><span class="co">##  [6] "bsdb:32690600/1/1_COVID-19:Patients-with-high-SARS-CoV-2-infectivity_vs_Patients-with-low-to-none-SARS-CoV-2-infectivity_DOWN"                                 </span></span>
+<span><span class="co">##  [7] "bsdb:32690600/1/2_COVID-19:Patients-with-high-SARS-CoV-2-infectivity_vs_Patients-with-low-to-none-SARS-CoV-2-infectivity_UP"                                   </span></span>
+<span><span class="co">##  [8] "bsdb:33431578/1/1_COVID-19:COVID-19-cases_vs_Healthy-controls_UP"                                                                                              </span></span>
+<span><span class="co">##  [9] "bsdb:33431578/2/1_COVID-19:Recovered-COVID-19-cases_vs_Healthy-controls_UP"                                                                                    </span></span>
+<span><span class="co">## [10] "bsdb:33577896/1/2_COVID-19:Symptomatic,-mild-to-moderate-COVID-19-patients_vs_Asymptomatic-uninfected-controls_DOWN"                                           </span></span>
+<span><span class="co">## [11] "bsdb:33596245/2/1_COVID-19:COVID-positive-patients-admitted-to-ICU-(i-COVID-19)_vs_COVID-positive-patients-admitted-to-infectious-disease-ward-(w-COVID-19)_UP"</span></span>
+<span><span class="co">## [12] "bsdb:33678150/1/2_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                                                                         </span></span>
+<span><span class="co">## [13] "bsdb:33789966/1/2_COVID-19:Confirmed-COVID-19-patients_vs_Healthy-controls_UP"                                                                                 </span></span>
+<span><span class="co">## [14] "bsdb:33977168/1/2_COVID-19:COVID-19-patients_vs_Non-COVID-patients-with-URTI-or-COPD_DOWN"                                                                     </span></span>
+<span><span class="co">## [15] "bsdb:33978940/1/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-patients-with-fever-and-cough_UP"                                                   </span></span>
+<span><span class="co">## [16] "bsdb:33980943/1/1_COVID-19:COVID-19-patients_vs_COVID-19-negative-patients-with-pneumonia_UP"                                                                  </span></span>
+<span><span class="co">## [17] "bsdb:33986253/3/2_COVID-19:Flu-patients_vs_Healthy-controls_DOWN"                                                                                              </span></span>
+<span><span class="co">## [18] "bsdb:34031657/3/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-healthcare-workers-(controls)_UP"                                                   </span></span>
+<span><span class="co">## [19] "bsdb:34058978/1/2_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls_UP"                                                                        </span></span>
+<span><span class="co">## [20] "bsdb:34100340/3/1_COVID-19:Recovered-COVID-19-patients_vs_Non-infected-patients-with-unrelated-respiratory-medical-conditions_UP"                              </span></span>
+<span><span class="co">## [21] "bsdb:34100340/4/1_COVID-19:Positive-for-COVID-19-viral-RNA-in-feces_vs_Negative-for-COVID-19-viral-RNA-in-feces_UP"                                            </span></span>
+<span><span class="co">## [22] "bsdb:34151035/1/1_COVID-19:COVID-19-patients_vs_Non-COVID-19-controls_DOWN"                                                                                    </span></span>
+<span><span class="co">## [23] "bsdb:34168484/1/1_COVID-19:COVID-19-patients-with-fever_vs_COVID-19-patients-without-fever_UP"                                                                 </span></span>
+<span><span class="co">## [24] "bsdb:34294722/3/2_COVID-19:COVID-19-patients-not-treated-with-antibiotics_vs_Healthy-controls_DOWN"                                                            </span></span>
+<span><span class="co">## [25] "bsdb:35411293/1/2_COVID-19:COVID-19-cases_vs_Healthy-controls_DOWN"                                                                                            </span></span>
+<span><span class="co">## [26] "bsdb:36869345/3/1_COVID-19:Feces-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_UP"                                                           </span></span>
+<span><span class="co">## [27] "bsdb:36894986/1/1_COVID-19:COVID-19-infection-cases._vs_Control-group_UP"                                                                                      </span></span>
+<span><span class="co">## [28] "bsdb:36894986/1/2_COVID-19:COVID-19-infection-cases._vs_Control-group_DOWN"                                                                                    </span></span>
+<span><span class="co">## [29] "bsdb:37119437/1/1_COVID-19:Healthy-Controls-Group_vs_Covid-19-and-Post-Covid-19-Groups_UP"                                                                     </span></span>
+<span><span class="co">## [30] "bsdb:37119437/3/1_COVID-19:Post-Covid-19-Group_vs_Healthy-Controls-and-Covid-19-Groups_UP"                                                                     </span></span>
+<span><span class="co">## [31] "bsdb:37119437/9/1_COVID-19:Post-Covid-19-Group_vs_Healthy-Controls_UP"                                                                                         </span></span>
+<span><span class="co">## [32] "bsdb:37596518/1/1_COVID-19:COVID-19-Patients_vs_Non-Covid-19-Patients---pneumonia-patients_UP"                                                                 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[2]]</span></span>
-<span><span class="co">##  [1] "bsdb:428/2/1_COVID-19:Recovered-COVID-19-cases_vs_Healthy-controls_UP"                                                         </span></span>
-<span><span class="co">##  [2] "bsdb:428/2/2_COVID-19:Recovered-COVID-19-cases_vs_Healthy-controls_DOWN"                                                       </span></span>
-<span><span class="co">##  [3] "bsdb:441/1/2_COVID-19:COVID-19-cases_vs_Healthy-controls_DOWN"                                                                 </span></span>
-<span><span class="co">##  [4] "bsdb:441/4/1_COVID-19:COVID-19-cases_vs_Healthy-controls_UP"                                                                   </span></span>
-<span><span class="co">##  [5] "bsdb:453/1/1_COVID-19:SARS-CoV-2-infected-patients_vs_Non-infected-patients-with-unrelated-respiratory-medical-conditions_UP"  </span></span>
-<span><span class="co">##  [6] "bsdb:464/2/2_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_UP"                                                      </span></span>
-<span><span class="co">##  [7] "bsdb:474/1/1_COVID-19:COVID-19-patients_vs_Non-COVID-patients-with-URTI-or-COPD_UP"                                            </span></span>
-<span><span class="co">##  [8] "bsdb:476/1/1_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_UP"                                                      </span></span>
-<span><span class="co">##  [9] "bsdb:478/1/2_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                                                                </span></span>
-<span><span class="co">## [10] "bsdb:479/2/1_COVID-19:Mild-moderate-COVID-19-patients_vs_Healthy-controls_DOWN"                                                </span></span>
-<span><span class="co">## [11] "bsdb:481/1/1_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                                                                </span></span>
-<span><span class="co">## [12] "bsdb:481/3/1_COVID-19:Severe-COVID-19-patients_vs_Mild-COVID-19-patients_UP"                                                   </span></span>
-<span><span class="co">## [13] "bsdb:487/1/1_COVID-19:Recovered-COVID-19-samples-(respiratory-negative)_vs_Infected-COVID-19-samples-(respiratory-positive)_UP"</span></span>
-<span><span class="co">## [14] "bsdb:498/1/2_COVID-19:Symptomatic,-mild-to-moderate-COVID-19-patients_vs_Asymptomatic-uninfected-controls_DOWN"                </span></span>
-<span><span class="co">## [15] "bsdb:511/3/2_COVID-19:COVID-19-patients-not-treated-with-antibiotics_vs_Healthy-controls_DOWN"                                 </span></span>
-<span><span class="co">## [16] "bsdb:512/2/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls_UP"                                             </span></span>
-<span><span class="co">## [17] "bsdb:828/3/1_COVID-19,Respiratory-failure-requiring-assisted-ventilation:Intubated_vs_Non-intubated_UP"                        </span></span>
-<span><span class="co">## [18] "bsdb:940/1/1_COVID-19:Covid-19-group_vs_Control-group_UP"                                                                      </span></span>
-<span><span class="co">## [19] "bsdb:940/3/1_COVID-19:Post-Covid-19-group_vs_Control-group_UP"                                                                 </span></span>
-<span><span class="co">## [20] "bsdb:940/5/2_COVID-19:Covid-19-C-group_vs_Control-group_DOWN"                                                                  </span></span>
+<span><span class="co">##  [1] "bsdb:513/2/1_COVID-19:COVID-19-positive-patients-with-breathing-assistance_vs_COVID-19-positive-patients-without-breathing-assistance_UP"</span></span>
+<span><span class="co">##  [2] "bsdb:32442562/3/1_COVID-19:Pneumonia-controls_vs_Uninfected-controls,-COVID-19-patients_DOWN"                                            </span></span>
+<span><span class="co">##  [3] "bsdb:32497191/1/2_COVID-19:COVID-19-cases_vs_Healthy-controls_DOWN"                                                                      </span></span>
+<span><span class="co">##  [4] "bsdb:33431578/1/2_COVID-19:COVID-19-cases_vs_Healthy-controls_DOWN"                                                                      </span></span>
+<span><span class="co">##  [5] "bsdb:33431578/3/1_COVID-19:Recovered-COVID-19-cases_vs_Healthy-controls_UP"                                                              </span></span>
+<span><span class="co">##  [6] "bsdb:33577896/1/1_COVID-19:Symptomatic,-mild-to-moderate-COVID-19-patients_vs_Asymptomatic-uninfected-controls_UP"                       </span></span>
+<span><span class="co">##  [7] "bsdb:33659220/1/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls_DOWN"                                                </span></span>
+<span><span class="co">##  [8] "bsdb:33672177/2/1_COVID-19:Mild-moderate-COVID-19-patients_vs_Healthy-controls_DOWN"                                                     </span></span>
+<span><span class="co">##  [9] "bsdb:33850111/1/2_COVID-19:Severe-COVID-19-patients_vs_Mild-COVID-19-patients_UP"                                                        </span></span>
+<span><span class="co">## [10] "bsdb:34031657/2/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls_UP"                                                  </span></span>
+<span><span class="co">## [11] "bsdb:34100340/3/2_COVID-19:Recovered-COVID-19-patients_vs_Non-infected-patients-with-unrelated-respiratory-medical-conditions_DOWN"      </span></span>
+<span><span class="co">## [12] "bsdb:34200249/1/1_COVID-19:Recovered-COVID-19-samples-(respiratory-negative)_vs_Infected-COVID-19-samples-(respiratory-positive)_UP"     </span></span>
+<span><span class="co">## [13] "bsdb:34294722/2/1_COVID-19:COVID-19-patients-(severe/critical)_vs_COVID-19-patients-(mild/moderate)_DOWN"                                </span></span>
+<span><span class="co">## [14] "bsdb:37119437/2/1_COVID-19:Covid-19-Group_vs_Healthy-Controls-and-Post-Covid-19-Groups_UP"                                               </span></span>
+<span><span class="co">## [15] "bsdb:37119437/4/2_COVID-19:Covid-19-N-group_vs_Control-group_DOWN"                                                                       </span></span>
+<span><span class="co">## [16] "bsdb:37119437/8/1_COVID-19:Covid-19-Group_vs_Healthy-Controls_UP"                                                                        </span></span>
+<span><span class="co">## [17] "bsdb:37803040/3/1_COVID-19,Respiratory-failure-requiring-assisted-ventilation:Intubated_vs_Non-intubated_UP"                             </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[3]]</span></span>
-<span><span class="co">##  [1] "bsdb:428/3/2_COVID-19:Recovered-COVID-19-cases_vs_Healthy-controls_DOWN"                                                                             </span></span>
-<span><span class="co">##  [2] "bsdb:453/2/1_COVID-19:SARS-CoV-2-recovered-individuals_vs_SARS-CoV-2-infected-patients_DOWN"                                                         </span></span>
-<span><span class="co">##  [3] "bsdb:458/1/2_COVID-19:COVID-19-patients_vs_Non-intubated-patients-with-non-incubation-viral-pneumonia-or-non-incubation-non-infectious-diseases_DOWN"</span></span>
-<span><span class="co">##  [4] "bsdb:478/2/1_COVID-19:COVID-19-patients_vs_Flu-patients_DOWN"                                                                                        </span></span>
-<span><span class="co">##  [5] "bsdb:479/1/1_COVID-19:ICU-COVID-19-patients_vs_Healthy-controls_DOWN"                                                                                </span></span>
-<span><span class="co">##  [6] "bsdb:479/4/2_COVID-19:ICU-COVID-19-patients_vs_Patients-infected-with-other-human-coronaviruses_UP"                                                  </span></span>
-<span><span class="co">##  [7] "bsdb:481/2/1_COVID-19:Antibiotic-treated-COVID-19-patients_vs_Antibiotic-naive-COVID-19-patients_UP"                                                 </span></span>
-<span><span class="co">##  [8] "bsdb:485/2/2_COVID-19:COVID-19-patients-with-fever_vs_COVID-19-patients-without-fever_DOWN"                                                          </span></span>
-<span><span class="co">##  [9] "bsdb:487/2/1_COVID-19:Recovered-COVID-19-samples-(respiratory-negative)_vs_Healthy-controls_DOWN"                                                    </span></span>
-<span><span class="co">## [10] "bsdb:782/3/1_COVID-19:Feces-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_UP"                                                      </span></span>
-<span><span class="co">## [11] "bsdb:940/2/2_COVID-19:Post-Covid-19-group_vs_Covid-19-group_DOWN"                                                                                    </span></span>
-<span><span class="co">## [12] "bsdb:940/4/2_COVID-19:Covid-19-N-group_vs_Control-group_DOWN"                                                                                        </span></span>
+<span><span class="co">##  [1] "bsdb:513/3/1_COVID-19:COVID-19-positive-patients-with-antibiotic-use_vs_COVID-19-positive-patients-without-antibiotic-use_UP"</span></span>
+<span><span class="co">##  [2] "bsdb:32497191/1/1_COVID-19:COVID-19-cases_vs_Healthy-controls_UP"                                                            </span></span>
+<span><span class="co">##  [3] "bsdb:33431578/2/2_COVID-19:Recovered-COVID-19-cases_vs_Healthy-controls_DOWN"                                                </span></span>
+<span><span class="co">##  [4] "bsdb:33431578/4/2_COVID-19:COVID-19-patients-treated-with-antibiotics_vs_Healthy-controls_UP"                                </span></span>
+<span><span class="co">##  [5] "bsdb:33577896/2/2_COVID-19:COVID-19-patients-with-high-viral-load_vs_COVID-19-patients-with-low-viral-load_DOWN"             </span></span>
+<span><span class="co">##  [6] "bsdb:33672177/2/2_COVID-19:Mild-moderate-COVID-19-patients_vs_Healthy-controls_UP"                                           </span></span>
+<span><span class="co">##  [7] "bsdb:33789966/2/2_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_UP"                                               </span></span>
+<span><span class="co">##  [8] "bsdb:33789966/3/1_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                                       </span></span>
+<span><span class="co">##  [9] "bsdb:33815323/1/1_COVID-19:Severe-COVID-19-patients_vs_COVID-19-negative-controls_UP"                                        </span></span>
+<span><span class="co">## [10] "bsdb:33978940/2/1_COVID-19:COVID-19-positive-patients_vs_Healthy-controls_UP"                                                </span></span>
+<span><span class="co">## [11] "bsdb:34100340/4/2_COVID-19:Positive-for-COVID-19-viral-RNA-in-feces_vs_Negative-for-COVID-19-viral-RNA-in-feces_DOWN"        </span></span>
+<span><span class="co">## [12] "bsdb:34382150/1/1_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_UP"                                               </span></span>
+<span><span class="co">## [13] "bsdb:37119437/4/1_COVID-19:Covid-19-N-group_vs_Control-group_UP"                                                             </span></span>
+<span><span class="co">## [14] "bsdb:37119437/5/2_COVID-19:Covid-19-C-group_vs_Control-group_DOWN"                                                           </span></span>
+<span><span class="co">## [15] "bsdb:37119437/10/2_COVID-19:Post-Covid-19-Group_vs_Covid-19-Group_DOWN"                                                      </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[4]]</span></span>
-<span><span class="co">##  [1] "bsdb:428/4/1_COVID-19:COVID-19-patients-treated-with-antibiotics_vs_Healthy-controls_DOWN"                                     </span></span>
-<span><span class="co">##  [2] "bsdb:428/4/2_COVID-19:COVID-19-patients-treated-with-antibiotics_vs_Healthy-controls_UP"                                       </span></span>
-<span><span class="co">##  [3] "bsdb:430/1/2_COVID-19:Patients-with-high-SARS-CoV-2-infectivity_vs_Patients-with-low-to-none-SARS-CoV-2-infectivity_UP"        </span></span>
-<span><span class="co">##  [4] "bsdb:453/1/2_COVID-19:SARS-CoV-2-infected-patients_vs_Non-infected-patients-with-unrelated-respiratory-medical-conditions_DOWN"</span></span>
-<span><span class="co">##  [5] "bsdb:453/4/2_COVID-19:Positive-for-COVID-19-viral-RNA-in-feces_vs_Negative-for-COVID-19-viral-RNA-in-feces_DOWN"               </span></span>
-<span><span class="co">##  [6] "bsdb:464/2/1_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_DOWN"                                                    </span></span>
-<span><span class="co">##  [7] "bsdb:477/1/1_COVID-19:Severe-COVID-19-patients_vs_COVID-19-negative-controls_UP"                                               </span></span>
-<span><span class="co">##  [8] "bsdb:479/3/1_COVID-19:ICU-COVID-19-patients_vs_Mild-Moderate-COVID-19-patients_DOWN"                                           </span></span>
-<span><span class="co">##  [9] "bsdb:484/2/1_COVID-19:COVID-19-positive-patients_vs_Healthy-controls_UP"                                                       </span></span>
-<span><span class="co">## [10] "bsdb:498/1/1_COVID-19:Symptomatic,-mild-to-moderate-COVID-19-patients_vs_Asymptomatic-uninfected-controls_UP"                  </span></span>
-<span><span class="co">## [11] "bsdb:940/4/1_COVID-19:Covid-19-N-group_vs_Control-group_UP"                                                                    </span></span>
+<span><span class="co">## [1] "bsdb:32497191/3/1_COVID-19:COVID-19-patients_vs_H1N1-patients_UP"                                                                                       </span></span>
+<span><span class="co">## [2] "bsdb:33431578/4/1_COVID-19:COVID-19-patients-treated-with-antibiotics_vs_Healthy-controls_DOWN"                                                         </span></span>
+<span><span class="co">## [3] "bsdb:33596245/1/1_COVID-19:COVID-positive-patients-admitted-to-ICU-(i-COVID-19)_vs_Pneumonia-control-patients-(COVID-negative)_UP"                      </span></span>
+<span><span class="co">## [4] "bsdb:33977168/1/1_COVID-19:COVID-19-patients_vs_Non-COVID-patients-with-URTI-or-COPD_UP"                                                                </span></span>
+<span><span class="co">## [5] "bsdb:33986253/1/2_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                                                                                    </span></span>
+<span><span class="co">## [6] "bsdb:34103263/1/1_COVID-19:COVID-19-patients_vs_Non-intubated-patients-with-non-incubation-viral-pneumonia-or-non-incubation-non-infectious-diseases_UP"</span></span>
+<span><span class="co">## [7] "bsdb:37119437/5/1_COVID-19:Covid-19-C-group_vs_Control-group_UP"                                                                                        </span></span>
+<span><span class="co">## [8] "bsdb:37119437/8/2_COVID-19:Covid-19-Group_vs_Healthy-Controls_DOWN"                                                                                     </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[5]]</span></span>
-<span><span class="co">##  [1] "bsdb:441/3/1_COVID-19:COVID-19-patients_vs_H1N1-patients_UP"                                           </span></span>
-<span><span class="co">##  [2] "bsdb:473/1/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls_DOWN"                   </span></span>
-<span><span class="co">##  [3] "bsdb:478/3/1_COVID-19:Flu-patients_vs_Healthy-controls_UP"                                             </span></span>
-<span><span class="co">##  [4] "bsdb:479/1/2_COVID-19:ICU-COVID-19-patients_vs_Healthy-controls_UP"                                    </span></span>
-<span><span class="co">##  [5] "bsdb:481/2/2_COVID-19:Antibiotic-treated-COVID-19-patients_vs_Antibiotic-naive-COVID-19-patients_DOWN" </span></span>
-<span><span class="co">##  [6] "bsdb:484/4/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-patients-with-fever-and-cough_UP"</span></span>
-<span><span class="co">##  [7] "bsdb:500/1/1_COVID-19:COVID-19-patients_vs_COVID-19-negative-patients-with-pneumonia_UP"               </span></span>
-<span><span class="co">##  [8] "bsdb:511/2/1_COVID-19:COVID-19-patients-(severe/critical)_vs_COVID-19-patients-(mild/moderate)_DOWN"   </span></span>
-<span><span class="co">##  [9] "bsdb:831/1/2_COVID-19:COVID-19-Patients_vs_Non-Covid-19-Patients---pneumonia-patients_DOWN"            </span></span>
-<span><span class="co">## [10] "bsdb:940/5/1_COVID-19:Covid-19-C-group_vs_Control-group_UP"                                            </span></span>
+<span><span class="co">##  [1] "bsdb:33431578/3/2_COVID-19:Recovered-COVID-19-cases_vs_Healthy-controls_DOWN"                                                                 </span></span>
+<span><span class="co">##  [2] "bsdb:33596245/3/1_COVID-19:COVID-positive-patients-admitted-to-infectious-disease-ward-(w-COVID-19)_vs_Pneumonia-controls-(COVID-negative)_UP"</span></span>
+<span><span class="co">##  [3] "bsdb:33672177/3/1_COVID-19:ICU-COVID-19-patients_vs_Mild-Moderate-COVID-19-patients_DOWN"                                                     </span></span>
+<span><span class="co">##  [4] "bsdb:33789966/2/1_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_DOWN"                                                              </span></span>
+<span><span class="co">##  [5] "bsdb:33850111/1/1_COVID-19:Severe-COVID-19-patients_vs_Mild-COVID-19-patients_DOWN"                                                           </span></span>
+<span><span class="co">##  [6] "bsdb:33986253/1/1_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                                                        </span></span>
+<span><span class="co">##  [7] "bsdb:34168484/2/2_COVID-19:COVID-19-patients-with-fever_vs_COVID-19-patients-without-fever_DOWN"                                              </span></span>
+<span><span class="co">##  [8] "bsdb:36744910/1/1_COVID-19:Moderate-severity_vs_Mild-severity_UP"                                                                             </span></span>
+<span><span class="co">##  [9] "bsdb:37119437/7/1_COVID-19:Covid-19-Group_vs_Healthy-controls_UP"                                                                             </span></span>
+<span><span class="co">## [10] "bsdb:37119437/7/2_COVID-19:Covid-19-Group_vs_Healthy-controls_DOWN"                                                                           </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[6]]</span></span>
-<span><span class="co">## [1] "bsdb:449/1/1_COVID-19:COVID-19-cases_vs_Healthy-controls_UP"                                                                 </span></span>
-<span><span class="co">## [2] "bsdb:453/2/2_COVID-19:SARS-CoV-2-recovered-individuals_vs_SARS-CoV-2-infected-patients_UP"                                   </span></span>
-<span><span class="co">## [3] "bsdb:459/1/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls_DOWN"                                         </span></span>
-<span><span class="co">## [4] "bsdb:478/5/1_COVID-19:Flu-patients_vs_Healthy-controls_DOWN"                                                                 </span></span>
-<span><span class="co">## [5] "bsdb:481/1/2_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                                            </span></span>
-<span><span class="co">## [6] "bsdb:486/1/2_COVID-19:Asymptomatic-COVID-19-patients_vs_Healthy-controls_DOWN"                                               </span></span>
-<span><span class="co">## [7] "bsdb:486/2/1_COVID-19:Asymptomatic-COVID-19-patients_vs_Healthy-controls_UP"                                                 </span></span>
-<span><span class="co">## [8] "bsdb:489/1/1_COVID-19:COVID-positive-patients-admitted-to-ICU-(i-COVID-19)_vs_Pneumonia-control-patients-(COVID-negative)_UP"</span></span>
-<span><span class="co">## [9] "bsdb:513/1/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls_UP"                                           </span></span>
+<span><span class="co">## [1] "bsdb:33577896/2/1_COVID-19:COVID-19-patients-with-high-viral-load_vs_COVID-19-patients-with-low-viral-load_UP"                                  </span></span>
+<span><span class="co">## [2] "bsdb:33596245/3/2_COVID-19:COVID-positive-patients-admitted-to-infectious-disease-ward-(w-COVID-19)_vs_Pneumonia-controls-(COVID-negative)_DOWN"</span></span>
+<span><span class="co">## [3] "bsdb:33678150/3/1_COVID-19:Severe-COVID-19-patients_vs_Mild-COVID-19-patients_UP"                                                               </span></span>
+<span><span class="co">## [4] "bsdb:33986253/2/1_COVID-19:COVID-19-patients_vs_Flu-patients_DOWN"                                                                              </span></span>
+<span><span class="co">## [5] "bsdb:33986253/4/2_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                                                                            </span></span>
+<span><span class="co">## [6] "bsdb:34055851/1/2_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_DOWN"                                                                </span></span>
+<span><span class="co">## [7] "bsdb:34100340/1/1_COVID-19:SARS-CoV-2-infected-patients_vs_Non-infected-patients-with-unrelated-respiratory-medical-conditions_UP"              </span></span>
+<span><span class="co">## [8] "bsdb:34423593/1/1_COVID-19:COVID-19-cases_vs_Healthy-controls_UP"                                                                               </span></span>
+<span><span class="co">## [9] "bsdb:37119437/9/2_COVID-19:Post-Covid-19-Group_vs_Healthy-Controls_DOWN"                                                                        </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[7]]</span></span>
-<span><span class="co">## [1] "bsdb:453/4/1_COVID-19:Positive-for-COVID-19-viral-RNA-in-feces_vs_Negative-for-COVID-19-viral-RNA-in-feces_UP"                                              </span></span>
-<span><span class="co">## [2] "bsdb:464/3/2_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                                                                                             </span></span>
-<span><span class="co">## [3] "bsdb:476/1/2_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_DOWN"                                                                                 </span></span>
-<span><span class="co">## [4] "bsdb:489/2/1_COVID-19:COVID-positive-patients-admitted-to-ICU-(i-COVID-19)_vs_COVID-positive-patients-admitted-to-infectious-disease-ward-(w-COVID-19)_UP"  </span></span>
-<span><span class="co">## [5] "bsdb:489/2/2_COVID-19:COVID-positive-patients-admitted-to-ICU-(i-COVID-19)_vs_COVID-positive-patients-admitted-to-infectious-disease-ward-(w-COVID-19)_DOWN"</span></span>
-<span><span class="co">## [6] "bsdb:498/2/1_COVID-19:COVID-19-patients-with-high-viral-load_vs_COVID-19-patients-with-low-viral-load_UP"                                                   </span></span>
-<span><span class="co">## [7] "bsdb:546/1/2_COVID-19:COVID-19-cases_vs_Non-infected-controls_DOWN"                                                                                         </span></span>
+<span><span class="co">##  [1] "bsdb:33596245/1/2_COVID-19:COVID-positive-patients-admitted-to-ICU-(i-COVID-19)_vs_Pneumonia-control-patients-(COVID-negative)_DOWN"</span></span>
+<span><span class="co">##  [2] "bsdb:33672177/1/1_COVID-19:ICU-COVID-19-patients_vs_Healthy-controls_DOWN"                                                          </span></span>
+<span><span class="co">##  [3] "bsdb:33678150/1/1_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                                                                </span></span>
+<span><span class="co">##  [4] "bsdb:33978940/4/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-patients-with-fever-and-cough_UP"                        </span></span>
+<span><span class="co">##  [5] "bsdb:33986253/3/1_COVID-19:Flu-patients_vs_Healthy-controls_UP"                                                                     </span></span>
+<span><span class="co">##  [6] "bsdb:34055851/1/1_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_UP"                                                      </span></span>
+<span><span class="co">##  [7] "bsdb:34199203/3/1_COVID-19:Severe-COVID-19-patients_vs_Healthy-controls_UP"                                                         </span></span>
+<span><span class="co">##  [8] "bsdb:34294722/1/2_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                                              </span></span>
+<span><span class="co">##  [9] "bsdb:36869345/2/1_COVID-19:Sputum-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_UP"                               </span></span>
+<span><span class="co">## [10] "bsdb:37119437/10/1_COVID-19:Post-Covid-19-Group_vs_Covid-19-Group_UP"                                                               </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[8]]</span></span>
-<span><span class="co">## [1] "bsdb:464/1/1_COVID-19:Confirmed-COVID-19-patients_vs_Healthy-controls_DOWN"                                                                    </span></span>
-<span><span class="co">## [2] "bsdb:478/4/2_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                                                                                </span></span>
-<span><span class="co">## [3] "bsdb:479/3/2_COVID-19:ICU-COVID-19-patients_vs_Mild-Moderate-COVID-19-patients_UP"                                                             </span></span>
-<span><span class="co">## [4] "bsdb:483/2/1_COVID-19:Antibiotic-treated-COVID-19-patients_vs_Antibiotic-naive-COVID-19-patients,-pneumonia-patients,-uninfected-controls_DOWN"</span></span>
-<span><span class="co">## [5] "bsdb:485/1/2_COVID-19:COVID-19-patients-with-fever_vs_COVID-19-patients-without-fever_DOWN"                                                    </span></span>
-<span><span class="co">## [6] "bsdb:831/2/1_COVID-19:COVID-19-patients---Ventilated_vs_COVID-19-patients---Non-Ventilated_UP"                                                 </span></span>
+<span><span class="co">## [1] "bsdb:33596245/2/2_COVID-19:COVID-positive-patients-admitted-to-ICU-(i-COVID-19)_vs_COVID-positive-patients-admitted-to-infectious-disease-ward-(w-COVID-19)_DOWN"</span></span>
+<span><span class="co">## [2] "bsdb:33986253/5/1_COVID-19:Flu-patients_vs_Healthy-controls_DOWN"                                                                                                </span></span>
+<span><span class="co">## [3] "bsdb:33986253/5/2_COVID-19:Flu-patients_vs_Healthy-controls_UP"                                                                                                  </span></span>
+<span><span class="co">## [4] "bsdb:34423593/1/2_COVID-19:COVID-19-cases_vs_Healthy-controls_DOWN"                                                                                              </span></span>
+<span><span class="co">## [5] "bsdb:36744910/2/1_COVID-19:Severe/Critical-severity_vs_Mild-severity_UP"                                                                                         </span></span>
+<span><span class="co">## [6] "bsdb:37596518/2/1_COVID-19:COVID-19-patients---Ventilated_vs_COVID-19-patients---Non-Ventilated_UP"                                                              </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[9]]</span></span>
-<span><span class="co">## [1] "bsdb:464/3/1_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                                                          </span></span>
-<span><span class="co">## [2] "bsdb:478/1/1_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                                                          </span></span>
-<span><span class="co">## [3] "bsdb:478/5/2_COVID-19:Flu-patients_vs_Healthy-controls_UP"                                                                                 </span></span>
-<span><span class="co">## [4] "bsdb:489/3/2_COVID-19:COVID-positive-patients-admitted-to-infectious-disease-ward-(w-COVID-19)_vs_Pneumonia-controls-(COVID-negative)_DOWN"</span></span>
-<span><span class="co">## [5] "bsdb:511/5/1_COVID-19:COVID-19-patients-not-treated-with-antibiotics_vs_Healthy-controls_UP"                                               </span></span>
-<span><span class="co">## [6] "bsdb:965/1/1_COVID-19:COVID-19-patients_vs_healthy-controls_UP"                                                                            </span></span>
+<span><span class="co">## [1] "bsdb:33672177/1/2_COVID-19:ICU-COVID-19-patients_vs_Healthy-controls_UP"                                   </span></span>
+<span><span class="co">## [2] "bsdb:33678150/2/1_COVID-19:Antibiotic-treated-COVID-19-patients_vs_Antibiotic-naive-COVID-19-patients_UP"  </span></span>
+<span><span class="co">## [3] "bsdb:33678150/2/2_COVID-19:Antibiotic-treated-COVID-19-patients_vs_Antibiotic-naive-COVID-19-patients_DOWN"</span></span>
+<span><span class="co">## [4] "bsdb:33789966/3/2_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                                       </span></span>
+<span><span class="co">## [5] "bsdb:34294722/4/2_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                     </span></span>
+<span><span class="co">## [6] "bsdb:36869345/2/2_COVID-19:Sputum-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_DOWN"    </span></span>
+<span><span class="co">## [7] "bsdb:37158877/1/2_COVID-19:RPs-(Recovered-Patients)_vs_HCs-(Healthy-Controls)_DOWN"                        </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[10]]</span></span>
-<span><span class="co">## [1] "bsdb:478/3/2_COVID-19:Flu-patients_vs_Healthy-controls_DOWN"                                         </span></span>
-<span><span class="co">## [2] "bsdb:479/4/1_COVID-19:ICU-COVID-19-patients_vs_Patients-infected-with-other-human-coronaviruses_DOWN"</span></span>
-<span><span class="co">## [3] "bsdb:482/1/1_COVID-19:Severe-COVID-19-patients_vs_Mild-COVID-19-patients_DOWN"                       </span></span>
-<span><span class="co">## [4] "bsdb:485/2/1_COVID-19:COVID-19-patients-with-fever_vs_COVID-19-patients-without-fever_UP"            </span></span>
+<span><span class="co">## [1] "bsdb:33672177/3/2_COVID-19:ICU-COVID-19-patients_vs_Mild-Moderate-COVID-19-patients_UP"          </span></span>
+<span><span class="co">## [2] "bsdb:33789966/1/1_COVID-19:Confirmed-COVID-19-patients_vs_Healthy-controls_DOWN"                 </span></span>
+<span><span class="co">## [3] "bsdb:34168484/1/2_COVID-19:COVID-19-patients-with-fever_vs_COVID-19-patients-without-fever_DOWN" </span></span>
+<span><span class="co">## [4] "bsdb:34294722/3/1_COVID-19:COVID-19-patients-not-treated-with-antibiotics_vs_Healthy-controls_UP"</span></span>
+<span><span class="co">## [5] "bsdb:34382150/1/2_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_DOWN"                 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[11]]</span></span>
-<span><span class="co">## [1] "bsdb:478/4/1_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                          </span></span>
-<span><span class="co">## [2] "bsdb:486/1/1_COVID-19:Asymptomatic-COVID-19-patients_vs_Healthy-controls_UP"                               </span></span>
-<span><span class="co">## [3] "bsdb:498/2/2_COVID-19:COVID-19-patients-with-high-viral-load_vs_COVID-19-patients-with-low-viral-load_DOWN"</span></span>
-<span><span class="co">## [4] "bsdb:511/3/1_COVID-19:COVID-19-patients-not-treated-with-antibiotics_vs_Healthy-controls_UP"               </span></span>
-<span><span class="co">## [5] "bsdb:511/4/2_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                          </span></span>
-<span><span class="co">## [6] "bsdb:547/1/1_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_UP"                                  </span></span>
-<span><span class="co">## [7] "bsdb:548/1/2_COVID-19:COVID-19-cases_vs_Healthy-controls_DOWN"                                             </span></span>
+<span><span class="co">## [1] "bsdb:33672177/4/1_COVID-19:ICU-COVID-19-patients_vs_Patients-infected-with-other-human-coronaviruses_DOWN"</span></span>
+<span><span class="co">## [2] "bsdb:33672177/4/2_COVID-19:ICU-COVID-19-patients_vs_Patients-infected-with-other-human-coronaviruses_UP"  </span></span>
+<span><span class="co">## [3] "bsdb:33980943/1/2_COVID-19:COVID-19-patients_vs_COVID-19-negative-patients-with-pneumonia_DOWN"           </span></span>
+<span><span class="co">## [4] "bsdb:36350127/3/2_COVID-19:Covid-19-patients_vs_non-Covid-19-patients_DOWN"                               </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[12]]</span></span>
-<span><span class="co">## [1] "bsdb:486/2/2_COVID-19:Asymptomatic-COVID-19-patients_vs_Healthy-controls_DOWN"                           </span></span>
-<span><span class="co">## [2] "bsdb:511/1/1_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                                          </span></span>
-<span><span class="co">## [3] "bsdb:512/1/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls-and-healthcare-workers_UP"</span></span>
-<span><span class="co">## [4] "bsdb:782/2/1_COVID-19:Sputum-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_UP"         </span></span>
-<span><span class="co">## [5] "bsdb:782/2/2_COVID-19:Sputum-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_DOWN"       </span></span>
-<span><span class="co">## [6] "bsdb:1040/1/2_COVID-19:RPs-(Recovered-Patients)_vs_HCs-(Healthy-Controls)_DOWN"                          </span></span>
+<span><span class="co">## [1] "bsdb:33986253/4/1_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                             </span></span>
+<span><span class="co">## [2] "bsdb:34100340/2/2_COVID-19:SARS-CoV-2-recovered-individuals_vs_SARS-CoV-2-infected-patients_UP"                    </span></span>
+<span><span class="co">## [3] "bsdb:34168484/2/1_COVID-19:COVID-19-patients-with-fever_vs_COVID-19-patients-without-fever_UP"                     </span></span>
+<span><span class="co">## [4] "bsdb:36744910/1/2_COVID-19:Moderate-severity_vs_Mild-severity_DOWN"                                                </span></span>
+<span><span class="co">## [5] "bsdb:38289047/2/2_COVID-19:COVID-19-patients_vs_NO-COVID-19-(Patients-with-diagnosis-different-from-COVID-19)_DOWN"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[13]]</span></span>
-<span><span class="co">## [1] "bsdb:486/3/1_COVID-19:Severe-COVID-19-patients_vs_Healthy-controls_UP"                                                         </span></span>
-<span><span class="co">## [2] "bsdb:489/1/2_COVID-19:COVID-positive-patients-admitted-to-ICU-(i-COVID-19)_vs_Pneumonia-control-patients-(COVID-negative)_DOWN"</span></span>
-<span><span class="co">## [3] "bsdb:496/2/1_COVID-19:COVID-19-patients_vs_Seasonal-flu-patients_UP"                                                           </span></span>
-<span><span class="co">## [4] "bsdb:977/3/2_COVID-19:Covid-19-patients_vs_non-Covid-19-patients_DOWN"                                                         </span></span>
+<span><span class="co">## [1] "bsdb:34031657/1/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls-and-healthcare-workers_UP"                                            </span></span>
+<span><span class="co">## [2] "bsdb:34100340/2/1_COVID-19:SARS-CoV-2-recovered-individuals_vs_SARS-CoV-2-infected-patients_DOWN"                                                         </span></span>
+<span><span class="co">## [3] "bsdb:34103263/1/2_COVID-19:COVID-19-patients_vs_Non-intubated-patients-with-non-incubation-viral-pneumonia-or-non-incubation-non-infectious-diseases_DOWN"</span></span>
+<span><span class="co">## [4] "bsdb:34199203/1/1_COVID-19:Asymptomatic-COVID-19-patients_vs_Healthy-controls_UP"                                                                         </span></span>
+<span><span class="co">## [5] "bsdb:34200249/2/1_COVID-19:Recovered-COVID-19-samples-(respiratory-negative)_vs_Healthy-controls_DOWN"                                                    </span></span>
+<span><span class="co">## [6] "bsdb:36744910/3/1_COVID-19:Severe/Critical-severity_vs_Moderate-severity_UP"                                                                              </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[14]]</span></span>
-<span><span class="co">## [1] "bsdb:486/3/2_COVID-19:Severe-COVID-19-patients_vs_Healthy-controls_DOWN"                                      </span></span>
-<span><span class="co">## [2] "bsdb:511/4/1_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                                               </span></span>
-<span><span class="co">## [3] "bsdb:965/2/2_COVID-19:COVID-19-patients_vs_NO-COVID-19-(Patients-with-diagnosis-different-from-COVID-19)_DOWN"</span></span>
-<span><span class="co">## [4] "bsdb:977/6/2_COVID-19:Hospitalized-patients_vs_local-controls_DOWN"                                           </span></span>
+<span><span class="co">## [1] "bsdb:34058978/1/1_COVID-19:COVID-19-positive-patients_vs_COVID-19-negative-controls_DOWN"             </span></span>
+<span><span class="co">## [2] "bsdb:34173452/2/2_COVID-19:COVID-19-patients_vs_Seasonal-flu-patients_DOWN"                           </span></span>
+<span><span class="co">## [3] "bsdb:34199203/2/1_COVID-19:Asymptomatic-COVID-19-patients_vs_Healthy-controls_UP"                     </span></span>
+<span><span class="co">## [4] "bsdb:35411293/1/1_COVID-19:COVID-19-cases_vs_Healthy-controls_UP"                                     </span></span>
+<span><span class="co">## [5] "bsdb:36869345/3/2_COVID-19:Feces-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_DOWN"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[15]]</span></span>
-<span><span class="co">## [1] "bsdb:487/2/2_COVID-19:Recovered-COVID-19-samples-(respiratory-negative)_vs_Healthy-controls_UP"       </span></span>
-<span><span class="co">## [2] "bsdb:487/3/1_COVID-19:Infected-COVID-19-samples-(respiratory-positive)_vs_Healthy-controls_DOWN"      </span></span>
-<span><span class="co">## [3] "bsdb:782/1/1_COVID-19:Pharyngeal-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_DOWN"</span></span>
-<span><span class="co">## [4] "bsdb:831/2/2_COVID-19:COVID-19-patients---Ventilated_vs_COVID-19-patients---Non-Ventilated_DOWN"      </span></span>
-<span><span class="co">## [5] "bsdb:977/6/1_COVID-19:Hospitalized-patients_vs_local-controls_UP"                                     </span></span>
+<span><span class="co">## [1] "bsdb:34100340/1/2_COVID-19:SARS-CoV-2-infected-patients_vs_Non-infected-patients-with-unrelated-respiratory-medical-conditions_DOWN"</span></span>
+<span><span class="co">## [2] "bsdb:36350127/3/1_COVID-19:Covid-19-patients_vs_non-Covid-19-patients_UP"                                                           </span></span>
+<span><span class="co">## [3] "bsdb:37438797/1/2_COVID-19:Severe-COVID-19_vs_Moderate-COVID-19_DOWN"                                                               </span></span>
+<span><span class="co">## [4] "bsdb:37596518/1/2_COVID-19:COVID-19-Patients_vs_Non-Covid-19-Patients---pneumonia-patients_DOWN"                                    </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[16]]</span></span>
-<span><span class="co">## [1] "bsdb:487/3/2_COVID-19:Infected-COVID-19-samples-(respiratory-positive)_vs_Healthy-controls_UP"</span></span>
-<span><span class="co">## [2] "bsdb:977/1/1_COVID-19:COVID-19-patients_vs_local-controls_UP"                                 </span></span>
-<span><span class="co">## [3] "bsdb:977/1/2_COVID-19:COVID-19-patients_vs_local-controls_DOWN"                               </span></span>
-<span><span class="co">## [4] "bsdb:1040/1/1_COVID-19:RPs-(Recovered-Patients)_vs_HCs-(Healthy-Controls)_UP"                 </span></span>
+<span><span class="co">## [1] "bsdb:34173452/1/1_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"               </span></span>
+<span><span class="co">## [2] "bsdb:34199203/1/2_COVID-19:Asymptomatic-COVID-19-patients_vs_Healthy-controls_DOWN"</span></span>
+<span><span class="co">## [3] "bsdb:34425246/1/2_COVID-19:COVID-19-cases_vs_Non-infected-controls_DOWN"           </span></span>
+<span><span class="co">## [4] "bsdb:36744910/2/2_COVID-19:Severe/Critical-severity_vs_Mild-severity_DOWN"         </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[17]]</span></span>
-<span><span class="co">## [1] "bsdb:489/3/1_COVID-19:COVID-positive-patients-admitted-to-infectious-disease-ward-(w-COVID-19)_vs_Pneumonia-controls-(COVID-negative)_UP"</span></span>
-<span><span class="co">## [2] "bsdb:496/2/2_COVID-19:COVID-19-patients_vs_Seasonal-flu-patients_DOWN"                                                                   </span></span>
-<span><span class="co">## [3] "bsdb:548/1/1_COVID-19:COVID-19-cases_vs_Healthy-controls_UP"                                                                             </span></span>
-<span><span class="co">## [4] "bsdb:782/3/2_COVID-19:Feces-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_DOWN"                                        </span></span>
+<span><span class="co">## [1] "bsdb:34173452/1/2_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                              </span></span>
+<span><span class="co">## [2] "bsdb:34200249/2/2_COVID-19:Recovered-COVID-19-samples-(respiratory-negative)_vs_Healthy-controls_UP"</span></span>
+<span><span class="co">## [3] "bsdb:34294722/1/1_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                                </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[18]]</span></span>
-<span><span class="co">## [1] "bsdb:496/1/1_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"                               </span></span>
-<span><span class="co">## [2] "bsdb:511/5/2_COVID-19:COVID-19-patients-not-treated-with-antibiotics_vs_Healthy-controls_DOWN"</span></span>
+<span><span class="co">## [1] "bsdb:34173452/2/1_COVID-19:COVID-19-patients_vs_Seasonal-flu-patients_UP"                          </span></span>
+<span><span class="co">## [2] "bsdb:34294722/5/2_COVID-19:COVID-19-patients-not-treated-with-antibiotics_vs_Healthy-controls_DOWN"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[19]]</span></span>
-<span><span class="co">## [1] "bsdb:496/1/2_COVID-19:COVID-19-patients_vs_Healthy-controls_DOWN"                                   </span></span>
-<span><span class="co">## [2] "bsdb:782/1/2_COVID-19:Pharyngeal-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_UP"</span></span>
-<span><span class="co">## [3] "bsdb:977/3/1_COVID-19:Covid-19-patients_vs_non-Covid-19-patients_UP"                                </span></span>
+<span><span class="co">## [1] "bsdb:34199203/2/2_COVID-19:Asymptomatic-COVID-19-patients_vs_Healthy-controls_DOWN"</span></span>
+<span><span class="co">## [2] "bsdb:34294722/4/1_COVID-19:COVID-19-patients_vs_Healthy-controls_UP"               </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[20]]</span></span>
-<span><span class="co">## [1] "bsdb:500/1/2_COVID-19:COVID-19-patients_vs_COVID-19-negative-patients-with-pneumonia_DOWN"</span></span>
-<span><span class="co">## [2] "bsdb:547/1/2_COVID-19:Recovered-COVID-19-patients_vs_Healthy-controls_DOWN"               </span></span>
+<span><span class="co">## [1] "bsdb:34199203/3/2_COVID-19:Severe-COVID-19-patients_vs_Healthy-controls_DOWN"                            </span></span>
+<span><span class="co">## [2] "bsdb:36869345/1/2_COVID-19:Pharyngeal-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_UP"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[21]]</span></span>
-<span><span class="co">## [1] "bsdb:513/2/1_COVID-19:COVID-19-positive-patients-with-breathing-assistance_vs_COVID-19-positive-patients-without-breathing-assistance_UP"</span></span>
-<span><span class="co">## [2] "bsdb:965/1/2_COVID-19:COVID-19-patients_vs_healthy-controls_DOWN"</span></span></code></pre>
+<span><span class="co">## [1] "bsdb:34200249/3/1_COVID-19:Infected-COVID-19-samples-(respiratory-positive)_vs_Healthy-controls_DOWN"      </span></span>
+<span><span class="co">## [2] "bsdb:34200249/3/2_COVID-19:Infected-COVID-19-samples-(respiratory-positive)_vs_Healthy-controls_UP"        </span></span>
+<span><span class="co">## [3] "bsdb:36350127/6/1_COVID-19:Hospitalized-patients_vs_local-controls_UP"                                     </span></span>
+<span><span class="co">## [4] "bsdb:36744910/3/2_COVID-19:Severe/Critical-severity_vs_Moderate-severity_DOWN"                             </span></span>
+<span><span class="co">## [5] "bsdb:36869345/1/1_COVID-19:Pharyngeal-samples-from-COVID-19-patients_vs_samples-from-Healthy-patients_DOWN"</span></span>
+<span><span class="co">## [6] "bsdb:37596518/2/2_COVID-19:COVID-19-patients---Ventilated_vs_COVID-19-patients---Non-Ventilated_DOWN"      </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[22]]</span></span>
+<span><span class="co">## [1] "bsdb:34294722/5/1_COVID-19:COVID-19-patients-not-treated-with-antibiotics_vs_Healthy-controls_UP"</span></span>
+<span><span class="co">## [2] "bsdb:36350127/1/2_COVID-19:COVID-19-patients_vs_local-controls_DOWN"                             </span></span>
+<span><span class="co">## [3] "bsdb:37158877/1/1_COVID-19:RPs-(Recovered-Patients)_vs_HCs-(Healthy-Controls)_UP"                </span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[23]]</span></span>
+<span><span class="co">## [1] "bsdb:36350127/1/1_COVID-19:COVID-19-patients_vs_local-controls_UP"      </span></span>
+<span><span class="co">## [2] "bsdb:36350127/6/2_COVID-19:Hospitalized-patients_vs_local-controls_DOWN"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[24]]</span></span>
+<span><span class="co">## [1] "bsdb:38289047/1/1_COVID-19:COVID-19-patients_vs_healthy-controls_UP"  </span></span>
+<span><span class="co">## [2] "bsdb:38289047/1/2_COVID-19:COVID-19-patients_vs_healthy-controls_DOWN"</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="create-a-wide-format-dataframe">Create a wide-format dataframe<a class="anchor" aria-label="anchor" href="#create-a-wide-format-dataframe"></a>
 </h2>
 <p>This would be suitable for regression analysis.</p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">covid_withsigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">covid_all</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">covid_all</span><span class="op">$</span><span class="va">`NCBI Taxonomy IDs`</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sigs</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">covid_withsigs</span>, tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">cmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu">safe</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/safe/man/getCmatrix.html" class="external-link">getCmatrix</a></span><span class="op">(</span><span class="va">sigs</span>, as.matrix <span class="op">=</span> <span class="cn">TRUE</span>, min.size <span class="op">=</span> <span class="fl">0</span>, prune <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## WARNING: rows are sorted elements of keyword.list</span></span>
-<span><span class="co">## 170 categories formed</span></span></code></pre>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<span><span class="co">## 184 categories formed</span></span></code></pre>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">cmat</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">covid_withsigs</span>, <span class="va">cdf</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">cdf</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">54</span><span class="op">]</span></span></code></pre></div>
@@ -2772,14 +2795,14 @@ be something interesting.</p>
 <p>Note this has a number of columns that are mostly zeros, it could be
 filtered significantly for any regression or machine learning
 analysis:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">cdf</span><span class="op">[[</span><span class="st">"[Brevibacterium] frigoritolerans"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## &lt; table of extent 0 &gt;</span></span></code></pre>
 <p>Create another heatmap on correlations of presence/absence of taxa.
 This is not necessary because the previous Jaccard Index heatmap is
 probably better, it is just a demonstration of doing something with the
 taxa presence/absence directly.</p>
-<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sigcors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">cmat</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">siglengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">sigs</span>, <span class="va">length</span><span class="op">)</span></span>
 <span><span class="va">ha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span></span>
@@ -2798,11 +2821,11 @@ taxa presence/absence directly.</p>
 <span><span class="co">## to `col` argument.</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Use `suppressMessages()` to turn off this message.</span></span></code></pre>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hm</span></span></code></pre></div>
 <p><img src="capstoneanalysis_clare_files/figure-html/unnamed-chunk-22-1.png" width="1920"></p>
 <p>Use this interactively to make an interactive heatmap:</p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/InteractiveComplexHeatmap" class="external-link">InteractiveComplexHeatmap</a></span><span class="op">)</span></span>
 <span><span class="va">hm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/draw-dispatch.html" class="external-link">draw</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/InteractiveComplexHeatmap/man/htShiny.html" class="external-link">htShiny</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span></span></code></pre></div>
@@ -2824,7 +2847,7 @@ taxa presence/absence directly.</p>
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
 </div>
 
       </footer>

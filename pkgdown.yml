@@ -1,16 +1,16 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
-  Bearkland capstone DED 12.2.2024: Bearkland capstone DED 12.2.2024.html
   c-section_meconium_shaimaa: c-section_meconium_shaimaa.html
+  capstoneanalysis_BearklandM: capstoneanalysis_BearklandM.html
   capstoneanalysis_clare: capstoneanalysis_clare.html
   capstoneanalysis_fatima: capstoneanalysis_fatima.html
   capstoneanalysis_ifeanyi: capstoneanalysis_ifeanyi.html
   capstoneanalysis_kweku: capstoneanalysis_kweku.html
   fieldworkanalysis_samara: fieldworkanalysis_samara.html
   healthysig: healthysig.html
-last_built: 2025-03-19T16:40Z
+last_built: 2025-05-05T19:22Z
 urls:
   reference: http://waldronlab.io/bugSigSimple/reference
   article: http://waldronlab.io/bugSigSimple/articles
