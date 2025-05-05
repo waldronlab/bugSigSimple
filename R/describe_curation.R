@@ -3,12 +3,14 @@
 #' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired
 #' @param n number of taxa to return (if sig.type=="both", this is the number of taxa to return for each direction)
 #'
-#' @importFrom dplyr filter %>% mutate rowwise n_distinct group_by relocate rename first ungroup across
+#' @importFrom dplyr filter %>% mutate rowwise n_distinct group_by relocate rename first ungroup across n
 #' @importFrom utils relist head
 #' @importFrom stats quantile binom.test
 #' @importFrom kableExtra kbl kable_styling
 #' @importFrom tidyr separate
 #' @importFrom stringr str_replace str_extract
+#' @importFrom bugsigdbr getSignatures
+#' 
 #' @return kable table with increased and decreased taxa and a binomial test based on total number of studies in the data.frame
 #' @export
 #'
@@ -23,7 +25,7 @@ createTaxonTable <- function(dat, n=10){
     data.frame(getMostFrequentTaxa(dat, sig.type = "both", n = n),
                stringsAsFactors = FALSE) %>%
     mutate(metaphlan_name = Var1) %>%
-    tidyr::separate(
+    separate(
       col = Var1,
       sep = "\\|",
       into = dmap,
@@ -48,7 +50,7 @@ createTaxonTable <- function(dat, n=10){
       .countTaxon(dat = dat, x = x, direction = "decreased"))) %>%
     mutate(Taxon = gsub(".+\\|", "", output$metaphlan_name))
   
-    output %>% tidyr::separate(col="Taxon", into=c("Taxonomic Level", "Taxon Name"), sep="__") %>%
+    output %>% separate(col="Taxon", into=c("Taxonomic Level", "Taxon Name"), sep="__") %>%
     mutate(`Taxonomic Level` = unname(dmap[`Taxonomic Level`])) %>%
     rowwise() %>%    
     mutate( `Binomial Test pval` = .createBinomTestSummary(increased_signatures, total_signatures, wordy = FALSE)) %>%
@@ -60,7 +62,7 @@ createTaxonTable <- function(dat, n=10){
   if (direction[1] %in% c("increased", "decreased")){
     dat <- filter(dat, `Abundance in Group 1` == direction[1])
   }
-  allnames <- bugsigdbr::getSignatures(dat, tax.id.type = "metaphlan")
+  allnames <- getSignatures(dat, tax.id.type = "metaphlan")
   sum(vapply(allnames, function(onesignames) x %in% onesignames, FUN.VALUE = 1L))
 }
 
@@ -86,22 +88,23 @@ createTaxonTable <- function(dat, n=10){
 
 #' Create a table of all studies currently in data.frame
 #'
-#' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired
+#' @param bsdb.df \code{data.frame} produced by \link[bugsigdbr]{importBugSigDB}, pre-filtered as desired
+#' @param includeAlso \code{character} with column names to additionally include in the output table (default = `NULL`)
 #'
-#' @importFrom dplyr group_by summarize  %>%
+#' @importFrom dplyr group_by %>% select relocate reframe across n
+#' @importFrom tidyr all_of
 #' @importFrom kableExtra kbl kable_styling
 #' @return a data.frame of basic study information. Can be wrapped in 
-#' kable_styling(kbl(.)) to format nicely.
+#' kable_styling(kbl(...)) to format nicely.
 #' @export
 #'
 #' @examples
 #' full.dat <- bugsigdbr::importBugSigDB()
 #' createStudyTable(full.dat)
-#' ## kable_styling(kbl(createStudyTable(full.dat))) #for html styling
 
 createStudyTable <- function(bsdb.df, includeAlso = NULL) {
   # input check
-  if (!is_null(includeAlso)) {
+  if (!is.null(includeAlso)) {
     if (!all(includeAlso %in% colnames(bsdb.df))) {
       stop(paste(
         "The following columns are not found in the input data frame:",
@@ -153,7 +156,18 @@ globalVariables(
     "Freq",
     "species",
     "kingdom",
-    "Var1"
+    "Var1",
+    # the following are necessary after the merged data
+    "Authors",
+    "Year",
+    "BasicID",
+    "PMID",
+    "URL",
+    "uniqueRank",
+    "Study code",
+    "Group 0 sample size",
+    "Group 1 sample size",
+    "N_signatures"
   )
 )
 

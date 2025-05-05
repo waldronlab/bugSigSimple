@@ -42,7 +42,7 @@ suppressPackageStartupMessages({
 
 ```{r}
 # use version="devel" and cache = FALSE to take the latest version from bugsigdb.org
-dat <- bugsigdbr::importBugSigDB(version = "devel", cache = FALSE) 
+dat <- bugsigdbr::importBugSigDB(cache = FALSE) 
 dim(dat)
 names(dat)
 ```
@@ -85,6 +85,7 @@ subset.final <-
   filter(`Body site` == "Meconium") %>%
   arrange(PMID)
 ```
+
 Show key characteristics of the included signatures:
 
 ```{r}
@@ -107,13 +108,17 @@ sort(setdiff(subset.dat$PMID, subset.final$PMID))
 # Table of studies
 
 These are the studies included in the review:
+
 ```{r}
-bugSigSimple::createStudyTable(subset.final)
+createStudyTable(subset.final) %>% 
+  kbl() %>% 
+  kable_styling()
 ```
 
 # Summary of taxa reported
 
 This table summarizes the results for the top `n` most frequently identified taxa.
+
 ```{r}
 kable_styling(kbl(bugSigSimple::createTaxonTable(subset.final, n = 20)))
 ```

@@ -1,10 +1,10 @@
 ---
-title: "Analysis of prevalent stool genera in bugsigdb.org"
+title: "Analysis of prevalent stool genera in BugSigDB"
 name: "Haoyan Zhong"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Analysis of prevalent stool genera in bugsigdb.org}
+  %\VignetteIndexEntry{Analysis of prevalent stool genera in BugSigDB}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -13,7 +13,7 @@ vignette: >
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## BugsigDB stat- Signature overlaps
+## BugSigDB stat- Signature overlaps
 
 Compare genus abundance change (increased/decreased) from all diseased subjects in BugsigDB with existing typical genus from healthy volunteers recorded in BugsigDB Study 562
 typical genus were set at prevalence level=0, 50, and 70
@@ -26,8 +26,10 @@ library(dplyr)
 library(bugsigdbr)
 library(BugSigDBStats)
 library(ggpubr)
+# set light theme for ggplot
+theme_set(theme_light())
 
-full.dat <- bugsigdbr::importBugSigDB(version = "devel", cache=FALSE)
+full.dat <- bugsigdbr::importBugSigDB(cache=FALSE)
 #Stripping empty signatures:
 ind1 <- lengths(full.dat[["MetaPhlAn taxon names"]]) > 0
 ind2 <- lengths(full.dat[["NCBI Taxonomy IDs"]]) > 0
@@ -69,6 +71,7 @@ head(healthysig70)
 ```
 
 ## Get changed in abundance disease genus
+
 ```{r increased disease genus}
 bugdisease_increased <-  dat %>%
   filter (`Host species` == 'Homo sapiens') %>%
@@ -99,6 +102,7 @@ diseasesig_increased2 <- purrr::map_df(diseasesig_increased, ~as.data.frame(.x),
 bugall_increased <- merge(x = bugdisease_increased2, y = diseasesig_increased2, 
                           by =c('study_id','experiment_id','signature_id'), all.x = TRUE)
 ```
+
 ```{r decreased disease genus}
 bugdisease_decreased <-  dat %>%
   filter (`Host species` == 'Homo sapiens') %>%
@@ -213,6 +217,7 @@ paircheck50_increased <- paircomp50_increased %>%
           signature_id= purrr::map_chr(stringr::str_split(purrr::map_chr(name2_2, 3),'_'),1)
         ) 
 ```
+
 ## merge jacard scores with disease study data
 
 ```{r merge jacard scores with disease study data}
