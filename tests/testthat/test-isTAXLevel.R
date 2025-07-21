@@ -1,6 +1,5 @@
 #Function file: simple.R
 
-
 test_that(".isTaxLevel returns TRUE for genus-level taxon", {
   s <- "k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Lachnospiraceae|g__Lachnospira"
   result <- .isTaxLevel(s, "genus")

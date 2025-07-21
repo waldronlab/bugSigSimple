@@ -1,6 +1,5 @@
 #Function file: simple.R
 
-
 test_that("getMostFrequentTaxa returns the most frequently occurring taxa in a table of signatures", {
   # Create test data
   test_data <- data.frame(

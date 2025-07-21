@@ -1,6 +1,5 @@
 #Function file: simple.R
 
-
 test_that("make_unique_study_ID works", {
   # Test data
   test_df <- data.frame(

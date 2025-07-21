@@ -1,6 +1,5 @@
 #Function file: simple.R
 
-
 # Firstly, test when there are multiple levels
 test_that(".getTip returns the last part of the string", {
   s <- "k__Bacteria|p__Firmicutes|g__Lactobacillus"

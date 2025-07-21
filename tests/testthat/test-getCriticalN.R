@@ -1,6 +1,5 @@
 #Function file: montecarlo.R
 
-
 test_that("getCriticalN returns 95th percentile threshold", {
   relevant.sigs <- list(
     sig1 = c("Bacteroides", "Escherichia"),
