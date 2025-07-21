@@ -29,11 +29,12 @@ Imports:
     ggplot2,
     kableExtra
 Suggests: 
-    BiocStyle, 
+    BiocStyle,
     knitr,
     rmarkdown,
     broom,
-    jtools
+    jtools,
+    testthat (>= 3.0.0)
 Remotes:
     waldronlab/BugSigDBStats,
     waldronlab/bugsigdbr
@@ -43,3 +44,4 @@ VignetteBuilder: knitr
 RoxygenNote: 7.3.2
 Encoding: UTF-8
 URL: https://waldronlab.io/bugSigSimple
+Config/testthat/edition: 3
