@@ -1,15 +1,10 @@
 #Function file: simple.R
 
 
-# Unit test: subsetByCurator should return rows with the specified curator
-
-library(testthat)
-
 test_that("subsetByCurator returns only rows with the specified curator", {
-  # A small fake dataset similar to what importBugSigDB() would return
   dat <- data.frame(
     Curator = c("Anne-mariesharp", "Victoria", "Anne-mariesharp"),
-    Study = c("Study1", "Study2", "Study3")
+    Study = c("Study 1", "Study 2", "Study 3")
   )
   
   # Use the function to subset

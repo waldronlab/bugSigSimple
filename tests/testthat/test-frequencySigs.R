@@ -4,9 +4,6 @@
 # Mock .getTip function since it's not in global environment
 .getTip <- function(x) x
 
-
-library(testthat)
-
 test_that("frequencySigs identifies the most frequently occuring taxa", {
   test_sigs <- list(
     "UP_sig1" = c("Bacteroides", "Escherichia"),

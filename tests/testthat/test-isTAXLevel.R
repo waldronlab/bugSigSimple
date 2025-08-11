@@ -1,10 +1,5 @@
 #Function file: simple.R
 
-
-# Unit test: .isTaxLevel should return the expected taxonomic level
-
-library(testthat)
-
 test_that(".isTaxLevel returns TRUE for genus-level taxon", {
   s <- "k__Bacteria|p__Firmicutes|c__Clostridia|o__Clostridiales|f__Lachnospiraceae|g__Lachnospira"
   result <- .isTaxLevel(s, "genus")

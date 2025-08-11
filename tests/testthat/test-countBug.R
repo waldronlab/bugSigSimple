@@ -1,8 +1,5 @@
 #Function file: montecarlo.R
 
-
-library(testthat)
-
 test_that(".countBug returns max frequency of most common taxon", {
   relevant.sigs <- list(
     sig1 = c("Bacteroides", "Escherichia"),

@@ -1,8 +1,5 @@
 #Function file: montecarlo.R
 
-
-library(testthat)
-
 test_that("simulateSignatures simulates signatures by sampling taxa based on 
           their frequency in a reference set", {
   relevant.sigs <- list(
