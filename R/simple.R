@@ -90,7 +90,7 @@ getMostFrequentTaxa <- function(dat, n=10, sig.type=c("both", "increased", "decr
 #' @param bsdb.df \code{data.frame} produced by \link[bugsigdbr]{importBugSigDB}, pre-filtered as desired
 
 .make_unique_study_ID <- function(bsdb.df){
-  bsdb_with_StudyCode <- bsdb.df %>% 
+  bsdb_with_StudyIDs <- bsdb.df %>% 
     # fix DOIs
     mutate(
       DOI =  ifelse(
@@ -107,11 +107,11 @@ getMostFrequentTaxa <- function(dat, n=10, sig.type=c("both", "increased", "decr
       # this is arbitrary, the point is to make sure you can split overlapping
       # IDs into one
       uniqueRank = as.numeric(as.factor(paste(PMID, DOI, URL, `Authors list`))),
-      `Study code` = ifelse(uniqueRank > 1, paste(BasicID, uniqueRank - 1, sep = "."), BasicID)
+      `Study Identifier` = ifelse(uniqueRank > 1, paste(BasicID, uniqueRank - 1, sep = "."), BasicID)
     ) %>% 
     ungroup() %>% 
     select(- BasicID, - uniqueRank) %>% 
-    relocate(`Study code`) 
+    relocate(`Study Identifier`) 
   
-  return(bsdb_with_StudyCode)
+  return(bsdb_with_StudyIDs)
 }
