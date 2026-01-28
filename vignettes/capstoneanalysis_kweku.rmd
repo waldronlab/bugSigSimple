@@ -38,11 +38,21 @@ names(dat)
 ```
 
 ```{r}
+#library(tidyverse)
+#condition_of_interest <- c("irritable bowel syndrome")
+#efo <- bugsigdbr::getOntology("efo")
+#dat_condition <- bugsigdbr::subsetByOntology(dat, column = "Condition", "irritable bowel syndrome", efo) %>%
+#  mutate(comparison1 = paste(`Group 0 name`, `Group 1 name`, sep = " vs "))
 library(tidyverse)
-condition_of_interest <- c("irritable bowel syndrome")
-efo <- bugsigdbr::getOntology("efo")
-dat_condition <- bugsigdbr::subsetByOntology(dat, column = "Condition", "irritable bowel syndrome", efo) %>%
+library(bugsigdbr)
+dat <- importBugSigDB(cache = TRUE)  
+
+dat_condition <- dat %>%
+  filter(grepl("irritable bowel syndrome", Condition, ignore.case = TRUE)) %>%
   mutate(comparison1 = paste(`Group 0 name`, `Group 1 name`, sep = " vs "))
+
+nrow(dat_condition)
+head(dat_condition)
 ```  
   
 
@@ -100,14 +110,18 @@ jmat <- BugSigDBStats::calcJaccardSimilarity(allsigs)
 
 ```{r, fig.width=20, fig.height=20}
 library(ComplexHeatmap)
+siglengths <- siglengths[rownames(jmat)]
+print(paste("jmat dimensions:", nrow(jmat), "x", ncol(jmat)))
+print(paste("siglengths length:", length(siglengths)))
 ha <- HeatmapAnnotation(`Signature Length` = anno_barplot(siglengths))
 hr <- rowAnnotation(`Signature Length` = anno_barplot(siglengths))
+
 hm <- Heatmap(
   jmat,
-  top_annotation = ha, left_annotation = hr,
+  top_annotation = ha, 
+  left_annotation = hr,
   row_names_max_width = unit(20, "cm"),
   column_names_max_height = unit(20, "cm"),
-#  row_labels = sub(".+:", "", rownames(jmat)),  #get rid of study labels
   column_labels = sub(".+:", "", colnames(jmat))
 )
 hm
@@ -116,8 +130,26 @@ hm
 Use this interactively to make an interactive heatmap. Some expanding of the default size is required to see anything. Creating a sub-heatmap, then exporting it as a table, allows in-depth identification of the subgroups.
 
 ```{r, eval = FALSE}
+#library(InteractiveComplexHeatmap)
+#hm <- draw(hm)
+#htShiny(hm)
+# Interactive heatmap version
+library(ComplexHeatmap)
 library(InteractiveComplexHeatmap)
-hm <- draw(hm)
+siglengths <- siglengths[rownames(jmat)]
+
+ha <- HeatmapAnnotation(`Signature Length` = anno_barplot(siglengths))
+hr <- rowAnnotation(`Signature Length` = anno_barplot(siglengths))
+
+hm <- Heatmap(
+  jmat,
+  name = "Jaccard",
+  top_annotation = ha, 
+  left_annotation = hr,
+  show_row_names = FALSE,      
+  show_column_names = FALSE     
+)
+
 htShiny(hm)
 ```
 
@@ -155,16 +187,23 @@ table(cdf[["Bifidobacterium catenulatum"]])
 Create another heatmap on correlations of presence/absence of taxa. This is not necessary because the previous Jaccard Index heatmap is probably better, it is just a demonstration of doing something with the taxa presence/absence directly. 
 
 ```{r, fig.width=20, fig.height=20}
+library(ComplexHeatmap)
+
 sigcors <- cor(t(cmat))
 siglengths <- sapply(sigs, length)
+
+# FIX: Ensure siglengths matches sigcors
+siglengths <- siglengths[rownames(sigcors)]
+
 ha <- HeatmapAnnotation(`Signature Length` = anno_barplot(siglengths))
 hr <- rowAnnotation(`Signature Length` = anno_barplot(siglengths))
+
 hm <- Heatmap(
   sigcors,
-  top_annotation = ha, left_annotation = hr,
+  top_annotation = ha, 
+  left_annotation = hr,
   row_names_max_width = unit(20, "cm"),
   column_names_max_height = unit(20, "cm"),
- # row_labels = sub(".+:", "", rownames(sigcors)), ##removing study just to make signature names legible
   column_labels = sub(".+:", "", colnames(sigcors))
 )
 hm
@@ -172,8 +211,29 @@ hm
 
 Use this interactively to make an interactive heatmap:
 ```{r, eval = FALSE}
+#library(InteractiveComplexHeatmap)
+#hm <- draw(hm)
+#htShiny(hm)
+library(ComplexHeatmap)
 library(InteractiveComplexHeatmap)
-hm <- draw(hm)
+
+sigcors <- cor(t(cmat))
+siglengths <- sapply(sigs, length)
+
+siglengths <- siglengths[rownames(sigcors)]
+
+ha <- HeatmapAnnotation(`Signature Length` = anno_barplot(siglengths))
+hr <- rowAnnotation(`Signature Length` = anno_barplot(siglengths))
+
+hm <- Heatmap(
+  sigcors,
+  name = "Correlation",
+  top_annotation = ha, 
+  left_annotation = hr,
+  show_row_names = FALSE,      
+  show_column_names = FALSE     
+)
+
 htShiny(hm)
 ```
 
