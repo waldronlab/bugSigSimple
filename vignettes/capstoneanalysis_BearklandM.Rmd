@@ -332,3 +332,4 @@ decfreqs <- filter(allfreqs, I(increased_signatures - decreased_signatures) < 0)
 kableExtra::kbl(allfreqs) %>%
   kable_paper("hover", full_width = FALSE)
 ```
+# Updated for issue #29
