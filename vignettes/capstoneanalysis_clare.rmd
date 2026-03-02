@@ -122,29 +122,181 @@ cc_gut_sigs1_taxontable <- bugSigSimple::createTaxonTable(cc_gut_sigs1) %>%
 kableExtra::kbl(cc_gut_sigs1_taxontable)
 ```
 
-
-
-
 ## Monte-Carlo simulation for increased abundance taxa
 
 Just for the increased cc_gut_sigs1 for now. I am inclined to skip this analysis in favor of the clustering and binomial test analysis.
 
 ```{r}
-library(bugSigSimple)
-gut.sigs.increased <- filter(cc_gut_sigs1, `Abundance in Group 1` == "increased") %>% 
-  bugsigdbr::getSignatures(tax.id.type = "taxname")
- my.siglengths.inc <- sapply(gut.sigs.increased, length)
+#library(bugSigSimple)
+#gut.sigs.increased <- filter(cc_gut_sigs1, `Abundance in Group 1` == "increased") %>% 
+ # bugsigdbr::getSignatures(tax.id.type = "taxname")
+# my.siglengths.inc <- sapply(gut.sigs.increased, length)
 
-getCriticalN(gut.sigs.increased, my.siglengths.inc)
+#getCriticalN(gut.sigs.increased, my.siglengths.inc)
 # Compare to observed - enterococcus & streptococcus are the only taxa that equal the critical limit
-frequencySigs(gut.sigs.increased)
+#frequencySigs(gut.sigs.increased)
 ```
+
+```{r}
+library(bugSigSimple)
+library(ggplot2)
+
+gut.sigs.increased <- filter(cc_gut_sigs1, `Abundance in Group 1` == "increased") %>%
+  bugsigdbr::getSignatures(tax.id.type = "taxname")
+
+my.siglengths.inc <- sapply(gut.sigs.increased, length)
+```
+
+
+```{r}
+cn_res <- getCriticalN(
+  relevant.sigs = gut.sigs.increased,
+  siglengths    = my.siglengths.inc,
+  alpha         = 0.05,
+  nsim          = 1000,   
+  ci            = 0.95,
+  ci_nsim       = 500
+)
+
+cat(sprintf(
+  "Critical N (%s): %d\n95%% CI: [%d, %d]\n",
+  cn_res$quantile_label,
+  round(cn_res$critical_n),
+  round(cn_res$ci_lower),
+  round(cn_res$ci_upper)
+))
+```
+
+```{r}
+
+shapiro.test(cn_res$simulated_values)
+obs_max <- max(table(unlist(gut.sigs.increased)))
+
+plotCriticalN(
+  cn_result = cn_res,
+  obs_max   = obs_max,
+  title     = "Normal distribution — max taxon frequency\n(gut microbiome, COVID-19 increased taxa)"
+)
+```
+```{r significant-taxa-plot, fig.width=11, fig.height=nrow(sig_df) * 0.55 + 3}
+sig_df <- significantTaxa(
+  sigs      = gut.sigs.increased,
+  cn_result = cn_res,
+  n         = 20,
+  plot      = FALSE,      # suppress internal plot so we can correct significance first
+  plot_type = "lollipop",
+  title     = "Taxon frequency vs. Monte Carlo threshold\n(gut, COVID-19 increased)"
+)
+```
+
+
+```{r significant-taxa-plot, fig.width=11, fig.height=nrow(sig_df) * 0.55 + 3}
+cat("Critical N value:  ", cn_res$critical_n, "\n")
+cat("Max observed count:", max(sig_df$count), "\n")
+print(sig_df[, c("taxon", "count", "critical_n")])
+```
+
+```{r significant-taxa-plot, fig.width=11, fig.height=nrow(sig_df) * 0.55 + 3}
+# Correct significance flag from > to >= to include taxa that meet the threshold
+sig_df$significant <- sig_df$count >= sig_df$critical_n
+```
+
+```{r}
+cat("\nSignificant taxa:\n")
+print(sig_df[sig_df$significant, c("taxon", "count", "critical_n", "significant")])
+```
+
+```{r significant-taxa-plot, fig.width=11, fig.height=nrow(sig_df) * 0.55 + 3}
+# Re-order factor for clean top-to-bottom ranking
+sig_df$taxon <- factor(sig_df$taxon, levels = sig_df$taxon[order(sig_df$count)])
+```
+
+
+```{r significant-taxa-plot, fig.width=11, fig.height=nrow(sig_df) * 0.55 + 3}
+# Now render the lollipop plot with corrected significance
+ggplot(sig_df, aes(x = count, y = taxon, colour = factor(significant))) +
+
+  annotate("rect",
+           xmin = cn_res$ci_lower, xmax = cn_res$ci_upper,
+           ymin = -Inf, ymax = Inf,
+           fill = "grey70", alpha = 0.15) +
+
+  geom_vline(xintercept = cn_res$critical_n,
+             linetype = "dashed", colour = "grey30", linewidth = 0.8) +
+
+  geom_segment(aes(x = 0, xend = count, yend = taxon),
+               linewidth = 0.7, alpha = 0.5) +
+
+  geom_point(size = 5) +
+
+  geom_text(data = subset(sig_df, significant),
+            aes(label = paste0("p = ", signif(p_empirical, 2))),
+            hjust = -0.25, size = 3.5, colour = "#c0392b", fontface = "bold") +
+
+  annotate("text",
+           x = cn_res$critical_n, y = 0.4,
+           label = paste0("Critical N = ", round(cn_res$critical_n)),
+           hjust = 0.5, vjust = 1, size = 3.2, colour = "grey30") +
+
+  scale_colour_manual(
+    values = c("FALSE" = "#2980b9", "TRUE" = "#c0392b"),
+    labels = c("FALSE" = "Not significant",
+               "TRUE"  = paste0("Significant (>= Critical N = ",
+                                round(cn_res$critical_n), ")")),
+    name = NULL
+  ) +
+
+  scale_x_continuous(expand = expansion(mult = c(0, 0.25))) +
+  scale_y_discrete(expand = expansion(add = c(1.2, 1.2))) +
+
+  labs(
+    title    = "Taxon frequency vs. Monte Carlo threshold\n(gut, COVID-19 increased)",
+    subtitle = paste0("Dashed line = critical N (", cn_res$quantile_label,
+                      ");  grey band = 95% CI"),
+    x        = "Observed frequency (number of signatures)",
+    y        = NULL
+  ) +
+
+theme_bw(base_size = 13) +
+  theme(
+    legend.position    = "bottom",
+    plot.title         = element_text(face = "bold"),
+    plot.subtitle      = element_text(colour = "grey40"),
+    axis.text.y        = element_text(
+      size   = 11,
+      face   = ifelse(levels(sig_df$taxon) %in%
+                        sig_df$taxon[sig_df$significant],
+                      "bold.italic", "italic"),
+      margin = margin(r = 4)
+    ),
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor   = element_blank(),
+    plot.margin        = margin(t = 15, r = 30, b = 15, l = 15)
+  )
+```
+
+
+```{r significant-taxa-table}
+# Print the significance table (significant taxa first)
+kableExtra::kbl(
+  sig_df,
+  col.names = c("Taxon", "Observed count", "Critical N",
+                "Significant", "Empirical p-value"),
+  digits    = 3,
+  caption   = "Top 20 taxa: observed frequency vs. Monte Carlo threshold"
+) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover")) %>%
+  kableExtra::row_spec(
+    which(sig_df$significant),
+    bold       = TRUE,
+    background = "#fde8e8"
+  )
+```
+
 ## Overall frequencies of taxa decreased in cases for case/control feces studies
 ```{r, eval = FALSE}
 createTaxonTable(cc_gut_sigs1, n=40)
 ```
-
-
 
 ## nasopharyngeal microbiota analysis
 
@@ -197,10 +349,29 @@ hm
 Use this interactively to make an interactive heatmap (not evaluated in vignette). Some expanding of the default size is required to see anything. Creating a sub-heatmap, then exporting it as a table, allows in-depth identification of the subgroups.
 
 ```{r, eval = FALSE}
-library(InteractiveComplexHeatmap)
-hm <- draw(hm)
-htShiny(hm)
+#library(InteractiveComplexHeatmap)
+#hm <- draw(hm)
+#htShiny(hm)
 ```
+
+```{r}
+library(InteractiveComplexHeatmap)
+
+ht_jaccard <- draw(
+  hm,
+  heatmap_legend_side = "bottom",
+  annotation_legend_side = "bottom"
+)
+
+htShiny(
+  ht_jaccard,
+  width1  = 1000,   # main heatmap panel width  (px)
+  height1 = 1000,   # main heatmap panel height (px)
+  width2  = 400,    # sub-heatmap panel width   (px)
+  height2 = 400     # sub-heatmap panel height  (px)
+)
+```
+
 
 ```{r, fig.height=60, fig.width=20}
 hc <- hclust(as.dist(jmat))
@@ -253,8 +424,27 @@ hm
 
 Use this interactively to make an interactive heatmap:
 ```{r, eval = FALSE}
-library(InteractiveComplexHeatmap)
-hm <- draw(hm)
-htShiny(hm)
+#library(InteractiveComplexHeatmap)
+#hm <- draw(hm)
+#htShiny(hm)
 ```
+
+```{r}
+library(InteractiveComplexHeatmap)
+
+ht_jaccard <- draw(
+  hm,
+  heatmap_legend_side = "bottom",
+  annotation_legend_side = "bottom"
+)
+
+htShiny(
+  ht_jaccard,
+  width1  = 1000,   # main heatmap panel width  (px)
+  height1 = 1000,   # main heatmap panel height (px)
+  width2  = 400,    # sub-heatmap panel width   (px)
+  height2 = 400     # sub-heatmap panel height  (px)
+)
+```
+
 
