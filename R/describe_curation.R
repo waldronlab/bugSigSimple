@@ -18,44 +18,44 @@
 #' full.dat <- bugsigdbr::importBugSigDB()
 #' createTaxonTable(full.dat, n=20)
 
-createTaxonTable <- function(dat, n=10){
+createTaxonTable <- function(dat, n = 10, format = "Simple") {
   dmap <- c("kingdom", "phylum", "class", "order", "family", "genus", "species")
   names(dmap) <- substring(dmap, 1, 1)
+
   output <-
     data.frame(getMostFrequentTaxa(dat, sig.type = "both", n = n),
                stringsAsFactors = FALSE) %>%
     mutate(metaphlan_name = Var1) %>%
-    separate(
-      col = Var1,
-      sep = "\\|",
-      into = dmap,
-      fill = "right"
-    ) %>%
+    separate(col = Var1, sep = "\\|", into = dmap, fill = "right") %>%
     mutate(across(kingdom:species, ~ str_replace(., ".__", ""))) %>%
     rename(n_signatures = Freq)
-  
+
   output <-
-    output %>% mutate(n_signatures = sapply(output$metaphlan_name, function(x) {
-      sum(grepl(
-        pattern = x,
-        x = dat$`MetaPhlAn taxon names`,
-        fixed = TRUE
-      ))
-    })) %>%
-    mutate(`Total Signatures` = sapply(metaphlan_name, function(x)
+    output %>%
+    mutate(total_signatures = sapply(metaphlan_name, function(x)
       .countTaxon(dat = dat, x = x, direction = "both"))) %>%
-    mutate(`Increased Signatures` = sapply(metaphlan_name, function(x)
+    mutate(increased_signatures = sapply(metaphlan_name, function(x)
       .countTaxon(dat = dat, x = x, direction = "increased"))) %>%
-    mutate(`Decreased Signatures` = sapply(metaphlan_name, function(x)
+    mutate(decreased_signatures = sapply(metaphlan_name, function(x)
       .countTaxon(dat = dat, x = x, direction = "decreased"))) %>%
-    mutate(Taxon = gsub(".+\\|", "", output$metaphlan_name))
-  
-    output %>% separate(col="Taxon", into=c("Taxonomic Level", "Taxon Name"), sep="__") %>%
+    mutate(Taxon = gsub(".+\\|", "", metaphlan_name)) %>%
+    select(-n_signatures)
+
+  output <- output %>%
+    separate(col = "Taxon", into = c("Taxonomic Level", "Taxon Name"), sep = "__") %>%
     mutate(`Taxonomic Level` = unname(dmap[`Taxonomic Level`])) %>%
-    rowwise() %>%    
-    mutate( `Binomial Test pval` = .createBinomTestSummary(`Increased Signatures`, `Total Signatures`, wordy = FALSE)) %>%
-      ungroup() %>%
-    relocate(`Taxon Name`, `Taxonomic Level`, `Total Signatures`, `Increased Signatures`, `Decreased Signatures`, `Binomial Test pval`)
+    rowwise() %>%
+    mutate(`Binomial Test pval` = .createBinomTestSummary(increased_signatures, total_signatures, wordy = FALSE)) %>%
+    ungroup()
+
+  simple_cols <- c("Taxon Name", "Taxonomic Level", "total_signatures",
+                   "increased_signatures", "decreased_signatures", "Binomial Test pval")
+
+  if (format == "Simple") {
+    output %>% select(all_of(simple_cols))
+  } else {
+    output %>% relocate(all_of(simple_cols))
+  }
 }
 
 .countTaxon = function(dat, x, direction = c("both", "increased", "decreased")){
@@ -115,14 +115,14 @@ createStudyTable <- function(bsdb.df, includeAlso = NULL) {
   # Core of the change is in how study IDs are generated, see function in 
   # simple.R. NB: the function also fixes DOI links as side effect, now. 
   
-  bsdb_with_StudyIDs.df <- .make_unique_study_ID(bsdb.df)
+  bsdb_with_StudyCodes.df <- .make_unique_study_ID(bsdb.df)
   
   # some dplyr-fu to summarize tables, with more recent syntax
-  study_table_fixed <- bsdb_with_StudyIDs.df %>%
-    group_by(`Study Identifier`) %>%
+  study_table_fixed <- bsdb_with_StudyCodes.df %>%
+    group_by(`Study code`) %>%
     reframe(
-      Cases = max(`Group 1 sample size`),
-      Controls = max(`Group 0 sample size`),
+      MaxCases = max(`Group 1 sample size`),
+      MaxControls = max(`Group 0 sample size`),
       across(
         all_of(
           c("Study design", "Condition", "PMID", "DOI", "URL", includeAlso)
@@ -130,9 +130,9 @@ createStudyTable <- function(bsdb.df, includeAlso = NULL) {
         .fns = function(x)
           paste(unique(x), collapse = "; ")
       ),
-      `Number of signatures` = n()
+      N_signatures = n()
     ) %>%
-    relocate(`Number of signatures`, .after = Condition)
+    relocate(N_signatures, .after = Condition)
   
   return(study_table_fixed)
 }
@@ -147,10 +147,10 @@ globalVariables(
     "Study.Design",
     "Taxon Name",
     "Binomial Test pval",
-    "Total Signatures",
+    "total_signatures",
     "Abundance in Group 1",
-    "Decreased Signatures",
-    "Increased Signatures",
+    "decreased_signatures",
+    "increased_signatures",
     "Taxonomic Level",
     "metaphlan_name",
     "Freq",
@@ -164,10 +164,10 @@ globalVariables(
     "PMID",
     "URL",
     "uniqueRank",
-    "Study Identifier",
+    "Study code",
     "Group 0 sample size",
     "Group 1 sample size",
-    "Number of signatures"
+    "N_signatures"
   )
 )
 
