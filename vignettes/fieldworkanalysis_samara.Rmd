@@ -140,6 +140,7 @@ summary(lm(Streptococcus ~ Lactobacillus, data = df))
 wilcox.test(df$Streptococcus, df$Lactobacillus)
 t.test(df$Streptococcus, df$Lactobacillus)
 ```
+
 ```{r}
 secount <-
   curatedMetagenomicData::returnSamples(all_healthy_adult_vagina_metadata, dataType = "relative_abundance", counts = TRUE)

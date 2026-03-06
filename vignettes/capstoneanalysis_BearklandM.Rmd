@@ -325,10 +325,18 @@ lapply(unique(clusts), function(i) names(clusts)[clusts == i])
 
 ```{r}
 #all taxon increased and decreased freq
-allfreqs <- bugSigSimple::createTaxonTable(subset.final, n = 500) %>% #could change number
-  arrange(I(decreased_signatures - increased_signatures))
-incfreqs <- filter(allfreqs, I(increased_signatures - decreased_signatures) > 0)
-decfreqs <- filter(allfreqs, I(increased_signatures - decreased_signatures) < 0)
+#allfreqs <- bugSigSimple::createTaxonTable(subset.final, n = 500, format = "Full") %>% #could change number
+#  mutate(delta = `Increased Signatures` - `Decreased Signatures`) %>%
+#  arrange(delta)
+
+allfreqs <- bugSigSimple::createTaxonTable(subset.final, n = 500, format = "Simple") %>%
+  mutate(delta = increased_signatures - decreased_signatures) %>%
+  arrange(delta)
+  #arrange(I(decreased_signatures - increased_signatures))
+#incfreqs <- filter(allfreqs, I(increased_signatures - decreased_signatures) > 0)
+#decfreqs <- filter(allfreqs, I(increased_signatures - decreased_signatures) < 0)
+incfreqs <- filter(allfreqs, delta > 0)
+decfreqs <- filter(allfreqs, delta < 0)
 kableExtra::kbl(allfreqs) %>%
   kable_paper("hover", full_width = FALSE)
 ```
