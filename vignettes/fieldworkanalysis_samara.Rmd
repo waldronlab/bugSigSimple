@@ -21,7 +21,6 @@ vignette: >
 
 ```{r, eval=FALSE, messages=FALSE}
 install.packages(c("devtools", "tidyverse", "kableExtra"))
-devtools::install_github("waldronlab/bugSigSimple")
 devtools::install_github("waldronlab/BugSigDBStats")
 devtools::install_github("waldronlab/bugsigdbr")
 ```
@@ -70,10 +69,25 @@ subset.dat <-
 Summary of studies and most frequent taxa increased and decreased in endometriosis patients for all studies
 
 ```{r, messages=FALSE}
-bugSigSimple::createStudyTable(subset.dat)
-getMostFrequentTaxa(subset.dat, n=30)
-getMostFrequentTaxa(subset.dat, direction="UP")
-getMostFrequentTaxa(subset.dat, direction="DOWN")
+bugSigSimple::createStudyTable(subset.dat) %>%
+  kbl() %>%
+  kable_paper("hover", full_width = FALSE) %>%
+  scroll_box(width = "100%", height = "400px")
+
+getMostFrequentTaxa(subset.dat, n=30) %>%
+  kbl() %>%
+  kable_paper("hover", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+
+getMostFrequentTaxa(subset.dat, direction="UP") %>%
+  kbl() %>%
+  kable_paper("hover", full_width = FALSE) %>%
+  scroll_box(height = "300px")
+
+getMostFrequentTaxa(subset.dat, direction="DOWN") %>%
+  kbl() %>%
+  kable_paper("hover", full_width = FALSE) %>%
+  scroll_box(height = "300px")
 ```
 
 # Excluding feces samples
@@ -97,7 +111,10 @@ reproductive_sigs <-
   subset.dat2[which(subset.dat2$`Body site` != "feces" |
                       is.na(subset.dat2$`Body site`)), ]
 
-bugSigSimple::createStudyTable(reproductive_sigs)
+bugSigSimple::createStudyTable(reproductive_sigs) %>%
+  kbl() %>%
+  kable_paper("hover", full_width = FALSE) %>%
+  scroll_box(width = "100%", height = "400px")
 
 allfreqs <- bugSigSimple::createTaxonTable(reproductive_sigs, n = 20) %>% #could change number
   arrange(I(`Decreased Signatures` - `Increased Signatures`))
