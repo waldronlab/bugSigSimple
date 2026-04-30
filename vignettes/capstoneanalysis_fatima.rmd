@@ -72,11 +72,9 @@ table(my.dat.cond[,"Condition"])
 ## Studies table
 
 ```{r}
-
 createStudyTable(my.dat.cond) %>% 
   kbl() %>% 
   kable_styling()
-
 ```
 
 ## Taxa table
@@ -110,8 +108,12 @@ createStudyTable(my.dat.bd) %>%
 ## Taxa table
 
 ```{r}
-createTaxonTable(my.dat.bd, n = 20) %>% 
-  kbl() %>% 
+#createTaxonTable(my.dat.bd, n = 20) %>% 
+#  kbl() %>% 
+#   kable_styling()
+
+createTaxonTable(my.dat.bd, n = 20) %>%  
+  kbl() %>%
   kable_styling()
 ```
 
@@ -128,8 +130,12 @@ table(my.dat.mdd[,"Condition"])
 
 ```{r}
 
-createStudyTable(my.dat.mdd) %>% 
-  kbl() %>% 
+#createStudyTable(my.dat.mdd) %>% 
+#  kbl() %>% 
+ # kable_styling()
+
+createStudyTable(my.dat.mdd) %>%
+  kbl() %>%
   kable_styling()
 
 ```
