@@ -24,7 +24,7 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install(c("devtools", "tidyverse", "kableExtra"))
-BiocManager::install(c("waldronlab/bugSigSimple", "waldronlab/BugSigDBStats", "waldronlab/bugsigdbr"))
+BiocManager::install(c("waldronlab/BugSigDBStats", "waldronlab/bugsigdbr"))
 ```
 
 ```{r}

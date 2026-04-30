@@ -21,7 +21,6 @@ vignette: >
 
 ```{r, eval=FALSE, messages=FALSE}
 install.packages(c("devtools", "tidyverse", "kableExtra"))
-devtools::install_github("waldronlab/bugSigSimple")
 devtools::install_github("waldronlab/BugSigDBStats")
 devtools::install_github("waldronlab/bugsigdbr")
 ```
