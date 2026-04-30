@@ -17,7 +17,7 @@ install.packages("xfun")
 ```
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(results = 'hide', fig.show = 'hide')
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
 ```{r}
