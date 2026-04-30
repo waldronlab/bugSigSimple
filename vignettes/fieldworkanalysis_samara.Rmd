@@ -100,9 +100,9 @@ reproductive_sigs <-
 bugSigSimple::createStudyTable(reproductive_sigs)
 
 allfreqs <- bugSigSimple::createTaxonTable(reproductive_sigs, n = 20) %>% #could change number
-  arrange(I(decreased_signatures - increased_signatures))
-incfreqs <- filter(allfreqs, I(increased_signatures - decreased_signatures) > 0)
-decfreqs <- filter(allfreqs, I(increased_signatures - decreased_signatures) < 0)
+  arrange(I(`Decreased Signatures` - `Increased Signatures`))
+incfreqs <- filter(allfreqs, I(`Increased Signatures` - `Decreased Signatures`) > 0)
+decfreqs <- filter(allfreqs, I(`Increased Signatures` - `Decreased Signatures`) < 0)
 kableExtra::kbl(allfreqs) %>%
   kable_paper("hover", full_width = FALSE)
 ```
