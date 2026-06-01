@@ -19,7 +19,7 @@ vignette: >
 # Making sure packages are installed
 
 Not evaluated in vignette:
-```{r, eval=FALSE, messages=FALSE}
+```{r, eval=FALSE, message=FALSE}
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install(c("devtools", "tidyverse", "kableExtra"))
@@ -28,15 +28,13 @@ BiocManager::install(c("waldronlab/bugSigSimple", "waldronlab/BugSigDBStats", "w
 
 # Load and subset data
 
-```{r, messages=FALSE}
+```{r, message=FALSE}
 suppressPackageStartupMessages({
   library(bugSigSimple)
   library(BugSigDBStats)
   library(bugsigdbr)
   library(tidyverse)
-  library(stringr)
   library(kableExtra)
-  library(dplyr)
 })
 ```
 
@@ -49,7 +47,7 @@ names(dat)
 
 # Subsetting
 
-```{r, messages=FALSE}
+```{r, message=FALSE}
 included.pmid <-
   c(
     28018325,
@@ -64,7 +62,8 @@ included.pmid <-
     27362264
   )
 subset.dat <-
-  filter(dat, PMID %in% included.pmid) 
+  dat %>%
+  dplyr::filter(PMID %in% included.pmid) 
 ```
 
 ```{r group0}
@@ -81,20 +80,17 @@ included.group1 <- "C-section"
 
 ```{r}
 subset.final <-
-  filter(subset.dat, `Group 0 name` %in% included.group0 & `Group 1 name` %in% included.group1) %>%
-  filter(`Body site` == "Meconium") %>%
-  arrange(PMID)
+  subset.dat %>%
+  dplyr::filter(`Group 0 name` %in% included.group0, `Group 1 name` %in% included.group1) %>%
+  dplyr::filter(`Body site` == "Meconium") %>%
+  dplyr::arrange(PMID)
 ```
 
 Show key characteristics of the included signatures:
 
 ```{r}
-detach("package:dplyr", unload = TRUE)
-library(dplyr)
-```
-
-```{r}
-select(subset.final, "PMID", "Source", "Group 0 name", "Group 1 name", "Abundance in Group 1")
+subset.final %>%
+  dplyr::select("PMID", "Source", "Group 0 name", "Group 1 name", "Abundance in Group 1")
 ```
 
 Are any studies missing?
@@ -120,7 +116,9 @@ createStudyTable(subset.final) %>%
 This table summarizes the results for the top `n` most frequently identified taxa.
 
 ```{r}
-kable_styling(kbl(bugSigSimple::createTaxonTable(subset.final, n = 20)))
+bugSigSimple::createTaxonTable(subset.final, n = 20) %>% 
+  kbl() %>% 
+  kable_styling()
 ```
 
 
