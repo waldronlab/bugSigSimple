@@ -137,3 +137,8 @@ getMostFrequentTaxa(subset.final, direction="UP")
 ```{r}
 getMostFrequentTaxa(subset.final, direction="DOWN")
 ```
+
+# Acknowledgements
+
+This vignette was refactored with the assistance of Gemini Code Assist.
+
