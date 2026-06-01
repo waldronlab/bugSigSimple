@@ -119,7 +119,7 @@ createStudyTable <- function(bsdb.df, includeAlso = NULL) {
   
   # some dplyr-fu to summarize tables, with more recent syntax
   study_table_fixed <- bsdb_with_StudyCodes.df %>%
-    group_by(`Study code`) %>%
+    group_by(`Study Identifier`) %>%
     reframe(
       MaxCases = max(`Group 1 sample size`),
       MaxControls = max(`Group 0 sample size`),
@@ -164,7 +164,7 @@ globalVariables(
     "PMID",
     "URL",
     "uniqueRank",
-    "Study code",
+    "Study Identifier",
     "Group 0 sample size",
     "Group 1 sample size",
     "N_signatures"

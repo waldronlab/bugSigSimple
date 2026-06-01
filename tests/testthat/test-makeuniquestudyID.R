@@ -14,8 +14,8 @@ test_that("make_unique_study_ID works", {
   result <- .make_unique_study_ID(test_df)
   
   # Basic checks
-  expect_true("Study code" %in% names(result))
+  expect_true("Study Identifier" %in% names(result))
   expect_equal(nrow(result), 2)
   expect_true(all(startsWith(result$DOI, "https://doi.org/")))
-  expect_length(unique(result$`Study code`), 2) # Should create unique IDs
+  expect_length(unique(result$`Study Identifier`), 2) # Should create unique IDs
 })
