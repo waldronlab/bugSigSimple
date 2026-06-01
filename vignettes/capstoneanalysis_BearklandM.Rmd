@@ -9,18 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r}
-# Set a CRAN mirror
-options(repos = c(CRAN = "https://cran.rstudio.com"))
-
-install.packages("xfun")
-```
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
-```{r}
+```{r, eval=FALSE}
 if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 BiocManager::install(c("devtools", "tidyverse", "kableExtra"))
