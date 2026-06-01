@@ -9,7 +9,8 @@ test_that("getCriticalN returns 95th percentile threshold", {
   set.seed(123)
   result <- getCriticalN(relevant.sigs, c(2, 2), nsim = 100)
   
-  expect_type(result, "double")
-  expect_true(result >= 1)
-  expect_true(result <= 4)
+  expect_type(result, "list")
+  expect_type(result$critical_n, "double")
+  expect_true(result$critical_n >= 1)
+  expect_true(result$critical_n <= 4)
 })
