@@ -1,6 +1,6 @@
 Package: bugSigSimple
-Version: 0.99.6
-Date: 2022-03-07
+Version: 0.99.7
+Date: 2026-06-01
 Title: Simple exploratory analysis of curated microbe signatures 
 Authors@R: c(person("Ludwig", "Geistlinger", email = "Ludwig_Geistlinger@hms.harvard.edu", role = c("aut", "cre")),
     person("Chloe", "Mirzayi", email = "chloe.mirzayi@sph.cuny.edu", role = c("aut")),
