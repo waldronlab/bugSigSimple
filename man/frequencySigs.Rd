@@ -7,12 +7,13 @@
 frequencySigs(sigs, n = 10)
 }
 \arguments{
-\item{sigs}{data.frame produced by \link[bugsigdbr]{importBugSigDB}}
+\item{sigs}{a list of signatures, such as produced by \link[bugsigdbr]{getSignatures}}
 
-\item{n}{Number of top taxa to return}
+\item{n}{Number of top taxa to return (default: 10)}
 }
 \value{
-integer vector of top most recurrent taxa
+a named table of the top \code{n} most recurrent taxa (taxon names
+  as names, counts as values), sorted in decreasing order
 }
 \description{
 Identify the most frequently recurring taxa in bugsigdb
