@@ -1,0 +1,790 @@
+---
+title: "Exploratory Analysis of Colorectal Cancer (CRC) Microbial Signatures"
+author: "Sally Karimi Kinyua"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exploratory Analysis of Colorectal Cancer (CRC) Microbial Signatures}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+# Introduction
+
+This vignette demonstrates an exploratory analysis of microbial signatures associated with
+colorectal cancer (CRC) using data obtained from BugSigDB and functions provided by the
+bugSigSimple package.
+
+# Analysis objectives
+
+1. Downloading the data from BugSigDB
+2. Filtering of the data to select relevant signatures and remove similar/duplicate signatures
+3. Restricting to fecal samples (the body site with the most consistent, human, non-tissue evidence)
+4. Description of the studies
+5. Description of the taxa
+6. Basic statistical tests
+7. Monte Carlo simulation to calculate critical N
+8. Heatmaps and dendrograms
+
+# Making sure packages are installed
+
+```{r, eval=FALSE, message=FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install(c("devtools", "tidyverse", "kableExtra"))
+BiocManager::install(c("waldronlab/bugSigSimple", "waldronlab/BugSigDBStats", "waldronlab/bugsigdbr"))
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+
+library(bugSigSimple)
+library(bugsigdbr)
+library(BugSigDBStats)
+library(tidyverse)
+library(kableExtra)
+library(ComplexHeatmap)
+```
+
+# Download BugSigDB data
+
+```{r download-data}
+full.dat <- bugsigdbr::importBugSigDB(cache = FALSE)
+
+dim(full.dat)
+```
+
+
+The BugSigDB database was downloaded using the `importBugSigDB()` function from the
+**bugsigdbr** package. The result contains all curated microbial signatures together with
+study metadata such as disease, body site, sequencing platform, and abundance direction.
+
+# Remove empty signatures
+
+```{r clean-data}
+ind1 <- lengths(full.dat[["MetaPhlAn taxon names"]]) > 0
+ind2 <- lengths(full.dat[["NCBI Taxonomy IDs"]]) > 0
+
+dat <- full.dat[ind1 & ind2, ]
+
+dim(dat)
+```
+
+Signatures without annotated taxa were removed to ensure that only complete microbial
+signatures were included in downstream analyses.
+
+# Select CRC-related signatures
+
+```{r select-crc}
+pattern <- paste(
+  "Colorectal cancer",
+  "Colorectal Neoplasms",
+  "Colorectal carcinoma",
+  "Colorectal adenocarcinoma",
+  "Colonic Neoplasms",
+  "Rectal Neoplasms",
+  "Colorectal adenoma",
+  "Colorectal polyp",
+  "colon cancer",
+  "rectal cancer",
+  "CRC",
+  sep = "|"
+)
+
+crc.dat <- dat %>%
+  filter(
+    grepl(pattern, Condition, ignore.case = TRUE) |
+      grepl(pattern, `Group 0 name`, ignore.case = TRUE) |
+      grepl(pattern, `Group 1 name`, ignore.case = TRUE)
+  ) %>%
+  filter(
+    grepl(pattern, Condition, ignore.case = TRUE)
+  )
+
+nrow(crc.dat)
+
+crc.dat %>%
+  count(Condition, sort = TRUE)
+```
+
+To capture the complete body of evidence related to colorectal cancer (CRC), signatures were
+identified using both the primary disease terminology (colorectal cancer / neoplasms) and
+related terms covering adenomas, polyps, and site-specific variants (colon/rectal cancer).
+Disease-related terms were searched across the Condition, Group 0 name, and Group 1 name
+fields to recover studies curated under different naming conventions. Finally, only records
+whose primary condition corresponded to a CRC-related disease were retained.
+
+# Remove similar signatures
+
+```{r remove-duplicates}
+crc.filtered <- crc.dat %>%
+  distinct()
+
+nrow(crc.filtered)
+```
+
+Exact duplicate records were removed using `distinct()` to reduce redundancy before
+downstream analyses. This step retains unique CRC-associated microbial signatures while
+preserving the overall study representation.
+
+# Restrict to fecal samples
+
+```{r restrict-feces}
+crc.filtered %>%
+  count(`Body site`, sort = TRUE) %>%
+  knitr::kable()
+
+# Feces is the dominant, human, non-tissue body site in the CRC signatures.
+# One study (PMID 26397137) used a mouse model rather than human subjects and
+# is excluded so that the signature set reflects human fecal microbiome findings.
+crc.filtered <- crc.filtered %>%
+  filter(`Body site` == "Feces") %>%
+  filter(PMID != 26397137)
+
+nrow(crc.filtered)
+```
+
+CRC signatures in BugSigDB were curated from several body sites, including feces, mucosal
+tissue, and oral samples, as well as from a small number of mouse studies. To keep the
+downstream comparisons consistent, the analysis was restricted to fecal signatures from
+human studies, which represent the largest and most directly comparable body of evidence
+for the gut microbiome in CRC.
+
+# Study characteristics
+
+```{r study-summary}
+study.summary <-
+  crc.filtered %>%
+  count(`Body site`, `Sequencing type`)
+
+knitr::kable(study.summary)
+```
+
+The selected CRC fecal signatures span multiple studies and sequencing approaches.
+Summarizing study characteristics provides context for interpreting downstream analyses
+and highlights the diversity of experimental designs represented in BugSigDB.
+
+# Taxonomic summary
+
+```{r taxa-summary}
+taxa.table <- createTaxonTable(crc.filtered)
+
+head(taxa.table)
+
+knitr::kable(head(taxa.table, 10))
+```
+
+The taxonomic summary identifies microorganisms that recur across CRC-associated
+signatures. Frequently reported taxa may represent microbial features that are
+consistently observed across independent CRC studies.
+
+# Split by sequencing type
+
+```{r split-sequencing}
+crc.wms <- crc.filtered %>% filter(`Sequencing type` == "WMS")
+crc.16s <- crc.filtered %>% filter(`Sequencing type` == "16S")
+
+cat("WMS  - signatures:", nrow(crc.wms), "| studies:", n_distinct(crc.wms$PMID), "\n")
+cat("16S  - signatures:", nrow(crc.16s), "| studies:", n_distinct(crc.16s$PMID), "\n")
+```
+
+Splitting by sequencing platform makes it possible to check later whether whole-metagenome
+shotgun (WMS) and 16S rRNA studies agree on the direction of the taxa they report.
+
+# Long-format taxon table
+
+```{r taxon-long}
+sigs.feces <- bugsigdbr::getSignatures(crc.filtered, tax.id.type = "taxname")
+
+taxon.long <- purrr::map_dfr(seq_along(sigs.feces), function(i) {
+  taxa <- sigs.feces[[i]]
+  if (length(taxa) == 0) return(NULL)
+  tibble::tibble(sig_id = i, taxon = taxa)
+}) %>%
+  left_join(
+    crc.filtered %>%
+      mutate(sig_id = row_number()) %>%
+      select(sig_id, PMID, Condition, `Sequencing type`, `Abundance in Group 1`),
+    by = "sig_id"
+  ) %>%
+  rename(direction = `Abundance in Group 1`)
+
+nrow(taxon.long)
+```
+
+Each signature was expanded into one row per taxon and joined back to its study metadata
+(PMID, condition, sequencing type, and reported direction). This long-format table underlies
+all of the frequency, concordance, enrichment, and co-occurrence analyses below.
+
+# Taxon frequency across studies
+
+```{r taxon-freq}
+taxon.freq <- taxon.long %>%
+  distinct(PMID, taxon, direction) %>%
+  count(taxon, direction, name = "n_studies") %>%
+  group_by(taxon) %>%
+  mutate(total_studies = sum(n_studies)) %>%
+  ungroup() %>%
+  arrange(desc(total_studies))
+
+n_distinct(taxon.freq$taxon)
+
+taxon.freq %>%
+  distinct(taxon, total_studies) %>%
+  slice_max(total_studies, n = 10) %>%
+  knitr::kable()
+```
+
+The most frequently reported taxa give a first impression of which microbes are
+consistently associated with CRC across independent studies, before accounting for
+direction of change or statistical significance.
+
+# Core consensus signature
+
+```{r core-signature}
+concordance <- taxon.long %>%
+  distinct(PMID, taxon, direction) %>%
+  group_by(taxon) %>%
+  summarise(
+    n_studies       = n_distinct(PMID),
+    n_increased     = sum(direction == "increased"),
+    n_decreased     = sum(direction == "decreased"),
+    concordance_pct = round(max(n_increased, n_decreased) / n_studies * 100, 1),
+    majority_dir    = if_else(n_increased >= n_decreased, "increased", "decreased"),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(n_studies), desc(concordance_pct))
+
+# Formal threshold for a "core" signature: reported in at least 3 independent
+# studies, with at least 75% of those studies agreeing on direction
+core.sig <- concordance %>%
+  filter(n_studies >= 3, concordance_pct >= 75) %>%
+  arrange(majority_dir, desc(n_studies))
+
+nrow(core.sig)
+
+knitr::kable(core.sig)
+```
+
+```{r core-signature-plot, fig.height=max(6, 0.32 * nrow(core.sig) + 2), fig.width=9}
+core.sig %>%
+  mutate(
+    direction_label = if_else(majority_dir == "increased",
+                               "Increased in CRC", "Decreased in CRC"),
+    # Wrap long taxon names onto a second line instead of letting them
+    # overlap or run off the plot area
+    taxon_label = paste0(str_wrap(taxon, width = 28), " (", n_studies, ")")
+  ) %>%
+  ggplot(aes(x = reorder(taxon_label, n_studies), y = n_studies, fill = direction_label)) +
+  geom_col(width = 0.7) +
+  geom_text(aes(label = paste0(concordance_pct, "%")), hjust = -0.15, size = 3.3) +
+  coord_flip(clip = "off") +
+  facet_wrap(~direction_label, scales = "free_y", ncol = 1) +
+  scale_fill_manual(values = c("Increased in CRC" = "#B22222",
+                                "Decreased in CRC" = "#006400")) +
+  # Extra headroom on the right so the "%" labels never get clipped
+  scale_y_continuous(expand = expansion(mult = c(0, 0.35))) +
+  labs(
+    title = "Core CRC Consensus Signature",
+    subtitle = "Taxa in >=3 studies with >=75% direction concordance",
+    x = NULL, y = "Number of independent studies", fill = NULL
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold"),
+    axis.text.y = element_text(size = 10, lineheight = 0.9),
+    strip.text = element_text(size = 11, face = "bold"),
+    plot.margin = margin(t = 10, r = 20, b = 10, l = 10)
+  )
+```
+
+Requiring at least three independent studies and at least 75% directional agreement is a
+common, interpretable threshold for calling a taxon "core": it rules out one-off findings
+while still tolerating some disagreement between studies that differ in cohort, region, or
+platform.
+
+# WMS vs 16S concordance
+
+```{r wms-16s-concordance}
+dir.by.platform <- taxon.long %>%
+  filter(`Sequencing type` %in% c("WMS", "16S")) %>%
+  distinct(PMID, taxon, direction, `Sequencing type`) %>%
+  count(taxon, `Sequencing type`, direction, name = "n_studies") %>%
+  group_by(taxon, `Sequencing type`) %>%
+  slice_max(n_studies, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  select(taxon, `Sequencing type`, majority_dir = direction)
+
+platform.compare <- dir.by.platform %>%
+  pivot_wider(names_from = `Sequencing type`, values_from = majority_dir) %>%
+  filter(!is.na(WMS), !is.na(`16S`)) %>%
+  rename(dir_WMS = WMS, dir_16S = `16S`) %>%
+  mutate(agree = dir_WMS == dir_16S)
+
+nrow(platform.compare)
+sum(platform.compare$agree)
+round(100 * mean(platform.compare$agree), 1)
+
+knitr::kable(platform.compare)
+```
+
+For taxa reported by both sequencing platforms, this compares the majority-reported
+direction from WMS studies against the majority-reported direction from 16S studies. High
+agreement supports the idea that a taxon's association with CRC is a real biological
+signal rather than a platform-specific artifact; disagreement flags taxa where sequencing
+approach may be driving the result.
+
+# Taxon enrichment analysis
+
+```{r taxon-enrichment}
+n.universe <- n_distinct(taxon.long$taxon)
+n.sigs     <- length(sigs.feces)
+
+enrichment.df <- taxon.freq %>%
+  distinct(taxon, total_studies) %>%
+  mutate(
+    observed         = total_studies,
+    expected         = n.sigs / n.universe,
+    enrichment_ratio = observed / expected,
+    log2_enrichment  = log2(enrichment_ratio),
+    p_value = purrr::map_dbl(observed, ~ binom.test(
+      x = .x, n = n.sigs, p = 1 / n.universe, alternative = "greater"
+    )$p.value),
+    p_adj = p.adjust(p_value, method = "BH")
+  ) %>%
+  arrange(p_adj, desc(log2_enrichment))
+
+sum(enrichment.df$p_adj < 0.05)
+
+knitr::kable(head(enrichment.df, 15))
+```
+
+A binomial test compares each taxon's observed frequency against the frequency expected if
+taxa were reported at random from the full pool of fecal CRC taxa. Taxa with a small
+adjusted p-value are reported far more often than chance would predict, independent of the
+core-signature concordance threshold above.
+
+# Co-occurrence and co-exclusion
+
+```{r co-occurrence}
+top.taxa <- taxon.freq %>%
+  distinct(taxon, total_studies) %>%
+  slice_max(total_studies, n = 30) %>%
+  pull(taxon)
+
+presence.mat <- taxon.long %>%
+  filter(taxon %in% top.taxa) %>%
+  distinct(PMID, taxon) %>%
+  mutate(present = 1L) %>%
+  pivot_wider(names_from = taxon, values_from = present, values_fill = 0L) %>%
+  column_to_rownames("PMID") %>%
+  as.matrix()
+
+co.occ.mat <- t(presence.mat) %*% presence.mat
+diag(co.occ.mat) <- 0
+
+co.occ.pairs <- which(upper.tri(co.occ.mat), arr.ind = TRUE) %>%
+  as.data.frame() %>%
+  mutate(
+    taxon_a   = rownames(co.occ.mat)[row],
+    taxon_b   = colnames(co.occ.mat)[col],
+    n_studies = co.occ.mat[cbind(row, col)]
+  ) %>%
+  filter(n_studies > 0) %>%
+  arrange(desc(n_studies)) %>%
+  slice_max(n_studies, n = 15)
+
+knitr::kable(co.occ.pairs %>% select(taxon_a, taxon_b, n_studies))
+```
+
+```{r co-exclusion}
+co.excl <- taxon.long %>%
+  filter(taxon %in% top.taxa) %>%
+  distinct(PMID, taxon, direction) %>%
+  inner_join(
+    taxon.long %>% filter(taxon %in% top.taxa) %>% distinct(PMID, taxon, direction),
+    by = "PMID", suffix = c("_a", "_b"), relationship = "many-to-many"
+  ) %>%
+  filter(taxon_a < taxon_b, direction_a != direction_b) %>%
+  count(taxon_a, taxon_b, name = "n_coexclusion") %>%
+  filter(n_coexclusion >= 2) %>%
+  arrange(desc(n_coexclusion))
+
+nrow(co.excl)
+knitr::kable(head(co.excl, 15))
+```
+
+Co-occurrence identifies taxa that tend to be reported together within the same study,
+suggestive of a shared microbial community shift. Co-exclusion identifies taxa reported in
+*opposite* directions within the same study, which may point to competitive or antagonistic
+relationships between taxa in the CRC gut environment.
+
+# Cross-disease overlap
+
+```{r cross-disease-overlap}
+comparison.conditions <- c(
+  "Crohn's disease", "Ulcerative colitis", "Inflammatory Bowel Diseases",
+  "Non-alcoholic fatty liver disease", "Obesity", "Colorectal adenoma"
+)
+
+other.diseases <- dat %>% filter(Condition %in% comparison.conditions)
+
+disease.taxa <- purrr::map_dfr(comparison.conditions, function(cond) {
+  sub.df <- other.diseases %>% filter(Condition == cond)
+  if (nrow(sub.df) == 0) return(NULL)
+  sigs.sub <- bugsigdbr::getSignatures(sub.df, tax.id.type = "taxname")
+  tibble::tibble(taxon = unique(unlist(sigs.sub)), condition = cond)
+})
+
+crc.taxa.set <- unique(unlist(sigs.feces))
+
+overlap.summary <- purrr::map_dfr(comparison.conditions, function(cond) {
+  other.set <- disease.taxa %>% filter(condition == cond) %>% pull(taxon)
+  if (length(other.set) == 0) return(NULL)
+  tibble::tibble(
+    condition          = cond,
+    n_taxa_other       = length(other.set),
+    n_shared_with_crc  = length(intersect(crc.taxa.set, other.set)),
+    jaccard            = round(length(intersect(crc.taxa.set, other.set)) /
+                                  length(union(crc.taxa.set, other.set)), 3)
+  )
+})
+
+knitr::kable(overlap.summary)
+```
+
+Comparing the CRC taxon set against related diseases (IBD, obesity, NAFLD, adenoma) gives a
+sense of specificity: a "core" CRC signature that overlaps heavily with several unrelated
+conditions is more likely to reflect general gut dysbiosis than a disease-specific
+mechanism. **Note:** the `comparison.conditions` strings should be checked against
+`unique(dat$Condition)` in your own session, since exact BugSigDB condition labels can
+differ slightly from common usage.
+
+# Geographic trends
+
+```{r geographic-trends, fig.height=6, fig.width=8}
+crc.filtered %>%
+  distinct(PMID, `Location of subjects`) %>%
+  count(`Location of subjects`, sort = TRUE) %>%
+  knitr::kable()
+
+crc.filtered %>%
+  distinct(PMID, `Location of subjects`, `Sequencing type`) %>%
+  count(`Location of subjects`, `Sequencing type`) %>%
+  ggplot(aes(x = reorder(`Location of subjects`, n), y = n, fill = `Sequencing type`)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "CRC Fecal Studies by Reported Location",
+    x = NULL, y = "Number of studies"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+Geographic distribution matters for a "core" CRC signature: if the signature is driven
+almost entirely by studies from one region, it is less safe to generalize as a universal
+CRC marker.
+
+# Temporal trends
+
+```{r temporal-trends, fig.height=6, fig.width=8}
+crc.filtered %>%
+  distinct(PMID, Year, `Sequencing type`) %>%
+  count(Year, `Sequencing type`) %>%
+  group_by(`Sequencing type`) %>%
+  arrange(Year) %>%
+  mutate(cumulative_n = cumsum(n)) %>%
+  ungroup() %>%
+  ggplot(aes(x = Year, y = cumulative_n, color = `Sequencing type`)) +
+  geom_line(linewidth = 1.2) +
+  geom_point() +
+  labs(
+    title = "Cumulative CRC Fecal Studies Over Time",
+    x = "Publication year", y = "Cumulative number of studies", color = "Sequencing type"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "bottom")
+```
+
+Tracking publication year shows whether the evidence base is still growing and whether
+older, low-throughput studies (mostly 16S) are gradually being supplemented or superseded
+by newer WMS studies.
+
+# Diagnostic-relevance framing
+
+```{r diagnostic-relevance}
+known.crc.markers <- c(
+  "Fusobacterium nucleatum", "Parvimonas micra", "Peptostreptococcus anaerobius",
+  "Solobacterium moorei", "Gemella morbillorum", "Porphyromonas asaccharolytica",
+  "Prevotella intermedia", "Alistipes finegoldii"
+)
+
+marker.pattern <- paste(known.crc.markers, collapse = "|")
+
+diagnostic.check <- core.sig %>%
+  mutate(known_marker = str_detect(taxon, regex(marker.pattern, ignore_case = TRUE))) %>%
+  select(taxon, majority_dir, n_studies, concordance_pct, known_marker)
+
+knitr::kable(diagnostic.check)
+
+cat(
+  "Known literature markers recovered in the core signature:",
+  sum(diagnostic.check$known_marker), "of", length(known.crc.markers), "\n"
+)
+```
+
+As a lightweight sanity check (not a formal validation), the core consensus signature was
+cross-referenced against a small set of taxa repeatedly reported as CRC-associated in the
+oncomicrobiome literature (e.g. *Fusobacterium nucleatum*, *Parvimonas micra*,
+*Peptostreptococcus anaerobius*). Recovering these taxa from an independent,
+database-driven pipeline is reassuring; missing them does not invalidate the analysis, but
+is worth noting when interpreting the core signature's clinical relevance. The
+`known.crc.markers` list is illustrative rather than exhaustive and should be adapted to
+whichever markers are most relevant to your research question.
+
+# Monte Carlo critical N
+
+```{r monte-carlo}
+siglengths <- lengths(crc.filtered$`MetaPhlAn taxon names`)
+
+criticalN <- getCriticalN(
+  relevant.sigs = crc.filtered$`MetaPhlAn taxon names`,
+  siglengths = siglengths
+)
+
+criticalN
+```
+
+The Monte Carlo simulation estimates the critical number of independent studies required
+before repeated observation of a taxon is unlikely to occur by chance.
+
+# Plot critical N
+
+```{r criticalN-plot, fig.height=5, fig.width=6}
+hist(
+  criticalN$simulated_values,
+  breaks = 30,
+  main = "Monte Carlo Simulation of Critical N",
+  xlab = "Maximum frequency under the null model"
+)
+
+abline(
+  v = criticalN$critical_n,
+  col = "violet",
+  lwd = 2,
+  lty = 2
+)
+```
+
+The simulated distribution illustrates the study count threshold required for statistical
+significance under random sampling.
+
+# Signature similarity
+
+```{r signature-similarity}
+
+allsigs <- bugsigdbr::getSignatures(
+  crc.filtered,
+  tax.id.type = "taxname"
+)
+
+# Keep signatures containing at least two taxa
+allsigs <- allsigs[sapply(allsigs, length) > 1]
+
+length(allsigs)
+
+# Pairwise overlaps
+mydists <- BugSigDBStats::calcPairwiseOverlaps(allsigs)
+
+dim(mydists)
+
+# Jaccard similarity matrix
+jmat <- BugSigDBStats::calcJaccardSimilarity(allsigs)
+
+# Keep BugSigDB study/experiment identifiers
+row_labels <- sub("^bsdb:", "PMID", sub("_.*$", "", rownames(jmat)))
+col_labels <- sub("^bsdb:", "PMID", sub("_.*$", "", colnames(jmat)))
+```
+
+Microbial signatures were converted into a pairwise Jaccard similarity matrix using
+functions provided by BugSigDBStats. This matrix was subsequently used for both the
+heatmap and hierarchical clustering analyses.
+
+# Heatmap
+
+```{r heatmap, fig.height=max(9, 0.22 * nrow(jmat) + 3), fig.width=max(11, 0.22 * ncol(jmat) + 5)}
+
+library(grid)
+library(ComplexHeatmap)
+
+# Calculate signature lengths
+siglengths <- sapply(allsigs, length)
+
+# Short labels for display
+short.labels <- paste0("S", seq_len(nrow(jmat)))
+
+# Scale label font size down as the matrix grows, so labels stay
+# legible without overlapping - but never smaller than 5pt
+n.sigs.heat <- nrow(jmat)
+label.fontsize <- max(5, min(8, 10 - 0.03 * n.sigs.heat))
+
+# Top annotation
+ha <- HeatmapAnnotation(
+  `Signature\nLength` = anno_barplot(
+    siglengths,
+    gp = gpar(fill = 4:(length(siglengths) + 3)),
+    annotation_name_gp = gpar(
+      fontsize = 10,
+      lineheight = 0.8
+    )
+  )
+)
+
+# Left annotation
+hr <- rowAnnotation(
+  `Signature\nLength` = anno_barplot(
+    siglengths,
+    gp = gpar(fill = 4:(length(siglengths) + 3)),
+    annotation_name_gp = gpar(
+      fontsize = 10,
+      lineheight = 0.8
+    )
+  )
+)
+
+# Create heatmap
+hm <- Heatmap(
+  jmat,
+
+  top_annotation = ha,
+  left_annotation = hr,
+
+  # More room reserved for labels so long PMID/study identifiers
+  # aren't truncated
+  row_names_max_width = unit(14, "cm"),
+  column_names_max_height = unit(6, "cm"),
+
+  row_labels = row_labels,
+  column_labels = col_labels,
+
+  row_names_gp = gpar(fontsize = label.fontsize),
+  column_names_gp = gpar(fontsize = label.fontsize),
+  column_names_rot = 45,
+
+  column_title = "Heatmap of Similarity of CRC Microbial Signatures",
+  column_title_gp = gpar(fontsize = 15),
+
+  heatmap_legend_param = list(
+    title = "Jaccard Similarity",
+    direction = "horizontal"
+  )
+)
+
+# Draw heatmap
+draw(
+  hm,
+  heatmap_legend_side = "bottom",
+  annotation_legend_side = "right",
+  padding = unit(c(2, 2, 2, 10), "mm")
+)
+
+# Save the heatmap as a high-resolution PNG, sized to match the
+# on-screen version above so nothing is re-cropped on export
+png(
+  filename = "CRC_heatmap.png",
+  width = max(14, 0.25 * ncol(jmat) + 6),
+  height = max(11, 0.25 * nrow(jmat) + 4),
+  units = "in",
+  res = 300
+)
+
+draw(
+  hm,
+  heatmap_legend_side = "bottom",
+  annotation_legend_side = "right",
+  padding = unit(c(2, 2, 2, 10), "mm")
+)
+
+dev.off()
+```
+
+The heatmap visualizes pairwise Jaccard similarities among CRC-associated microbial
+signatures, highlighting groups of studies with similar taxonomic compositions.
+
+# Dendrogram
+
+```{r dendrogram, fig.height=max(9, 0.35 * length(row_labels) + 3), fig.width=11}
+
+# Convert similarity to distance
+hc <- hclust(as.dist(1 - jmat))
+
+# Assign labels directly on the hclust object (in the ORIGINAL row order
+# of jmat) before converting to a dendrogram. as.dendrogram()/plot() then
+# handle reordering internally via hc$order.
+hc$labels <- row_labels
+
+dend <- as.dendrogram(hc)
+
+par(mar = c(4, 1, 3, 14))  # wide right margin for the horizontal labels
+
+plot(
+  dend,
+  horiz = TRUE,
+  main = "Hierarchical Cluster Map of CRC Microbial Signatures",
+  xlab = "Distance (1 - Jaccard similarity)",
+  cex.main = 1.1
+)
+
+```
+
+hc <- hclust(as.dist(1 - jmat))
+hc$labels <- row_labels
+
+dend <- as.dendrogram(hc)
+
+par(mar = c(4, 1, 3, 14))
+
+plot(
+  dend,
+  horiz = TRUE,
+  main = "Hierarchical Cluster Map of CRC Microbial Signatures",
+  xlab = "Distance (1 - Jaccard similarity)",
+  cex.main = 1.1
+)
+```
+
+
+
+Hierarchical clustering groups microbial signatures according to taxonomic similarity,
+revealing patterns of shared microbial composition across CRC studies.
+
+# Discussion
+
+This exploratory analysis identified `r nrow(crc.filtered)` fecal, human-derived
+colorectal cancer microbial signatures curated in BugSigDB. Beyond the taxonomic summary,
+Monte Carlo critical-N estimation, and pairwise Jaccard similarity/heatmap/dendrogram
+analyses, several additional layers of evidence were used to characterize a candidate
+"core" CRC-associated signature:
+
+- A **formal core-signature threshold** (≥3 independent studies, ≥75% directional
+  concordance) narrowed the taxon list to `r nrow(core.sig)` taxa with consistent evidence.
+- **WMS vs 16S concordance** checked whether that consistency holds across sequencing
+  platforms, flagging taxa whose direction may be platform-dependent rather than biological.
+- **Binomial enrichment testing** identified taxa reported far more often than chance,
+  independent of the concordance threshold.
+- **Co-occurrence and co-exclusion** analyses added a network view of which taxa move
+  together or in opposition within the same studies.
+- **Cross-disease overlap** with IBD, obesity, NAFLD, and adenoma assessed how specific the
+  CRC signature is to CRC versus general gut dysbiosis.
+- **Geographic and temporal trends** checked whether the evidence base is dominated by a
+  single region or era.
+- A **diagnostic-relevance check** against known oncomicrobiome markers (e.g.
+  *Fusobacterium nucleatum*, *Parvimonas micra*) provided a lightweight sanity check on
+  whether the database-derived signature recovers established biology.
+
+Together, these results provide a multi-angle starting point for identifying a candidate
+core CRC-associated gut microbial signature and for prioritizing taxa for further
+validation, rather than relying on any single metric in isolation.
