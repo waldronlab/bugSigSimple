@@ -14,14 +14,17 @@ getMostFrequentTaxa(
 \arguments{
 \item{dat}{A table such as output by \link[bugsigdbr]{importBugSigDB}}
 
-\item{n}{Number of most frequently occurring taxa to return}
+\item{n}{Number of most frequently occurring taxa to return (default: 10)}
 
-\item{sig.type}{increased for increased in cases relative to controls, decreased for decreased in cases relative to controls, both for either}
+\item{sig.type}{"increased" for taxa increased in cases relative to controls, "decreased" for decreased, "both" for either (default: "both")}
 
-\item{direction.column}{column containing direction information in dat}
+\item{direction.column}{column containing direction information in dat (default: "Abundance in Group 1")}
 }
 \value{
-A list of signatures, with PMIDs for list element names
+A named table of taxon counts (as produced by \code{table}), sorted in
+decreasing order. Names are the full metaphlan-style taxon path strings
+(e.g. "k__Bacteria|g__Blautia", not just the tip taxon), and values are
+their frequency across signatures in \code{dat}.
 }
 \description{
 Get the most frequently occurring taxa in a table of signatures

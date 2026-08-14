@@ -1,9 +1,10 @@
 #' Identify the most frequently recurring taxa in bugsigdb
 #'
-#' @param sigs data.frame produced by \link[bugsigdbr]{importBugSigDB}
-#' @param n Number of top taxa to return
+#' @param sigs a list of signatures, such as produced by \link[bugsigdbr]{getSignatures}
+#' @param n Number of top taxa to return (default: 10)
 #'
-#' @return integer vector of top most recurrent taxa
+#' @return a named table of the top \code{n} most recurrent taxa (taxon names
+#'   as names, counts as values), sorted in decreasing order
 #' @export
 #'
 #' @examples
@@ -22,10 +23,11 @@ frequencySigs <- function(sigs, n = 10){
 #' Simulate a list of signatures based on a universe of taxa equal in size and length to some smaller set of signatures
 #'
 #' @param relevant.sigs A list of signatures providing a relevant background for drawing taxa
-#' @param siglengths An integer vector, the length of which provides the number of signatures to be simulated, and the 
+#' @param siglengths An integer vector, the length of which provides the number of signatures to be simulated, and the
 #' integers of which provide the number of taxa to be simulated in each signature
 #'
-#' @return A list of signatures of the same number and individual lengths as found in my.dat
+#' @return A list of signatures, matching \code{siglengths} in number and in
+#'   the number of taxa per signature, drawn from \code{relevant.sigs}
 #' @export
 #'
 #' @examples
@@ -63,20 +65,25 @@ simulateSignatures <- function(relevant.sigs, siglengths) {
   max(table(unlist(siglist)))
 }
 
-#' countBug counts the frequency of the most commonly identified bug in a simulated signature.
-
 #' getCriticalN performs a Monte Carlo simulation to estimate the number of times the most frequent taxon is expected to be observed
 #' in a list of signatures
 #'
-#' @param relevant.sigs a list of signatures that form the "background" from which taxa for simulated signatures will be drawn. 
+#' @param relevant.sigs a list of signatures that form the "background" from which taxa for simulated signatures will be drawn.
 #' These are used to estimate how frequently taxa occur
 #' @param siglengths The sizes of signatures found in a set of related studies. Simulated signatures will match these in number and size.
 #' @param alpha Probability at which a critical threshold will be calculated (default: 0.05)
 #' @param nsim Number of simulations (default: 1000)
+#' @param ci Width of the bootstrap confidence interval to compute around the
+#' critical threshold, e.g. 0.95 for a 95\% CI (default: 0.95). Set to NULL to skip.
+#' @param ci_nsim Number of bootstrap resamples used to compute the CI (default: 500)
 #'
-#' @return The 1 - alpha quantile of Monte Carlo simulated values for the maximum number of times any taxon is identified.
+#' @return A list: \code{critical_n} is the 1 - alpha quantile of simulated
+#' values for the maximum number of times any taxon is identified,
+#' \code{ci_lower}/\code{ci_upper} give the bootstrap CI around it (NA if
+#' \code{ci = NULL}), \code{simulated_values} holds the raw simulated maxima,
+#' plus \code{alpha} and a \code{quantile_label} for printing.
 #' @export
-#' @details E.g. for alpha = 0.05, we expect only a 5% chance that any taxon will be identified N times or more.
+#' @details E.g. for alpha = 0.05, we expect only a 5\% chance that any taxon will be identified N times or more.
 
 #' @examples
 #' full.dat <- bugsigdbr::importBugSigDB()
@@ -85,7 +92,8 @@ simulateSignatures <- function(relevant.sigs, siglengths) {
 #' relevant.sigs <- bugsigdbr::getSignatures(my.dat)
 #' my.sigs.increased <- relevant.sigs[grep("UP", names(relevant.sigs))]
 #' (my.siglengths <- sapply(my.sigs.increased, length))
-#' getCriticalN(relevant.sigs, my.siglengths)
+#' cn_res <- getCriticalN(relevant.sigs, my.siglengths)
+#' cn_res$critical_n
 #' # Compare to observed
 #' frequencySigs(my.sigs.increased)
 
@@ -144,8 +152,14 @@ getCriticalN <- function(relevant.sigs,
 #' @export
 #'
 #' @examples
-#' res <- getCriticalN(relevant.sigs, my.siglengths)
-#' plotCriticalN(res, obs_max = 7)
+#' full.dat <- bugsigdbr::importBugSigDB()
+#' my.dat <- full.dat[full.dat$Curator == "Mst Afroza Parvin", ]
+#' relevant.dat <- full.dat[full.dat$`Body site` %in% my.dat$`Body site`, ]
+#' relevant.sigs <- bugsigdbr::getSignatures(my.dat)
+#' my.sigs.increased <- relevant.sigs[grep("UP", names(relevant.sigs))]
+#' my.siglengths <- sapply(my.sigs.increased, length)
+#' cn_res <- getCriticalN(relevant.sigs, my.siglengths)
+#' plotCriticalN(cn_res, obs_max = 7)
 
 plotCriticalN <- function(cn_result,
                           obs_max    = NULL,
@@ -282,6 +296,35 @@ plotCriticalN <- function(cn_result,
 }
 
 
+#' Flag taxa whose observed frequency exceeds the Monte Carlo critical threshold
+#'
+#' Compares observed taxon frequencies (via \code{\link{frequencySigs}}) against
+#' the critical threshold from \code{\link{getCriticalN}}, and optionally
+#' plots the result as a lollipop or bar chart.
+#'
+#' @param sigs a list of signatures, such as produced by \link[bugsigdbr]{getSignatures}
+#' @param cn_result the list returned by \code{\link{getCriticalN}}
+#' @param n number of top taxa to consider (default: 20)
+#' @param plot logical; if TRUE (default), draw a plot of observed frequency vs. critical N
+#' @param plot_type one of "lollipop" (default) or "bar"
+#' @param title plot title
+#'
+#' @return (invisibly) a data.frame, one row per taxon, ordered by decreasing
+#' count: \code{taxon}, \code{count}, \code{critical_n}, \code{significant}
+#' (count > critical_n), and \code{p_empirical}, the empirical chance of
+#' seeing a count this high in the null simulations. Also prints a ggplot2
+#' figure if \code{plot = TRUE}.
+#' @export
+#'
+#' @examples
+#' full.dat <- bugsigdbr::importBugSigDB()
+#' my.dat <- full.dat[full.dat$Curator == "Mst Afroza Parvin", ]
+#' relevant.dat <- full.dat[full.dat$`Body site` %in% my.dat$`Body site`, ]
+#' relevant.sigs <- bugsigdbr::getSignatures(my.dat)
+#' my.sigs.increased <- relevant.sigs[grep("UP", names(relevant.sigs))]
+#' my.siglengths <- sapply(my.sigs.increased, length)
+#' cn_res <- getCriticalN(relevant.sigs, my.siglengths)
+#' significantTaxa(my.sigs.increased, cn_res)
 significantTaxa <- function(sigs,
                             cn_result,
                             n         = 20,

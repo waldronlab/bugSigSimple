@@ -9,7 +9,7 @@ createStudyTable(bsdb.df, includeAlso = NULL)
 \arguments{
 \item{bsdb.df}{\code{data.frame} produced by \link[bugsigdbr]{importBugSigDB}, pre-filtered as desired}
 
-\item{includeAlso}{\code{character} with column names to additionally include in the output table (default = `NULL`)}
+\item{includeAlso}{\code{character} with column names to additionally include in the output table (default = \code{NULL})}
 }
 \value{
 a data.frame of basic study information. Can be wrapped in 

@@ -9,9 +9,9 @@ subsetByCurator(dat, curator, curator.column = "Curator")
 \arguments{
 \item{dat}{data.frame produced by \link[bugsigdbr]{importBugSigDB}}
 
-\item{curator}{curator to subset by}
+\item{curator}{character vector of one or more curator names to subset by}
 
-\item{curator.column}{name of column of curators in data.frame}
+\item{curator.column}{name of column of curators in data.frame (default: "Curator")}
 }
 \value{
 data.frame subsetted by curator

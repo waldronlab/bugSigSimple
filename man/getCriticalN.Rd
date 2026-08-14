@@ -2,14 +2,20 @@
 % Please edit documentation in R/montecarlo.R
 \name{getCriticalN}
 \alias{getCriticalN}
-\title{countBug counts the frequency of the most commonly identified bug in a simulated signature.
-getCriticalN performs a Monte Carlo simulation to estimate the number of times the most frequent taxon is expected to be observed
+\title{getCriticalN performs a Monte Carlo simulation to estimate the number of times the most frequent taxon is expected to be observed
 in a list of signatures}
 \usage{
-getCriticalN(relevant.sigs, siglengths, alpha = 0.05, nsim = 1000)
+getCriticalN(
+  relevant.sigs,
+  siglengths,
+  alpha = 0.05,
+  nsim = 1000,
+  ci = 0.95,
+  ci_nsim = 500
+)
 }
 \arguments{
-\item{relevant.sigs}{a list of signatures that form the "background" from which taxa for simulated signatures will be drawn. 
+\item{relevant.sigs}{a list of signatures that form the "background" from which taxa for simulated signatures will be drawn.
 These are used to estimate how frequently taxa occur}
 
 \item{siglengths}{The sizes of signatures found in a set of related studies. Simulated signatures will match these in number and size.}
@@ -17,17 +23,25 @@ These are used to estimate how frequently taxa occur}
 \item{alpha}{Probability at which a critical threshold will be calculated (default: 0.05)}
 
 \item{nsim}{Number of simulations (default: 1000)}
+
+\item{ci}{Width of the bootstrap confidence interval to compute around the
+critical threshold, e.g. 0.95 for a 95\% CI (default: 0.95). Set to NULL to skip.}
+
+\item{ci_nsim}{Number of bootstrap resamples used to compute the CI (default: 500)}
 }
 \value{
-The 1 - alpha quantile of Monte Carlo simulated values for the maximum number of times any taxon is identified.
+A list: \code{critical_n} is the 1 - alpha quantile of simulated
+values for the maximum number of times any taxon is identified,
+\code{ci_lower}/\code{ci_upper} give the bootstrap CI around it (NA if
+\code{ci = NULL}), \code{simulated_values} holds the raw simulated maxima,
+plus \code{alpha} and a \code{quantile_label} for printing.
 }
 \description{
-countBug counts the frequency of the most commonly identified bug in a simulated signature.
 getCriticalN performs a Monte Carlo simulation to estimate the number of times the most frequent taxon is expected to be observed
 in a list of signatures
 }
 \details{
-E.g. for alpha = 0.05, we expect only a 5% chance that any taxon will be identified N times or more.
+E.g. for alpha = 0.05, we expect only a 5\% chance that any taxon will be identified N times or more.
 }
 \examples{
 full.dat <- bugsigdbr::importBugSigDB()
@@ -36,7 +50,8 @@ relevant.dat <- full.dat[full.dat$`Body site` \%in\% my.dat$`Body site`, ]
 relevant.sigs <- bugsigdbr::getSignatures(my.dat)
 my.sigs.increased <- relevant.sigs[grep("UP", names(relevant.sigs))]
 (my.siglengths <- sapply(my.sigs.increased, length))
-getCriticalN(relevant.sigs, my.siglengths)
+cn_res <- getCriticalN(relevant.sigs, my.siglengths)
+cn_res$critical_n
 # Compare to observed
 frequencySigs(my.sigs.increased)
 }

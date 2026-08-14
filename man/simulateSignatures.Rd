@@ -9,11 +9,12 @@ simulateSignatures(relevant.sigs, siglengths)
 \arguments{
 \item{relevant.sigs}{A list of signatures providing a relevant background for drawing taxa}
 
-\item{siglengths}{An integer vector, the length of which provides the number of signatures to be simulated, and the 
+\item{siglengths}{An integer vector, the length of which provides the number of signatures to be simulated, and the
 integers of which provide the number of taxa to be simulated in each signature}
 }
 \value{
-A list of signatures of the same number and individual lengths as found in my.dat
+A list of signatures, matching \code{siglengths} in number and in
+  the number of taxa per signature, drawn from \code{relevant.sigs}
 }
 \description{
 Simulate a list of signatures based on a universe of taxa equal in size and length to some smaller set of signatures

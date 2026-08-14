@@ -2,21 +2,28 @@
 % Please edit documentation in R/simple.R
 \name{.make_unique_study_ID}
 \alias{.make_unique_study_ID}
-\title{Author: Giacomo Antonello
-Date: 2025-03-17}
+\title{Build unique study identifiers for a table of signatures}
 \usage{
 .make_unique_study_ID(bsdb.df)
 }
 \arguments{
 \item{bsdb.df}{\code{data.frame} produced by \link[bugsigdbr]{importBugSigDB}, pre-filtered as desired}
 }
+\value{
+\code{bsdb.df} with a new leading \code{Study Identifier} column
+}
 \description{
-Description:
+Generates a study identifier the way curatedMetagenomicData does it: the
+first author from the \code{Authors list} column (usually surname +
+initials, e.g. "ZellerG") with whitespace stripped, plus the year, e.g.
+"ZellerG_2014". Duplicates get a ".1", ".2", ... suffix. Also normalizes
+bare DOIs (starting with "10.") to full \url{https://doi.org/} links.
 }
-\details{
-This function takes a raw bugSigDB input from `bugsigdbr` and generates a 
-unique idenfier as curatedMetagenomicsData does: full last name, initial(s) of 
-first name(s) and year of publication. Additionally, it checks if there are 
-more PMID codes associated with the same ID and adds a .1, .2, for each 
-duplication
+\note{
+Author: Giacomo Antonello (2025-03-17)
 }
+\examples{
+full.dat <- bugsigdbr::importBugSigDB()
+bugSigSimple:::.make_unique_study_ID(full.dat[1:10, ])
+}
+\keyword{internal}

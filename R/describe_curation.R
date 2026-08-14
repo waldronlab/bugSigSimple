@@ -1,7 +1,12 @@
 #' Create a table of most frequent taxa in a data.frame
 #'
+#' For each of the top taxa, counts how often it was reported increased vs.
+#' decreased and runs a binomial test on those counts (null: 50/50).
+#'
 #' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired
 #' @param n number of taxa to return (if sig.type=="both", this is the number of taxa to return for each direction)
+#' @param format "Simple" (default) keeps only the core summary columns; any
+#'   other value returns the full table, with those columns moved to the front
 #'
 #' @importFrom dplyr filter %>% mutate rowwise n_distinct group_by relocate rename first ungroup across n
 #' @importFrom utils relist head
@@ -10,8 +15,10 @@
 #' @importFrom tidyr separate
 #' @importFrom stringr str_replace str_extract
 #' @importFrom bugsigdbr getSignatures
-#' 
-#' @return kable table with increased and decreased taxa and a binomial test based on total number of studies in the data.frame
+#'
+#' @return a data.frame with one row per taxon, giving its taxonomic level,
+#'   total/increased/decreased signature counts, and binomial test p-value.
+#'   Can be wrapped in kable_styling(kbl(...)) to format nicely.
 #' @export
 #'
 #' @examples
@@ -89,7 +96,7 @@ createTaxonTable <- function(dat, n = 10, format = "Simple") {
 #' Create a table of all studies currently in data.frame
 #'
 #' @param bsdb.df \code{data.frame} produced by \link[bugsigdbr]{importBugSigDB}, pre-filtered as desired
-#' @param includeAlso \code{character} with column names to additionally include in the output table (default = `NULL`)
+#' @param includeAlso \code{character} with column names to additionally include in the output table (default = \code{NULL})
 #'
 #' @importFrom dplyr group_by %>% select relocate reframe across n
 #' @importFrom tidyr all_of

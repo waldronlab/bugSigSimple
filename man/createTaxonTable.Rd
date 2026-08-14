@@ -4,18 +4,24 @@
 \alias{createTaxonTable}
 \title{Create a table of most frequent taxa in a data.frame}
 \usage{
-createTaxonTable(dat, n = 10)
+createTaxonTable(dat, n = 10, format = "Simple")
 }
 \arguments{
 \item{dat}{data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired}
 
 \item{n}{number of taxa to return (if sig.type=="both", this is the number of taxa to return for each direction)}
+
+\item{format}{"Simple" (default) keeps only the core summary columns; any
+other value returns the full table, with those columns moved to the front}
 }
 \value{
-kable table with increased and decreased taxa and a binomial test based on total number of studies in the data.frame
+a data.frame with one row per taxon, giving its taxonomic level,
+  total/increased/decreased signature counts, and binomial test p-value.
+  Can be wrapped in kable_styling(kbl(...)) to format nicely.
 }
 \description{
-Create a table of most frequent taxa in a data.frame
+For each of the top taxa, counts how often it was reported increased vs.
+decreased and runs a binomial test on those counts (null: 50/50).
 }
 \examples{
 full.dat <- bugsigdbr::importBugSigDB()
