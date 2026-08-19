@@ -279,7 +279,7 @@ draw(
 
 # Save the heatmap as a high-resolution PNG
 png(
-  filename = "MASLD_heatmap.png",
+  filename = file.path(tempdir(), "MASLD_heatmap.png"),
   width = 14,
   height = 10,
   units = "in",
