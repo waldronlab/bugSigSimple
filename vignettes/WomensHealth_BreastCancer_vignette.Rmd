@@ -1,0 +1,482 @@
+---
+title: "Focused Sub-Analysis of Breast Cancer Microbial Signatures"
+subtitle: "Condition-Specific Analysis with Cross-Condition Mapping (BugSigDB)"
+author: "Sally Karimi Kinyua"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Focused Sub-Analysis of Breast Cancer Microbial Signatures}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+
+library(bugSigSimple)
+library(bugsigdbr)
+library(BugSigDBStats)
+library(tidyverse)
+library(kableExtra)
+library(ComplexHeatmap)
+```
+
+# Introduction
+
+This vignette demonstrates a focused sub-analysis of microbial signatures associated
+specifically with breast cancer using BugSigDB. Unlike the Cervical Cancer sub-analysis,
+no body-site restriction is applied by default here: breast cancer microbiome research
+spans both breast tissue itself and fecal/gut samples (investigating the gut-breast axis),
+so restricting to breast tissue alone would discard a substantial, legitimately relevant
+portion of the evidence base. This notebook also evaluates how breast-cancer-associated
+taxa overlap with other broader women's health conditions.
+
+# Download and Prepare Data
+
+```{r download-data}
+full.dat <- bugsigdbr::importBugSigDB(cache = FALSE)
+
+# Remove empty signatures
+ind1 <- lengths(full.dat[["MetaPhlAn taxon names"]]) > 0
+ind2 <- lengths(full.dat[["NCBI Taxonomy IDs"]]) > 0
+dat <- full.dat[ind1 & ind2, ]
+```
+
+# Select Breast Cancer Specific Signatures
+
+```{r select-breast-cancer}
+breast_terms <- c(
+  "Breast cancer",
+  "Breast cancer stage",
+  "Breast carcinoma",
+  "HER2 Positive Breast Carcinoma"
+)
+
+breast_dat <- dat %>%
+  filter(Condition %in% breast_terms) %>%
+  distinct()
+
+nrow(breast_dat)
+
+breast_dat %>%
+  count(Condition, sort = TRUE) %>%
+  knitr::kable()
+```
+
+# Study Characteristics
+
+```{r study-summary}
+study.summary <- breast_dat %>%
+  count(`Body site`, `Sequencing type`)
+
+knitr::kable(study.summary)
+
+breast_dat %>%
+  count(Year) %>%
+  arrange(Year) %>%
+  knitr::kable()
+```
+
+The body site breakdown above shows how the evidence splits between breast tissue itself
+and other sites (most likely feces, reflecting gut-breast axis research). Review this
+table before deciding whether a body-site restriction is warranted for your specific
+research question - the default here keeps all sites.
+
+## Demographic & Anatomy Metrics Visualisations
+
+```{r body-site-plot, fig.height=5, fig.width=8}
+breast_dat %>%
+  count(`Body site`, sort = TRUE) %>%
+  ggplot(aes(x = reorder(`Body site`, n), y = n)) +
+  geom_col(fill = "#C71585", width = 0.6) +
+  coord_flip() +
+  labs(
+    title = "Breast Cancer Signatures by Body Site",
+    subtitle = "Distribution of tissue sampling locations across studies",
+    x = NULL, y = "Number of Signatures"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+```{r geographic-trends, fig.height=5, fig.width=8}
+breast_dat %>%
+  distinct(PMID, `Location of subjects`, `Sequencing type`) %>%
+  count(`Location of subjects`, `Sequencing type`) %>%
+  filter(!is.na(`Location of subjects`)) %>%
+  ggplot(aes(x = reorder(`Location of subjects`, n), y = n, fill = `Sequencing type`)) +
+  geom_col(width = 0.6) +
+  scale_fill_manual(values = c("16S" = "#FF1493", "WMS" = "#B2DFDB")) +
+  coord_flip() +
+  labs(
+    title = "Breast Cancer Cases Reported by Study Region",
+    subtitle = "Geographic grouping categorized by clinical platform technology",
+    x = NULL, y = "Number of Independent Studies", fill = "Platform"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "bottom"
+  )
+```
+
+```{r temporal-trends, fig.height=6, fig.width=8}
+breast_dat %>%
+  distinct(PMID, Year, `Sequencing type`) %>%
+  filter(!is.na(Year)) %>%
+  count(Year, `Sequencing type`) %>%
+  group_by(`Sequencing type`) %>%
+  arrange(Year) %>%
+  mutate(cumulative_n = cumsum(n)) %>%
+  ungroup() %>%
+  ggplot(aes(x = Year, y = cumulative_n, color = `Sequencing type`)) +
+  geom_line(linewidth = 1.2) +
+  geom_point() +
+  labs(
+    title = "Cumulative Breast Cancer Studies Over Time",
+    x = "Publication year", y = "Cumulative number of studies", color = "Sequencing type"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "bottom")
+```
+
+# Taxonomic Summary
+
+```{r taxa-summary}
+taxa.table <- createTaxonTable(breast_dat)
+knitr::kable(head(taxa.table, 20))
+```
+
+# Split by Sequencing Type
+
+```{r split-sequencing}
+breast.wms <- breast_dat %>% filter(`Sequencing type` == "WMS")
+breast.16s <- breast_dat %>% filter(`Sequencing type` == "16S")
+
+cat("WMS  - signatures:", nrow(breast.wms), "| studies:", n_distinct(breast.wms$PMID), "\n")
+cat("16S  - signatures:", nrow(breast.16s), "| studies:", n_distinct(breast.16s$PMID), "\n")
+```
+
+# Long-Format Taxon Table Setup
+
+```{r taxon-long}
+sigs.breast <- bugsigdbr::getSignatures(breast_dat, tax.id.type = "taxname")
+
+# Also pull a broader copy for cross-condition reference background mapping
+sigs.all <- bugsigdbr::getSignatures(dat, tax.id.type = "taxname")
+
+taxon.long <- purrr::map_dfr(seq_along(sigs.all), function(i) {
+  taxa <- sigs.all[[i]]
+  if (length(taxa) == 0) return(NULL)
+  tibble::tibble(sig_id = i, taxon = taxa)
+}) %>%
+  left_join(
+    dat %>%
+      mutate(sig_id = row_number()) %>%
+      select(sig_id, PMID, Condition, `Sequencing type`, `Abundance in Group 1`),
+    by = "sig_id"
+  ) %>%
+  rename(direction = `Abundance in Group 1`)
+
+cat("Long-format table successfully built with", nrow(taxon.long), "rows.\n")
+
+knitr::kable(head(taxon.long), caption = "Preview of the Structured Long-Format Taxon Table")
+```
+
+# Taxon Frequency Across Studies
+
+```{r taxon-freq}
+taxon.freq <- taxon.long %>%
+  filter(Condition %in% breast_terms) %>%
+  distinct(PMID, taxon, direction) %>%
+  count(taxon, direction, name = "n_studies") %>%
+  group_by(taxon) %>%
+  mutate(total_studies = sum(n_studies)) %>%
+  ungroup() %>%
+  arrange(desc(total_studies))
+
+n_distinct(taxon.freq$taxon)
+
+taxon.freq %>%
+  distinct(taxon, total_studies) %>%
+  slice_max(total_studies, n = 15) %>%
+  knitr::kable()
+```
+
+# Core Consensus Signature
+
+```{r core-signature}
+concordance <- taxon.long %>%
+  filter(Condition %in% breast_terms) %>%
+  distinct(PMID, taxon, direction) %>%
+  group_by(taxon) %>%
+  summarise(
+    n_studies       = n_distinct(PMID),
+    n_increased     = sum(direction == "increased"),
+    n_decreased     = sum(direction == "decreased"),
+    concordance_pct = round(max(n_increased, n_decreased) / n_studies * 100, 1),
+    majority_dir    = if_else(n_increased >= n_decreased, "increased", "decreased"),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(n_studies), desc(concordance_pct))
+
+# Standard threshold (matching the General analysis): >=3 studies, >=75% concordance.
+# If this returns very few/zero rows given the smaller sample size here, consider
+# loosening to >=2 studies / >=70% concordance, as was done for Cervical Cancer -
+# and note that deviation explicitly in the Discussion section if you do.
+core.sig <- concordance %>%
+  filter(n_studies >= 3, concordance_pct >= 75) %>%
+  arrange(majority_dir, desc(n_studies))
+
+nrow(core.sig)
+
+knitr::kable(core.sig)
+```
+
+# Core Signature Visualisation
+
+```{r core-signature-plot, fig.height=6, fig.width=9}
+if (nrow(core.sig) > 0) {
+  core.sig %>%
+    group_by(majority_dir) %>%
+    slice_max(n_studies, n = 15, with_ties = FALSE) %>%
+    ungroup() %>%
+    mutate(
+      direction_label = if_else(majority_dir == "increased", "Increased", "Decreased"),
+      taxon_label = paste0(str_wrap(taxon, width = 28), " (", n_studies, ")")
+    ) %>%
+    ggplot(aes(x = reorder(taxon_label, n_studies), y = n_studies, fill = direction_label)) +
+    geom_col(width = 0.7) +
+    geom_text(aes(label = paste0(concordance_pct, "%")), hjust = -0.15, size = 3.3) +
+    coord_flip(clip = "off") +
+    facet_wrap(~direction_label, scales = "free_y", ncol = 1) +
+    scale_fill_manual(values = c("Increased" = "#FFB7D5", "Decreased" = "#FDF6E2")) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.35))) +
+    labs(
+      title = "Core Breast Cancer Consensus Signature",
+      x = NULL, y = "Number of independent studies", fill = NULL
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(legend.position = "none", plot.title = element_text(face = "bold"))
+} else {
+  cat("No taxa met the core-signature threshold at this sample size.")
+}
+```
+
+# WMS vs 16S Concordance
+
+```{r wms-16s-concordance}
+dir.by.platform <- taxon.long %>%
+  filter(Condition %in% breast_terms) %>%
+  filter(`Sequencing type` %in% c("WMS", "16S")) %>%
+  distinct(PMID, taxon, direction, `Sequencing type`) %>%
+  count(taxon, `Sequencing type`, direction, name = "n_studies") %>%
+  group_by(taxon, `Sequencing type`) %>%
+  slice_max(n_studies, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  select(taxon, `Sequencing type`, majority_dir = direction)
+
+platform.compare <- dir.by.platform %>%
+  pivot_wider(names_from = `Sequencing type`, values_from = majority_dir) %>%
+  filter(!is.na(WMS), !is.na(`16S`)) %>%
+  rename(dir_WMS = WMS, dir_16S = `16S`) %>%
+  mutate(agree = dir_WMS == dir_16S)
+
+nrow(platform.compare)
+if (nrow(platform.compare) > 0) {
+  sum(platform.compare$agree)
+  round(100 * mean(platform.compare$agree), 1)
+  knitr::kable(platform.compare)
+} else {
+  cat("No taxa reported by both WMS and 16S in this breast-cancer dataset.")
+}
+```
+
+# Taxon Enrichment Analysis
+
+```{r taxon-enrichment}
+n.universe <- n_distinct(taxon.long %>% filter(Condition %in% breast_terms) %>% pull(taxon))
+n.sigs     <- length(sigs.breast)
+
+enrichment.df <- taxon.freq %>%
+  distinct(taxon, total_studies) %>%
+  mutate(
+    observed         = total_studies,
+    expected         = n.sigs / n.universe,
+    enrichment_ratio = observed / expected,
+    log2_enrichment  = log2(enrichment_ratio),
+    p_value = purrr::map_dbl(observed, ~ binom.test(
+      x = .x, n = n.sigs, p = 1 / n.universe, alternative = "greater"
+    )$p.value),
+    p_adj = p.adjust(p_value, method = "BH")
+  ) %>%
+  arrange(p_adj, desc(log2_enrichment))
+
+sum(enrichment.df$p_adj < 0.05)
+
+knitr::kable(head(enrichment.df, 15))
+```
+
+# Monte Carlo Critical N
+
+```{r monte-carlo}
+siglengths <- lengths(breast_dat$`MetaPhlAn taxon names`)
+
+criticalN <- getCriticalN(
+  relevant.sigs = breast_dat$`MetaPhlAn taxon names`,
+  siglengths = siglengths
+)
+
+criticalN
+```
+
+```{r criticalN-plot, fig.height=5, fig.width=6}
+hist(
+  criticalN$simulated_values,
+  breaks = 30,
+  main = "Monte Carlo Simulation of Critical N (Breast Cancer)",
+  xlab = "Maximum frequency under the null model"
+)
+
+abline(
+  v = criticalN$critical_n,
+  col = "violet",
+  lwd = 2,
+  lty = 2
+)
+```
+
+# Cross-Condition Taxa Overlap Analysis
+
+This section explores whether the taxa altered in breast cancer are unique to breast
+tissue/tumor microenvironment changes or represent shared dysbiosis markers also seen
+across other women's health conditions.
+
+```{r cross-condition-overlap}
+breast_taxa <- taxon.long %>%
+  filter(Condition %in% breast_terms) %>%
+  distinct(taxon) %>%
+  pull(taxon)
+
+shared_taxa_counts <- taxon.long %>%
+  filter(taxon %in% breast_taxa) %>%
+  group_by(taxon) %>%
+  summarise(
+    total_womens_health_studies = n_distinct(PMID),
+    distinct_conditions_linked = n_distinct(Condition),
+    top_other_conditions = paste(
+      head(setdiff(unique(Condition), breast_terms), 3),
+      collapse = ", "
+    ),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(distinct_conditions_linked))
+
+shared_taxa_counts %>%
+  slice_max(distinct_conditions_linked, n = 20, with_ties = FALSE) %>%
+  knitr::kable(
+    caption = "Top Breast-Cancer-Associated Taxa and Their Links to Other Women's Health Conditions",
+    col.names = c("Taxon Name", "Total WH Studies", "Total Distinct Conditions", "Other Conditions it Often Appears In")
+  )
+```
+
+# Shared Dysbiosis Visualisation
+
+```{r plot-shared-taxa, fig.height=6, fig.width=9}
+top_shared_taxa <- shared_taxa_counts %>%
+  filter(distinct_conditions_linked > 1) %>%
+  slice_max(total_womens_health_studies, n = 15, with_ties = FALSE) %>%
+  pull(taxon)
+
+if (length(top_shared_taxa) > 0) {
+  taxon.long %>%
+    filter(taxon %in% top_shared_taxa) %>%
+    mutate(Condition_Group = if_else(Condition %in% breast_terms, "Breast Cancer", Condition)) %>%
+    count(taxon, Condition_Group) %>%
+    ggplot(aes(x = reorder(taxon, n), y = n, fill = Condition_Group)) +
+    geom_col() +
+    coord_flip() +
+    labs(
+      title = "Breast Cancer Taxa Active in Other Conditions",
+      subtitle = "Tracking where prominent breast-cancer-associated microbes show up elsewhere",
+      x = NULL, y = "Total Signature Mentions", fill = "Condition Group"
+    ) +
+    theme_minimal(base_size = 11) +
+    theme(legend.position = "right")
+}
+```
+
+# Signature Similarity and Heatmap
+
+```{r heatmap, fig.height=10, fig.width=12}
+allsigs <- bugsigdbr::getSignatures(breast_dat, tax.id.type = "taxname")
+allsigs <- allsigs[sapply(allsigs, length) > 1]
+
+if (length(allsigs) > 1) {
+  jmat <- BugSigDBStats::calcJaccardSimilarity(allsigs)
+  siglengths <- sapply(allsigs, length)
+
+  ha <- HeatmapAnnotation(
+    `Signature\nLength` = anno_barplot(siglengths, gp = gpar(fill = "#B0C4DE"), height = unit(1.2, "cm"))
+  )
+  hr <- rowAnnotation(
+    `Signature\nLength` = anno_barplot(siglengths, gp = gpar(fill = "#B0C4DE"), width = unit(1.2, "cm"))
+  )
+
+  hm <- Heatmap(
+    jmat,
+    top_annotation = ha,
+    left_annotation = hr,
+    show_row_names = FALSE,
+    show_column_names = FALSE,
+
+    row_km = 4,
+    column_km = 4,
+    row_gap = unit(1.5, "mm"),
+    column_gap = unit(1.5, "mm"),
+
+    row_dend_width = unit(2.5, "cm"),
+    column_dend_height = unit(2.5, "cm"),
+
+    column_title = "Heatmap of Breast Cancer Microbial Signatures",
+    column_title_gp = gpar(fontsize = 14, fontface = "bold"),
+    heatmap_legend_param = list(
+      title = "Jaccard Similarity",
+      direction = "horizontal",
+      legend_width = unit(6, "cm")
+    )
+  )
+
+  draw(hm, heatmap_legend_side = "bottom", padding = unit(c(5, 5, 5, 5), "mm"))
+
+  png(filename = "BreastCancer_heatmap.png", width = 12, height = 10, units = "in", res = 300)
+  draw(hm, heatmap_legend_side = "bottom", padding = unit(c(5, 5, 5, 5), "mm"))
+  dev.off()
+}
+```
+
+# Dendrogram
+
+```{r dendrogram, fig.height=14, fig.width=10}
+if (exists("jmat") && nrow(jmat) > 1) {
+  hc <- hclust(as.dist(1 - jmat))
+  dend <- as.dendrogram(hc)
+
+  par(mar = c(5, 2, 4, 2))
+
+  plot(
+    dend,
+    horiz = TRUE,
+    leaflab = "none",
+    main = "Hierarchical Cluster Map of Breast Cancer Microbial Signatures",
+    xlab = "Distance (1 - Jaccard similarity)",
+    cex.main = 1.3,
+    lwd = 0.8
+  )
+}
+```
+
+
+
