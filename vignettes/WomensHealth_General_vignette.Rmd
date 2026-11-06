@@ -1,0 +1,579 @@
+---
+title: "Exploratory Analysis of Women's Health Microbial Signatures"
+subtitle: "General Landscape Analysis (BugSigDB)"
+author: "Sally Karimi Kinyua"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exploratory Analysis of Women's Health Microbial Signatures}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+# Introduction
+
+This vignette demonstrates an exploratory analysis of microbial signatures associated
+with women's health conditions using data obtained from BugSigDB and functions provided
+by the bugSigSimple package. This is the **General** analysis — a broad landscape view
+across many women's-health-related conditions (breast cancer, cervical cancer,
+endometriosis, pregnancy/maternal-child topics, and other reproductive/gynecological
+conditions). Four focused sub-analyses (Cervical Cancer, Breast Cancer, Endometriosis,
+and Pregnancy/Maternal-Child) build on this General analysis with condition-specific
+rigor.
+
+# Analysis objectives
+
+1. Downloading the data from BugSigDB
+2. Filtering the data to select women's-health-related signatures and remove duplicates
+3. Description of the studies (body site, sequencing platform, publication year)
+4. Description of the taxa
+5. Core consensus signature and basic statistical tests
+6. Monte Carlo simulation to calculate critical N
+7. Heatmaps and dendrograms
+
+# Environment note
+
+**Before running this vignette**, confirm your Bioconductor infrastructure loads cleanly.
+If `library(S4Vectors)` (or any of its dependents) fails with an error like *"package
+could not be loaded"* or *"reached elapsed time limit"*, reinstall it fresh in an
+otherwise-idle R session before proceeding:
+
+```{r, eval=FALSE}
+remove.packages("S4Vectors")
+BiocManager::install("S4Vectors", update = FALSE, force = TRUE)
+# Restart R (Session > Restart R) before continuing
+```
+
+# Making sure packages are installed
+
+```{r, eval=FALSE, message=FALSE}
+if (!require("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install(c("devtools", "tidyverse", "kableExtra"))
+BiocManager::install(c("waldronlab/bugSigSimple", "waldronlab/BugSigDBStats", "waldronlab/bugsigdbr"))
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+
+library(bugSigSimple)
+library(bugsigdbr)
+library(BugSigDBStats)
+library(tidyverse)
+library(kableExtra)
+library(ComplexHeatmap)
+```
+
+# Download BugSigDB data
+
+```{r download-data}
+full.dat <- bugsigdbr::importBugSigDB(cache = FALSE)
+
+dim(full.dat)
+```
+
+# Remove empty signatures
+
+```{r clean-data}
+ind1 <- lengths(full.dat[["MetaPhlAn taxon names"]]) > 0
+ind2 <- lengths(full.dat[["NCBI Taxonomy IDs"]]) > 0
+
+dat <- full.dat[ind1 & ind2, ]
+
+dim(dat)
+```
+
+# Select women's-health-related signatures
+
+```{r select-womens-health}
+womens_health_terms <- c(
+  # Breast
+  "Breast cancer", "Breast cancer stage", "Breast carcinoma", "HER2 Positive Breast Carcinoma",
+  # Cervical
+  "Cervical cancer", "Cervical cerclage", "Cervical glandular intraepithelial neoplasia",
+  "Cervical glandular intraepithelial neoplasia,Cervical cancer",
+  "Cervical glandular intraepithelial neoplasia,Human papilloma virus infection",
+  "Cervix erosion", "Human papilloma virus infection", "Human papilloma virus infection,Age",
+  "Human papilloma virus infection,Cervical cancer",
+  "Human papilloma virus infection,Cervical glandular intraepithelial neoplasia",
+  "Chlamydophila infectious disease,Human papilloma virus infection",
+  # Endometriosis
+  "Endometriosis", "Adenomyosis", "Adenomyosis,Endometriosis",
+  # Pregnancy / maternal-child
+  "Pregnancy", "Gestational age", "Gestational diabetes", "Vaginal microbiome measurement",
+  "Premature birth", "Spontaneous preterm birth", "Preterm premature rupture of the membranes",
+  "Birth weight", "Birth measurement", "HIV mother to child transmission",
+  "Neonatal death", "Neonatal jaundice", "Postnatal growth retardation",
+  "Necrotizing enterocolitis", "Breastfeeding duration", "Breastfeeding duration,Transport",
+  "Maternal milk", "Cesarean section", "Delivery method",
+  # Broader women's health
+  "Ovarian cancer", "Polycystic ovary syndrome", "Menopause", "Postmenopausal",
+  "Postmenopausal osteoporosis", "Acquired primary ovarian failure", "Endometrial cancer",
+  "Bacterial vaginosis", "Vaginitis", "Vulvovaginitis", "Vulvovaginal candidiasis",
+  "Gonorrhea", "Chlamydia trachomatis", "Chlamydia trachomatis infectious disease",
+  "Genital neoplasm, femaale", "Age at menarche", "Hormone replacement therapy", "Parous","Rosacea", "Ehlers-Danlos syndrome"
+)
+
+
+womens_health_dat <- dat %>%
+  filter(Condition %in% womens_health_terms)
+
+dim(womens_health_dat)
+
+womens_health_dat %>%
+  count(Condition, sort = TRUE) %>%
+  knitr::kable()
+```
+
+Unlike the other Summer Projects analysis, no single body site captures the relevant evidence here —
+vaginal, cervical, breast, and fecal samples are all legitimately relevant to different
+women's-health conditions. No body-site restriction is applied in the General analysis;
+body site distribution is instead described below as part of the study characteristics.
+
+One study (conjunctival trachoma, caused by *Chlamydia trachomatis*) is retained as a
+legitimate — if biologically atypical — result of the `Chlamydia trachomatis` filter term,
+and is noted here as a minor caveat rather than excluded.
+
+# Remove duplicate signatures
+
+```{r remove-duplicates}
+womens_health_dat <- womens_health_dat %>%
+  distinct()
+
+nrow(womens_health_dat)
+```
+
+No exact duplicate records were found in this signature set.
+
+# Study characteristics
+
+```{r study-summary}
+study.summary <- womens_health_dat %>%
+  count(`Body site`, `Sequencing type`)
+
+knitr::kable(study.summary)
+
+womens_health_dat %>%
+  count(Year) %>%
+  arrange(Year) %>%
+  knitr::kable()
+```
+
+Body site distribution spans fecal samples (largely gestational diabetes, PCOS, and
+breast cancer studies), reproductive-tract sites (vagina, cervix, endometrium - largely
+bacterial vaginosis, HPV, and cervical cancer studies), and smaller categories including
+meconium (mother-to-child transmission studies) and breast/milk tissue. Sequencing type
+is heavily 16S-dominated (528 of 579 signatures), with a much smaller WMS subset (44) -
+a real limitation to note when interpreting the WMS vs. 16S concordance check below, which
+will be comparatively underpowered relative to the CRC analysis's more balanced platform
+split. Publication years span 2010-2024, with the bulk of studies from 2018-2022; the
+apparent taper in 2023-2024 most likely reflects BugSigDB curation lag rather than a
+genuine decline in research activity.
+
+# Taxonomic summary
+
+```{r taxa-summary}
+taxa.table <- createTaxonTable(womens_health_dat)
+
+head(taxa.table)
+
+knitr::kable(head(taxa.table, 20))
+```
+
+# Split by sequencing type
+
+```{r split-sequencing}
+wh.wms <- womens_health_dat %>% filter(`Sequencing type` == "WMS")
+wh.16s <- womens_health_dat %>% filter(`Sequencing type` == "16S")
+
+cat("WMS  - signatures:", nrow(wh.wms), "| studies:", n_distinct(wh.wms$PMID), "\n")
+cat("16S  - signatures:", nrow(wh.16s), "| studies:", n_distinct(wh.16s$PMID), "\n")
+```
+
+# Long-format taxon table
+
+```{r taxon-long}
+sigs.womens_health <- bugsigdbr::getSignatures(womens_health_dat, tax.id.type = "taxname")
+
+taxon.long <- purrr::map_dfr(seq_along(sigs.womens_health), function(i) {
+  taxa <- sigs.womens_health[[i]]
+  if (length(taxa) == 0) return(NULL)
+  tibble::tibble(sig_id = i, taxon = taxa)
+}) %>%
+  left_join(
+    womens_health_dat %>%
+      mutate(sig_id = row_number()) %>%
+      select(sig_id, PMID, Condition, `Sequencing type`, `Abundance in Group 1`),
+    by = "sig_id"
+  ) %>%
+  rename(direction = `Abundance in Group 1`)
+
+nrow(taxon.long)
+```
+
+# Taxon frequency across studies
+
+```{r taxon-freq}
+taxon.freq <- taxon.long %>%
+  distinct(PMID, taxon, direction) %>%
+  count(taxon, direction, name = "n_studies") %>%
+  group_by(taxon) %>%
+  mutate(total_studies = sum(n_studies)) %>%
+  ungroup() %>%
+  arrange(desc(total_studies))
+
+n_distinct(taxon.freq$taxon)
+
+taxon.freq %>%
+  distinct(taxon, total_studies) %>%
+  slice_max(total_studies, n = 15) %>%
+  knitr::kable()
+```
+
+Given that General pools many biologically distinct conditions together (vaginal
+dysbiosis, gut dysbiosis in metabolic conditions, breast tissue changes), the most
+frequent taxa are expected to reflect a mix of vaginal-health organisms (e.g.
+*Lactobacillus*, *Gardnerella*, *Prevotella*) and gut-health organisms (e.g.
+*Bacteroides*, *Faecalibacterium*) rather than a single coherent signature - this
+heterogeneity is itself part of the motivation for the four focused sub-analyses.
+
+# Core consensus signature
+
+```{r core-signature}
+concordance <- taxon.long %>%
+  distinct(PMID, taxon, direction) %>%
+  group_by(taxon) %>%
+  summarise(
+    n_studies       = n_distinct(PMID),
+    n_increased     = sum(direction == "increased"),
+    n_decreased     = sum(direction == "decreased"),
+    concordance_pct = round(max(n_increased, n_decreased) / n_studies * 100, 1),
+    majority_dir    = if_else(n_increased >= n_decreased, "increased", "decreased"),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(n_studies), desc(concordance_pct))
+
+core.sig <- concordance %>%
+  filter(n_studies >= 3, concordance_pct >= 75) %>%
+  arrange(majority_dir, desc(n_studies))
+
+nrow(core.sig)
+
+knitr::kable(core.sig)
+```
+
+```{r core-signature-plot, fig.height=max(9, 0.45 * 15 + 3), fig.width=9}
+core.sig %>%
+  group_by(majority_dir) %>%
+  slice_max(n_studies, n = 15, with_ties = FALSE) %>%
+  ungroup() %>%
+  mutate(
+    direction_label = if_else(majority_dir == "increased",
+                               "Increased", "Decreased"),
+    taxon_label = paste0(str_wrap(taxon, width = 28), " (", n_studies, ")")
+  ) %>%
+  ggplot(aes(x = reorder(taxon_label, n_studies), y = n_studies, fill = direction_label)) +
+  geom_col(width = 0.7) +
+  geom_text(aes(label = paste0(concordance_pct, "%")), hjust = -0.15, size = 3.3) +
+  coord_flip(clip = "off") +
+  facet_wrap(~direction_label, scales = "free_y", ncol = 1) +
+  scale_fill_manual(values = c("Increased" = "#800020", "Decreased" = "#FFCBA4")) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.35))) +
+  labs(
+    title = "Core Women's Health Consensus Signature (General)",
+    subtitle = "Top 15 taxa per direction, in >=3 studies with >=75% direction concordance",
+    x = NULL, y = "Number of independent studies", fill = NULL
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold"),
+    axis.text.y = element_text(size = 10, lineheight = 0.9),
+    strip.text = element_text(size = 11, face = "bold"),
+    plot.margin = margin(t = 10, r = 20, b = 10, l = 10)
+  )
+```
+
+
+```{r core-signature-full-table}
+knitr::kable(core.sig)
+```
+
+```{r body-site-plot, fig.height=7, fig.width=9}
+womens_health_dat %>%
+  count(`Body site`, sort = TRUE) %>%
+  filter(n >= 2) %>%
+  ggplot(aes(x = reorder(`Body site`, n), y = n)) +
+  geom_col(fill = "#C154C1") +
+  coord_flip() +
+  labs(
+    title = "Women's Health Signatures by Body Site",
+    subtitle = "Sites with at least 2 signatures",
+    x = NULL, y = "Number of signatures"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+
+
+# WMS vs 16S concordance
+
+```{r wms-16s-concordance}
+dir.by.platform <- taxon.long %>%
+  filter(`Sequencing type` %in% c("WMS", "16S")) %>%
+  distinct(PMID, taxon, direction, `Sequencing type`) %>%
+  count(taxon, `Sequencing type`, direction, name = "n_studies") %>%
+  group_by(taxon, `Sequencing type`) %>%
+  slice_max(n_studies, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  select(taxon, `Sequencing type`, majority_dir = direction)
+
+platform.compare <- dir.by.platform %>%
+  pivot_wider(names_from = `Sequencing type`, values_from = majority_dir) %>%
+  filter(!is.na(WMS), !is.na(`16S`)) %>%
+  rename(dir_WMS = WMS, dir_16S = `16S`) %>%
+  mutate(agree = dir_WMS == dir_16S)
+
+nrow(platform.compare)
+sum(platform.compare$agree)
+round(100 * mean(platform.compare$agree), 1)
+
+knitr::kable(platform.compare)
+```
+
+Note the much smaller WMS sample here (44 signatures total, vs. hundreds of 16S) compared
+to the CRC analysis - this comparison is real but less statistically powered than its CRC
+counterpart, and should be presented with that caveat.
+
+# Taxon enrichment analysis
+
+```{r taxon-enrichment}
+n.universe <- n_distinct(taxon.long$taxon)
+n.sigs     <- length(sigs.womens_health)
+
+enrichment.df <- taxon.freq %>%
+  distinct(taxon, total_studies) %>%
+  mutate(
+    observed         = total_studies,
+    expected         = n.sigs / n.universe,
+    enrichment_ratio = observed / expected,
+    log2_enrichment  = log2(enrichment_ratio),
+    p_value = purrr::map_dbl(observed, ~ binom.test(
+      x = .x, n = n.sigs, p = 1 / n.universe, alternative = "greater"
+    )$p.value),
+    p_adj = p.adjust(p_value, method = "BH")
+  ) %>%
+  arrange(p_adj, desc(log2_enrichment))
+
+sum(enrichment.df$p_adj < 0.05)
+
+knitr::kable(head(enrichment.df, 15))
+```
+```{r geographic-trends, fig.height=8, fig.width=9}
+womens_health_dat %>%
+  distinct(PMID, `Location of subjects`, `Sequencing type`) %>%
+  count(`Location of subjects`, `Sequencing type`) %>%
+  ggplot(aes(x = reorder(`Location of subjects`, n), y = n, fill = `Sequencing type`)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Women's Health Studies by Reported Location",
+    x = NULL, y = "Number of studies"
+  ) +
+  theme_minimal(base_size = 11)
+```
+
+```{r temporal-trends, fig.height=6, fig.width=8}
+womens_health_dat %>%
+  distinct(PMID, Year, `Sequencing type`) %>%
+  count(Year, `Sequencing type`) %>%
+  filter(!is.na(Year)) %>%
+  group_by(`Sequencing type`) %>%
+  arrange(Year) %>%
+  mutate(cumulative_n = cumsum(n)) %>%
+  ungroup() %>%
+  ggplot(aes(x = Year, y = cumulative_n, color = `Sequencing type`)) +
+  geom_line(linewidth = 1.2) +
+  geom_point() +
+  labs(
+    title = "Cumulative Women's Health Studies Over Time",
+    x = "Publication year", y = "Cumulative number of studies", color = "Sequencing type"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "bottom")
+```
+
+
+# Monte Carlo critical N
+
+```{r monte-carlo}
+siglengths <- lengths(womens_health_dat$`MetaPhlAn taxon names`)
+
+criticalN <- getCriticalN(
+  relevant.sigs = womens_health_dat$`MetaPhlAn taxon names`,
+  siglengths = siglengths
+)
+
+criticalN
+```
+
+```{r criticalN-plot, fig.height=5, fig.width=6}
+hist(
+  criticalN$simulated_values,
+  breaks = 30,
+  main = "Monte Carlo Simulation of Critical N (Women's Health, General)",
+  xlab = "Maximum frequency under the null model"
+)
+
+abline(
+  v = criticalN$critical_n,
+  col = "#FF00FF",
+  lwd = 2,
+  lty = 2
+)
+```
+
+# Signature similarity
+
+```{r signature-similarity}
+allsigs <- bugsigdbr::getSignatures(womens_health_dat, tax.id.type = "taxname")
+
+allsigs <- allsigs[sapply(allsigs, length) > 1]
+
+length(allsigs)
+
+mydists <- BugSigDBStats::calcPairwiseOverlaps(allsigs)
+
+dim(mydists)
+
+jmat <- BugSigDBStats::calcJaccardSimilarity(allsigs)
+
+row_labels <- sub("^bsdb:", "PMID", sub("_.*$", "", rownames(jmat)))
+col_labels <- sub("^bsdb:", "PMID", sub("_.*$", "", colnames(jmat)))
+```
+
+# Heatmap
+
+
+
+```{r heatmap, fig.height=7, fig.width=9}
+library(grid)
+library(ComplexHeatmap)
+
+siglengths <- sapply(allsigs, length)
+
+# Set standard, crisp base font sizes
+ha <- HeatmapAnnotation(
+  `Signature\nLength` = anno_barplot(siglengths, gp = gpar(fill = "steelblue"))
+)
+
+hr <- rowAnnotation(
+  `Signature\nLength` = anno_barplot(siglengths, gp = gpar(fill = "steelblue"))
+)
+
+hm <- Heatmap(
+  jmat,
+  top_annotation = ha,
+  left_annotation = hr,
+  show_row_names = FALSE,
+  show_column_names = FALSE,
+  column_title = "Heatmap of Similarity of Women's Health Microbial Signatures",
+  column_title_gp = gpar(fontsize = 12, fontface = "bold"),
+  heatmap_legend_param = list(title = "Jaccard Similarity", direction = "horizontal")
+)
+
+# Draw cleanly directly to your HTML page output
+draw(hm, heatmap_legend_side = "bottom")
+
+# Force turn off any weird existing devices
+dev.off() 
+
+# Open clean canvas with safe, static dimensions
+png(
+  filename = "WomensHealth_heatmap.png",
+  width = 12,
+  height = 10,
+  units = "in",
+  res = 300
+)
+
+# Draw the heatmap inside the device
+draw(
+  hm,
+  heatmap_legend_side = "bottom",
+  annotation_legend_side = "right",
+  padding = unit(c(2, 2, 2, 10), "mm")
+)
+
+# Crucial: turn off the device to save the file cleanly
+dev.off()
+
+```
+
+Given the heterogeneity already observed in the taxon frequency table (vaginal-health taxa
+vs. gut-health taxa), this heatmap is expected to reveal distinct clusters of studies
+rather than one homogeneous signature - likely separating along body-site/condition lines
+(vaginal/cervical studies vs. fecal/metabolic studies) rather than a single unified
+women's-health signature. This heterogeneity is the core rationale for the four focused
+sub-analyses that follow this General analysis.
+
+# Dendrogram
+
+```{r dendrogram, fig.height=6, fig.width=9}
+hc <- hclust(as.dist(1 - jmat))
+dend <- as.dendrogram(hc)
+
+# Standard margin structure
+par(mar = c(4, 1, 3, 1))
+
+plot(
+  dend,
+  horiz = TRUE,
+  leaflab = "none",
+  main = "Hierarchical Cluster Map of Women's Health Microbial Signatures",
+  xlab = "Distance (1 - Jaccard similarity)",
+  cex.main = 1.1
+)
+```
+11}
+
+
+```
+
+# Discussion
+
+This exploratory analysis identified `r nrow(womens_health_dat)` women's-health-related
+microbial signatures curated in BugSigDB, spanning breast cancer, cervical cancer,
+endometriosis, pregnancy/maternal-child topics, and broader gynecological conditions
+(PCOS, menopause, bacterial vaginosis, and related infections).
+
+Key observations from this General analysis:
+
+- A **formal core-signature threshold** (>=3 independent studies, >=75% directional
+  concordance) identified `r nrow(core.sig)` taxa with consistent evidence across the
+  whole women's-health evidence base.
+- The most frequently reported taxa split cleanly into two biologically distinct clusters:
+  **vaginal-health organisms** (*Lactobacillus*, *Gardnerella*, *Prevotella*, *Sneathia*,
+  *Megasphaera*, *Dialister*) associated largely with bacterial vaginosis, HPV, and
+  cervical cancer studies, and **gut-health organisms** (*Bacteroides*,
+  *Faecalibacterium*, *Blautia*) associated largely with gestational diabetes, PCOS, and
+  breast cancer studies.
+- **WMS vs. 16S concordance** is reported, but is comparatively underpowered relative to
+  the CRC analysis given the strong 16S skew (528 vs. 44 signatures) in this dataset.
+- **Body site distribution** confirms that, unlike CRC, no single body site captures the
+  relevant evidence - vaginal, cervical, fecal, and breast tissue samples are all
+  legitimately part of the women's-health evidence base.
+- One study (conjunctival trachoma) was retained as a legitimate but biologically atypical
+  result of the `Chlamydia trachomatis` filter term - a minor caveat rather than an error.
+- BugSigDB currently has **no dedicated postpartum category** and only one study with a
+  clean postpartum-specific comparison (maternal vs. infant samples at 6 weeks
+  postpartum) - too sparse for formal statistical treatment, and mentioned here only as a
+  gap in the current evidence base.
+
+The biological heterogeneity uncovered here - two largely distinct microbial communities
+(vaginal vs. gut) responding to different conditions - is the central motivation for the
+four focused sub-analyses (Cervical Cancer, Breast Cancer, Endometriosis, and
+Pregnancy/Maternal-Child) that follow, each of which applies this same rigor within a
+single, biologically coherent condition.

@@ -1,0 +1,395 @@
+---
+title: "Focused Sub-Analysis of Endometriosis Microbial Signatures"
+subtitle: "Condition-Specific Analysis with Cross-Condition Mapping (BugSigDB)"
+author: "Sally Karimi Kinyua"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Focused Sub-Analysis of Endometriosis Microbial Signatures}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  message = FALSE
+)
+
+library(bugSigSimple)
+library(bugsigdbr)
+library(BugSigDBStats)
+library(tidyverse)
+library(kableExtra)
+library(ComplexHeatmap)
+```
+
+# Introduction
+
+This vignette demonstrates a focused sub-analysis of microbial signatures associated
+specifically with endometriosis (and the closely related condition adenomyosis) using
+BugSigDB. This is the smallest of the four sub-analyses by sample size in the General
+Women's Health dataset (42 signatures total across "Endometriosis", "Adenomyosis", and
+"Adenomyosis,Endometriosis"), so thresholds and statistical power should be interpreted
+with appropriate caution throughout.
+
+# Download and Prepare Data
+
+```{r download-data}
+full.dat <- bugsigdbr::importBugSigDB(cache = FALSE)
+
+ind1 <- lengths(full.dat[["MetaPhlAn taxon names"]]) > 0
+ind2 <- lengths(full.dat[["NCBI Taxonomy IDs"]]) > 0
+dat <- full.dat[ind1 & ind2, ]
+```
+
+# Select Endometriosis-Specific Signatures
+
+```{r select-endometriosis}
+endometriosis_terms <- c(
+  "Endometriosis",
+  "Adenomyosis",
+  "Adenomyosis,Endometriosis"
+)
+
+endo_dat <- dat %>%
+  filter(Condition %in% endometriosis_terms) %>%
+  distinct()
+
+nrow(endo_dat)
+
+endo_dat %>%
+  count(Condition, sort = TRUE) %>%
+  knitr::kable()
+```
+
+# Study Characteristics
+
+```{r study-summary}
+study.summary <- endo_dat %>%
+  count(`Body site`, `Sequencing type`)
+
+knitr::kable(study.summary)
+
+endo_dat %>%
+  count(Year) %>%
+  arrange(Year) %>%
+  knitr::kable()
+```
+
+```{r body-site-plot, fig.height=5, fig.width=8}
+endo_dat %>%
+  count(`Body site`, sort = TRUE) %>%
+  ggplot(aes(x = reorder(`Body site`, n), y = n)) +
+  geom_col(fill = "#FFDE00", width = 0.6) +
+  coord_flip() +
+  labs(
+    title = "Endometriosis Signatures by Body Site",
+    x = NULL, y = "Number of Signatures"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(plot.title = element_text(face = "bold"))
+```
+
+```{r geographic-trends, fig.height=5, fig.width=8}
+endo_dat %>%
+  distinct(PMID, `Location of subjects`, `Sequencing type`) %>%
+  filter(!is.na(`Location of subjects`)) %>%
+  count(`Location of subjects`, `Sequencing type`) %>%
+  ggplot(aes(x = reorder(`Location of subjects`, n), y = n, fill = `Sequencing type`)) +
+  geom_col(width = 0.6) +
+  coord_flip() +
+  # Adds your pastel dark brown palette manually
+  scale_fill_manual(values = c("#8B7365", "#A38D80", "#BCABA2")) + 
+  labs(
+    title = "Endometriosis Studies by Reported Location",
+    x = NULL, y = "Number of Independent Studies", fill = "Platform"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(plot.title = element_text(face = "bold"), legend.position = "bottom")
+
+```
+
+```{r temporal-trends, fig.height=6, fig.width=8}
+endo_dat %>%
+  distinct(PMID, Year, `Sequencing type`) %>%
+  filter(!is.na(Year)) %>%
+  count(Year, `Sequencing type`) %>%
+  group_by(`Sequencing type`) %>%
+  arrange(Year) %>%
+  mutate(cumulative_n = cumsum(n)) %>%
+  ungroup() %>%
+  ggplot(aes(x = Year, y = cumulative_n, color = `Sequencing type`)) +
+  geom_line(linewidth = 1.2) +
+  geom_point() +
+  labs(
+    title = "Cumulative Endometriosis Studies Over Time",
+    x = "Publication year", y = "Cumulative number of studies", color = "Sequencing type"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(legend.position = "bottom")
+```
+
+# Taxonomic Summary
+
+```{r taxa-summary}
+taxa.table <- createTaxonTable(endo_dat)
+knitr::kable(head(taxa.table, 20))
+```
+
+# Split by Sequencing Type
+
+```{r split-sequencing}
+endo.wms <- endo_dat %>% filter(`Sequencing type` == "WMS")
+endo.16s <- endo_dat %>% filter(`Sequencing type` == "16S")
+
+cat("WMS  - signatures:", nrow(endo.wms), "| studies:", n_distinct(endo.wms$PMID), "\n")
+cat("16S  - signatures:", nrow(endo.16s), "| studies:", n_distinct(endo.16s$PMID), "\n")
+```
+
+# Long-Format Taxon Table
+
+```{r taxon-long}
+sigs.endo <- bugsigdbr::getSignatures(endo_dat, tax.id.type = "taxname")
+sigs.all <- bugsigdbr::getSignatures(dat, tax.id.type = "taxname")
+
+taxon.long <- purrr::map_dfr(seq_along(sigs.all), function(i) {
+  taxa <- sigs.all[[i]]
+  if (length(taxa) == 0) return(NULL)
+  tibble::tibble(sig_id = i, taxon = taxa)
+}) %>%
+  left_join(
+    dat %>%
+      mutate(sig_id = row_number()) %>%
+      select(sig_id, PMID, Condition, `Sequencing type`, `Abundance in Group 1`),
+    by = "sig_id"
+  ) %>%
+  rename(direction = `Abundance in Group 1`)
+
+nrow(taxon.long)
+```
+
+# Taxon Frequency Across Studies
+
+```{r taxon-freq}
+taxon.freq <- taxon.long %>%
+  filter(Condition %in% endometriosis_terms) %>%
+  distinct(PMID, taxon, direction) %>%
+  count(taxon, direction, name = "n_studies") %>%
+  group_by(taxon) %>%
+  mutate(total_studies = sum(n_studies)) %>%
+  ungroup() %>%
+  arrange(desc(total_studies))
+
+n_distinct(taxon.freq$taxon)
+
+taxon.freq %>%
+  distinct(taxon, total_studies) %>%
+  slice_max(total_studies, n = 15) %>%
+  knitr::kable()
+```
+
+# Core Consensus Signature
+
+```{r core-signature}
+concordance <- taxon.long %>%
+  filter(Condition %in% endometriosis_terms) %>%
+  distinct(PMID, taxon, direction) %>%
+  group_by(taxon) %>%
+  summarise(
+    n_studies       = n_distinct(PMID),
+    n_increased     = sum(direction == "increased"),
+    n_decreased     = sum(direction == "decreased"),
+    concordance_pct = round(max(n_increased, n_decreased) / n_studies * 100, 1),
+    majority_dir    = if_else(n_increased >= n_decreased, "increased", "decreased"),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(n_studies), desc(concordance_pct))
+
+# Given the small sample size (42 signatures total), the standard >=3/>=75% threshold
+# may return very few or zero rows. Loosen to >=2 studies / >=70% concordance if so
+# (matching the Cervical Cancer approach), and state that explicitly below.
+core.sig <- concordance %>%
+  filter(n_studies >= 2, concordance_pct >= 70) %>%
+  arrange(majority_dir, desc(n_studies))
+
+nrow(core.sig)
+
+knitr::kable(core.sig)
+```
+
+# Core Signature Visualisation
+
+```{r core-signature-plot, fig.height=6, fig.width=9}
+if (nrow(core.sig) > 0) {
+  core.sig %>%
+    group_by(majority_dir) %>%
+    slice_max(n_studies, n = 15, with_ties = FALSE) %>%
+    ungroup() %>%
+    mutate(
+      direction_label = if_else(majority_dir == "increased", "Increased", "Decreased"),
+      taxon_label = paste0(str_wrap(taxon, width = 28), " (", n_studies, ")")
+    ) %>%
+    ggplot(aes(x = reorder(taxon_label, n_studies), y = n_studies, fill = direction_label)) +
+    geom_col(width = 0.7) +
+    geom_text(aes(label = paste0(concordance_pct, "%")), hjust = -0.15, size = 3.3) +
+    coord_flip(clip = "off") +
+    facet_wrap(~direction_label, scales = "free_y", ncol = 1) +
+    scale_fill_manual(values = c("Increased" = "#FFF2A3", "Decreased" = "#4A2E1B")) +
+    scale_y_continuous(expand = expansion(mult = c(0, 0.35))) +
+    labs(
+      title = "Core Endometriosis Consensus Signature",
+      subtitle = "Taxa in >=2 studies with >=70% direction concordance",
+      x = NULL, y = "Number of independent studies", fill = NULL
+    ) +
+    theme_minimal(base_size = 12) +
+    theme(legend.position = "none", plot.title = element_text(face = "bold"))
+} else {
+  cat("No taxa met the core-signature threshold at this sample size.")
+}
+```
+
+
+
+
+# Taxon Enrichment Analysis
+
+```{r taxon-enrichment}
+n.universe <- n_distinct(taxon.long %>% filter(Condition %in% endometriosis_terms) %>% pull(taxon))
+n.sigs     <- length(sigs.endo)
+
+enrichment.df <- taxon.freq %>%
+  distinct(taxon, total_studies) %>%
+  mutate(
+    observed         = total_studies,
+    expected         = n.sigs / n.universe,
+    enrichment_ratio = observed / expected,
+    log2_enrichment  = log2(enrichment_ratio),
+    p_value = purrr::map_dbl(observed, ~ binom.test(
+      x = .x, n = n.sigs, p = 1 / n.universe, alternative = "greater"
+    )$p.value),
+    p_adj = p.adjust(p_value, method = "BH")
+  ) %>%
+  arrange(p_adj, desc(log2_enrichment))
+
+sum(enrichment.df$p_adj < 0.05)
+
+knitr::kable(head(enrichment.df, 15))
+```
+
+# Monte Carlo Critical N
+
+```{r monte-carlo}
+siglengths <- lengths(endo_dat$`MetaPhlAn taxon names`)
+
+criticalN <- getCriticalN(
+  relevant.sigs = endo_dat$`MetaPhlAn taxon names`,
+  siglengths = siglengths
+)
+
+criticalN
+```
+
+```{r criticalN-plot, fig.height=5, fig.width=6}
+hist(
+  criticalN$simulated_values,
+  breaks = 30,
+  main = "Monte Carlo Simulation of Critical N (Endometriosis)",
+  xlab = "Maximum frequency under the null model"
+)
+
+abline(v = criticalN$critical_n, col = "violet", lwd = 2, lty = 2)
+```
+
+# Cross-Condition Taxa Overlap Analysis
+
+```{r cross-condition-overlap}
+endo_taxa <- taxon.long %>%
+  filter(Condition %in% endometriosis_terms) %>%
+  distinct(taxon) %>%
+  pull(taxon)
+
+shared_taxa_counts <- taxon.long %>%
+  filter(taxon %in% endo_taxa) %>%
+  group_by(taxon) %>%
+  summarise(
+    total_womens_health_studies = n_distinct(PMID),
+    distinct_conditions_linked = n_distinct(Condition),
+    top_other_conditions = paste(
+      head(setdiff(unique(Condition), endometriosis_terms), 3),
+      collapse = ", "
+    ),
+    .groups = "drop"
+  ) %>%
+  arrange(desc(distinct_conditions_linked))
+
+shared_taxa_counts %>%
+  slice_max(distinct_conditions_linked, n = 20, with_ties = FALSE) %>%
+  knitr::kable(
+    caption = "Top Endometriosis-Associated Taxa and Their Links to Other Conditions",
+    col.names = c("Taxon Name", "Total WH Studies", "Total Distinct Conditions", "Other Conditions it Often Appears In")
+  )
+```
+
+# Signature Similarity and Heatmap
+
+```{r heatmap, fig.height=9, fig.width=10}
+allsigs <- bugsigdbr::getSignatures(endo_dat, tax.id.type = "taxname")
+allsigs <- allsigs[sapply(allsigs, length) > 1]
+
+if (length(allsigs) > 1) {
+  jmat <- BugSigDBStats::calcJaccardSimilarity(allsigs)
+  siglengths <- sapply(allsigs, length)
+
+  ha <- HeatmapAnnotation(
+    `Signature\nLength` = anno_barplot(siglengths, gp = gpar(fill = "#4682B4"), height = unit(1.2, "cm"))
+  )
+  hr <- rowAnnotation(
+    `Signature\nLength` = anno_barplot(siglengths, gp = gpar(fill = "#4682B4"), width = unit(1.2, "cm"))
+  )
+
+  hm <- Heatmap(
+    jmat,
+    top_annotation = ha,
+    left_annotation = hr,
+    row_names_gp = gpar(fontsize = 7),
+    column_names_gp = gpar(fontsize = 7),
+    column_names_rot = 45,
+    column_title = "Heatmap of Endometriosis Microbial Signatures",
+    column_title_gp = gpar(fontsize = 14, fontface = "bold"),
+    heatmap_legend_param = list(title = "Jaccard Similarity", direction = "horizontal", legend_width = unit(6, "cm"))
+  )
+
+  draw(hm, heatmap_legend_side = "bottom", padding = unit(c(5, 5, 5, 10), "mm"))
+
+  png(filename = "Endometriosis_heatmap.png", width = 10, height = 9, units = "in", res = 300)
+  draw(hm, heatmap_legend_side = "bottom", padding = unit(c(5, 5, 5, 10), "mm"))
+  dev.off()
+} else {
+  cat("Fewer than 2 multi-taxon signatures available - heatmap not generated.")
+}
+```
+
+Note: with only 42 total signatures for this sub-analysis, the heatmap is small enough
+that row/column labels are kept visible (unlike General/Breast Cancer, which had to hide
+labels given hundreds of signatures) - adjust `row_names_gp`/`column_names_gp` font size
+further if labels still overlap once you see the actual output.
+
+# Dendrogram
+
+```{r dendrogram, fig.height=10, fig.width=9}
+if (exists("jmat") && nrow(jmat) > 1) {
+  hc <- hclust(as.dist(1 - jmat))
+  dend <- as.dendrogram(hc)
+
+  par(mar = c(5, 2, 4, 10))
+
+  plot(
+    dend,
+    horiz = TRUE,
+    main = "Hierarchical Cluster Map of Endometriosis Microbial Signatures",
+    xlab = "Distance (1 - Jaccard similarity)",
+    cex.main = 1.2
+  )
+}
+```
+
