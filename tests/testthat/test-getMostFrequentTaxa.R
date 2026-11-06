@@ -1,6 +1,6 @@
 #Function file: simple.R
 
-test_that("getMostFrequentTaxa returns the most frequently occurring taxa in a table of signatures", {
+test_that(".getMostFrequentTaxa returns the most frequently occurring taxa in a table of signatures", {
   # Create test data
   test_data <- data.frame(
     PMID = c("123", "456", "789"),
@@ -19,7 +19,7 @@ test_that("getMostFrequentTaxa returns the most frequently occurring taxa in a t
     getSignatures = function(...) mock_signatures,
     .package = "bugsigdbr",
     {
-      result <- getMostFrequentTaxa(test_data, n = 5)
+      result <- .getMostFrequentTaxa(test_data, n = 5)
       
       # Basic checks
       expect_true(is.table(result))

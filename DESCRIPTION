@@ -1,5 +1,5 @@
 Package: bugSigSimple
-Version: 0.99.7
+Version: 0.99.8
 Date: 2026-06-01
 Title: Simple exploratory analysis of curated microbe signatures 
 Authors@R: c(person("Ludwig", "Geistlinger", email = "Ludwig_Geistlinger@hms.harvard.edu", role = c("aut", "cre")),
@@ -43,5 +43,6 @@ License: Artistic-2.0
 VignetteBuilder: knitr
 RoxygenNote: 7.3.2
 Encoding: UTF-8
-URL: https://waldronlab.io/bugSigSimple
+URL: https://waldronlab.io/bugSigSimple, https://github.com/waldronlab/bugSigSimple
+BugReports: https://github.com/waldronlab/bugSigSimple/issues
 Config/testthat/edition: 3
