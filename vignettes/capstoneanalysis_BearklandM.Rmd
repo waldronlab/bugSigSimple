@@ -107,7 +107,19 @@ subset.dat %>%
 Final subset to include only those Group 0 names of interest (controls with no DED) and only those Group 1 names of interest (some variation on DED)
 
 ```{r}
-subset.final <- subset.dat[which(subset.dat$`Group 0 name` %in% c("Healthy Control", "Control", "control", "healthy controls", "Normal Control (NC)","Healthy control", "Healthy Controls","Normal healthy (NDM) children", "Healthy controls")& subset.dat$`Group 1 name`%in% c("Meibomian Gland Dysfunction + Lacrimal Dysfunction", "Meibomian Gland Dysfunction", "Dry Eye","ADDE", "DED patients", "MGD", "Meibomian Gland Dysfunction (MGD)", "Meibomian Gland Dysfunction (MGD) DED", "Meibomian Gland Dysfunction (MGD) Groups", "Mixed DED", "Sjogrens Syndrome Dry Eye (SSDE)", "Non Sjogrens Syndrome Dry Eye (NSSDE)", "Dry Eye Disease patients", "Sjogren's patients with Dry Eye Disease", "Dry Eye Disease patients without Sjogrens", "Diabetic children with Dry Eye Disease (DM-DE)", "Mild Dry Eye", "Mild and Moderate to Severe Dry Eye")),]
+group0.controls <- c("Healthy Control", "Control", "control", "healthy controls",
+                      "Normal Control (NC)", "Healthy control", "Healthy Controls",
+                      "Normal healthy (NDM) children", "Healthy controls")
+group1.ded <- c("Meibomian Gland Dysfunction + Lacrimal Dysfunction", "Meibomian Gland Dysfunction",
+                "Dry Eye", "ADDE", "DED patients", "MGD", "Meibomian Gland Dysfunction (MGD)",
+                "Meibomian Gland Dysfunction (MGD) DED", "Meibomian Gland Dysfunction (MGD) Groups",
+                "Mixed DED", "Sjogrens Syndrome Dry Eye (SSDE)", "Non Sjogrens Syndrome Dry Eye (NSSDE)",
+                "Dry Eye Disease patients", "Sjogren's patients with Dry Eye Disease",
+                "Dry Eye Disease patients without Sjogrens", "Diabetic children with Dry Eye Disease (DM-DE)",
+                "Mild Dry Eye", "Mild and Moderate to Severe Dry Eye")
+
+subset.final <- subset.dat[subset.dat$`Group 0 name` %in% group0.controls &
+                              subset.dat$`Group 1 name` %in% group1.ded, ]
 
 subset.final %>%
   kbl() %>%
@@ -127,9 +139,12 @@ bugSigSimple::createStudyTable(subset.final)|> kableExtra::kbl()
 
 This table summarizes the results for the identified taxa.
 
-```{r}
-# Install and load necessary packages
+```{r, eval=FALSE}
 install.packages("openxlsx")
+```
+
+```{r}
+# Load necessary packages
 library(openxlsx)
 library(knitr)
 
@@ -147,16 +162,16 @@ addWorksheet(wb, "Taxon Table")
 writeData(wb, "Taxon Table", taxon_table)
 
 # Save the workbook
-saveWorkbook(wb, "TaxonTable.xlsx", overwrite = TRUE)
+saveWorkbook(wb, file.path(tempdir(), "TaxonTable.xlsx"), overwrite = TRUE)
 
 ```
 
-```{r}
+```{r, eval=FALSE}
 install.packages("writexl")
 
 ```
 
-```{r}
+```{r, eval=FALSE}
 install.packages("ontologyIndex")
 ```
 
@@ -218,7 +233,7 @@ print(plot)
 
 
 # Save the plot to a file
-ggsave("bar_graph.png", plot)
+ggsave(file.path(tempdir(), "bar_graph.png"), plot)
 
 
 ```
@@ -295,7 +310,7 @@ draw(hm,
      annotation_legend_side = "right")
 
 # Save the heatmap as an image
-png("heatmap.png", width = 12, height = 8, units = "in", res = 300)
+png(file.path(tempdir(), "heatmap.png"), width = 12, height = 8, units = "in", res = 300)
 draw(hm, 
      heatmap_legend_side = "bottom", 
      annotation_legend_side = "right")
@@ -320,7 +335,7 @@ hc <- hclust(dist(jmat))
 plot(hc)
 
 # Save the cluster map as an image
-png("cluster_map.png", width = 12, height = 8, units = "in", res = 300)
+png(file.path(tempdir(), "cluster_map.png"), width = 12, height = 8, units = "in", res = 300)
 plot(hc, main = "Hierarchical Cluster Map of Signatures", xlab = "", sub = "", cex = 0.6)
 dev.off()
 
