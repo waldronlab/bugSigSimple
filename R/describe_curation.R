@@ -30,7 +30,7 @@ createTaxonTable <- function(dat, n = 10, format = "Simple") {
   names(dmap) <- substring(dmap, 1, 1)
 
   output <-
-    data.frame(getMostFrequentTaxa(dat, sig.type = "both", n = n),
+    data.frame(.getMostFrequentTaxa(dat, sig.type = "both", n = n),
                stringsAsFactors = FALSE) %>%
     mutate(metaphlan_name = Var1) %>%
     separate(col = Var1, sep = "\\|", into = dmap, fill = "right") %>%

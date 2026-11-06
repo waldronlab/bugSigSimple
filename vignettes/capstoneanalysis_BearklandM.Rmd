@@ -183,7 +183,7 @@ efo
 Top 1000 taxa decreased in relation to the control
 
 ```{r}
-mostfreqdec <- bugSigSimple::getMostFrequentTaxa(subset.final, n=1000, sig.type = "decreased")
+mostfreqdec <- BugSigDBStats::getMostFrequentTaxa(subset.final, n=1000, direction = "DOWN")
 mostfreqdec %>%
   kbl() %>%
   kable_paper("hover", full_width = FALSE) %>%
@@ -193,7 +193,7 @@ mostfreqdec %>%
 Top 1000 taxa increased in relation to the control
 
 ```{r}
-mostfreqinc <- bugSigSimple::getMostFrequentTaxa(subset.final, n=1000, sig.type = "increased")
+mostfreqinc <- BugSigDBStats::getMostFrequentTaxa(subset.final, n=1000, direction = "UP")
 mostfreqinc %>%
   kbl() %>%
   kable_paper("hover", full_width = FALSE) %>%

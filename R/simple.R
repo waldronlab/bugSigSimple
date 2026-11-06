@@ -50,13 +50,19 @@ subsetByCurator <- function(dat, curator, curator.column="Curator")
 
 
 #' Get the most frequently occurring taxa in a table of signatures
+#'
+#' Internal helper used by \code{\link{createTaxonTable}}. Unlike
+#' \code{BugSigDBStats::getMostFrequentTaxa()}, which users should call
+#' directly, this keeps the full metaphlan path as names so that the
+#' taxonomy can be split into columns.
 #' @param dat A table such as output by \link[bugsigdbr]{importBugSigDB}
 #' @param n Number of most frequently occurring taxa to return (default: 10)
 #' @param sig.type "increased" for taxa increased in cases relative to controls, "decreased" for decreased, "both" for either (default: "both")
 #' @param direction.column column containing direction information in dat (default: "Abundance in Group 1")
 #' @importFrom dplyr filter %>%
 #' @importFrom bugsigdbr getSignatures
-#' @export
+#' @keywords internal
+#' @noRd
 #' @return
 #' A named table of taxon counts (as produced by \code{table}), sorted in
 #' decreasing order. Names are the full metaphlan-style taxon path strings
@@ -64,8 +70,8 @@ subsetByCurator <- function(dat, curator, curator.column="Curator")
 #' their frequency across signatures in \code{dat}.
 #' @examples
 #' full.dat <- bugsigdbr::importBugSigDB()
-#' getMostFrequentTaxa(full.dat)
-getMostFrequentTaxa <- function(dat, n=10, sig.type=c("both", "increased", "decreased"), direction.column="Abundance in Group 1")
+#' bugSigSimple:::.getMostFrequentTaxa(full.dat)
+.getMostFrequentTaxa <- function(dat, n=10, sig.type=c("both", "increased", "decreased"), direction.column="Abundance in Group 1")
 {
     sig.type <- match.arg(sig.type)
     
