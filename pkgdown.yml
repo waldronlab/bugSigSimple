@@ -1,5 +1,5 @@
-pandoc: 3.1.11
-pkgdown: 2.1.2
+pandoc: 3.8.3
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   c-section_meconium_shaimaa: c-section_meconium_shaimaa.html
@@ -8,9 +8,16 @@ articles:
   capstoneanalysis_fatima: capstoneanalysis_fatima.html
   capstoneanalysis_ifeanyi: capstoneanalysis_ifeanyi.html
   capstoneanalysis_kweku: capstoneanalysis_kweku.html
+  Colorectal_Cancer_Analysis_vignette: Colorectal_Cancer_Analysis_vignette.html
   fieldworkanalysis_samara: fieldworkanalysis_samara.html
+  goldstandard_vignette_peace: goldstandard_vignette_peace.html
   healthysig: healthysig.html
-last_built: 2025-05-05T19:22Z
+  WomensHealth_BreastCancer_vignette: WomensHealth_BreastCancer_vignette.html
+  WomensHealth_CervicalCancer_vignette: WomensHealth_CervicalCancer_vignette.html
+  WomensHealth_Endometriosis_vignette: WomensHealth_Endometriosis_vignette.html
+  WomensHealth_General_vignette: WomensHealth_General_vignette.html
+  WomensHealth_Pregnancy_vignette: WomensHealth_Pregnancy_vignette.html
+last_built: 2026-11-09T16:29Z
 urls:
-  reference: http://waldronlab.io/bugSigSimple/reference
-  article: http://waldronlab.io/bugSigSimple/articles
+  reference: https://waldronlab.io/bugSigSimple/reference
+  article: https://waldronlab.io/bugSigSimple/articles
