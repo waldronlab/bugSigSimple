@@ -133,8 +133,8 @@ pregnancy_dat %>%
   ggplot(aes(x = reorder(subgroup, n), y = n, fill = `Sequencing type`)) +
   geom_col() +
   coord_flip() +
-  # Provided 3 distinct pastel colors to match your 3 sequencing categories
-  scale_fill_manual(values = c("#FFB6C1", "#89CFF0", "#A3E4D7")) + 
+  # Palette sized to however many sequencing types are present
+  scale_fill_brewer(palette = "Pastel1") +
   labs(
     title = "Signatures by Internal Grouping and Sequencing Platform",
     x = NULL, y = "Number of Signatures", fill = "Platform"
@@ -154,8 +154,8 @@ pregnancy_dat %>%
   ggplot(aes(x = reorder(`Location of subjects`, n), y = n, fill = `Sequencing type`)) + 
   geom_col() + 
   coord_flip() + 
-  # Added emerald green to match the 3 required categories
-  scale_fill_manual(values = c("#FBCCE7", "#A6C8FF", "#50C878")) +
+  # Palette sized to however many sequencing types are present
+  scale_fill_brewer(palette = "Pastel1") +
   labs(
     title = "Pregnancy/Maternal-Child Studies by Reported Location", 
     x = NULL, 

@@ -1,5 +1,5 @@
 Package: bugSigSimple
-Version: 0.99.8
+Version: 0.99.9
 Date: 2026-06-01
 Title: Simple exploratory analysis of curated microbe signatures 
 Authors@R: c(person("Ludwig", "Geistlinger", email = "Ludwig_Geistlinger@hms.harvard.edu", role = c("aut", "cre")),
@@ -34,6 +34,7 @@ Suggests:
     rmarkdown,
     broom,
     jtools,
+    openxlsx,
     testthat (>= 3.0.0)
 Remotes:
     waldronlab/BugSigDBStats,
