@@ -183,7 +183,7 @@ sig_df <- significantTaxa(
   sigs      = gut.sigs.increased,
   cn_result = cn_res,
   n         = 20,
-  plot      = FALSE,      # suppress internal plot so we can correct significance first
+  plot      = FALSE,      # custom plot below
   plot_type = "lollipop",
   title     = "Taxon frequency vs. Monte Carlo threshold\n(gut, COVID-19 increased)"
 )
@@ -193,17 +193,13 @@ sig_df <- significantTaxa(
 ```{r significant-taxa-summary}
 cat("Critical N value:  ", cn_res$critical_n, "\n")
 cat("Max observed count:", max(sig_df$count), "\n")
-print(sig_df[, c("taxon", "count", "critical_n")])
+print(sig_df[, c("taxon", "count", "critical_n", "p_empirical")])
 ```
 
-```{r significant-taxa-correct}
-# Correct significance flag from > to >= to include taxa that meet the threshold
-sig_df$significant <- sig_df$count >= sig_df$critical_n
-```
 
 ```{r}
 cat("\nSignificant taxa:\n")
-print(sig_df[sig_df$significant, c("taxon", "count", "critical_n", "significant")])
+print(sig_df[sig_df$significant, c("taxon", "count", "critical_n", "p_empirical")])
 ```
 
 ```{r significant-taxa-order}
@@ -213,7 +209,7 @@ sig_df$taxon <- factor(sig_df$taxon, levels = sig_df$taxon[order(sig_df$count)])
 
 
 ```{r significant-taxa-plot, fig.width=11, fig.height=nrow(sig_df) * 0.55 + 3}
-# Now render the lollipop plot with corrected significance
+# Now render the lollipop plot
 ggplot(sig_df, aes(x = count, y = taxon, colour = factor(significant))) +
 
   annotate("rect",
@@ -241,8 +237,8 @@ ggplot(sig_df, aes(x = count, y = taxon, colour = factor(significant))) +
   scale_colour_manual(
     values = c("FALSE" = "#2980b9", "TRUE" = "#c0392b"),
     labels = c("FALSE" = "Not significant",
-               "TRUE"  = paste0("Significant (>= Critical N = ",
-                                round(cn_res$critical_n), ")")),
+               "TRUE"  = paste0("Significant (Monte Carlo p <= ",
+                                cn_res$alpha, ")")),
     name = NULL
   ) +
 

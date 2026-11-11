@@ -3,6 +3,11 @@
 #' For each of the top taxa, counts how often it was reported increased vs.
 #' decreased and runs a binomial test on those counts (null: 50/50).
 #'
+#' Because one test is run per taxon, the table also gives Benjamini-Hochberg
+#' adjusted p-values (false discovery rate). The adjustment is made across the
+#' taxa in the returned table, so it depends on \code{n}: report the
+#' adjusted values, and the \code{n} used, when interpreting several taxa.
+#'
 #' @param dat data.frame produced by \link[bugsigdbr]{importBugSigDB}, subsetted as desired
 #' @param n number of taxa to return (if sig.type=="both", this is the number of taxa to return for each direction)
 #' @param format "Simple" (default) keeps only the core summary columns; any
@@ -10,14 +15,16 @@
 #'
 #' @importFrom dplyr filter %>% mutate rowwise n_distinct group_by relocate rename first ungroup across n
 #' @importFrom utils relist head
-#' @importFrom stats quantile binom.test
+#' @importFrom stats quantile binom.test p.adjust
 #' @importFrom kableExtra kbl kable_styling
 #' @importFrom tidyr separate
 #' @importFrom stringr str_replace str_extract
 #' @importFrom bugsigdbr getSignatures
 #'
 #' @return a data.frame with one row per taxon, giving its taxonomic level,
-#'   total/increased/decreased signature counts, and binomial test p-value.
+#'   total/increased/decreased signature counts, the binomial test p-value
+#'   (\code{Binomial Test pval}) and its Benjamini-Hochberg adjusted value
+#'   (\code{BH adjusted pval}).
 #'   Can be wrapped in kable_styling(kbl(...)) to format nicely.
 #' @export
 #'
@@ -52,11 +59,15 @@ createTaxonTable <- function(dat, n = 10, format = "Simple") {
     separate(col = "Taxon", into = c("Taxonomic Level", "Taxon Name"), sep = "__") %>%
     mutate(`Taxonomic Level` = unname(dmap[`Taxonomic Level`])) %>%
     rowwise() %>%
-    mutate(`Binomial Test pval` = .createBinomTestSummary(increased_signatures, total_signatures, wordy = FALSE)) %>%
-    ungroup()
+    mutate(`Binomial Test pval` = binom.test(increased_signatures, total_signatures)$p.value) %>%
+    ungroup() %>%
+    # adjust unrounded p-values, then round both for display
+    mutate(`BH adjusted pval` = signif(p.adjust(`Binomial Test pval`, method = "BH"), 2),
+           `Binomial Test pval` = signif(`Binomial Test pval`, 2))
 
   simple_cols <- c("Taxon Name", "Taxonomic Level", "total_signatures",
-                   "increased_signatures", "decreased_signatures", "Binomial Test pval")
+                   "increased_signatures", "decreased_signatures", "Binomial Test pval",
+                   "BH adjusted pval")
 
   if (format == "Simple") {
     output %>% select(all_of(simple_cols))
@@ -154,6 +165,7 @@ globalVariables(
     "Study.Design",
     "Taxon Name",
     "Binomial Test pval",
+    "BH adjusted pval",
     "total_signatures",
     "Abundance in Group 1",
     "decreased_signatures",

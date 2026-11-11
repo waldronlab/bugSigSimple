@@ -28,15 +28,27 @@ significantTaxa(
 }
 \value{
 (invisibly) a data.frame, one row per taxon, ordered by decreasing
-count: \code{taxon}, \code{count}, \code{critical_n}, \code{significant}
-(count > critical_n), and \code{p_empirical}, the empirical chance of
-seeing a count this high in the null simulations. Also prints a ggplot2
-figure if \code{plot = TRUE}.
+count: \code{taxon}, \code{count}, \code{critical_n}, \code{p_empirical}
+and \code{significant}. Also prints a ggplot2 figure if \code{plot = TRUE}.
 }
 \description{
 Compares observed taxon frequencies (via \code{\link{frequencySigs}}) against
 the critical threshold from \code{\link{getCriticalN}}, and optionally
 plots the result as a lollipop or bar chart.
+}
+\details{
+\code{p_empirical} is the Monte Carlo p-value for a taxon's count: the
+proportion of null simulations in which the most frequent taxon was seen at
+least that many times, computed as (1 + number of simulations reaching the
+count) / (nsim + 1) so that it is never exactly zero (Phipson & Smyth, 2010).
+Because it is based on the simulated maximum, it is already adjusted for
+having looked at many taxa (family-wise error).
+
+\code{significant} is \code{p_empirical <= alpha}, using the \code{alpha}
+stored in \code{cn_result}. Defining it from the p-value means the flag and
+the reported p-value always agree. \code{critical_n} is an interpolated
+quantile, so comparing counts to it directly with \code{>} or \code{>=}
+can disagree with the p-value when a count sits exactly at the threshold.
 }
 \examples{
 full.dat <- bugsigdbr::importBugSigDB()
@@ -47,4 +59,8 @@ my.sigs.increased <- relevant.sigs[grep("UP", names(relevant.sigs))]
 my.siglengths <- sapply(my.sigs.increased, length)
 cn_res <- getCriticalN(relevant.sigs, my.siglengths)
 significantTaxa(my.sigs.increased, cn_res)
+}
+\references{
+Phipson B, Smyth GK (2010). Permutation p-values should never be
+zero. Statistical Applications in Genetics and Molecular Biology 9(1):39.
 }

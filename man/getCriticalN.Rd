@@ -41,7 +41,10 @@ getCriticalN performs a Monte Carlo simulation to estimate the number of times t
 in a list of signatures
 }
 \details{
-E.g. for alpha = 0.05, we expect only a 5\% chance that any taxon will be identified N times or more.
+E.g. for alpha = 0.05, we expect only about a 5\% chance that any
+taxon will be identified more than \code{critical_n} times by chance. To
+test observed taxa against this null distribution, use
+\code{\link{significantTaxa}}, which reports a Monte Carlo p-value for each.
 }
 \examples{
 full.dat <- bugsigdbr::importBugSigDB()

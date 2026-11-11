@@ -83,7 +83,10 @@ simulateSignatures <- function(relevant.sigs, siglengths) {
 #' \code{ci = NULL}), \code{simulated_values} holds the raw simulated maxima,
 #' plus \code{alpha} and a \code{quantile_label} for printing.
 #' @export
-#' @details E.g. for alpha = 0.05, we expect only a 5\% chance that any taxon will be identified N times or more.
+#' @details E.g. for alpha = 0.05, we expect only about a 5\% chance that any
+#' taxon will be identified more than \code{critical_n} times by chance. To
+#' test observed taxa against this null distribution, use
+#' \code{\link{significantTaxa}}, which reports a Monte Carlo p-value for each.
 
 #' @examples
 #' full.dat <- bugsigdbr::importBugSigDB()
@@ -310,10 +313,25 @@ plotCriticalN <- function(cn_result,
 #' @param title plot title
 #'
 #' @return (invisibly) a data.frame, one row per taxon, ordered by decreasing
-#' count: \code{taxon}, \code{count}, \code{critical_n}, \code{significant}
-#' (count > critical_n), and \code{p_empirical}, the empirical chance of
-#' seeing a count this high in the null simulations. Also prints a ggplot2
-#' figure if \code{plot = TRUE}.
+#' count: \code{taxon}, \code{count}, \code{critical_n}, \code{p_empirical}
+#' and \code{significant}. Also prints a ggplot2 figure if \code{plot = TRUE}.
+#'
+#' @details
+#' \code{p_empirical} is the Monte Carlo p-value for a taxon's count: the
+#' proportion of null simulations in which the most frequent taxon was seen at
+#' least that many times, computed as (1 + number of simulations reaching the
+#' count) / (nsim + 1) so that it is never exactly zero (Phipson & Smyth, 2010).
+#' Because it is based on the simulated maximum, it is already adjusted for
+#' having looked at many taxa (family-wise error).
+#'
+#' \code{significant} is \code{p_empirical <= alpha}, using the \code{alpha}
+#' stored in \code{cn_result}. Defining it from the p-value means the flag and
+#' the reported p-value always agree. \code{critical_n} is an interpolated
+#' quantile, so comparing counts to it directly with \code{>} or \code{>=}
+#' can disagree with the p-value when a count sits exactly at the threshold.
+#'
+#' @references Phipson B, Smyth GK (2010). Permutation p-values should never be
+#' zero. Statistical Applications in Genetics and Molecular Biology 9(1):39.
 #' @export
 #'
 #' @examples
@@ -344,10 +362,12 @@ significantTaxa <- function(sigs,
     critical_n = as.numeric(crit_n),
     stringsAsFactors = FALSE
   )
-  results$significant  <- results$count > results$critical_n
-  # Empirical p-value: how often does any taxon reach >= observed count by chance?
+  alpha     <- if (is.null(cn_result$alpha)) 0.05 else cn_result$alpha
+  # Monte Carlo p-value: how often does any taxon reach >= observed count by
+  # chance? The +1 keeps it from being reported as exactly zero.
   results$p_empirical  <- vapply(results$count, function(obs)
-    mean(sim_vals >= obs), numeric(1))
+    (1 + sum(sim_vals >= obs)) / (length(sim_vals) + 1), numeric(1))
+  results$significant  <- results$p_empirical <= alpha
   
   # Reorder for plotting (descending frequency, but keep factor order for ggplot)
   results <- results[order(results$count, decreasing = FALSE), ]
@@ -359,8 +379,8 @@ significantTaxa <- function(sigs,
     
     # Colour palette
     sig_colours <- c("TRUE" = "#c0392b", "FALSE" = "#2980b9")
-    sig_labels  <- c("TRUE" = paste0("Significant (> Critical N = ",
-                                     round(crit_n), ")"),
+    sig_labels  <- c("TRUE" = paste0("Significant (Monte Carlo p <= ",
+                                     alpha, ")"),
                      "FALSE" = "Not significant")
     
     if (plot_type == "lollipop") {

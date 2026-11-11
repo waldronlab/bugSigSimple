@@ -16,12 +16,20 @@ other value returns the full table, with those columns moved to the front}
 }
 \value{
 a data.frame with one row per taxon, giving its taxonomic level,
-  total/increased/decreased signature counts, and binomial test p-value.
+  total/increased/decreased signature counts, the binomial test p-value
+  (\code{Binomial Test pval}) and its Benjamini-Hochberg adjusted value
+  (\code{BH adjusted pval}).
   Can be wrapped in kable_styling(kbl(...)) to format nicely.
 }
 \description{
 For each of the top taxa, counts how often it was reported increased vs.
 decreased and runs a binomial test on those counts (null: 50/50).
+}
+\details{
+Because one test is run per taxon, the table also gives Benjamini-Hochberg
+adjusted p-values (false discovery rate). The adjustment is made across the
+taxa in the returned table, so it depends on \code{n}: report the
+adjusted values, and the \code{n} used, when interpreting several taxa.
 }
 \examples{
 full.dat <- bugsigdbr::importBugSigDB()
