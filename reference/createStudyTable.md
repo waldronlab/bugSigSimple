@@ -30,21 +30,21 @@ kable_styling(kbl(...)) to format nicely.
 
 ``` r
 full.dat <- bugsigdbr::importBugSigDB()
-#> Using cached version from 2026-11-09 16:28:46
+#> Using cached version from 2026-11-20 02:47:35
 createStudyTable(full.dat)
-#> # A tibble: 1,246 × 9
+#> # A tibble: 1,846 × 9
 #>    `Study Identifier` MaxCases MaxControls `Study design` Condition N_signatures
 #>    <chr>                 <dbl>       <dbl> <chr>          <chr>            <int>
-#>  1 AartsE._2017             19          77 case-control   Attentio…            2
-#>  2 AbangeW.B._2021          87          82 cross-section… HIV infe…            3
-#>  3 AbduweliUyghurtur…        4           4 prospective c… Primary …            4
-#>  4 AbotsiR.E._2023         174         174 randomized co… Response…            5
-#>  5 AbrahamssonT.R._2…       20          20 prospective c… Atopic e…            3
-#>  6 AdambergK._2018           9           9 case-control   Obesity              6
-#>  7 Adu-OppongB._2022        51          51 cross-section… Urinary …            7
-#>  8 AguilarT._2020           16          56 cross-section… Obesity              2
-#>  9 AhmedS._2025             NA          NA cross-section… White ma…           24
-#> 10 AhnJ._2013               47          94 case-control   Colorect…            1
-#> # ℹ 1,236 more rows
+#>  1 AartiDarra_2023          54          54 cross-section… Hypergly…            8
+#>  2 AartsE._2017             19          77 case-control   Attentio…            2
+#>  3 AbangeW.B._2021          87          82 cross-section… HIV infe…            3
+#>  4 AbbondioM._2025           6           6 laboratory ex… Response…            9
+#>  5 AbduweliUyghurtur…        4           4 prospective c… Primary …            4
+#>  6 AbiolaIsawumi_2023       57          50 case-control   Gastroen…            4
+#>  7 AbotsiR.E._2023         174         174 randomized co… Response…            5
+#>  8 AbrahamssonT.R._2…       20          20 prospective c… Atopic e…            3
+#>  9 AdambergK._2018           9           9 case-control   Obesity              6
+#> 10 AdebayoA.S._2017         46          25 case-control   Urinary …           14
+#> # ℹ 1,836 more rows
 #> # ℹ 3 more variables: PMID <chr>, DOI <chr>, URL <chr>
 ```

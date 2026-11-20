@@ -68,7 +68,7 @@
       <h1>The Irritable Bowel Syndrome-associated Microbiome</h1>
                         <h4 data-toc-skip class="author">Kweku Amoo</h4>
             
-            <h4 data-toc-skip class="date">09 November, 2026</h4>
+            <h4 data-toc-skip class="date">20 November, 2026</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/waldronlab/bugSigSimple/blob/main/vignettes/capstoneanalysis_kweku.rmd" class="external-link"><code>vignettes/capstoneanalysis_kweku.rmd</code></a></small>
       <div class="d-none name"><code>capstoneanalysis_kweku.rmd</code></div>
@@ -109,7 +109,7 @@ occuring so frequently by chance</li>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 7425   51</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 12086    57</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "BSDB ID"                    "Study"                     </span></span>
@@ -117,27 +117,30 @@ occuring so frequently by chance</li>
 <span><span class="co">##  [5] "DOI"                        "URL"                       </span></span>
 <span><span class="co">##  [7] "Authors list"               "Title"                     </span></span>
 <span><span class="co">##  [9] "Journal"                    "Year"                      </span></span>
-<span><span class="co">## [11] "Keywords"                   "Experiment"                </span></span>
-<span><span class="co">## [13] "Location of subjects"       "Host species"              </span></span>
-<span><span class="co">## [15] "Body site"                  "UBERON ID"                 </span></span>
-<span><span class="co">## [17] "Condition"                  "EFO ID"                    </span></span>
-<span><span class="co">## [19] "Group 0 name"               "Group 1 name"              </span></span>
-<span><span class="co">## [21] "Group 1 definition"         "Group 0 sample size"       </span></span>
-<span><span class="co">## [23] "Group 1 sample size"        "Antibiotics exclusion"     </span></span>
-<span><span class="co">## [25] "Sequencing type"            "16S variable region"       </span></span>
-<span><span class="co">## [27] "Sequencing platform"        "Data transformation"       </span></span>
-<span><span class="co">## [29] "Statistical test"           "Significance threshold"    </span></span>
-<span><span class="co">## [31] "MHT correction"             "LDA Score above"           </span></span>
-<span><span class="co">## [33] "Matched on"                 "Confounders controlled for"</span></span>
-<span><span class="co">## [35] "Pielou"                     "Shannon"                   </span></span>
-<span><span class="co">## [37] "Chao1"                      "Simpson"                   </span></span>
-<span><span class="co">## [39] "Inverse Simpson"            "Richness"                  </span></span>
-<span><span class="co">## [41] "Signature page name"        "Source"                    </span></span>
-<span><span class="co">## [43] "Curated date"               "Curator"                   </span></span>
-<span><span class="co">## [45] "Revision editor"            "Description"               </span></span>
-<span><span class="co">## [47] "Abundance in Group 1"       "MetaPhlAn taxon names"     </span></span>
-<span><span class="co">## [49] "NCBI Taxonomy IDs"          "State"                     </span></span>
-<span><span class="co">## [51] "Reviewer"</span></span></code></pre>
+<span><span class="co">## [11] "Keywords"                   "Curation method"           </span></span>
+<span><span class="co">## [13] "Curation protocol"          "submittedBy"               </span></span>
+<span><span class="co">## [15] "submissionDate"             "Review state"              </span></span>
+<span><span class="co">## [17] "Quality control tag"        "Experiment"                </span></span>
+<span><span class="co">## [19] "Location of subjects"       "Host species"              </span></span>
+<span><span class="co">## [21] "Body site"                  "UBERON ID"                 </span></span>
+<span><span class="co">## [23] "Condition"                  "EFO ID"                    </span></span>
+<span><span class="co">## [25] "Group 0 name"               "Group 1 name"              </span></span>
+<span><span class="co">## [27] "Group 1 definition"         "Group 0 sample size"       </span></span>
+<span><span class="co">## [29] "Group 1 sample size"        "Antibiotics exclusion"     </span></span>
+<span><span class="co">## [31] "Sequencing type"            "16S variable region"       </span></span>
+<span><span class="co">## [33] "Sequencing platform"        "Data transformation"       </span></span>
+<span><span class="co">## [35] "Statistical test"           "Significance threshold"    </span></span>
+<span><span class="co">## [37] "MHT correction"             "LDA Score above"           </span></span>
+<span><span class="co">## [39] "Matched on"                 "Confounders controlled for"</span></span>
+<span><span class="co">## [41] "Pielou"                     "Shannon"                   </span></span>
+<span><span class="co">## [43] "Chao1"                      "Simpson"                   </span></span>
+<span><span class="co">## [45] "Inverse Simpson"            "Richness"                  </span></span>
+<span><span class="co">## [47] "Signature page name"        "Source"                    </span></span>
+<span><span class="co">## [49] "Curated date"               "Curator"                   </span></span>
+<span><span class="co">## [51] "Revision editor"            "Description"               </span></span>
+<span><span class="co">## [53] "Abundance in Group 1"       "MetaPhlAn taxon names"     </span></span>
+<span><span class="co">## [55] "NCBI Taxonomy IDs"          "State"                     </span></span>
+<span><span class="co">## [57] "Reviewer"</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#library(tidyverse)</span></span>
 <span><span class="co">#condition_of_interest &lt;- c("irritable bowel syndrome")</span></span>
@@ -148,7 +151,7 @@ occuring so frequently by chance</li>
 <pre><code><span><span class="co">## ── <span style="font-weight: bold;">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr    </span> 1.2.1     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr    </span> 2.2.0</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats  </span> 1.0.1     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr  </span> 1.6.0</span></span>
-<span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 4.0.3     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.3.1</span></span>
+<span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 4.0.4     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.3.1</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">lubridate</span> 1.9.5     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr    </span> 1.3.2</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr    </span> 1.2.2     </span></span>
 <span><span class="co">## ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
@@ -158,188 +161,189 @@ occuring so frequently by chance</li>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/waldronlab/bugsigdbr" class="external-link">bugsigdbr</a></span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>cache <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>  </span></code></pre></div>
-<pre><code><span><span class="co">## Using cached version from 2026-11-09 16:31:45</span></span></code></pre>
+<pre><code><span><span class="co">## Using cached version from 2026-11-20 02:52:13</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat_condition</span> <span class="op">&lt;-</span> <span class="va">dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"irritable bowel syndrome"</span>, <span class="va">Condition</span>, ignore.case <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>comparison1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">`Group 0 name`</span>, <span class="va">`Group 1 name`</span>, sep <span class="op">=</span> <span class="st">" vs "</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">dat_condition</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 101</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 117</span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat_condition</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##             BSDB ID    Study                    Study design     PMID</span></span>
-<span><span class="co">## 1 bsdb:19533811/1/2 19533811                    case-control 19533811</span></span>
-<span><span class="co">## 2 bsdb:19903265/1/1 19903265                    case-control 19903265</span></span>
-<span><span class="co">## 3 bsdb:19903265/1/2 19903265                    case-control 19903265</span></span>
-<span><span class="co">## 4 bsdb:21741921/1/1 21741921                    case-control 21741921</span></span>
-<span><span class="co">## 5 bsdb:21741921/1/2 21741921                    case-control 21741921</span></span>
-<span><span class="co">## 6 bsdb:21820992/1/1 21820992 case-control,prospective cohort 21820992</span></span>
+<pre><code><span><span class="co">##              BSDB ID    Study Study design     PMID</span></span>
+<span><span class="co">## 1  bsdb:19533811/1/2 19533811 case-control 19533811</span></span>
+<span><span class="co">## 2 bsdb:19533811/2/NA 19533811 case-control 19533811</span></span>
+<span><span class="co">## 3 bsdb:19533811/3/NA 19533811 case-control 19533811</span></span>
+<span><span class="co">## 4 bsdb:19533811/4/NA 19533811 case-control 19533811</span></span>
+<span><span class="co">## 5  bsdb:19903265/1/1 19903265 case-control 19903265</span></span>
+<span><span class="co">## 6  bsdb:19903265/1/2 19903265 case-control 19903265</span></span>
 <span><span class="co">##                                DOI  URL</span></span>
 <span><span class="co">## 1              10.3748/wjg.15.2887 &lt;NA&gt;</span></span>
-<span><span class="co">## 2 10.1111/j.1365-2982.2009.01427.x &lt;NA&gt;</span></span>
-<span><span class="co">## 3 10.1111/j.1365-2982.2009.01427.x &lt;NA&gt;</span></span>
-<span><span class="co">## 4     10.1053/j.gastro.2011.06.072 &lt;NA&gt;</span></span>
-<span><span class="co">## 5     10.1053/j.gastro.2011.06.072 &lt;NA&gt;</span></span>
-<span><span class="co">## 6     10.1053/j.gastro.2011.07.043 &lt;NA&gt;</span></span>
-<span><span class="co">##                                                                                                                                                                                                    Authors list</span></span>
-<span><span class="co">## 1                                                                                                             Kerckhoffs A.P., Samsom M., van der Rest M.E., de Vogel J., Knol J., Ben-Amor K. , Akkermans L.M.</span></span>
-<span><span class="co">## 2                                                                                                                                             Tana C., Umesaki Y., Imaoka A., Handa T., Kanazawa M. , Fukudo S.</span></span>
-<span><span class="co">## 3                                                                                                                                             Tana C., Umesaki Y., Imaoka A., Handa T., Kanazawa M. , Fukudo S.</span></span>
-<span><span class="co">## 4 Saulnier D.M., Riehle K., Mistretta T.A., Diaz M.A., Mandal D., Raza S., Weidler E.M., Qin X., Coarfa C., Milosavljevic A., Petrosino J.F., Highlander S., Gibbs R., Lynch S.V., Shulman R.J. , Versalovic J.</span></span>
-<span><span class="co">## 5 Saulnier D.M., Riehle K., Mistretta T.A., Diaz M.A., Mandal D., Raza S., Weidler E.M., Qin X., Coarfa C., Milosavljevic A., Petrosino J.F., Highlander S., Gibbs R., Lynch S.V., Shulman R.J. , Versalovic J.</span></span>
-<span><span class="co">## 6                                                                                                               Rajilić-Stojanović M., Biagi E., Heilig H.G., Kajander K., Kekkonen R.A., Tims S. , de Vos W.M.</span></span>
+<span><span class="co">## 2              10.3748/wjg.15.2887 &lt;NA&gt;</span></span>
+<span><span class="co">## 3              10.3748/wjg.15.2887 &lt;NA&gt;</span></span>
+<span><span class="co">## 4              10.3748/wjg.15.2887 &lt;NA&gt;</span></span>
+<span><span class="co">## 5 10.1111/j.1365-2982.2009.01427.x &lt;NA&gt;</span></span>
+<span><span class="co">## 6 10.1111/j.1365-2982.2009.01427.x &lt;NA&gt;</span></span>
+<span><span class="co">##                                                                                        Authors list</span></span>
+<span><span class="co">## 1 Kerckhoffs A.P., Samsom M., van der Rest M.E., de Vogel J., Knol J., Ben-Amor K. , Akkermans L.M.</span></span>
+<span><span class="co">## 2 Kerckhoffs A.P., Samsom M., van der Rest M.E., de Vogel J., Knol J., Ben-Amor K. , Akkermans L.M.</span></span>
+<span><span class="co">## 3 Kerckhoffs A.P., Samsom M., van der Rest M.E., de Vogel J., Knol J., Ben-Amor K. , Akkermans L.M.</span></span>
+<span><span class="co">## 4 Kerckhoffs A.P., Samsom M., van der Rest M.E., de Vogel J., Knol J., Ben-Amor K. , Akkermans L.M.</span></span>
+<span><span class="co">## 5                                 Tana C., Umesaki Y., Imaoka A., Handa T., Kanazawa M. , Fukudo S.</span></span>
+<span><span class="co">## 6                                 Tana C., Umesaki Y., Imaoka A., Handa T., Kanazawa M. , Fukudo S.</span></span>
 <span><span class="co">##                                                                                                                      Title</span></span>
 <span><span class="co">## 1 Lower Bifidobacteria counts in both duodenal mucosa-associated and fecal microbiota in irritable bowel syndrome patients</span></span>
-<span><span class="co">## 2    Altered profiles of intestinal microbiota and organic acids may be the origin of symptoms in irritable bowel syndrome</span></span>
-<span><span class="co">## 3    Altered profiles of intestinal microbiota and organic acids may be the origin of symptoms in irritable bowel syndrome</span></span>
-<span><span class="co">## 4                               Gastrointestinal microbiome signatures of pediatric patients with irritable bowel syndrome</span></span>
-<span><span class="co">## 5                               Gastrointestinal microbiome signatures of pediatric patients with irritable bowel syndrome</span></span>
-<span><span class="co">## 6 Global and deep molecular analysis of microbiota signatures in fecal samples from patients with irritable bowel syndrome</span></span>
+<span><span class="co">## 2 Lower Bifidobacteria counts in both duodenal mucosa-associated and fecal microbiota in irritable bowel syndrome patients</span></span>
+<span><span class="co">## 3 Lower Bifidobacteria counts in both duodenal mucosa-associated and fecal microbiota in irritable bowel syndrome patients</span></span>
+<span><span class="co">## 4 Lower Bifidobacteria counts in both duodenal mucosa-associated and fecal microbiota in irritable bowel syndrome patients</span></span>
+<span><span class="co">## 5    Altered profiles of intestinal microbiota and organic acids may be the origin of symptoms in irritable bowel syndrome</span></span>
+<span><span class="co">## 6    Altered profiles of intestinal microbiota and organic acids may be the origin of symptoms in irritable bowel syndrome</span></span>
 <span><span class="co">##                                                                                                       Journal</span></span>
 <span><span class="co">## 1                                                                           World journal of gastroenterology</span></span>
-<span><span class="co">## 2 Neurogastroenterology and motility : the official journal of the European Gastrointestinal Motility Society</span></span>
-<span><span class="co">## 3 Neurogastroenterology and motility : the official journal of the European Gastrointestinal Motility Society</span></span>
-<span><span class="co">## 4                                                                                            Gastroenterology</span></span>
-<span><span class="co">## 5                                                                                            Gastroenterology</span></span>
-<span><span class="co">## 6                                                                                            Gastroenterology</span></span>
-<span><span class="co">##   Year Keywords   Experiment     Location of subjects Host species</span></span>
-<span><span class="co">## 1 2009     &lt;NA&gt; Experiment 1              Netherlands Homo sapiens</span></span>
-<span><span class="co">## 2 2010     &lt;NA&gt; Experiment 1                    Japan Homo sapiens</span></span>
-<span><span class="co">## 3 2010     &lt;NA&gt; Experiment 1                    Japan Homo sapiens</span></span>
-<span><span class="co">## 4 2011     &lt;NA&gt; Experiment 1 United States of America Homo sapiens</span></span>
-<span><span class="co">## 5 2011     &lt;NA&gt; Experiment 1 United States of America Homo sapiens</span></span>
-<span><span class="co">## 6 2011     &lt;NA&gt; Experiment 1                  Finland Homo sapiens</span></span>
-<span><span class="co">##                         Body site                     UBERON ID</span></span>
-<span><span class="co">## 1 Feces,Mucosa of small intestine UBERON:0001204,UBERON:0001988</span></span>
-<span><span class="co">## 2                           Feces                UBERON:0001988</span></span>
-<span><span class="co">## 3                           Feces                UBERON:0001988</span></span>
-<span><span class="co">## 4                           Feces                UBERON:0001988</span></span>
-<span><span class="co">## 5                           Feces                UBERON:0001988</span></span>
-<span><span class="co">## 6                           Feces                UBERON:0001988</span></span>
-<span><span class="co">##                  Condition      EFO ID    Group 0 name Group 1 name</span></span>
-<span><span class="co">## 1 Irritable bowel syndrome EFO:0000555 Healthy Control          IBS</span></span>
-<span><span class="co">## 2 Irritable bowel syndrome EFO:0000555 Healthy Control          IBS</span></span>
-<span><span class="co">## 3 Irritable bowel syndrome EFO:0000555 Healthy Control          IBS</span></span>
-<span><span class="co">## 4 Irritable bowel syndrome EFO:0000555 Healthy Control          IBS</span></span>
-<span><span class="co">## 5 Irritable bowel syndrome EFO:0000555 Healthy Control          IBS</span></span>
-<span><span class="co">## 6 Irritable bowel syndrome EFO:0000555 Healthy Control        IBS-A</span></span>
+<span><span class="co">## 2                                                                           World journal of gastroenterology</span></span>
+<span><span class="co">## 3                                                                           World journal of gastroenterology</span></span>
+<span><span class="co">## 4                                                                           World journal of gastroenterology</span></span>
+<span><span class="co">## 5 Neurogastroenterology and motility : the official journal of the European Gastrointestinal Motility Society</span></span>
+<span><span class="co">## 6 Neurogastroenterology and motility : the official journal of the European Gastrointestinal Motility Society</span></span>
+<span><span class="co">##   Year Keywords Curation method Curation protocol    submittedBy</span></span>
+<span><span class="co">## 1 2009     &lt;NA&gt;              NA                NA User:Kwekuamoo</span></span>
+<span><span class="co">## 2 2009     &lt;NA&gt;              NA                NA User:Kwekuamoo</span></span>
+<span><span class="co">## 3 2009     &lt;NA&gt;              NA                NA User:Kwekuamoo</span></span>
+<span><span class="co">## 4 2009     &lt;NA&gt;              NA                NA User:Kwekuamoo</span></span>
+<span><span class="co">## 5 2010     &lt;NA&gt;              NA                NA User:Kwekuamoo</span></span>
+<span><span class="co">## 6 2010     &lt;NA&gt;              NA                NA User:Kwekuamoo</span></span>
+<span><span class="co">##          submissionDate Review state Quality control tag   Experiment</span></span>
+<span><span class="co">## 1 19 July 2021 02:57:53     Reviewed                  NA Experiment 1</span></span>
+<span><span class="co">## 2 19 July 2021 02:57:53     Reviewed                  NA Experiment 2</span></span>
+<span><span class="co">## 3 19 July 2021 02:57:53     Reviewed                  NA Experiment 3</span></span>
+<span><span class="co">## 4 19 July 2021 02:57:53     Reviewed                  NA Experiment 4</span></span>
+<span><span class="co">## 5  4 July 2021 17:08:08     Reviewed                  NA Experiment 1</span></span>
+<span><span class="co">## 6  4 July 2021 17:08:08     Reviewed                  NA Experiment 1</span></span>
+<span><span class="co">##   Location of subjects Host species                       Body site</span></span>
+<span><span class="co">## 1          Netherlands Homo sapiens Feces,Mucosa of small intestine</span></span>
+<span><span class="co">## 2          Netherlands Homo sapiens Feces,Mucosa of small intestine</span></span>
+<span><span class="co">## 3          Netherlands Homo sapiens Feces,Mucosa of small intestine</span></span>
+<span><span class="co">## 4          Netherlands Homo sapiens Feces,Mucosa of small intestine</span></span>
+<span><span class="co">## 5                Japan Homo sapiens                           Feces</span></span>
+<span><span class="co">## 6                Japan Homo sapiens                           Feces</span></span>
+<span><span class="co">##                       UBERON ID                Condition        EFO ID</span></span>
+<span><span class="co">## 1 UBERON:0001204,UBERON:0001988 Irritable bowel syndrome MONDO:0005052</span></span>
+<span><span class="co">## 2 UBERON:0001204,UBERON:0001988 Irritable bowel syndrome MONDO:0005052</span></span>
+<span><span class="co">## 3 UBERON:0001204,UBERON:0001988 Irritable bowel syndrome MONDO:0005052</span></span>
+<span><span class="co">## 4 UBERON:0001204,UBERON:0001988 Irritable bowel syndrome MONDO:0005052</span></span>
+<span><span class="co">## 5                UBERON:0001988 Irritable bowel syndrome MONDO:0005052</span></span>
+<span><span class="co">## 6                UBERON:0001988 Irritable bowel syndrome MONDO:0005052</span></span>
+<span><span class="co">##      Group 0 name Group 1 name</span></span>
+<span><span class="co">## 1 Healthy Control          IBS</span></span>
+<span><span class="co">## 2 Healthy Control        IBS-D</span></span>
+<span><span class="co">## 3 Healthy Control        IBS-A</span></span>
+<span><span class="co">## 4 Healthy Control        IBS-C</span></span>
+<span><span class="co">## 5 Healthy Control          IBS</span></span>
+<span><span class="co">## 6 Healthy Control          IBS</span></span>
 <span><span class="co">##                                                                                                                                                                                                                                                                                                                                                                                                    Group 1 definition</span></span>
 <span><span class="co">## 1                                                                                                                                                                                     Twelve male and 29 female IBS patients included in this study fulfilled the Rome II criteria for IBS and were categorized as diarrhea predominant (IBS-D), constipation predominant (IBS-C) or alternating IBS subgroup (IBS-A)</span></span>
-<span><span class="co">## 2 All patients were diagnosed with IBS after conducting a medical interview based on Rome II criteria and positive judgment by a Rome II modular questionnaire retrospectively and positively fulfilling Rome III criteria. According to Rome II criteria related to bowel habits, 11 subjects had constipation-predominant IBS (IBS-C), eight had diarrhoea-predominant IBS (IBS-D) and seven had mixed IBS (IBS-M).</span></span>
-<span><span class="co">## 3 All patients were diagnosed with IBS after conducting a medical interview based on Rome II criteria and positive judgment by a Rome II modular questionnaire retrospectively and positively fulfilling Rome III criteria. According to Rome II criteria related to bowel habits, 11 subjects had constipation-predominant IBS (IBS-C), eight had diarrhoea-predominant IBS (IBS-D) and seven had mixed IBS (IBS-M).</span></span>
-<span><span class="co">## 4                                                                                                                                                                                               Children ages 7-12 who met the Pediatric Rome III criteria for IBS (Table 1). Subtyping of IBS was based on previous recommendations for IBS in adults because no Pediatric Rome subtype criteria exist for children.</span></span>
-<span><span class="co">## 5                                                                                                                                                                                               Children ages 7-12 who met the Pediatric Rome III criteria for IBS (Table 1). Subtyping of IBS was based on previous recommendations for IBS in adults because no Pediatric Rome subtype criteria exist for children.</span></span>
-<span><span class="co">## 6                                                                                                                                                                                                                                                                                                                                                IBS patients fulfilled the Rome II criteria. Alternating IBS (IBS-A)</span></span>
+<span><span class="co">## 2                                                                                                                                                                                                                                                                                     IBS patients included in this study fulfilled the Rome II criteria for IBS and were categorized as diarrhea predominant (IBS-D)</span></span>
+<span><span class="co">## 3                                                                                                                                                                                                                                                                                IBS patients included in this study fulfilled the Rome II criteria for IBS and were categorized as  alternating IBS subgroup (IBS-A)</span></span>
+<span><span class="co">## 4                                                                                                                                                                                                                                                                                IBS patients included in this study fulfilled the Rome II criteria for IBS and were categorized as  constipation predominant (IBS-C)</span></span>
+<span><span class="co">## 5 All patients were diagnosed with IBS after conducting a medical interview based on Rome II criteria and positive judgment by a Rome II modular questionnaire retrospectively and positively fulfilling Rome III criteria. According to Rome II criteria related to bowel habits, 11 subjects had constipation-predominant IBS (IBS-C), eight had diarrhoea-predominant IBS (IBS-D) and seven had mixed IBS (IBS-M).</span></span>
+<span><span class="co">## 6 All patients were diagnosed with IBS after conducting a medical interview based on Rome II criteria and positive judgment by a Rome II modular questionnaire retrospectively and positively fulfilling Rome III criteria. According to Rome II criteria related to bowel habits, 11 subjects had constipation-predominant IBS (IBS-C), eight had diarrhoea-predominant IBS (IBS-D) and seven had mixed IBS (IBS-M).</span></span>
 <span><span class="co">##   Group 0 sample size Group 1 sample size Antibiotics exclusion Sequencing type</span></span>
 <span><span class="co">## 1                  26                  41                  &lt;NA&gt;            &lt;NA&gt;</span></span>
-<span><span class="co">## 2                  26                  26                  &lt;NA&gt;             WMS</span></span>
-<span><span class="co">## 3                  26                  26                  &lt;NA&gt;             WMS</span></span>
-<span><span class="co">## 4                  27                  28              6 months             16S</span></span>
-<span><span class="co">## 5                  27                  28              6 months             16S</span></span>
-<span><span class="co">## 6                  46                  19                  &lt;NA&gt;             16S</span></span>
-<span><span class="co">##   16S variable region         Sequencing platform Data transformation</span></span>
-<span><span class="co">## 1                  NA                     RT-qPCR          raw counts</span></span>
-<span><span class="co">## 2                  NA                     RT-qPCR                &lt;NA&gt;</span></span>
-<span><span class="co">## 3                  NA                     RT-qPCR                &lt;NA&gt;</span></span>
-<span><span class="co">## 4                 123                   PhyloChip relative abundances</span></span>
-<span><span class="co">## 5                 123                   PhyloChip relative abundances</span></span>
-<span><span class="co">## 6                  NA Human Intestinal Tract Chip                &lt;NA&gt;</span></span>
-<span><span class="co">##          Statistical test Significance threshold MHT correction LDA Score above</span></span>
-<span><span class="co">## 1                  T-Test                   0.05           TRUE              NA</span></span>
-<span><span class="co">## 2    Spearman Correlation                   0.05          FALSE              NA</span></span>
-<span><span class="co">## 3    Spearman Correlation                   0.05          FALSE              NA</span></span>
-<span><span class="co">## 4 Mann-Whitney (Wilcoxon)                   0.05          FALSE              NA</span></span>
-<span><span class="co">## 5 Mann-Whitney (Wilcoxon)                   0.05          FALSE              NA</span></span>
-<span><span class="co">## 6                  T-Test                   0.05           TRUE              NA</span></span>
+<span><span class="co">## 2                  26                  14                  &lt;NA&gt;            &lt;NA&gt;</span></span>
+<span><span class="co">## 3                  26                  16                  &lt;NA&gt;            &lt;NA&gt;</span></span>
+<span><span class="co">## 4                  26                  11                  &lt;NA&gt;            &lt;NA&gt;</span></span>
+<span><span class="co">## 5                  26                  26                  &lt;NA&gt;             WMS</span></span>
+<span><span class="co">## 6                  26                  26                  &lt;NA&gt;             WMS</span></span>
+<span><span class="co">##   16S variable region Sequencing platform Data transformation</span></span>
+<span><span class="co">## 1                  NA             RT-qPCR          raw counts</span></span>
+<span><span class="co">## 2                  NA             RT-qPCR          raw counts</span></span>
+<span><span class="co">## 3                  NA             RT-qPCR          raw counts</span></span>
+<span><span class="co">## 4                  NA             RT-qPCR          raw counts</span></span>
+<span><span class="co">## 5                  NA             RT-qPCR                &lt;NA&gt;</span></span>
+<span><span class="co">## 6                  NA             RT-qPCR                &lt;NA&gt;</span></span>
+<span><span class="co">##       Statistical test Significance threshold MHT correction LDA Score above</span></span>
+<span><span class="co">## 1               T-Test                   0.05           TRUE              NA</span></span>
+<span><span class="co">## 2               T-Test                   0.05           TRUE              NA</span></span>
+<span><span class="co">## 3               T-Test                   0.05           TRUE              NA</span></span>
+<span><span class="co">## 4               T-Test                   0.05           TRUE              NA</span></span>
+<span><span class="co">## 5 Spearman Correlation                   0.05          FALSE              NA</span></span>
+<span><span class="co">## 6 Spearman Correlation                   0.05          FALSE              NA</span></span>
 <span><span class="co">##   Matched on Confounders controlled for Pielou Shannon Chao1 Simpson</span></span>
 <span><span class="co">## 1       &lt;NA&gt;                       &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;</span></span>
-<span><span class="co">## 2    age,sex                       &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;</span></span>
-<span><span class="co">## 3    age,sex                       &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;</span></span>
+<span><span class="co">## 2       &lt;NA&gt;                       &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;</span></span>
+<span><span class="co">## 3       &lt;NA&gt;                       &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;</span></span>
 <span><span class="co">## 4       &lt;NA&gt;                       &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;</span></span>
-<span><span class="co">## 5       &lt;NA&gt;                       &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;</span></span>
-<span><span class="co">## 6       &lt;NA&gt;                       &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;</span></span>
-<span><span class="co">##   Inverse Simpson  Richness Signature page name</span></span>
-<span><span class="co">## 1            &lt;NA&gt;      &lt;NA&gt;         Signature 2</span></span>
-<span><span class="co">## 2            &lt;NA&gt;      &lt;NA&gt;         Signature 1</span></span>
-<span><span class="co">## 3            &lt;NA&gt;      &lt;NA&gt;         Signature 2</span></span>
-<span><span class="co">## 4            &lt;NA&gt; unchanged         Signature 1</span></span>
-<span><span class="co">## 5            &lt;NA&gt; unchanged         Signature 2</span></span>
-<span><span class="co">## 6            &lt;NA&gt;      &lt;NA&gt;         Signature 1</span></span>
-<span><span class="co">##                             Source Curated date   Curator</span></span>
-<span><span class="co">## 1                   Tables 2 and 3 19 July 2021 Kwekuamoo</span></span>
-<span><span class="co">## 2                          Table 2  4 July 2021 Kwekuamoo</span></span>
-<span><span class="co">## 3                             text 19 July 2023  Atrayees</span></span>
-<span><span class="co">## 4 Figure 2; Supplementary Table 1A  8 July 2021 Kwekuamoo</span></span>
-<span><span class="co">## 5 Figure 2; Supplementary Table 1B  8 July 2021 Kwekuamoo</span></span>
-<span><span class="co">## 6                         Table 1. 15 July 2021 Kwekuamoo</span></span>
-<span><span class="co">##                    Revision editor</span></span>
-<span><span class="co">## 1        Chloe,Kwekuamoo,WikiWorks</span></span>
-<span><span class="co">## 2     Kwekuamoo,Atrayees,WikiWorks</span></span>
-<span><span class="co">## 3               Atrayees,WikiWorks</span></span>
-<span><span class="co">## 4 Kwekuamoo,Claregrieve1,WikiWorks</span></span>
-<span><span class="co">## 5 Kwekuamoo,Claregrieve1,WikiWorks</span></span>
-<span><span class="co">## 6              Kwekuamoo,WikiWorks</span></span>
-<span><span class="co">##                                                                                                                                                                                                                                                                                                                                                                                                                     Description</span></span>
-<span><span class="co">## 1                                                                                                                                                                                                                                                                                                                                          Real time PCR analysis of fecal bifidobacteria in HS, IBS patients and IBS subgroups</span></span>
-<span><span class="co">## 2                                                                                                                                                                                                                                                                                                                                                            Comparison of GI microbiota between IBS patients and the\ncontrols</span></span>
-<span><span class="co">## 3                                                                                                                                                                                                                                                                                                                                             Comparison of GI microbiota between IBS patients and the controls\n\nAbundance in</span></span>
-<span><span class="co">## 4                                                                                                                                                                                                                                                                                                                                                            Differential microbial abundance between IBS patients and controls</span></span>
-<span><span class="co">## 5                                                                                                                                                                                                                                                                                                                                                            Differential microbial abundance between IBS patients and controls</span></span>
-<span><span class="co">## 6 Differences Between Intestinal Microbiota in Healthy and IBS.\nNOTE. Genus-like phylogenetic groups for which the hybridization signal differed significantly between the healthy subjects and (one of the subtypes of) IBS patients are indicated. Gray shading represents phylogenetic groups with a decreased signal in IBS patients. a) Significant (q &lt; .05) correlation. b) Strongly significant (q &lt; .01) correlation.</span></span>
+<span><span class="co">## 5    age,sex                       &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;</span></span>
+<span><span class="co">## 6    age,sex                       &lt;NA&gt;   &lt;NA&gt;    &lt;NA&gt;  &lt;NA&gt;    &lt;NA&gt;</span></span>
+<span><span class="co">##   Inverse Simpson Richness Signature page name         Source Curated date</span></span>
+<span><span class="co">## 1            &lt;NA&gt;     &lt;NA&gt;         Signature 2 Tables 2 and 3 19 July 2021</span></span>
+<span><span class="co">## 2            &lt;NA&gt;     &lt;NA&gt;                &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;</span></span>
+<span><span class="co">## 3            &lt;NA&gt;     &lt;NA&gt;                &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;</span></span>
+<span><span class="co">## 4            &lt;NA&gt;     &lt;NA&gt;                &lt;NA&gt;           &lt;NA&gt;         &lt;NA&gt;</span></span>
+<span><span class="co">## 5            &lt;NA&gt;     &lt;NA&gt;         Signature 1        Table 2  4 July 2021</span></span>
+<span><span class="co">## 6            &lt;NA&gt;     &lt;NA&gt;         Signature 2           text 19 July 2023</span></span>
+<span><span class="co">##     Curator              Revision editor</span></span>
+<span><span class="co">## 1 Kwekuamoo    Chloe,Kwekuamoo,WikiWorks</span></span>
+<span><span class="co">## 2      &lt;NA&gt;                         &lt;NA&gt;</span></span>
+<span><span class="co">## 3      &lt;NA&gt;                         &lt;NA&gt;</span></span>
+<span><span class="co">## 4      &lt;NA&gt;                         &lt;NA&gt;</span></span>
+<span><span class="co">## 5 Kwekuamoo Kwekuamoo,Atrayees,WikiWorks</span></span>
+<span><span class="co">## 6  Atrayees           Atrayees,WikiWorks</span></span>
+<span><span class="co">##                                                                            Description</span></span>
+<span><span class="co">## 1 Real time PCR analysis of fecal bifidobacteria in HS, IBS patients and IBS subgroups</span></span>
+<span><span class="co">## 2                                                                                 &lt;NA&gt;</span></span>
+<span><span class="co">## 3                                                                                 &lt;NA&gt;</span></span>
+<span><span class="co">## 4                                                                                 &lt;NA&gt;</span></span>
+<span><span class="co">## 5                   Comparison of GI microbiota between IBS patients and the\ncontrols</span></span>
+<span><span class="co">## 6    Comparison of GI microbiota between IBS patients and the controls\n\nAbundance in</span></span>
 <span><span class="co">##   Abundance in Group 1</span></span>
 <span><span class="co">## 1            decreased</span></span>
-<span><span class="co">## 2            increased</span></span>
-<span><span class="co">## 3            decreased</span></span>
-<span><span class="co">## 4            increased</span></span>
-<span><span class="co">## 5            decreased</span></span>
+<span><span class="co">## 2                 &lt;NA&gt;</span></span>
+<span><span class="co">## 3                 &lt;NA&gt;</span></span>
+<span><span class="co">## 4                 &lt;NA&gt;</span></span>
+<span><span class="co">## 5            increased</span></span>
 <span><span class="co">## 6            decreased</span></span>
-<span><span class="co">##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            MetaPhlAn taxon names</span></span>
-<span><span class="co">## 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium catenulatum, k__Bacillati|p__Bacillota|c__Clostridia|o__Peptostreptococcales|f__Peptostreptococcaceae|g__Romboutsia|s__Romboutsia lituseburensis, k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium</span></span>
-<span><span class="co">## 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella, k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus</span></span>
-<span><span class="co">## 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium</span></span>
-<span><span class="co">## 4 k__Pseudomonadati|p__Acidobacteriota|c__Terriglobia|o__Terriglobales|f__Acidobacteriaceae, k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Aeromonadales|f__Aeromonadaceae, k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Alteromonadales|f__Alteromonadaceae, k__Bacillati|p__Bacillota|c__Bacilli|o__Bacillales|f__Bacillaceae, k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Micrococcales|f__Cellulomonadaceae, k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae, k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Legionellales|f__Coxiellaceae, k__Pseudomonadati|p__Thermodesulfobacteriota|c__Desulfobacteria|o__Desulfobacterales|f__Desulfobacteraceae, k__Pseudomonadati|p__Thermodesulfobacteriota|c__Desulfovibrionia|o__Desulfovibrionales|f__Desulfovibrionaceae, k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae, k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Enterobacterales|f__Enterobacteriaceae|g__Escherichia|s__Escherichia coli, k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Eubacteriaceae, k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae, k__Pseudomonadati|p__Nitrospirota|c__Nitrospiria|o__Nitrospirales|f__Nitrospiraceae, k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Pasteurellales|f__Pasteurellaceae, k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Peptococcaceae|g__Peptococcus, k__Bacillati|p__Bacillota|c__Clostridia|o__Peptostreptococcales|f__Peptostreptococcaceae, k__Pseudomonadati|p__Myxococcota|o__Polyangiales|f__Polyangiaceae, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae, k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Micrococcales|f__Promicromonosporaceae, k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae, k__Pseudomonadati|p__Thermodesulfobacteriota|c__Syntrophobacteria|o__Syntrophobacterales|f__Syntrophobacteraceae, k__Pseudomonadati|p__Pseudomonadota|c__Gammaproteobacteria|o__Thiotrichales|f__Thiotrichaceae</span></span>
-<span><span class="co">## 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae, k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Micrococcales|f__Cellulomonadaceae, k__Bacillati|p__Bacillota|c__Clostridia|o__Lachnospirales|f__Lachnospiraceae, k__Bacillati|p__Bacillota|c__Bacilli|o__Bacillales|f__Paenibacillaceae, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Porphyromonadaceae, k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Streptococcaceae, k__Pseudomonadati|p__Bacteroidota, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Phocaeicola|s__Phocaeicola vulgatus</span></span>
-<span><span class="co">## 6                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Rikenellaceae|g__Alistipes, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Prevotellaceae|g__Alloprevotella|s__Alloprevotella tannerae, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides fragilis, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides intestinalis, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Phocaeicola|s__Phocaeicola plebeius, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Bacteroides|s__Bacteroides uniformis, k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Oscillospiraceae|g__Faecalibacterium, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Odoribacteraceae|g__Odoribacter, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Parabacteroides, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Bacteroidaceae|g__Phocaeicola|s__Phocaeicola vulgatus, k__Pseudomonadati|p__Bacteroidota|c__Bacteroidia|o__Bacteroidales|f__Tannerellaceae|g__Tannerella</span></span>
-<span><span class="co">##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                NCBI Taxonomy IDs</span></span>
-<span><span class="co">## 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               1783272|201174|1760|85004|31953|1678|1686, 1783272|1239|186801|3082720|186804|1501226|1537, 1783272|201174|1760|85004|31953|1678</span></span>
-<span><span class="co">## 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  1783272|1239|909932|1843489|31977|29465, 1783272|1239|91061|186826|33958|1578</span></span>
-<span><span class="co">## 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          1783272|1239|186801|186802|31979|1485</span></span>
-<span><span class="co">## 4 3379134|57723|204432|204433|204434, 3379134|1224|1236|135624|84642, 3379134|1224|1236|135622|72275, 1783272|1239|91061|1385|186817, 1783272|201174|1760|85006|85016, 1783272|1239|186801|186802|31979, 3379134|1224|1236|118969|118968, 3379134|200940|3024418|213118|213119, 3379134|200940|3031449|213115|194924, 3379134|1224|1236|91347|543, 3379134|1224|1236|91347|543|561|562, 1783272|1239|186801|186802|186806, 1783272|1239|186801|3085636|186803, 3379134|40117|203693|189778|189779, 3379134|1224|1236|135625|712, 1783272|1239|186801|186802|186807|2740, 1783272|1239|186801|3082720|186804, 3379134|2818505|3031712|49, 3379134|976|200643|171549|171552, 1783272|201174|1760|85006|85017, 1783272|1239|91061|186826|1300, 3379134|200940|3024408|213462|213465, 3379134|1224|1236|72273|135617</span></span>
-<span><span class="co">## 5                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    3379134|976|200643|171549|815, 1783272|201174|1760|85006|85016, 1783272|1239|186801|3085636|186803, 1783272|1239|91061|1385|186822, 3379134|976|200643|171549|171551, 1783272|1239|91061|186826|1300, 3379134|976, 3379134|976|200643|171549|815|909656|821</span></span>
-<span><span class="co">## 6                                                                                                                                                                                                                                                                                                                                 3379134|976|200643|171549|171550|239759, 3379134|976|200643|171549|171552|1283313|76122, 3379134|976|200643|171549|815|816|817, 3379134|976|200643|171549|815|816|329854, 3379134|976|200643|171549|815|909656|310297, 3379134|976|200643|171549|815|816|820, 1783272|1239|186801|186802|216572|216851, 3379134|976|200643|171549|1853231|283168, 3379134|976|200643|171549|2005525|375288, 3379134|976|200643|171549|815|909656|821, 3379134|976|200643|171549|2005525|195950</span></span>
-<span><span class="co">##      State     Reviewer              comparison1</span></span>
-<span><span class="co">## 1 Complete        Chloe   Healthy Control vs IBS</span></span>
-<span><span class="co">## 2 Complete     Atrayees   Healthy Control vs IBS</span></span>
-<span><span class="co">## 3 Complete     Atrayees   Healthy Control vs IBS</span></span>
-<span><span class="co">## 4 Complete Claregrieve1   Healthy Control vs IBS</span></span>
-<span><span class="co">## 5 Complete Claregrieve1   Healthy Control vs IBS</span></span>
-<span><span class="co">## 6 Complete     Lwaldron Healthy Control vs IBS-A</span></span></code></pre>
+<span><span class="co">##                                                                                                                                                                                                                                                                                                                                                                              MetaPhlAn taxon names</span></span>
+<span><span class="co">## 1 k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium|s__Bifidobacterium catenulatum, k__Bacillati|p__Bacillota|c__Clostridia|o__Peptostreptococcales|f__Peptostreptococcaceae|g__Romboutsia|s__Romboutsia lituseburensis, k__Bacillati|p__Actinomycetota|c__Actinomycetes|o__Bifidobacteriales|f__Bifidobacteriaceae|g__Bifidobacterium</span></span>
+<span><span class="co">## 2                                                                                                                                                                                                                                                                                                                                                                                               NA</span></span>
+<span><span class="co">## 3                                                                                                                                                                                                                                                                                                                                                                                               NA</span></span>
+<span><span class="co">## 4                                                                                                                                                                                                                                                                                                                                                                                               NA</span></span>
+<span><span class="co">## 5                                                                                                                                                                                                     k__Bacillati|p__Bacillota|c__Negativicutes|o__Veillonellales|f__Veillonellaceae|g__Veillonella, k__Bacillati|p__Bacillota|c__Bacilli|o__Lactobacillales|f__Lactobacillaceae|g__Lactobacillus</span></span>
+<span><span class="co">## 6                                                                                                                                                                                                                                                                                                        k__Bacillati|p__Bacillota|c__Clostridia|o__Eubacteriales|f__Clostridiaceae|g__Clostridium</span></span>
+<span><span class="co">##                                                                                                                  NCBI Taxonomy IDs</span></span>
+<span><span class="co">## 1 1783272|201174|1760|85004|31953|1678|1686, 1783272|1239|186801|3082720|186804|1501226|1537, 1783272|201174|1760|85004|31953|1678</span></span>
+<span><span class="co">## 2                                                                                                                               NA</span></span>
+<span><span class="co">## 3                                                                                                                               NA</span></span>
+<span><span class="co">## 4                                                                                                                               NA</span></span>
+<span><span class="co">## 5                                                    1783272|1239|909932|1843489|31977|29465, 1783272|1239|91061|186826|33958|1578</span></span>
+<span><span class="co">## 6                                                                                            1783272|1239|186801|186802|31979|1485</span></span>
+<span><span class="co">##      State Reviewer              comparison1</span></span>
+<span><span class="co">## 1 Complete    Chloe   Healthy Control vs IBS</span></span>
+<span><span class="co">## 2     &lt;NA&gt;     &lt;NA&gt; Healthy Control vs IBS-D</span></span>
+<span><span class="co">## 3     &lt;NA&gt;     &lt;NA&gt; Healthy Control vs IBS-A</span></span>
+<span><span class="co">## 4     &lt;NA&gt;     &lt;NA&gt; Healthy Control vs IBS-C</span></span>
+<span><span class="co">## 5 Complete Atrayees   Healthy Control vs IBS</span></span>
+<span><span class="co">## 6 Complete Atrayees   Healthy Control vs IBS</span></span></code></pre>
 <div class="section level3">
 <h3 id="table-of-studies">Table of studies<a class="anchor" aria-label="anchor" href="#table-of-studies"></a>
 </h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">bugSigSimple</span><span class="fu">::</span><span class="fu"><a href="../reference/createStudyTable.html">createStudyTable</a></span><span class="op">(</span><span class="va">dat_condition</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 17 × 9</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 22 × 9</span></span></span>
 <span><span class="co">##    `Study Identifier` MaxCases MaxControls `Study design` Condition N_signatures</span></span>
 <span><span class="co">##    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> CarrollI.M._2012         23          23 case-control   Irritabl…            3</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> ChassardC._2012          14          12 case-control   Irritabl…            3</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> ChenH._2023             354         354 cross-section… Irritabl…           18</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> DubocH._2012             14          18 case-control   Irritabl…            2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> FourieN.H._2016          11          20 case-control   Irritabl…            4</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> JacobsJ.P._2023         318         177 case-control   Irritabl…            2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> KerckhoffsA.P._20…       41          26 case-control   Irritabl…            1</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> LabusJ.S._2017           16          23 cross-section… Irritabl…           12</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> MeiL._2021               30          30 case-control   Irritabl…            2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">10</span> MertsalmiT.H._2017       18          56 case-control   Irritabl…            1</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">11</span> Rajilić-Stojanovi…       62          46 case-control,… Irritabl…            8</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">12</span> SaulnierD.M._2011        28          27 case-control   Irritabl…            2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">13</span> ShinS.Y._2022            24          24 randomized co… Irritabl…           11</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">14</span> ShuklaR._2015            47          30 case-control   Irritabl…           10</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">15</span> SuQ._2023               460         460 case-control   Irritabl…           12</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">16</span> TanaC._2010              26          26 case-control   Irritabl…            2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">17</span> ZhuX._2021               74          20 case-control   Irritabl…            8</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 1</span> BarandouziZ.A._20…       80          21 case-control   Irritabl…            2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 2</span> CarrollI.M._2011         16          21 case-control   Irritabl…            1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 3</span> CarrollI.M._2012         23          23 case-control   Irritabl…            3</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 4</span> ChassardC._2012          14          12 case-control   Irritabl…            3</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 5</span> ChenH._2023             354         354 cross-section… Irritabl…           18</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 6</span> DubocH._2012             14          18 case-control   Irritabl…            2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 7</span> FourieN.H._2016          11          20 case-control   Irritabl…            4</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 8</span> HartikainenA.K._2…       26          26 randomized co… Irritabl…            1</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;"> 9</span> JacobsJ.P._2023         318         177 case-control   Irritabl…            2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">10</span> KerckhoffsA.P._20…       41          26 case-control   Irritabl…            4</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 12 more rows</span></span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 3 more variables: PMID &lt;chr&gt;, DOI &lt;chr&gt;, URL &lt;chr&gt;</span></span></span></code></pre>
 </div>
 <div class="section level3">
@@ -394,7 +398,7 @@ genus
 12
 </td>
 <td style="text-align:right;">
-0.0130
+0.013
 </td>
 </tr>
 <tr>
@@ -414,7 +418,47 @@ genus
 11
 </td>
 <td style="text-align:right;">
-0.0570
+0.057
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Prevotella
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+0.013
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ruminococcus
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+13
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+0.270
 </td>
 </tr>
 <tr>
@@ -434,12 +478,12 @@ phylum
 5
 </td>
 <td style="text-align:right;">
-0.7700
+0.770
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Ruminococcus
+Parabacteroides
 </td>
 <td style="text-align:left;">
 genus
@@ -448,13 +492,13 @@ genus
 12
 </td>
 <td style="text-align:right;">
-3
+4
 </td>
 <td style="text-align:right;">
-9
+8
 </td>
 <td style="text-align:right;">
-0.1500
+0.390
 </td>
 </tr>
 <tr>
@@ -474,12 +518,12 @@ genus
 2
 </td>
 <td style="text-align:right;">
-0.0650
+0.065
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Parabacteroides
+Bacteroides
 </td>
 <td style="text-align:left;">
 genus
@@ -494,27 +538,27 @@ genus
 8
 </td>
 <td style="text-align:right;">
-0.2300
+0.230
 </td>
 </tr>
 <tr>
 <td style="text-align:left;">
-Prevotella
+Enterobacteriaceae
 </td>
 <td style="text-align:left;">
-genus
+family
 </td>
 <td style="text-align:right;">
 10
 </td>
 <td style="text-align:right;">
-2
+9
 </td>
 <td style="text-align:right;">
-8
+1
 </td>
 <td style="text-align:right;">
-0.1100
+0.021
 </td>
 </tr>
 <tr>
@@ -525,24 +569,7 @@ Streptococcus
 genus
 </td>
 <td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-0.0700
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Coprococcus
-</td>
-<td style="text-align:left;">
-genus
+9
 </td>
 <td style="text-align:right;">
 8
@@ -551,30 +578,7 @@ genus
 1
 </td>
 <td style="text-align:right;">
-7
-</td>
-<td style="text-align:right;">
-0.0700
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Enterocloster
-</td>
-<td style="text-align:left;">
-genus
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-8
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0.0078
+0.039
 </td>
 </tr>
 </tbody>
@@ -592,11 +596,11 @@ testing.</p>
 <code class="sourceCode R"><span><span class="va">allsigs</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat_condition</span>, tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">allsigs</span> <span class="op">&lt;-</span> <span class="va">allsigs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsigs</span>, <span class="va">length</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span> <span class="co">#require length &gt; 1</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 85</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 97</span></span></code></pre>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mydists</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcPairwiseOverlaps.html" class="external-link">calcPairwiseOverlaps</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mydists</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 729   8</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 941   8</span></span></code></pre>
 <p>What is the distribution of signature lengths?</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
@@ -608,8 +612,10 @@ testing.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## siglengths</span></span>
-<span><span class="co">##  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 23 25 26 27 28 36 40 </span></span>
-<span><span class="co">## 11 12 10  8  1  3  6  3  6  3  3  2  1  1  2  2  2  1  1  1  1  1  1  1  1  1</span></span></code></pre>
+<span><span class="co">##  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 22 23 25 26 27 28 35 </span></span>
+<span><span class="co">## 16 13 11  9  2  3  6  3  6  3  3  3  1  2  2  2  2  1  1  1  1  1  1  1  1  1 </span></span>
+<span><span class="co">## 40 </span></span>
+<span><span class="co">##  1</span></span></code></pre>
 <p>Create a matrix of Jaccard similarities (0 for no overlap, 1 for 100%
 overlap)</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
@@ -638,10 +644,10 @@ overlap)</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">siglengths</span> <span class="op">&lt;-</span> <span class="va">siglengths</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a></span><span class="op">(</span><span class="va">jmat</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"jmat dimensions:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">jmat</span><span class="op">)</span>, <span class="st">"x"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">jmat</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "jmat dimensions: 85 x 85"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "jmat dimensions: 97 x 97"</span></span></code></pre>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"siglengths length:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "siglengths length: 85"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "siglengths length: 97"</span></span></code></pre>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/HeatmapAnnotation.html" class="external-link">HeatmapAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">hr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/rowAnnotation.html" class="external-link">rowAnnotation</a></span><span class="op">(</span>`Signature Length` <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/ComplexHeatmap/man/anno_barplot.html" class="external-link">anno_barplot</a></span><span class="op">(</span><span class="va">siglengths</span><span class="op">)</span><span class="op">)</span></span>
@@ -653,14 +659,21 @@ overlap)</p>
 <span>  row_names_max_width <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">20</span>, <span class="st">"cm"</span><span class="op">)</span>,</span>
 <span>  column_names_max_height <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fl">20</span>, <span class="st">"cm"</span><span class="op">)</span>,</span>
 <span>  column_labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">sub</a></span><span class="op">(</span><span class="st">".+:"</span>, <span class="st">""</span>, <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">jmat</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="va">hm</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## The automatically generated colors map from the 1^st and 99^th of the</span></span>
+<span><span class="co">## values in the matrix. There are outliers in the matrix whose patterns</span></span>
+<span><span class="co">## might be hidden by this color mapping. You can manually set the color</span></span>
+<span><span class="co">## to `col` argument.</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Use `suppressMessages()` to turn off this message.</span></span></code></pre>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hm</span></span></code></pre></div>
 <p><img src="capstoneanalysis_kweku_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="1920"></p>
 <p>Use this interactively to make an interactive heatmap. Some expanding
 of the default size is required to see anything. Creating a sub-heatmap,
 then exporting it as a table, allows in-depth identification of the
 subgroups.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#library(InteractiveComplexHeatmap)</span></span>
 <span><span class="co">#hm &lt;- draw(hm)</span></span>
 <span><span class="co">#htShiny(hm)</span></span>
@@ -682,60 +695,70 @@ subgroups.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/InteractiveComplexHeatmap/man/htShiny.html" class="external-link">htShiny</a></span><span class="op">(</span><span class="va">hm</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">jmat</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">hc</span><span class="op">)</span></span></code></pre></div>
 <p><img src="capstoneanalysis_kweku_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="" width="1920"></p>
 <p>This tree can be cut to show the clusters, for example. The clusters
 of more than 1 signature but less than ~10 signatures are most likely to
 be something interesting.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">clusts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cutree.html" class="external-link">cutree</a></span><span class="op">(</span><span class="va">hc</span>, k <span class="op">=</span> <span class="fl">8</span><span class="op">)</span><span class="op">)</span>  <span class="co">#set the number of clusters here with k</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">clusts</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">clusts</span><span class="op">)</span><span class="op">[</span><span class="va">clusts</span> <span class="op">==</span> <span class="va">i</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [[1]]</span></span>
-<span><span class="co">##  [1] "bsdb:19533811/1/2_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_DOWN"                                                                </span></span>
-<span><span class="co">##  [2] "bsdb:19903265/1/1_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_UP"                                                                  </span></span>
-<span><span class="co">##  [3] "bsdb:21741921/1/1_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_UP"                                                                  </span></span>
-<span><span class="co">##  [4] "bsdb:21741921/1/2_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_DOWN"                                                                </span></span>
-<span><span class="co">##  [5] "bsdb:21820992/1/2_Irritable-bowel-syndrome:IBS-A_vs_Healthy-Control_UP"                                                                </span></span>
-<span><span class="co">##  [6] "bsdb:21820992/2/2_Irritable-bowel-syndrome:IBS-C_vs_Healthy-Control_UP"                                                                </span></span>
-<span><span class="co">##  [7] "bsdb:21820992/3/2_Irritable-bowel-syndrome:IBS-D_vs_Healthy-Control_UP"                                                                </span></span>
-<span><span class="co">##  [8] "bsdb:21820992/4/2_Irritable-bowel-syndrome:IBS-(All-patients)_vs_Healthy-Control_UP"                                                   </span></span>
-<span><span class="co">##  [9] "bsdb:22315951/1/1_Irritable-bowel-syndrome:constipated-IBS_vs_Healthy-Control_DOWN"                                                    </span></span>
-<span><span class="co">## [10] "bsdb:22315951/1/3_Irritable-bowel-syndrome:constipated-IBS_vs_Healthy-Control_DOWN"                                                    </span></span>
-<span><span class="co">## [11] "bsdb:22339879/1/1_Irritable-bowel-syndrome:diarrhea-predominant-irritable-bowel-syndrome_vs_healthy-controls_UP"                       </span></span>
-<span><span class="co">## [12] "bsdb:22339879/2/1_Irritable-bowel-syndrome:diarrhea-predominant-irritable-bowel-syndrome_vs_healthy-controls_UP"                       </span></span>
-<span><span class="co">## [13] "bsdb:25784074/3/2_Irritable-bowel-syndrome:IBS-D_vs_Health-Control_DOWN"                                                               </span></span>
-<span><span class="co">## [14] "bsdb:26963804/1/1_Irritable-bowel-syndrome:irritable-bowel-syndrome_vs_control_UP"                                                     </span></span>
-<span><span class="co">## [15] "bsdb:26963804/1/2_Irritable-bowel-syndrome:irritable-bowel-syndrome_vs_control_DOWN"                                                   </span></span>
-<span><span class="co">## [16] "bsdb:26963804/2/1_Irritable-bowel-syndrome:overweight-irritable-bowel-syndrome_vs_control_UP"                                          </span></span>
-<span><span class="co">## [17] "bsdb:26963804/2/2_Irritable-bowel-syndrome:overweight-irritable-bowel-syndrome_vs_control_DOWN"                                        </span></span>
-<span><span class="co">## [18] "bsdb:33663411/1/1_Irritable-bowel-syndrome:IBS-D_vs_Healthy-Control_UP"                                                                </span></span>
-<span><span class="co">## [19] "bsdb:34937163/1/1_Irritable-bowel-syndrome:IBS-D-patients-(Duodenal-mucosa-samples)_vs_Healthy-controls-(Duodenal-mucosa-samples)_UP"  </span></span>
-<span><span class="co">## [20] "bsdb:34937163/1/2_Irritable-bowel-syndrome:IBS-D-patients-(Duodenal-mucosa-samples)_vs_Healthy-controls-(Duodenal-mucosa-samples)_DOWN"</span></span>
-<span><span class="co">## [21] "bsdb:34937163/2/1_Irritable-bowel-syndrome:IBS-D-patients-(Duodenal-lumen-samples)_vs_Healthy-controls-(Duodenal-lumen-samples)_UP"    </span></span>
-<span><span class="co">## [22] "bsdb:34937163/2/2_Irritable-bowel-syndrome:IBS-D-patients-(Duodenal-lumen-samples)_vs_Healthy-controls-(Duodenal-lumen-samples)_DOWN"  </span></span>
-<span><span class="co">## [23] "bsdb:34937163/3/2_Irritable-bowel-syndrome:IBS-D-patients-(Rectal-mucosa-samples)_vs_Healthy-controls-(Rectal-mucosa-samples)_DOWN"    </span></span>
-<span><span class="co">## [24] "bsdb:34937163/4/2_Irritable-bowel-syndrome:IBS-D-patients-(Rectal-lumen-samples)_vs_Healthy-controls-(Rectal-lumen-samples)_DOWN"      </span></span>
-<span><span class="co">## [25] "bsdb:36250371/2/1_Irritable-bowel-syndrome:Responder-(Pre-treatment-samples)_vs_Non-responder-(Pre-treatment-samples)_UP"              </span></span>
-<span><span class="co">## [26] "bsdb:36250371/3/1_Irritable-bowel-syndrome:Responder-(Post-treatment-samples)_vs_Non-responder-(Post-treatment-samples)_UP"            </span></span>
-<span><span class="co">## [27] "bsdb:36250371/3/2_Irritable-bowel-syndrome:Responder-(Post-treatment-samples)_vs_Non-responder-(Post-treatment-samples)_DOWN"          </span></span>
-<span><span class="co">## [28] "bsdb:36250371/4/2_Irritable-bowel-syndrome:Post-treatment-samples-(responder-group)_vs_Pre-treatment-samples-(responder-group)_DOWN"   </span></span>
-<span><span class="co">## [29] "bsdb:36250371/5/1_Irritable-bowel-syndrome:Probiotics-(Baseline)_vs_Placebo-(Baseline)_UP"                                             </span></span>
-<span><span class="co">## [30] "bsdb:36250371/6/1_Irritable-bowel-syndrome:Probiotics-(post-treatment)_vs_Placebo-(post-treatment)_UP"                                 </span></span>
-<span><span class="co">## [31] "bsdb:36573834/1/1_Irritable-bowel-syndrome:IBS-C-(IBS-Constipation)_vs_Non-IBS1-(Non-irritable-bowel-syndrome-1)_DOWN"                 </span></span>
-<span><span class="co">## [32] "bsdb:36573834/1/2_Irritable-bowel-syndrome:IBS-C-(IBS-Constipation)_vs_Non-IBS1-(Non-irritable-bowel-syndrome-1)_UP"                   </span></span>
-<span><span class="co">## [33] "bsdb:36573834/2/1_Irritable-bowel-syndrome:IBS-D-(IBS-Diarrhea)_vs_Non-IBS2-(Non-irritable-bowel-syndrome-2)_DOWN"                     </span></span>
-<span><span class="co">## [34] "bsdb:36573834/2/2_Irritable-bowel-syndrome:IBS-D-(IBS-Diarrhea)_vs_Non-IBS2-(Non-irritable-bowel-syndrome-2)_UP"                       </span></span>
-<span><span class="co">## [35] "bsdb:36573834/3/1_Irritable-bowel-syndrome:IBS-U-(IBS-Unclassified)_vs_Non-IBS3-(Non-irritable-bowel-syndrome-3)_DOWN"                 </span></span>
-<span><span class="co">## [36] "bsdb:36573834/3/2_Irritable-bowel-syndrome:IBS-U-(IBS-Unclassified)_vs_Non-IBS3-(Non-irritable-bowel-syndrome-3)_UP"                   </span></span>
-<span><span class="co">## [37] "bsdb:36624530/1/1_Irritable-bowel-syndrome:Irritable-Bowel-Syndrome_vs_Healthy-controls_UP"                                            </span></span>
-<span><span class="co">## [38] "bsdb:36624530/1/2_Irritable-bowel-syndrome:Irritable-Bowel-Syndrome_vs_Healthy-controls_DOWN"                                          </span></span>
-<span><span class="co">## [39] "bsdb:36774467/1/2_Irritable-bowel-syndrome:IBS-(Irritable-Bowel-Syndrome)-patients_vs_Healthy-Controls_DOWN"                           </span></span>
-<span><span class="co">## [40] "bsdb:36774467/8/1_Irritable-bowel-syndrome:IBS-Patients-(Irritable-Bowel-Syndrome)_vs_Healthy-controls_UP"                             </span></span>
-<span><span class="co">## [41] "bsdb:36774467/8/2_Irritable-bowel-syndrome:IBS-Patients-(Irritable-Bowel-Syndrome)_vs_Healthy-controls_DOWN"                           </span></span>
-<span><span class="co">## [42] "bsdb:36774467/9/1_Irritable-bowel-syndrome:IBS-Patients-(Irritable-Bowel-Syndrome)_vs_Healthy-controls_UP"                             </span></span>
-<span><span class="co">## [43] "bsdb:36774467/9/2_Irritable-bowel-syndrome:IBS-Patients-(Irritable-Bowel-Syndrome)_vs_Healthy-controls_DOWN"                           </span></span>
+<span><span class="co">##  [1] "bsdb:19533811/1/2_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_DOWN"                                                                                              </span></span>
+<span><span class="co">##  [2] "bsdb:19903265/1/1_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_UP"                                                                                                </span></span>
+<span><span class="co">##  [3] "bsdb:21737778/1/1_Irritable-bowel-syndrome:IBS-D_vs_Healthy-Control_DOWN"                                                                                            </span></span>
+<span><span class="co">##  [4] "bsdb:21741921/1/1_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_UP"                                                                                                </span></span>
+<span><span class="co">##  [5] "bsdb:21741921/1/2_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_DOWN"                                                                                              </span></span>
+<span><span class="co">##  [6] "bsdb:22315951/1/1_Irritable-bowel-syndrome:constipated-IBS_vs_Healthy-Control_DOWN"                                                                                  </span></span>
+<span><span class="co">##  [7] "bsdb:22315951/1/3_Irritable-bowel-syndrome:constipated-IBS_vs_Healthy-Control_DOWN"                                                                                  </span></span>
+<span><span class="co">##  [8] "bsdb:22339879/1/1_Irritable-bowel-syndrome:diarrhea-predominant-irritable-bowel-syndrome_vs_healthy-controls_UP"                                                     </span></span>
+<span><span class="co">##  [9] "bsdb:22339879/2/1_Irritable-bowel-syndrome:diarrhea-predominant-irritable-bowel-syndrome_vs_healthy-controls_UP"                                                     </span></span>
+<span><span class="co">## [10] "bsdb:22713265/2/1_Irritable-bowel-syndrome:IBS-C_vs_Healthy-Control_UP"                                                                                              </span></span>
+<span><span class="co">## [11] "bsdb:25784074/1/1_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_UP"                                                                                                </span></span>
+<span><span class="co">## [12] "bsdb:25784074/2/1_Irritable-bowel-syndrome:IBS-C_vs_Health-Control_UP"                                                                                               </span></span>
+<span><span class="co">## [13] "bsdb:25784074/3/1_Irritable-bowel-syndrome:IBS-D_vs_Health-Control_UP"                                                                                               </span></span>
+<span><span class="co">## [14] "bsdb:25784074/3/2_Irritable-bowel-syndrome:IBS-D_vs_Health-Control_DOWN"                                                                                             </span></span>
+<span><span class="co">## [15] "bsdb:25784074/5/2_Irritable-bowel-syndrome:Irritable-Bowel-Syndrome,-constipation-predominant-(IBS-C)_vs_Irritable-Bowel-Syndrome,-diarrhea-predominant-(IBS-D)_DOWN"</span></span>
+<span><span class="co">## [16] "bsdb:25784074/6/1_Irritable-bowel-syndrome:Visible-abdominal-distension_vs_No-Visible-abdominal-distension_UP"                                                       </span></span>
+<span><span class="co">## [17] "bsdb:26963804/1/1_Irritable-bowel-syndrome:irritable-bowel-syndrome_vs_control_UP"                                                                                   </span></span>
+<span><span class="co">## [18] "bsdb:26963804/1/2_Irritable-bowel-syndrome:irritable-bowel-syndrome_vs_control_DOWN"                                                                                 </span></span>
+<span><span class="co">## [19] "bsdb:26963804/2/1_Irritable-bowel-syndrome:overweight-irritable-bowel-syndrome_vs_control_UP"                                                                        </span></span>
+<span><span class="co">## [20] "bsdb:26963804/2/2_Irritable-bowel-syndrome:overweight-irritable-bowel-syndrome_vs_control_DOWN"                                                                      </span></span>
+<span><span class="co">## [21] "bsdb:33429936/1/1_Irritable-bowel-syndrome:Irritable-bowel-syndrome-(IBS)_vs_Healthy-control_UP"                                                                     </span></span>
+<span><span class="co">## [22] "bsdb:33429936/1/2_Irritable-bowel-syndrome:Irritable-bowel-syndrome-(IBS)_vs_Healthy-control_DOWN"                                                                   </span></span>
+<span><span class="co">## [23] "bsdb:33663411/1/1_Irritable-bowel-syndrome:IBS-D_vs_Healthy-Control_UP"                                                                                              </span></span>
+<span><span class="co">## [24] "bsdb:34937163/1/1_Irritable-bowel-syndrome:IBS-D-patients-(Duodenal-mucosa-samples)_vs_Healthy-controls-(Duodenal-mucosa-samples)_UP"                                </span></span>
+<span><span class="co">## [25] "bsdb:34937163/1/2_Irritable-bowel-syndrome:IBS-D-patients-(Duodenal-mucosa-samples)_vs_Healthy-controls-(Duodenal-mucosa-samples)_DOWN"                              </span></span>
+<span><span class="co">## [26] "bsdb:34937163/2/1_Irritable-bowel-syndrome:IBS-D-patients-(Duodenal-lumen-samples)_vs_Healthy-controls-(Duodenal-lumen-samples)_UP"                                  </span></span>
+<span><span class="co">## [27] "bsdb:34937163/2/2_Irritable-bowel-syndrome:IBS-D-patients-(Duodenal-lumen-samples)_vs_Healthy-controls-(Duodenal-lumen-samples)_DOWN"                                </span></span>
+<span><span class="co">## [28] "bsdb:34937163/3/1_Irritable-bowel-syndrome:IBS-D-patients-(Rectal-mucosa-samples)_vs_Healthy-controls-(Rectal-mucosa-samples)_UP"                                    </span></span>
+<span><span class="co">## [29] "bsdb:34937163/3/2_Irritable-bowel-syndrome:IBS-D-patients-(Rectal-mucosa-samples)_vs_Healthy-controls-(Rectal-mucosa-samples)_DOWN"                                  </span></span>
+<span><span class="co">## [30] "bsdb:34937163/4/2_Irritable-bowel-syndrome:IBS-D-patients-(Rectal-lumen-samples)_vs_Healthy-controls-(Rectal-lumen-samples)_DOWN"                                    </span></span>
+<span><span class="co">## [31] "bsdb:36250371/1/1_Irritable-bowel-syndrome:Post-treatment-(probiotics)_vs_Pre-treatment-(probiotics)_DOWN"                                                           </span></span>
+<span><span class="co">## [32] "bsdb:36250371/2/1_Irritable-bowel-syndrome:Responder-(Pre-treatment-samples)_vs_Non-responder-(Pre-treatment-samples)_UP"                                            </span></span>
+<span><span class="co">## [33] "bsdb:36250371/3/1_Irritable-bowel-syndrome:Responder-(Post-treatment-samples)_vs_Non-responder-(Post-treatment-samples)_UP"                                          </span></span>
+<span><span class="co">## [34] "bsdb:36250371/3/2_Irritable-bowel-syndrome:Responder-(Post-treatment-samples)_vs_Non-responder-(Post-treatment-samples)_DOWN"                                        </span></span>
+<span><span class="co">## [35] "bsdb:36250371/4/2_Irritable-bowel-syndrome:Post-treatment-samples-(responder-group)_vs_Pre-treatment-samples-(responder-group)_DOWN"                                 </span></span>
+<span><span class="co">## [36] "bsdb:36250371/5/1_Irritable-bowel-syndrome:Probiotics-(Baseline)_vs_Placebo-(Baseline)_UP"                                                                           </span></span>
+<span><span class="co">## [37] "bsdb:36250371/6/1_Irritable-bowel-syndrome:Probiotics-(post-treatment)_vs_Placebo-(post-treatment)_UP"                                                               </span></span>
+<span><span class="co">## [38] "bsdb:36250371/6/2_Irritable-bowel-syndrome:Probiotics-(post-treatment)_vs_Placebo-(post-treatment)_DOWN"                                                             </span></span>
+<span><span class="co">## [39] "bsdb:36573834/1/1_Irritable-bowel-syndrome:IBS-C-(IBS-Constipation)_vs_Non-IBS1-(Non-irritable-bowel-syndrome-1)_DOWN"                                               </span></span>
+<span><span class="co">## [40] "bsdb:36573834/1/2_Irritable-bowel-syndrome:IBS-C-(IBS-Constipation)_vs_Non-IBS1-(Non-irritable-bowel-syndrome-1)_UP"                                                 </span></span>
+<span><span class="co">## [41] "bsdb:36573834/2/1_Irritable-bowel-syndrome:IBS-D-(IBS-Diarrhea)_vs_Non-IBS2-(Non-irritable-bowel-syndrome-2)_DOWN"                                                   </span></span>
+<span><span class="co">## [42] "bsdb:36573834/2/2_Irritable-bowel-syndrome:IBS-D-(IBS-Diarrhea)_vs_Non-IBS2-(Non-irritable-bowel-syndrome-2)_UP"                                                     </span></span>
+<span><span class="co">## [43] "bsdb:36573834/3/1_Irritable-bowel-syndrome:IBS-U-(IBS-Unclassified)_vs_Non-IBS3-(Non-irritable-bowel-syndrome-3)_DOWN"                                               </span></span>
+<span><span class="co">## [44] "bsdb:36573834/3/2_Irritable-bowel-syndrome:IBS-U-(IBS-Unclassified)_vs_Non-IBS3-(Non-irritable-bowel-syndrome-3)_UP"                                                 </span></span>
+<span><span class="co">## [45] "bsdb:36624530/1/1_Irritable-bowel-syndrome:Irritable-Bowel-Syndrome_vs_Healthy-controls_UP"                                                                          </span></span>
+<span><span class="co">## [46] "bsdb:36624530/1/2_Irritable-bowel-syndrome:Irritable-Bowel-Syndrome_vs_Healthy-controls_DOWN"                                                                        </span></span>
+<span><span class="co">## [47] "bsdb:36774467/1/2_Irritable-bowel-syndrome:IBS-(Irritable-Bowel-Syndrome)-patients_vs_Healthy-Controls_DOWN"                                                         </span></span>
+<span><span class="co">## [48] "bsdb:36774467/8/1_Irritable-bowel-syndrome:IBS-Patients-(Irritable-Bowel-Syndrome)_vs_Healthy-controls_UP"                                                           </span></span>
+<span><span class="co">## [49] "bsdb:36774467/8/2_Irritable-bowel-syndrome:IBS-Patients-(Irritable-Bowel-Syndrome)_vs_Healthy-controls_DOWN"                                                         </span></span>
+<span><span class="co">## [50] "bsdb:36774467/9/1_Irritable-bowel-syndrome:IBS-Patients-(Irritable-Bowel-Syndrome)_vs_Healthy-controls_UP"                                                           </span></span>
+<span><span class="co">## [51] "bsdb:36774467/9/2_Irritable-bowel-syndrome:IBS-Patients-(Irritable-Bowel-Syndrome)_vs_Healthy-controls_DOWN"                                                         </span></span>
+<span><span class="co">## [52] "bsdb:36905309/1/1_Irritable-bowel-syndrome:IBS-patients-(Irritable-Bowel-Syndrome)_vs_Healthy-Controls-(HC)_UP"                                                      </span></span>
+<span><span class="co">## [53] "bsdb:36905309/1/2_Irritable-bowel-syndrome:IBS-patients-(Irritable-Bowel-Syndrome)_vs_Healthy-Controls-(HC)_DOWN"                                                    </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[2]]</span></span>
 <span><span class="co">## [1] "bsdb:21820992/1/1_Irritable-bowel-syndrome:IBS-A_vs_Healthy-Control_DOWN"             </span></span>
@@ -744,17 +767,21 @@ be something interesting.</p>
 <span><span class="co">## [4] "bsdb:21820992/4/1_Irritable-bowel-syndrome:IBS-(All-patients)_vs_Healthy-Control_DOWN"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[3]]</span></span>
-<span><span class="co">## [1] "bsdb:25784074/1/1_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_UP"                                                                                                </span></span>
-<span><span class="co">## [2] "bsdb:25784074/2/1_Irritable-bowel-syndrome:IBS-C_vs_Health-Control_UP"                                                                                               </span></span>
-<span><span class="co">## [3] "bsdb:25784074/3/1_Irritable-bowel-syndrome:IBS-D_vs_Health-Control_UP"                                                                                               </span></span>
-<span><span class="co">## [4] "bsdb:25784074/5/2_Irritable-bowel-syndrome:Irritable-Bowel-Syndrome,-constipation-predominant-(IBS-C)_vs_Irritable-Bowel-Syndrome,-diarrhea-predominant-(IBS-D)_DOWN"</span></span>
-<span><span class="co">## [5] "bsdb:25784074/6/1_Irritable-bowel-syndrome:Visible-abdominal-distension_vs_No-Visible-abdominal-distension_UP"                                                       </span></span>
-<span><span class="co">## [6] "bsdb:28891262/1/1_Irritable-bowel-syndrome:Irritable-Bowel-Syndrome-positive-(IBS+)_vs_Irritable-Bowel-Syndrome-negative-(IBS-)_DOWN"                                </span></span>
-<span><span class="co">## [7] "bsdb:34937163/3/1_Irritable-bowel-syndrome:IBS-D-patients-(Rectal-mucosa-samples)_vs_Healthy-controls-(Rectal-mucosa-samples)_UP"                                    </span></span>
-<span><span class="co">## [8] "bsdb:36250371/1/1_Irritable-bowel-syndrome:Post-treatment-(probiotics)_vs_Pre-treatment-(probiotics)_DOWN"                                                           </span></span>
-<span><span class="co">## [9] "bsdb:36250371/6/2_Irritable-bowel-syndrome:Probiotics-(post-treatment)_vs_Placebo-(post-treatment)_DOWN"                                                             </span></span>
+<span><span class="co">## [1] "bsdb:21820992/1/2_Irritable-bowel-syndrome:IBS-A_vs_Healthy-Control_UP"             </span></span>
+<span><span class="co">## [2] "bsdb:21820992/2/2_Irritable-bowel-syndrome:IBS-C_vs_Healthy-Control_UP"             </span></span>
+<span><span class="co">## [3] "bsdb:21820992/3/2_Irritable-bowel-syndrome:IBS-D_vs_Healthy-Control_UP"             </span></span>
+<span><span class="co">## [4] "bsdb:21820992/4/2_Irritable-bowel-syndrome:IBS-(All-patients)_vs_Healthy-Control_UP"</span></span>
+<span><span class="co">## [5] "bsdb:22713265/1/1_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_UP"               </span></span>
+<span><span class="co">## [6] "bsdb:22713265/3/1_Irritable-bowel-syndrome:IBS-D_vs_Healthy-Control_UP"             </span></span>
+<span><span class="co">## [7] "bsdb:22713265/4/1_Irritable-bowel-syndrome:IBS-M_vs_Healthy-Control_UP"             </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[4]]</span></span>
+<span><span class="co">## [1] "bsdb:22713265/1/2_Irritable-bowel-syndrome:IBS_vs_Healthy-Control_DOWN"                                                              </span></span>
+<span><span class="co">## [2] "bsdb:22713265/2/2_Irritable-bowel-syndrome:IBS-C_vs_Healthy-Control_DOWN"                                                            </span></span>
+<span><span class="co">## [3] "bsdb:22713265/3/2_Irritable-bowel-syndrome:IBS-D_vs_Healthy-Control_DOWN"                                                            </span></span>
+<span><span class="co">## [4] "bsdb:28891262/1/1_Irritable-bowel-syndrome:Irritable-Bowel-Syndrome-positive-(IBS+)_vs_Irritable-Bowel-Syndrome-negative-(IBS-)_DOWN"</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## [[5]]</span></span>
 <span><span class="co">##  [1] "bsdb:28457228/1/1_Irritable-bowel-syndrome:IBS1-(Irritable-Bowel-Syndrome-1)_vs_HC-(Healthy-Control)_UP"                                      </span></span>
 <span><span class="co">##  [2] "bsdb:28457228/2/1_Irritable-bowel-syndrome:IBS1-(Irritable-Bowel-Syndrome-1)_vs_HC-like-IBS(Healthy-Control-like-Irritable-Bowel-Syndrome)_UP"</span></span>
 <span><span class="co">##  [3] "bsdb:28457228/4/1_Irritable-bowel-syndrome:IBS1-(Irritable-Bowel-Syndrome-1)_vs_HC-(Healthy-Control)_UP"                                      </span></span>
@@ -768,20 +795,18 @@ be something interesting.</p>
 <span><span class="co">## [11] "bsdb:36774467/5/1_Irritable-bowel-syndrome:IBS-NPD-(-Irritable-Bowel-Syndrome-without-psychiatric-disorders-)_vs_Healthy-controls_UP"         </span></span>
 <span><span class="co">## [12] "bsdb:36774467/6/1_Irritable-bowel-syndrome:IBS-PD-(-Irritable-Bowel-Syndrome-with-psychiatric-disorders-)_vs_Healthy-controls_UP"             </span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## [[5]]</span></span>
+<span><span class="co">## [[6]]</span></span>
 <span><span class="co">## [1] "bsdb:28457228/1/2_Irritable-bowel-syndrome:IBS1-(Irritable-Bowel-Syndrome-1)_vs_HC-(Healthy-Control)_DOWN"                                      </span></span>
 <span><span class="co">## [2] "bsdb:28457228/2/2_Irritable-bowel-syndrome:IBS1-(Irritable-Bowel-Syndrome-1)_vs_HC-like-IBS(Healthy-Control-like-Irritable-Bowel-Syndrome)_DOWN"</span></span>
 <span><span class="co">## [3] "bsdb:28457228/3/2_Irritable-bowel-syndrome:HC-like-IBS-(Healthy-Control-like-Irritable-Bowel-Syndrome)_vs_HC-(Healthy-Control)_DOWN"            </span></span>
 <span><span class="co">## [4] "bsdb:28457228/4/2_Irritable-bowel-syndrome:IBS1-(Irritable-Bowel-Syndrome-1)_vs_HC-(Healthy-Control)_DOWN"                                      </span></span>
 <span><span class="co">## [5] "bsdb:28457228/5/2_Irritable-bowel-syndrome:IBS1-(Irritable-Bowel-Syndrome-1)_vs_HC-like-IBS(Healthy-Control-like-Irritable-Bowel-Syndrome)_DOWN"</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## [[6]]</span></span>
+<span><span class="co">## [[7]]</span></span>
 <span><span class="co">## [1] "bsdb:28457228/3/1_Irritable-bowel-syndrome:HC-like-IBS-(Healthy-Control-like-Irritable-Bowel-Syndrome)_vs_HC-(Healthy-Control)_UP"   </span></span>
 <span><span class="co">## [2] "bsdb:36573834/5/1_Irritable-bowel-syndrome:IBS-C-(IBS-Constipation)-Validation-Cohort_vs_Non-IBS-(Non-irritable-bowel-syndrome)_DOWN"</span></span>
 <span><span class="co">## [3] "bsdb:36573834/6/1_Irritable-bowel-syndrome:IBS-D-(IBS-Diarrhea)-Validation-Cohort_vs_Non-IBS-(Non-irritable-bowel-syndrome)_DOWN"    </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## [[7]]</span></span>
-<span><span class="co">## [1] "bsdb:36573834/7/1_Irritable-bowel-syndrome:IBS-U-(IBS-Unclassified)-Validation-Cohort_vs_Non-IBS-(Non-irritable-bowel-syndrome)_DOWN"</span></span>
+<span><span class="co">## [4] "bsdb:36573834/7/1_Irritable-bowel-syndrome:IBS-U-(IBS-Unclassified)-Validation-Cohort_vs_Non-IBS-(Non-irritable-bowel-syndrome)_DOWN"</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [[8]]</span></span>
 <span><span class="co">## [1] "bsdb:36774467/2/2_Irritable-bowel-syndrome:IBS-C-(-Irritable-bowel-syndrome-with-predominant-constipation-)_vs_Healthy-controls_DOWN"                                            </span></span>
@@ -797,13 +822,13 @@ be something interesting.</p>
 <h2 id="create-a-wide-format-dataframe">Create a wide-format dataframe<a class="anchor" aria-label="anchor" href="#create-a-wide-format-dataframe"></a>
 </h2>
 <p>This would be suitable for regression analysis.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dat_withsigs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dat_condition</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">dat_condition</span><span class="op">$</span><span class="va">`NCBI Taxonomy IDs`</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">sigs</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/getSignatures.html" class="external-link">getSignatures</a></span><span class="op">(</span><span class="va">dat_withsigs</span>, tax.id.type <span class="op">=</span> <span class="st">"taxname"</span><span class="op">)</span></span>
 <span><span class="va">cmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="fu">safe</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/safe/man/getCmatrix.html" class="external-link">getCmatrix</a></span><span class="op">(</span><span class="va">sigs</span>, as.matrix <span class="op">=</span> <span class="cn">TRUE</span>, min.size <span class="op">=</span> <span class="fl">0</span>, prune <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## WARNING: rows are sorted elements of keyword.list</span></span>
-<span><span class="co">## 100 categories formed</span></span></code></pre>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<span><span class="co">## 113 categories formed</span></span></code></pre>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="va">cmat</span>, stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span>, check.names <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="va">cdf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="va">dat_withsigs</span>, <span class="va">cdf</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">cdf</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">54</span><span class="op">]</span></span></code></pre></div>
@@ -812,41 +837,41 @@ be something interesting.</p>
 <span><span class="co">##  [5] "DOI"                        "URL"                       </span></span>
 <span><span class="co">##  [7] "Authors list"               "Title"                     </span></span>
 <span><span class="co">##  [9] "Journal"                    "Year"                      </span></span>
-<span><span class="co">## [11] "Keywords"                   "Experiment"                </span></span>
-<span><span class="co">## [13] "Location of subjects"       "Host species"              </span></span>
-<span><span class="co">## [15] "Body site"                  "UBERON ID"                 </span></span>
-<span><span class="co">## [17] "Condition"                  "EFO ID"                    </span></span>
-<span><span class="co">## [19] "Group 0 name"               "Group 1 name"              </span></span>
-<span><span class="co">## [21] "Group 1 definition"         "Group 0 sample size"       </span></span>
-<span><span class="co">## [23] "Group 1 sample size"        "Antibiotics exclusion"     </span></span>
-<span><span class="co">## [25] "Sequencing type"            "16S variable region"       </span></span>
-<span><span class="co">## [27] "Sequencing platform"        "Data transformation"       </span></span>
-<span><span class="co">## [29] "Statistical test"           "Significance threshold"    </span></span>
-<span><span class="co">## [31] "MHT correction"             "LDA Score above"           </span></span>
-<span><span class="co">## [33] "Matched on"                 "Confounders controlled for"</span></span>
-<span><span class="co">## [35] "Pielou"                     "Shannon"                   </span></span>
-<span><span class="co">## [37] "Chao1"                      "Simpson"                   </span></span>
-<span><span class="co">## [39] "Inverse Simpson"            "Richness"                  </span></span>
-<span><span class="co">## [41] "Signature page name"        "Source"                    </span></span>
-<span><span class="co">## [43] "Curated date"               "Curator"                   </span></span>
-<span><span class="co">## [45] "Revision editor"            "Description"               </span></span>
-<span><span class="co">## [47] "Abundance in Group 1"       "MetaPhlAn taxon names"     </span></span>
-<span><span class="co">## [49] "NCBI Taxonomy IDs"          "State"                     </span></span>
-<span><span class="co">## [51] "Reviewer"                   "comparison1"               </span></span>
-<span><span class="co">## [53] "[Clostridium] cellulosi"    "[Clostridium] colinum"</span></span></code></pre>
+<span><span class="co">## [11] "Keywords"                   "Curation method"           </span></span>
+<span><span class="co">## [13] "Curation protocol"          "submittedBy"               </span></span>
+<span><span class="co">## [15] "submissionDate"             "Review state"              </span></span>
+<span><span class="co">## [17] "Quality control tag"        "Experiment"                </span></span>
+<span><span class="co">## [19] "Location of subjects"       "Host species"              </span></span>
+<span><span class="co">## [21] "Body site"                  "UBERON ID"                 </span></span>
+<span><span class="co">## [23] "Condition"                  "EFO ID"                    </span></span>
+<span><span class="co">## [25] "Group 0 name"               "Group 1 name"              </span></span>
+<span><span class="co">## [27] "Group 1 definition"         "Group 0 sample size"       </span></span>
+<span><span class="co">## [29] "Group 1 sample size"        "Antibiotics exclusion"     </span></span>
+<span><span class="co">## [31] "Sequencing type"            "16S variable region"       </span></span>
+<span><span class="co">## [33] "Sequencing platform"        "Data transformation"       </span></span>
+<span><span class="co">## [35] "Statistical test"           "Significance threshold"    </span></span>
+<span><span class="co">## [37] "MHT correction"             "LDA Score above"           </span></span>
+<span><span class="co">## [39] "Matched on"                 "Confounders controlled for"</span></span>
+<span><span class="co">## [41] "Pielou"                     "Shannon"                   </span></span>
+<span><span class="co">## [43] "Chao1"                      "Simpson"                   </span></span>
+<span><span class="co">## [45] "Inverse Simpson"            "Richness"                  </span></span>
+<span><span class="co">## [47] "Signature page name"        "Source"                    </span></span>
+<span><span class="co">## [49] "Curated date"               "Curator"                   </span></span>
+<span><span class="co">## [51] "Revision editor"            "Description"               </span></span>
+<span><span class="co">## [53] "Abundance in Group 1"       "MetaPhlAn taxon names"</span></span></code></pre>
 <p>Note this has a number of columns that are mostly zeros, it could be
 filtered significantly for any regression or machine learning
 analysis:</p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/table.html" class="external-link">table</a></span><span class="op">(</span><span class="va">cdf</span><span class="op">[[</span><span class="st">"Bifidobacterium catenulatum"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## </span></span>
-<span><span class="co">##  0  1 </span></span>
-<span><span class="co">## 97  3</span></span></code></pre>
+<span><span class="co">##   0   1 </span></span>
+<span><span class="co">## 110   3</span></span></code></pre>
 <p>Create another heatmap on correlations of presence/absence of taxa.
 This is not necessary because the previous Jaccard Index heatmap is
 probably better, it is just a demonstration of doing something with the
 taxa presence/absence directly.</p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/jokergoo/ComplexHeatmap" class="external-link">ComplexHeatmap</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">sigcors</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">cor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">cmat</span><span class="op">)</span><span class="op">)</span></span>
@@ -869,7 +894,7 @@ taxa presence/absence directly.</p>
 <span><span class="va">hm</span></span></code></pre></div>
 <p><img src="capstoneanalysis_kweku_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="" width="1920"></p>
 <p>Use this interactively to make an interactive heatmap:</p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#library(InteractiveComplexHeatmap)</span></span>
 <span><span class="co">#hm &lt;- draw(hm)</span></span>
 <span><span class="co">#htShiny(hm)</span></span>

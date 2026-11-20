@@ -43,7 +43,7 @@ dat <- bugsigdbr::importBugSigDB(cache = FALSE)
 dim(dat)
 ```
 
-    ## [1] 7425   51
+    ## [1] 12086    57
 
 ``` r
 
@@ -55,27 +55,30 @@ names(dat)
     ##  [5] "DOI"                        "URL"                       
     ##  [7] "Authors list"               "Title"                     
     ##  [9] "Journal"                    "Year"                      
-    ## [11] "Keywords"                   "Experiment"                
-    ## [13] "Location of subjects"       "Host species"              
-    ## [15] "Body site"                  "UBERON ID"                 
-    ## [17] "Condition"                  "EFO ID"                    
-    ## [19] "Group 0 name"               "Group 1 name"              
-    ## [21] "Group 1 definition"         "Group 0 sample size"       
-    ## [23] "Group 1 sample size"        "Antibiotics exclusion"     
-    ## [25] "Sequencing type"            "16S variable region"       
-    ## [27] "Sequencing platform"        "Data transformation"       
-    ## [29] "Statistical test"           "Significance threshold"    
-    ## [31] "MHT correction"             "LDA Score above"           
-    ## [33] "Matched on"                 "Confounders controlled for"
-    ## [35] "Pielou"                     "Shannon"                   
-    ## [37] "Chao1"                      "Simpson"                   
-    ## [39] "Inverse Simpson"            "Richness"                  
-    ## [41] "Signature page name"        "Source"                    
-    ## [43] "Curated date"               "Curator"                   
-    ## [45] "Revision editor"            "Description"               
-    ## [47] "Abundance in Group 1"       "MetaPhlAn taxon names"     
-    ## [49] "NCBI Taxonomy IDs"          "State"                     
-    ## [51] "Reviewer"
+    ## [11] "Keywords"                   "Curation method"           
+    ## [13] "Curation protocol"          "submittedBy"               
+    ## [15] "submissionDate"             "Review state"              
+    ## [17] "Quality control tag"        "Experiment"                
+    ## [19] "Location of subjects"       "Host species"              
+    ## [21] "Body site"                  "UBERON ID"                 
+    ## [23] "Condition"                  "EFO ID"                    
+    ## [25] "Group 0 name"               "Group 1 name"              
+    ## [27] "Group 1 definition"         "Group 0 sample size"       
+    ## [29] "Group 1 sample size"        "Antibiotics exclusion"     
+    ## [31] "Sequencing type"            "16S variable region"       
+    ## [33] "Sequencing platform"        "Data transformation"       
+    ## [35] "Statistical test"           "Significance threshold"    
+    ## [37] "MHT correction"             "LDA Score above"           
+    ## [39] "Matched on"                 "Confounders controlled for"
+    ## [41] "Pielou"                     "Shannon"                   
+    ## [43] "Chao1"                      "Simpson"                   
+    ## [45] "Inverse Simpson"            "Richness"                  
+    ## [47] "Signature page name"        "Source"                    
+    ## [49] "Curated date"               "Curator"                   
+    ## [51] "Revision editor"            "Description"               
+    ## [53] "Abundance in Group 1"       "MetaPhlAn taxon names"     
+    ## [55] "NCBI Taxonomy IDs"          "State"                     
+    ## [57] "Reviewer"
 
 ## Subsetting
 
@@ -248,7 +251,7 @@ bugSigSimple::createTaxonTable(subset.final, n = 20) %>%
 | Atopobium | genus | 1 | 0 | 1 | 1 |
 | Bacillota | phylum | 1 | 1 | 0 | 1 |
 | Bacilli | class | 1 | 1 | 0 | 1 |
-| Bacillales | order | 1 | 1 | 0 | 1 |
+| Caryophanales | order | 1 | 1 | 0 | 1 |
 | Bacillaceae | family | 1 | 1 | 0 | 1 |
 | Bacillus | genus | 1 | 1 | 0 | 1 |
 | Bacillus amyloliquefaciens | species | 1 | 1 | 0 | 1 |

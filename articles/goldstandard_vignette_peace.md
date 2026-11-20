@@ -40,7 +40,7 @@ full.dat <- bugsigdbr::importBugSigDB(cache = FALSE)
 dim(full.dat)
 ```
 
-    ## [1] 7425   51
+    ## [1] 12086    57
 
 The BugSigDB database was downloaded using the
 [`importBugSigDB()`](https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html)
@@ -60,7 +60,7 @@ dat <- full.dat[ind1 & ind2, ]
 dim(dat)
 ```
 
-    ## [1] 7425   51
+    ## [1] 12086    57
 
 Signatures without annotated taxa were removed to ensure that only
 complete microbial signatures were included in downstream analyses.
@@ -100,7 +100,7 @@ masld.dat <- dat %>%
 nrow(masld.dat)
 ```
 
-    ## [1] 43
+    ## [1] 185
 
 ``` r
 
@@ -108,9 +108,32 @@ masld.dat %>%
   count(Condition, sort = TRUE)
 ```
 
-    ##                           Condition  n
-    ## 1 Non-alcoholic fatty liver disease 37
-    ## 2     Non-alcoholic steatohepatitis  6
+    ##                                                                       Condition
+    ## 1                                             Non-alcoholic fatty liver disease
+    ## 2                                                 Non-alcoholic steatohepatitis
+    ## 3                                     Non-alcoholic fatty liver disease,Obesity
+    ## 4      Non-alcoholic fatty liver disease,Aspartate aminotransferase measurement
+    ## 5                    Non-alcoholic fatty liver disease,Hepatocellular carcinoma
+    ## 6  Non-alcoholic fatty liver disease,Serum alanine aminotransferase measurement
+    ## 7                        Non-alcoholic fatty liver disease severity measurement
+    ## 8                          Colorectal adenoma,Non-alcoholic fatty liver disease
+    ## 9                    Hepatocellular carcinoma,Non-alcoholic fatty liver disease
+    ## 10                         Non-alcoholic fatty liver disease,Colorectal adenoma
+    ## 11                 Non-alcoholic fatty liver disease,Inflammatory bowel disease
+    ## 12              Non-alcoholic steatohepatitis,Non-alcoholic fatty liver disease
+    ##      n
+    ## 1  102
+    ## 2   52
+    ## 3    6
+    ## 4    4
+    ## 5    4
+    ## 6    4
+    ## 7    3
+    ## 8    2
+    ## 9    2
+    ## 10   2
+    ## 11   2
+    ## 12   2
 
 To capture the complete body of evidence related to metabolic
 dysfunction-associated steatotic liver disease (MASLD), signatures were
@@ -132,7 +155,7 @@ masld.filtered <- masld.dat %>%
 nrow(masld.filtered)
 ```
 
-    ## [1] 43
+    ## [1] 185
 
 Exact duplicate records were removed using distinct() to reduce
 redundancy before downstream analyses. This step retains unique
@@ -152,10 +175,11 @@ knitr::kable(study.summary)
 
 | Body site                   | Sequencing type |   n |
 |:----------------------------|:----------------|----:|
-| Feces                       | 16S             |  35 |
+| Feces                       | 16S             | 115 |
 | Feces                       | PCR             |   2 |
-| Feces                       | WMS             |   3 |
+| Feces                       | WMS             |  63 |
 | Saliva                      | WMS             |   1 |
+| Supragingival dental plaque | 16S             |   2 |
 | Supragingival dental plaque | WMS             |   2 |
 
 The selected MASLD signatures span multiple studies and sequencing
@@ -173,14 +197,14 @@ head(taxa.table)
 ```
 
     ## # A tibble: 6 × 6
-    ##   `Taxon Name`       `Taxonomic Level` total_signatures increased_signatures
-    ##   <chr>              <chr>                        <int>                <int>
-    ## 1 Porphyromonadaceae family                           9                    3
-    ## 2 Bacteroides        genus                            7                    2
-    ## 3 Dorea              genus                            6                    4
-    ## 4 Roseburia          genus                            6                    3
-    ## 5 Prevotella         genus                            6                    2
-    ## 6 Alistipes          genus                            6                    2
+    ##   `Taxon Name`  `Taxonomic Level` total_signatures increased_signatures
+    ##   <chr>         <chr>                        <int>                <int>
+    ## 1 Alistipes     genus                           16                    5
+    ## 2 Bacteroides   genus                           15                    4
+    ## 3 Prevotella    genus                           15                    5
+    ## 4 Lactobacillus genus                           13                   10
+    ## 5 Megasphaera   genus                           13                    6
+    ## 6 Bacteroidota  phylum                          13                    2
     ## # ℹ 2 more variables: decreased_signatures <int>, `Binomial Test pval` <dbl>
 
 ``` r
@@ -190,16 +214,16 @@ knitr::kable(head(taxa.table,10))
 
 | Taxon Name | Taxonomic Level | total_signatures | increased_signatures | decreased_signatures | Binomial Test pval |
 |:---|:---|---:|---:|---:|---:|
-| Porphyromonadaceae | family | 9 | 3 | 6 | 0.510 |
-| Bacteroides | genus | 7 | 2 | 5 | 0.450 |
-| Dorea | genus | 6 | 4 | 2 | 0.690 |
-| Roseburia | genus | 6 | 3 | 3 | 1.000 |
-| Prevotella | genus | 6 | 2 | 4 | 0.690 |
-| Alistipes | genus | 6 | 2 | 4 | 0.690 |
-| Lactobacillus | genus | 5 | 4 | 1 | 0.370 |
-| Streptococcaceae | family | 5 | 2 | 3 | 1.000 |
-| Lachnoclostridium | genus | 5 | 5 | 0 | 0.062 |
-| Prevotellaceae | family | 5 | 1 | 4 | 0.370 |
+| Alistipes | genus | 16 | 5 | 11 | 0.21000 |
+| Bacteroides | genus | 15 | 4 | 11 | 0.12000 |
+| Prevotella | genus | 15 | 5 | 10 | 0.30000 |
+| Lactobacillus | genus | 13 | 10 | 3 | 0.09200 |
+| Megasphaera | genus | 13 | 6 | 7 | 1.00000 |
+| Bacteroidota | phylum | 13 | 2 | 11 | 0.02200 |
+| Oscillospiraceae | family | 12 | 0 | 12 | 0.00049 |
+| Prevotellaceae | family | 12 | 4 | 8 | 0.39000 |
+| Bacillota | phylum | 11 | 7 | 4 | 0.55000 |
+| Roseburia | genus | 11 | 4 | 7 | 0.55000 |
 
 The taxonomic summary identifies microorganisms that recur across
 MASLD-associated signatures. Frequently reported taxa may represent
@@ -222,59 +246,59 @@ criticalN
 
     ## $critical_n
     ## 95% 
-    ##  13 
+    ##  22 
     ## 
     ## $ci_lower
     ## 2.5% 
-    ##   12 
+    ##   22 
     ## 
     ## $ci_upper
     ## 97.5% 
-    ##    13 
+    ##    23 
     ## 
     ## $simulated_values
-    ##    [1]  9 13  9 12 10 11 10 12 11  8  8  8  8  7 11  8  8 10  7  8  9  9  8 12
-    ##   [25]  9  7 10 10 10  9  9 11  9  9 11 11 11  8  7  9 11  8 10  8  8  8 13 10
-    ##   [49]  9 11  9  9 10 10 14 10 11  9  7 10 10 13 10 10  8  9 12  8 12  7 14 11
-    ##   [73] 10 11 11  9  8 12 10  9  9  9 12 10  9 10  9  8 10 10 11  9  7  9 14 12
-    ##   [97] 10 12 11 10 11 13  9 10 10 10  8  8  8 10 11 12 10  8 13 10 11  9 10  8
-    ##  [121]  9 12  9  8 10  9 12 10  9 11  8 11 11 11 10  8 10 10  8  8 11  9 11 11
-    ##  [145]  8  9 12  7  9 10  8 10  9 13 10 10  8  7  9 10  8 10 11  8  9  9  7  8
-    ##  [169] 10 12  8 10 10  9 10 12  8  8 11 12  8  9  8  8  9  9  9 10 11  9  8 12
-    ##  [193] 11  9  9 11  8  7  8  9  9 10 10 12 12  8  9 10 10  9  8 12 10 10  8  9
-    ##  [217] 10 10 10 10 11  8 11  9 10  9  8 13  9 11 14 10 10 11  9  9 10 10  9 10
-    ##  [241]  9 10 12  9  9  9 11  7 12 10 13  9 10  9  9 10 10  9  8  7  8  7 10 11
-    ##  [265]  9 10 10 13  8  8 12 10  8 10  9 11 12 10 11 10  8  7  9 12  7 10 12 10
-    ##  [289]  9 12  9 10  8  8  8  9  9  9 10  9  9  8 10 10 10  8 11  9 10  9 10  8
-    ##  [313] 13 10 10  8  8 10 10 13  9 12  9  9  8 13  9 11  9  7  8 11  7  9 10 11
-    ##  [337]  8 10 10  8  8  9 11  9  9  8 12 12  9  9  9 10  8 11 13  8  9  9  8 11
-    ##  [361] 11  8 10 13 11  9 11 11  9  8  9  9 10  9 13 10  9  9 13  9  9  9 11  8
-    ##  [385] 11 10  8  9  9  9  9 12  7  9  8 13  8 10 10  9 10  8 10 10  7  9 11  8
-    ##  [409]  9 12 10  8 10 10  8  9  9 12  9  9  8  9  9  9  9 14 10 10 13  8 12  9
-    ##  [433] 10  9  7  9 11  8 11  9 10 11 12 11  8  7  9  8  9  8  9  9  8 10  8 13
-    ##  [457] 12 11 14 14 10  8  8 11  8 12 11  9  7  9  9  7  9  8  7 11 10 10 11  8
-    ##  [481] 10 12  9  9 10  8  8  9 10  9 11 14  9  9 10 10 12 10 10 10 10  8  9 11
-    ##  [505]  8 10  9 10  9  9 10 10  9  8 10  8 11 11 13 10 10  7  9  8 10  8 11 10
-    ##  [529] 10  9 12  9  9  9  9 11 12 10 10 10 12  9 11  7  8  9  8 10  9  8 12 12
-    ##  [553] 13  8  8 12  9 10  9  8 10  9 11 11  8  8  9  9  9  8  8  9 11  8 10  9
-    ##  [577]  9  8 13 10  8 10 10 10 11 10 10 16  8 10  9 10 13  9  8 12  8  9 11 10
-    ##  [601] 13 10 11  9 11  8  8  9 11 11 10 12 11  8  8 10  8  7 10 11 10 10  8  8
-    ##  [625] 10  9 12  7  7 10 10 10 10 10 11  9  9  9  8 12 10  9 13  9 11  9  9  9
-    ##  [649]  8 12  8 10 14 11 10  8  9 11  9 12  9  9  9 10  8  8  9 10  8 10 12  9
-    ##  [673]  9 10  9 11  8  9 10  9 10 11  8  9 10 10  7 10  8  8 11  8 11  9  8  9
-    ##  [697]  9 11  7 11 10 15 10 10  8 12 11 11  8 10  9  9 11  8  9 10  7  9  8  8
-    ##  [721]  7  8  7 11  9  8  7  7 10 13  9  9 13  8  8  8 10 10  8  7  9  9 12 14
-    ##  [745]  8  9  7  8  8 11 11  7  8  9 13 10 11 10 11  9 10 12 10  8 10  8 12 10
-    ##  [769]  8 15 10 10  8  9 11  8  9  9  9 10 10  7 10 10 11 12  8  8  9 12  8 11
-    ##  [793] 10 10 10  9 14  8 10 11  9 10 13  8  8  8  9  9  9  9 13 10 13 11 13  9
-    ##  [817]  8  9 11 10  9  9 10 10  8  9  9  9 10 10 10 12  8 10  9 12  9 15  9  9
-    ##  [841] 13  8 10  8 10  9  9 10 12  9  9  7 11 11  9 10 11 11  8  9  9  8  8 10
-    ##  [865]  9  9  8  8  8 10  9  9 10  9 10  9  7  9  9 10  8  9  8  9  9  8 16 10
-    ##  [889] 11  9  9  9  8  9 10  9  9  8 11 14  8  8 11  8  7 11 12 10 12  8 11  8
-    ##  [913] 11  8  9 11  9 10  8  9  8 12  8 10  9 10 10 11  8  9 13  9  9  9 12  7
-    ##  [937] 11  9 11  8  7  9  9 10  9  7  9 13  9  9 11  9 13  9 10 12 11 10 12 10
-    ##  [961]  9  9 11  9  9 10 11  9 10 10  8  8 11 10 10 11 12  9  9  8  8  8  8 12
-    ##  [985]  8 11  9 12  9 13  9  9 10  9 10 10 10 10 11 10
+    ##    [1] 19 19 17 18 17 16 19 18 17 16 17 17 19 20 20 17 22 18 19 18 19 18 19 21
+    ##   [25] 23 21 16 16 20 19 17 17 18 18 19 24 15 16 19 20 20 15 19 18 17 15 18 20
+    ##   [49] 17 16 18 22 17 16 18 17 22 19 16 18 17 21 20 20 16 18 19 17 19 20 23 21
+    ##   [73] 17 16 16 21 18 20 16 17 20 15 19 21 17 21 24 16 16 22 21 17 22 21 16 16
+    ##   [97] 16 16 17 18 14 18 17 17 14 17 20 17 20 18 14 15 21 22 16 16 15 21 19 16
+    ##  [121] 14 17 18 23 22 17 18 17 18 20 24 15 22 23 20 15 17 18 18 21 15 17 18 17
+    ##  [145] 17 17 21 21 21 21 19 24 19 23 18 18 20 18 17 19 21 19 19 17 17 20 19 17
+    ##  [169] 18 20 18 17 16 21 23 17 16 15 15 14 20 18 18 19 19 17 20 22 17 18 21 16
+    ##  [193] 18 18 16 18 18 21 17 18 19 20 18 16 20 23 19 22 19 17 20 21 19 16 18 16
+    ##  [217] 14 16 20 19 22 17 23 16 20 20 17 18 20 17 17 19 19 20 17 18 17 22 16 21
+    ##  [241] 18 16 20 16 15 22 17 20 15 19 16 19 16 21 16 23 18 17 20 17 17 20 21 20
+    ##  [265] 17 19 20 19 16 16 20 23 21 18 18 16 15 21 15 16 21 14 19 15 21 16 16 16
+    ##  [289] 16 17 17 15 17 18 18 18 18 22 19 20 20 18 21 21 19 15 18 17 20 15 17 19
+    ##  [313] 19 20 18 19 19 16 18 18 21 20 23 22 18 20 20 17 17 14 19 15 20 16 20 17
+    ##  [337] 21 17 20 18 23 18 19 18 20 20 20 21 21 17 16 15 17 23 17 17 17 17 19 17
+    ##  [361] 21 21 15 15 17 17 19 17 19 18 18 16 17 17 16 18 23 15 26 16 18 19 18 19
+    ##  [385] 19 18 20 19 16 15 22 17 17 22 18 16 20 16 17 22 16 18 19 18 22 17 15 16
+    ##  [409] 21 18 16 21 16 23 22 22 21 20 18 20 18 22 17 22 17 18 14 16 18 21 17 16
+    ##  [433] 18 14 15 20 15 19 19 21 15 16 22 16 17 18 16 18 18 17 21 18 16 21 22 18
+    ##  [457] 19 16 19 19 17 19 20 20 16 16 20 18 19 23 19 20 20 16 21 18 17 22 18 19
+    ##  [481] 18 21 19 21 16 19 17 16 17 19 15 18 18 16 21 19 19 18 22 18 21 17 19 16
+    ##  [505] 18 15 17 16 23 15 20 20 23 19 23 17 22 20 19 17 17 24 20 19 23 19 18 21
+    ##  [529] 21 18 19 17 21 16 18 18 15 22 19 18 16 15 15 15 16 23 16 17 15 19 19 19
+    ##  [553] 20 23 17 17 21 17 15 18 21 25 18 18 16 17 17 18 24 15 21 22 22 19 18 16
+    ##  [577] 22 16 16 22 19 21 19 20 19 18 17 18 17 16 18 17 17 16 16 22 16 16 17 15
+    ##  [601] 20 20 18 15 16 21 18 20 19 17 16 21 16 22 17 25 16 21 17 19 19 20 16 21
+    ##  [625] 18 14 19 20 21 18 18 21 17 24 19 16 18 17 16 16 17 18 20 15 18 16 19 16
+    ##  [649] 18 18 18 16 19 17 16 20 18 18 18 17 18 20 17 20 20 19 22 16 16 17 17 17
+    ##  [673] 17 18 20 18 20 17 20 16 15 17 18 18 21 19 22 22 19 17 16 16 17 16 18 17
+    ##  [697] 20 16 17 18 21 16 22 14 20 19 17 17 22 17 17 16 21 16 20 16 22 18 22 19
+    ##  [721] 21 22 17 18 21 20 15 18 20 14 17 18 18 17 17 24 18 16 18 15 17 16 20 19
+    ##  [745] 17 16 18 17 19 25 17 20 16 15 19 17 16 18 17 21 18 15 19 19 18 17 17 17
+    ##  [769] 16 18 19 24 17 20 18 17 16 19 16 20 17 14 17 19 26 20 21 19 17 22 23 20
+    ##  [793] 21 16 18 20 17 20 21 16 20 16 16 17 17 18 21 20 20 22 18 17 17 20 20 17
+    ##  [817] 19 22 16 17 17 18 15 20 21 20 16 18 17 22 17 17 20 20 19 17 18 16 19 22
+    ##  [841] 23 22 17 18 15 21 18 17 19 17 20 17 19 16 17 20 20 14 17 16 16 20 17 17
+    ##  [865] 17 18 16 16 24 15 18 22 16 15 16 15 19 21 16 24 20 19 18 18 15 19 17 18
+    ##  [889] 25 15 20 26 19 16 17 18 18 18 20 21 19 19 20 15 19 16 18 19 18 15 16 19
+    ##  [913] 20 18 18 20 17 16 23 21 23 17 20 18 19 18 19 20 21 22 20 16 23 18 14 20
+    ##  [937] 16 16 16 16 17 22 16 16 16 19 21 18 24 22 17 20 23 17 18 17 21 20 21 19
+    ##  [961] 27 16 18 20 18 22 18 18 18 18 20 15 15 17 17 20 16 17 16 21 18 23 20 20
+    ##  [985] 20 19 19 17 15 19 19 18 18 18 17 16 18 15 18 16
     ## 
     ## $alpha
     ## [1] 0.05
@@ -325,7 +349,7 @@ allsigs <- allsigs[sapply(allsigs, length) > 1]
 length(allsigs)
 ```
 
-    ## [1] 39
+    ## [1] 153
 
 ``` r
 
@@ -335,7 +359,7 @@ mydists <- BugSigDBStats::calcPairwiseOverlaps(allsigs)
 dim(mydists)
 ```
 
-    ## [1] 144   8
+    ## [1] 1477    8
 
 ``` r
 

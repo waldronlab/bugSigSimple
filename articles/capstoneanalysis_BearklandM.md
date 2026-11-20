@@ -36,7 +36,7 @@ dat <- bugsigdbr::importBugSigDB(version = "devel", cache = FALSE)
 dim(dat)
 ```
 
-    ## [1] 17053    57
+    ## [1] 17446    57
 
 Examine the data pulled in to view variable names
 
@@ -285,10 +285,10 @@ efo<-getOntology("efo")
 efo
 ```
 
-    ## Ontology with 84814 terms
+    ## Ontology with 84853 terms
     ## 
     ## format-version: 1.2
-    ## data-version: http://www.ebi.ac.uk/efo/releases/v3.95.0/efo.owl
+    ## data-version: http://www.ebi.ac.uk/efo/releases/v3.96.0/efo.owl
     ## ontology: http://www.ebi.ac.uk/efo/efo.owl
     ## 
     ## Properties:

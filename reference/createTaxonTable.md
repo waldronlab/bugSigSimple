@@ -37,30 +37,30 @@ Can be wrapped in kable_styling(kbl(...)) to format nicely.
 
 ``` r
 full.dat <- bugsigdbr::importBugSigDB()
-#> Using cached version from 2026-11-09 16:28:46
+#> Using cached version from 2026-11-20 02:47:35
 createTaxonTable(full.dat, n=20)
 #> # A tibble: 20 × 6
 #>    `Taxon Name`     `Taxonomic Level` total_signatures increased_signatures
 #>    <chr>            <chr>                        <int>                <int>
-#>  1 Bacteroides      genus                          597                  301
-#>  2 Streptococcus    genus                          580                  376
-#>  3 Lachnospiraceae  family                         579                  268
-#>  4 Prevotella       genus                          568                  296
-#>  5 Lactobacillus    genus                          531                  305
-#>  6 Bacillota        phylum                         459                  237
-#>  7 Faecalibacterium genus                          442                  161
-#>  8 Oscillospiraceae family                         441                  220
-#>  9 Clostridium      genus                          410                  224
-#> 10 Bifidobacterium  genus                          408                  213
-#> 11 Blautia          genus                          384                  180
-#> 12 Pseudomonadota   phylum                         366                  238
-#> 13 Bacteroidota     phylum                         365                  180
-#> 14 Actinomycetota   phylum                         362                  190
-#> 15 Ruminococcus     genus                          353                  155
-#> 16 Roseburia        genus                          345                  118
-#> 17 Eubacteriales    order                          342                  160
-#> 18 Veillonella      genus                          337                  215
-#> 19 Parabacteroides  genus                          319                  178
-#> 20 Haemophilus      genus                          318                  152
+#>  1 Bacteroides      genus                          987                  500
+#>  2 Streptococcus    genus                          945                  593
+#>  3 Prevotella       genus                          926                  496
+#>  4 Lachnospiraceae  family                         856                  402
+#>  5 Lactobacillus    genus                          810                  484
+#>  6 Bacillota        phylum                         751                  362
+#>  7 Oscillospiraceae family                         736                  365
+#>  8 Bifidobacterium  genus                          694                  383
+#>  9 Faecalibacterium genus                          665                  241
+#> 10 Blautia          genus                          623                  285
+#> 11 Bacteroidota     phylum                         612                  300
+#> 12 Pseudomonadota   phylum                         598                  389
+#> 13 Clostridium      genus                          586                  304
+#> 14 Actinomycetota   phylum                         577                  304
+#> 15 Veillonella      genus                          548                  326
+#> 16 Ruminococcus     genus                          539                  237
+#> 17 Roseburia        genus                          533                  186
+#> 18 Eubacteriales    order                          518                  245
+#> 19 Parabacteroides  genus                          502                  285
+#> 20 Fusobacterium    genus                          485                  296
 #> # ℹ 2 more variables: decreased_signatures <int>, `Binomial Test pval` <dbl>
 ```

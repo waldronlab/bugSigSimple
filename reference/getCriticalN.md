@@ -66,25 +66,19 @@ identified N times or more.
 
 ``` r
 full.dat <- bugsigdbr::importBugSigDB()
-#> Using cached version from 2026-11-09 16:28:46
+#> Using cached version from 2026-11-20 02:47:35
 my.dat <- full.dat[full.dat$Curator == "Mst Afroza Parvin", ]
 relevant.dat <- full.dat[full.dat$`Body site` %in% my.dat$`Body site`, ]
 relevant.sigs <- bugsigdbr::getSignatures(my.dat)
 my.sigs.increased <- relevant.sigs[grep("UP", names(relevant.sigs))]
 (my.siglengths <- sapply(my.sigs.increased, length))
+#>                                                                                                                                      bsdb:19849869/1/1_Obesity:Obese-(OB)_vs_Non-obese-(NOB)_UP 
+#>                                                                                                                                                                                               1 
 #>                                                                                                                  bsdb:22546742/1/1_Obesity:overweight/obese_vs_control-(BMI-at-normal-range)_UP 
 #>                                                                                                                                                                                               1 
 #>                                                                                                                               bsdb:23459324/4/1_Obesity:overweight-subjects_vs_lean-subjects_UP 
 #>                                                                                                                                                                                               1 
 #>                                                                                            bsdb:23631345/1/1_Obesity:obese-(obese/overweight/morbidly-obese)_vs_control-(lean/normal-weight)_UP 
-#>                                                                                                                                                                                               1 
-#>                                                              bsdb:25444008/1/1_Premature-birth:2-day-old-Pre-term-infants_vs_2-day-old-Full-term-infants(born-after-uncomplicated-pregnancy)_UP 
-#>                                                                                                                                                                                               7 
-#>                                                                    bsdb:25444008/2/1_Premature-birth:10-day-old-Pre-term_vs_10-day-old-Full-term-infants(born-after-uncomplicated-pregnancy)_UP 
-#>                                                                                                                                                                                               3 
-#>                                                                                  bsdb:25444008/3/1_Premature-birth:30-and-90-day-old-Pre-term-infants_vs_30-and-90-day-old-Full-term-infants_UP 
-#>                                                                                                                                                                                               1 
-#>      bsdb:25444008/9/1_Antimicrobial-agent:30-day-old-pre-tem-neonates-with-mothers-exposed-to-antibiotics-(IAP)_vs_30-day-old-full-term-neonates-not-exposed-to-antibiotics-(IAP/postnatal)_UP 
 #>                                                                                                                                                                                               1 
 #>                                                                                                                                    bsdb:26551842/1/1_Obesity:obese-children_vs_lean-children_UP 
 #>                                                                                                                                                                                               2 
@@ -155,9 +149,9 @@ my.sigs.increased <- relevant.sigs[grep("UP", names(relevant.sigs))]
 cn_res <- getCriticalN(relevant.sigs, my.siglengths)
 cn_res$critical_n
 #> 95% 
-#>   9 
+#>   8 
 # Compare to observed
 frequencySigs(my.sigs.increased)
-#>   1578    976   1239   1591  39778    543   1350   1485 201174  31979 
-#>      5      5      4      4      4      4      3      3      3      3 
+#>  1578   976  1239  1591 39778  1350  1485 31979 33042   817 
+#>     5     5     4     4     4     3     3     3     3     3 
 ```

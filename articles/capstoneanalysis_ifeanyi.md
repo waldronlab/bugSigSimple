@@ -76,7 +76,7 @@ dat <- bugsigdbr::importBugSigDB(cache = FALSE) #11/27/2022
 dim(dat)
 ```
 
-    ## [1] 7425   51
+    ## [1] 12086    57
 
 ## Subset Signatures by Curator and Conditions
 
@@ -118,13 +118,13 @@ bugSigSimple::createStudyTable(dat.sub) %>%
 | AngQ.Y.\_2021 | 22 | 24 | cross-sectional observational, not case-control | ethnic group | 2 | 34617511 | <https://doi.org/10.7554/eLife.70349> | <https://pubmed.ncbi.nlm.nih.gov/34617511> |
 | BalakrishnanB.\_2021 | 30 | 30 | cross-sectional observational, not case-control | ethnic group; socioeconomic status | 3 | 33596768 | <https://doi.org/10.1080/19490976.2021.1882926> | NA |
 | BrooksA.W.\_2018 | 88 | 1237 | cross-sectional observational, not case-control | ethnic group | 12 | 30513082 | <https://doi.org/10.1371/journal.pbio.2006842> | <https://pubmed.ncbi.nlm.nih.gov/30513082/> |
-| CarsonT.L.\_2018 | 47 | 33 | cross-sectional observational, not case-control | ethnic group | 1 | 29901485 | <https://doi.org/10.1097/PSY.0000000000000614>. | <https://pubmed.ncbi.nlm.nih.gov/29901485/> |
+| CarsonT.L.\_2018 | 47 | 33 | cross-sectional observational, not case-control | ethnic group | 1 | 29901485 | <https://doi.org/10.1097/PSY.0000000000000614> | <https://pubmed.ncbi.nlm.nih.gov/29901485/> |
 | ChongC.W.\_2015 | 20 | 24 | cross-sectional observational, not case-control | socioeconomic status | 4 | 26290472 | <https://doi.org/10.1038/srep13338> | <https://pubmed.ncbi.nlm.nih.gov/26290472/> |
 | DeFilippoC.\_2010 | 14 | 15 | cross-sectional observational, not case-control | place of residence measurement,ethnic group | 2 | 20679230 | <https://doi.org/10.1073/pnas.1005963107> | <https://pubmed.ncbi.nlm.nih.gov/20679230/> |
 | DwiyantoJ.\_2021 | 54 | 65 | cross-sectional observational, not case-control | ethnic group | 9 | 33514807 | <https://doi.org/10.1038/s41598-021-82311-3> | <https://pubmed.ncbi.nlm.nih.gov/33514807/> |
 | EscobarJ.S.\_2014 | 30 | 54 | cross-sectional observational, not case-control | ethnic group | 6 | 25495462 | <https://doi.org/10.1186/s12866-014-0311-6> | <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4275940/> |
 | GreenhillA.R.\_2015 | 86 | 29 | cross-sectional observational, not case-control | socioeconomic status | 1 | 25658868 | <https://doi.org/10.1371/journal.pone.0117427> | <https://pubmed.ncbi.nlm.nih.gov/25658868/> |
-| GrześkowiakŁ.\_2012 | 44 | 31 | cross-sectional observational, not case-control | socioeconomic status | 2 | 22228076 | <https://doi.org/10.1097/MPG.0b013e318249039c>. | <https://pubmed.ncbi.nlm.nih.gov/22228076/> |
+| GrześkowiakŁ.\_2012 | 44 | 31 | cross-sectional observational, not case-control | socioeconomic status | 2 | 22228076 | <https://doi.org/10.1097/MPG.0b013e318249039c> | <https://pubmed.ncbi.nlm.nih.gov/22228076/> |
 | KortekangasE.\_2020 | NA | NA | prospective cohort | sampling time | 2 | 32011017 | <https://doi.org/10.1111/ppe.12623> | NA |
 | LapidotY.\_2021 | 70 | 69 | cross-sectional observational, not case-control | socioeconomic status | 2 | 34444813 | <https://doi.org/10.3390/nu13082645> | <https://pubmed.ncbi.nlm.nih.gov/34444813/> |
 | LevinA.M.\_2016 | 168 | 130 | prospective cohort | risk factor | 2 | 27558272 | <https://doi.org/10.1038/srep31775> | NA |
@@ -141,7 +141,7 @@ dat.sub_SES <- filter(dat.sub, dat.sub$Condition == "socioeconomic status")
 dim(dat.sub_SES)
 ```
 
-    ## [1] 19 51
+    ## [1] 19 57
 
 ``` r
 
@@ -171,7 +171,7 @@ dat.sub_ethnic <- dat.sub %>% filter(dat.sub$Condition == "ethnic group")
 dim(dat.sub_ethnic)
 ```
 
-    ## [1] 31 51
+    ## [1] 31 57
 
 ``` r
 
@@ -349,7 +349,7 @@ cdf <- cbind(dat_withsigs, cdf)
 dim(cdf)
 ```
 
-    ## [1]  19 122
+    ## [1]  19 128
 
 An arbitrary example of meta-regression:
 
@@ -393,11 +393,11 @@ jtools::summ(fit)
 | `Location of subjects`Finland,Malawi           |   0.00 | 409099.66 |   0.00 | 1.00 |
 | `Location of subjects`Indonesia                |  50.34 | 240037.20 |   0.00 | 1.00 |
 | `Location of subjects`Israel                   |  50.34 | 240037.20 |   0.00 | 1.00 |
-| `Location of subjects`Malaysia                 |   0.00 | 250521.36 |   0.00 | 1.00 |
+| `Location of subjects`Malaysia                 |  -0.00 | 250521.36 |  -0.00 | 1.00 |
 | `Location of subjects`Mexico                   |  50.34 | 240037.20 |   0.00 | 1.00 |
 | `Location of subjects`Papua New Guinea         |  48.67 | 429466.83 |   0.00 | 1.00 |
-| `Location of subjects`United States of America |   0.00 | 289277.14 |   0.00 | 1.00 |
-| `Sequencing type`WMS                           |  -0.00 | 289277.14 |  -0.00 | 1.00 |
+| `Location of subjects`United States of America |  -0.00 | 289277.14 |  -0.00 | 1.00 |
+| `Sequencing type`WMS                           |   0.00 | 289277.14 |   0.00 | 1.00 |
 | `Abundance in Group 1`increased                | -49.77 | 125607.00 |  -0.00 | 1.00 |
 |  Standard errors: MLE                          |        |           |        |      |
 
@@ -511,15 +511,15 @@ cdfe <- cbind(dat_withsigse, cdfe)
 colnames(cdfe)[1:25]
 ```
 
-    ##  [1] "BSDB ID"               "Study"                 "Study design"         
-    ##  [4] "PMID"                  "DOI"                   "URL"                  
-    ##  [7] "Authors list"          "Title"                 "Journal"              
-    ## [10] "Year"                  "Keywords"              "Experiment"           
-    ## [13] "Location of subjects"  "Host species"          "Body site"            
-    ## [16] "UBERON ID"             "Condition"             "EFO ID"               
-    ## [19] "Group 0 name"          "Group 1 name"          "Group 1 definition"   
-    ## [22] "Group 0 sample size"   "Group 1 sample size"   "Antibiotics exclusion"
-    ## [25] "Sequencing type"
+    ##  [1] "BSDB ID"              "Study"                "Study design"        
+    ##  [4] "PMID"                 "DOI"                  "URL"                 
+    ##  [7] "Authors list"         "Title"                "Journal"             
+    ## [10] "Year"                 "Keywords"             "Curation method"     
+    ## [13] "Curation protocol"    "submittedBy"          "submissionDate"      
+    ## [16] "Review state"         "Quality control tag"  "Experiment"          
+    ## [19] "Location of subjects" "Host species"         "Body site"           
+    ## [22] "UBERON ID"            "Condition"            "EFO ID"              
+    ## [25] "Group 0 name"
 
 ## Create another heatmap on correlations of presence/absence of taxa.
 

@@ -59,7 +59,7 @@ pregnancy_dat <- dat %>%
 nrow(pregnancy_dat)
 ```
 
-    ## [1] 232
+    ## [1] 332
 
 ``` r
 
@@ -70,22 +70,22 @@ pregnancy_dat %>%
 
 | Condition                                  |   n |
 |:-------------------------------------------|----:|
-| Gestational diabetes                       |  71 |
-| Cesarean section                           |  29 |
-| Breastfeeding duration                     |  22 |
-| Delivery method                            |  21 |
-| Pregnancy                                  |  17 |
-| HIV mother to child transmission           |  15 |
-| Birth measurement                          |  11 |
-| Premature birth                            |  11 |
-| Spontaneous preterm birth                  |  10 |
+| Gestational diabetes                       | 103 |
+| Pregnancy                                  |  51 |
+| Cesarean section                           |  33 |
+| Breastfeeding duration                     |  32 |
+| Maternal milk                              |  22 |
+| Spontaneous preterm birth                  |  22 |
+| HIV mother to child transmission           |  18 |
+| Premature birth                            |  15 |
+| Birth measurement                          |   9 |
+| Gestational age                            |   5 |
 | Postnatal growth retardation               |   5 |
-| Gestational age                            |   4 |
+| Necrotizing enterocolitis                  |   4 |
 | Neonatal jaundice                          |   4 |
 | Preterm premature rupture of the membranes |   4 |
-| Necrotizing enterocolitis                  |   3 |
 | Breastfeeding duration,Transport           |   2 |
-| Maternal milk                              |   2 |
+| Neonatal death                             |   2 |
 | Birth weight                               |   1 |
 
 ### Breakdown by Internal Grouping
@@ -109,9 +109,9 @@ pregnancy_dat %>%
 
 | subgroup                     |   n |
 |:-----------------------------|----:|
-| Neonatal/Mother-to-Child     | 103 |
-| Vaginal/Gut During Pregnancy |  92 |
-| Preterm Birth                |  37 |
+| Vaginal/Gut During Pregnancy | 159 |
+| Neonatal/Mother-to-Child     | 122 |
+| Preterm Birth                |  51 |
 
 Signatures per Internal Grouping {.table}
 
@@ -130,27 +130,31 @@ knitr::kable(study.summary)
 | Anterior fornix of vagina,Lateral fornix of vagina,Uterine cervix | 16S | 2 |
 | Cervical mucus | 16S | 2 |
 | Colostrum | 16S | 3 |
-| Feces | 16S | 120 |
+| Feces | 16S | 167 |
 | Feces | ITS / ITS2 | 3 |
-| Feces | PCR | 1 |
-| Feces | WMS | 8 |
+| Feces | WMS | 16 |
+| Feces,Meconium | 16S | 2 |
 | Feces,Saliva,Anterior naris,Posterior fornix of vagina,Epithelium of elbow | 16S | 2 |
+| Mammary gland | 16S | 1 |
+| Marsupium | 16S | 2 |
 | Meconium | 16S | 24 |
 | Meconium | WMS | 2 |
-| Meconium,Feces | 16S | 4 |
-| Milk | 16S | 10 |
+| Milk | 16S | 15 |
+| Milk | WMS | 2 |
 | Mucosa of small intestine | 16S | 2 |
 | Nasopharynx | WMS | 2 |
-| Oral cavity | 16S | 2 |
+| Oral cavity | 16S | 4 |
 | Placenta | 16S | 2 |
 | Posterior fornix of vagina | 16S | 11 |
-| Posterior fornix of vagina,External cervical os | WMS | 6 |
+| Posterior fornix of vagina,External cervical os | WMS | 10 |
 | Rectum | 16S | 4 |
-| Saliva | 16S | 2 |
+| Saliva | 16S | 3 |
 | Subgingival dental plaque | 16S | 2 |
+| Supragingival dental plaque | 16S | 5 |
+| Uterine cervix,Endometrium | 16S | 2 |
 | Uterus | 16S | 2 |
-| Vagina | 16S | 12 |
-| Vagina | WMS | 4 |
+| Vagina | 16S | 29 |
+| Vagina | WMS | 11 |
 
 ``` r
 
@@ -163,17 +167,17 @@ pregnancy_dat %>%
 | Year |   n |
 |-----:|----:|
 | 2014 |   3 |
-| 2015 |   9 |
-| 2016 |   9 |
-| 2017 |  17 |
-| 2018 |  44 |
-| 2019 |   8 |
-| 2020 |  16 |
-| 2021 |  10 |
-| 2022 |  58 |
-| 2023 |   9 |
-| 2024 |  22 |
-| 2025 |  27 |
+| 2016 |   8 |
+| 2017 |  18 |
+| 2018 |  56 |
+| 2019 |  27 |
+| 2020 |  45 |
+| 2021 |  16 |
+| 2022 |  63 |
+| 2023 |  17 |
+| 2024 |  30 |
+| 2025 |  46 |
+| 2026 |   3 |
 
 ``` r
 
@@ -270,16 +274,16 @@ knitr::kable(head(taxa.table, 20))
 
 | Taxon Name | Taxonomic Level | total_signatures | increased_signatures | decreased_signatures | Binomial Test pval |
 |:---|:---|---:|---:|---:|---:|
-| Bacteroides | genus | 33 | 19 | 14 | 0.4900 |
-| Lactobacillus | genus | 26 | 15 | 11 | 0.5600 |
-| Faecalibacterium | genus | 22 | 11 | 11 | 1.0000 |
-| Veillonella | genus | 22 | 10 | 12 | 0.8300 |
-| Staphylococcus | genus | 21 | 11 | 10 | 1.0000 |
-| Streptococcus | genus | 21 | 9 | 12 | 0.6600 |
-| Bifidobacterium | genus | 19 | 16 | 3 | 0.0044 |
-| Bacillota | phylum | 18 | 13 | 5 | 0.0960 |
-| Blautia | genus | 18 | 13 | 5 | 0.0960 |
-| Prevotella | genus | 18 | 7 | 11 | 0.4800 |
+| Bacteroides | genus | 41 | 19 | 22 | 7.6e-01 |
+| Streptococcus | genus | 37 | 19 | 18 | 1.0e+00 |
+| Veillonella | genus | 37 | 13 | 24 | 9.9e-02 |
+| Bifidobacterium | genus | 33 | 28 | 5 | 6.6e-05 |
+| Lactobacillus | genus | 33 | 18 | 15 | 7.3e-01 |
+| Faecalibacterium | genus | 31 | 17 | 14 | 7.2e-01 |
+| Staphylococcus | genus | 28 | 15 | 13 | 8.5e-01 |
+| Prevotella | genus | 28 | 11 | 17 | 3.4e-01 |
+| Blautia | genus | 23 | 17 | 6 | 3.5e-02 |
+| Bacillota | phylum | 21 | 14 | 7 | 1.9e-01 |
 
 ## Split by Sequencing Type
 
@@ -291,14 +295,14 @@ preg.16s <- pregnancy_dat %>% filter(`Sequencing type` == "16S")
 cat("WMS  - signatures:", nrow(preg.wms), "| studies:", n_distinct(preg.wms$PMID), "\n")
 ```
 
-    ## WMS  - signatures: 22 | studies: 5
+    ## WMS  - signatures: 43 | studies: 9
 
 ``` r
 
 cat("16S  - signatures:", nrow(preg.16s), "| studies:", n_distinct(preg.16s$PMID), "\n")
 ```
 
-    ## 16S  - signatures: 206 | studies: 45
+    ## 16S  - signatures: 286 | studies: 67
 
 ## Long-Format Taxon Table
 
@@ -323,7 +327,7 @@ taxon.long <- purrr::map_dfr(seq_along(sigs.all), function(i) {
 nrow(taxon.long)
 ```
 
-    ## [1] 58971
+    ## [1] 96257
 
 ## Taxon Frequency Across Studies
 
@@ -341,7 +345,7 @@ taxon.freq <- taxon.long %>%
 n_distinct(taxon.freq$taxon)
 ```
 
-    ## [1] 793
+    ## [1] 1005
 
 ``` r
 
@@ -351,24 +355,23 @@ taxon.freq %>%
   knitr::kable()
 ```
 
-| taxon               | total_studies |
-|:--------------------|--------------:|
-| Bacillota           |            17 |
-| Bacteroides         |            17 |
-| Veillonella         |            17 |
-| Prevotella          |            16 |
-| Streptococcus       |            16 |
-| Actinomycetota      |            15 |
-| Bifidobacterium     |            15 |
-| Lactobacillus       |            15 |
-| Blautia             |            14 |
-| Lachnospiraceae     |            13 |
-| Oscillospiraceae    |            13 |
-| Erysipelotrichaceae |            12 |
-| Faecalibacterium    |            12 |
-| Haemophilus         |            12 |
-| Eubacteriales       |            11 |
-| Ruminococcus        |            11 |
+| taxon            | total_studies |
+|:-----------------|--------------:|
+| Streptococcus    |            30 |
+| Bacteroides      |            26 |
+| Prevotella       |            25 |
+| Lachnospiraceae  |            23 |
+| Blautia          |            19 |
+| Clostridium      |            19 |
+| Lactobacillus    |            19 |
+| Bifidobacterium  |            18 |
+| Faecalibacterium |            18 |
+| Roseburia        |            16 |
+| Staphylococcus   |            16 |
+| Actinomycetota   |            15 |
+| Bacillota        |            15 |
+| Haemophilus      |            15 |
+| Ruminococcus     |            15 |
 
 ## Core Consensus Signature
 
@@ -397,7 +400,7 @@ core.sig <- concordance %>%
 nrow(core.sig)
 ```
 
-    ## [1] 65
+    ## [1] 93
 
 ``` r
 
@@ -406,71 +409,99 @@ knitr::kable(core.sig)
 
 | taxon | n_studies | n_increased | n_decreased | concordance_pct | majority_dir |
 |:---|---:|---:|---:|---:|:---|
-| Actinomycetota | 13 | 5 | 10 | 76.9 | decreased |
-| Prevotella | 12 | 5 | 11 | 91.7 | decreased |
-| Blautia | 11 | 5 | 9 | 81.8 | decreased |
-| Coprococcus | 7 | 3 | 6 | 85.7 | decreased |
-| Bacteroidota | 6 | 2 | 5 | 83.3 | decreased |
-| Actinomycetales | 5 | 1 | 4 | 80.0 | decreased |
-| Bacteroidia | 4 | 0 | 4 | 100.0 | decreased |
-| Prevotellaceae | 4 | 0 | 4 | 100.0 | decreased |
-| Actinomycetaceae | 4 | 1 | 3 | 75.0 | decreased |
-| Alloprevotella | 4 | 2 | 3 | 75.0 | decreased |
-| Bacteroidaceae | 4 | 2 | 3 | 75.0 | decreased |
-| Bilophila | 4 | 1 | 3 | 75.0 | decreased |
-| Dialister | 4 | 1 | 3 | 75.0 | decreased |
-| Finegoldia | 4 | 2 | 3 | 75.0 | decreased |
-| Flavonifractor | 4 | 2 | 3 | 75.0 | decreased |
-| Odoribacter | 4 | 2 | 3 | 75.0 | decreased |
-| Peptococcaceae | 4 | 1 | 3 | 75.0 | decreased |
-| Sutterella | 4 | 2 | 3 | 75.0 | decreased |
-| Anaerococcus | 3 | 0 | 3 | 100.0 | decreased |
-| Bacteroidales | 3 | 0 | 3 | 100.0 | decreased |
-| Butyricicoccus | 3 | 0 | 3 | 100.0 | decreased |
-| Faecalibacterium prausnitzii | 3 | 1 | 3 | 100.0 | decreased |
-| Lachnospira | 3 | 0 | 3 | 100.0 | decreased |
-| Mogibacterium | 3 | 0 | 3 | 100.0 | decreased |
-| Negativicutes | 3 | 1 | 3 | 100.0 | decreased |
-| Phyllobacterium | 3 | 0 | 3 | 100.0 | decreased |
-| Bacteroides | 13 | 12 | 5 | 92.3 | increased |
-| Veillonella | 13 | 10 | 7 | 76.9 | increased |
-| Enterococcus | 10 | 8 | 2 | 80.0 | increased |
-| Faecalibacterium | 10 | 8 | 4 | 80.0 | increased |
-| Pseudomonadota | 10 | 8 | 2 | 80.0 | increased |
-| Bifidobacteriaceae | 8 | 7 | 3 | 87.5 | increased |
-| Clostridium | 8 | 6 | 4 | 75.0 | increased |
-| Corynebacterium | 8 | 6 | 3 | 75.0 | increased |
-| Enterobacteriaceae | 8 | 6 | 2 | 75.0 | increased |
-| Collinsella | 7 | 7 | 0 | 100.0 | increased |
-| Porphyromonas | 7 | 7 | 1 | 100.0 | increased |
-| Neisseria | 6 | 6 | 1 | 100.0 | increased |
-| Clostridia | 6 | 5 | 3 | 83.3 | increased |
-| Peptostreptococcaceae | 6 | 5 | 4 | 83.3 | increased |
-| Aerococcaceae | 5 | 5 | 0 | 100.0 | increased |
-| Eubacterium | 5 | 5 | 2 | 100.0 | increased |
-| Coprobacillus | 5 | 4 | 1 | 80.0 | increased |
-| Rothia | 5 | 4 | 1 | 80.0 | increased |
-| Turicibacter | 5 | 4 | 1 | 80.0 | increased |
-| Bifidobacteriales | 4 | 4 | 0 | 100.0 | increased |
-| Holdemania | 4 | 4 | 0 | 100.0 | increased |
-| Acidaminococcus | 4 | 3 | 2 | 75.0 | increased |
-| Coriobacteriales | 4 | 3 | 1 | 75.0 | increased |
-| Enterococcaceae | 4 | 3 | 1 | 75.0 | increased |
-| Erysipelotrichales | 4 | 3 | 2 | 75.0 | increased |
-| Lactobacillales | 4 | 3 | 1 | 75.0 | increased |
-| Leptotrichia | 4 | 3 | 2 | 75.0 | increased |
-| Propionibacteriaceae | 4 | 3 | 1 | 75.0 | increased |
-| Selenomonas | 4 | 3 | 1 | 75.0 | increased |
-| Butyrivibrio | 3 | 3 | 0 | 100.0 | increased |
-| Christensenella | 3 | 3 | 1 | 100.0 | increased |
-| Collinsella aerofaciens | 3 | 3 | 0 | 100.0 | increased |
-| Corynebacteriaceae | 3 | 3 | 0 | 100.0 | increased |
-| Enhydrobacter | 3 | 3 | 0 | 100.0 | increased |
-| Leptotrichiaceae | 3 | 3 | 0 | 100.0 | increased |
-| Micrococcaceae | 3 | 3 | 1 | 100.0 | increased |
-| Moraxellaceae | 3 | 3 | 0 | 100.0 | increased |
-| Phascolarctobacterium | 3 | 3 | 0 | 100.0 | increased |
-| Staphylococcaceae | 3 | 3 | 0 | 100.0 | increased |
+| Lachnospiraceae | 18 | 8 | 15 | 83.3 | decreased |
+| Alistipes | 13 | 4 | 10 | 76.9 | decreased |
+| Oscillospira | 8 | 2 | 7 | 87.5 | decreased |
+| Acinetobacter | 6 | 3 | 5 | 83.3 | decreased |
+| Fusobacterium nucleatum | 6 | 2 | 5 | 83.3 | decreased |
+| Alphaproteobacteria | 5 | 2 | 5 | 100.0 | decreased |
+| Anaerococcus | 5 | 1 | 4 | 80.0 | decreased |
+| Atopobium | 5 | 2 | 4 | 80.0 | decreased |
+| Lachnospira | 5 | 2 | 4 | 80.0 | decreased |
+| Escherichia | 4 | 1 | 4 | 100.0 | decreased |
+| Turicibacter | 4 | 0 | 4 | 100.0 | decreased |
+| Agathobacter | 4 | 2 | 3 | 75.0 | decreased |
+| Finegoldia | 4 | 1 | 3 | 75.0 | decreased |
+| Lachnoclostridium | 4 | 1 | 3 | 75.0 | decreased |
+| Mediterraneibacter torques | 4 | 1 | 3 | 75.0 | decreased |
+| Romboutsia | 4 | 2 | 3 | 75.0 | decreased |
+| Shigella | 4 | 2 | 3 | 75.0 | decreased |
+| Sphingomonadales | 4 | 2 | 3 | 75.0 | decreased |
+| Bifidobacteriales | 3 | 0 | 3 | 100.0 | decreased |
+| Bradyrhizobium | 3 | 2 | 3 | 100.0 | decreased |
+| Methanobacteriaceae | 3 | 0 | 3 | 100.0 | decreased |
+| Methanobacteriales | 3 | 0 | 3 | 100.0 | decreased |
+| Methanobrevibacter | 3 | 0 | 3 | 100.0 | decreased |
+| Rhodococcus | 3 | 1 | 3 | 100.0 | decreased |
+| Schaalia odontolytica | 3 | 1 | 3 | 100.0 | decreased |
+| Sutterella wadsworthensis | 3 | 1 | 3 | 100.0 | decreased |
+| Bacilli | 9 | 7 | 2 | 77.8 | increased |
+| Erysipelotrichaceae | 9 | 7 | 3 | 77.8 | increased |
+| Parabacteroides | 8 | 8 | 1 | 100.0 | increased |
+| Bacteroidales | 8 | 7 | 2 | 87.5 | increased |
+| Rothia | 8 | 7 | 3 | 87.5 | increased |
+| Eubacteriales | 8 | 6 | 5 | 75.0 | increased |
+| Peptostreptococcaceae | 8 | 6 | 3 | 75.0 | increased |
+| Prevotellaceae | 8 | 6 | 4 | 75.0 | increased |
+| Akkermansia | 6 | 6 | 2 | 100.0 | increased |
+| Bacteroidota | 6 | 6 | 3 | 100.0 | increased |
+| Bacteroidia | 6 | 5 | 2 | 83.3 | increased |
+| Capnocytophaga | 6 | 5 | 5 | 83.3 | increased |
+| Gemella | 6 | 5 | 2 | 83.3 | increased |
+| Mogibacterium | 6 | 5 | 3 | 83.3 | increased |
+| Pseudomonas | 6 | 5 | 2 | 83.3 | increased |
+| Actinomycetaceae | 5 | 5 | 1 | 100.0 | increased |
+| Eggerthella | 5 | 4 | 1 | 80.0 | increased |
+| Fusobacteriales | 5 | 4 | 1 | 80.0 | increased |
+| Granulicatella adiacens | 5 | 4 | 3 | 80.0 | increased |
+| Leptotrichia | 5 | 4 | 2 | 80.0 | increased |
+| Leptotrichiaceae | 5 | 4 | 1 | 80.0 | increased |
+| Parasutterella | 5 | 4 | 1 | 80.0 | increased |
+| Selenomonadales | 5 | 4 | 1 | 80.0 | increased |
+| Aggregatibacter segnis | 4 | 4 | 1 | 100.0 | increased |
+| Burkholderiaceae | 4 | 4 | 3 | 100.0 | increased |
+| Erysipelotrichales | 4 | 4 | 0 | 100.0 | increased |
+| Mycoplasmatota | 4 | 4 | 1 | 100.0 | increased |
+| Negativicutes | 4 | 4 | 0 | 100.0 | increased |
+| Parahaemophilus parainfluenzae | 4 | 4 | 0 | 100.0 | increased |
+| Aggregatibacter | 4 | 3 | 1 | 75.0 | increased |
+| Bacteroides caccae | 4 | 3 | 1 | 75.0 | increased |
+| Bacteroides thetaiotaomicron | 4 | 3 | 1 | 75.0 | increased |
+| Bacteroides uniformis | 4 | 3 | 1 | 75.0 | increased |
+| Bulleidia | 4 | 3 | 1 | 75.0 | increased |
+| Campylobacter | 4 | 3 | 2 | 75.0 | increased |
+| Cardiobacterium | 4 | 3 | 2 | 75.0 | increased |
+| Citrobacter | 4 | 3 | 2 | 75.0 | increased |
+| Collinsella aerofaciens | 4 | 3 | 1 | 75.0 | increased |
+| Enterobacterales | 4 | 3 | 1 | 75.0 | increased |
+| Gardnerella | 4 | 3 | 2 | 75.0 | increased |
+| Holdemania | 4 | 3 | 1 | 75.0 | increased |
+| Odoribacter | 4 | 3 | 1 | 75.0 | increased |
+| Olsenella | 4 | 3 | 1 | 75.0 | increased |
+| Pasteurellales | 4 | 3 | 1 | 75.0 | increased |
+| Peptostreptococcus | 4 | 3 | 1 | 75.0 | increased |
+| Phocaeicola vulgatus | 4 | 3 | 1 | 75.0 | increased |
+| Selenomonas | 4 | 3 | 2 | 75.0 | increased |
+| Sneathia | 4 | 3 | 1 | 75.0 | increased |
+| Stenotrophomonas | 4 | 3 | 3 | 75.0 | increased |
+| Veillonella dispar | 4 | 3 | 3 | 75.0 | increased |
+| Veillonella parvula | 4 | 3 | 2 | 75.0 | increased |
+| Verrucomicrobiota | 4 | 3 | 2 | 75.0 | increased |
+| Acidaminococcaceae | 3 | 3 | 0 | 100.0 | increased |
+| Actinobacillus | 3 | 3 | 0 | 100.0 | increased |
+| Actinomycetales | 3 | 3 | 0 | 100.0 | increased |
+| Betaproteobacteria | 3 | 3 | 0 | 100.0 | increased |
+| Burkholderiales | 3 | 3 | 1 | 100.0 | increased |
+| Campylobacter showae | 3 | 3 | 0 | 100.0 | increased |
+| Eikenella corrodens | 3 | 3 | 1 | 100.0 | increased |
+| Erysipelotrichia | 3 | 3 | 0 | 100.0 | increased |
+| Flavobacteriaceae | 3 | 3 | 1 | 100.0 | increased |
+| Fusobacteriia | 3 | 3 | 0 | 100.0 | increased |
+| Gemella morbillorum | 3 | 3 | 1 | 100.0 | increased |
+| Halomonas | 3 | 3 | 2 | 100.0 | increased |
+| Rothia mucilaginosa | 3 | 3 | 0 | 100.0 | increased |
+| Solobacterium | 3 | 3 | 0 | 100.0 | increased |
+| Streptococcus cristatus | 3 | 3 | 2 | 100.0 | increased |
 
 ## Core Signature Visualisation
 
@@ -528,7 +559,7 @@ platform.compare <- dir.by.platform %>%
 nrow(platform.compare)
 ```
 
-    ## [1] 59
+    ## [1] 169
 
 ``` r
 
@@ -541,67 +572,177 @@ if (nrow(platform.compare) > 0) {
 }
 ```
 
-| taxon                        | dir_16S   | dir_WMS   | agree |
-|:-----------------------------|:----------|:----------|:------|
-| Abiotrophia defectiva        | increased | increased | TRUE  |
-| Actinomyces                  | decreased | decreased | TRUE  |
-| Actinomyces graevenitzii     | decreased | decreased | TRUE  |
-| Actinomyces naeslundii       | decreased | increased | FALSE |
-| Actinomyces oris             | increased | increased | TRUE  |
-| Actinomycetaceae             | decreased | decreased | TRUE  |
-| Alloprevotella               | decreased | decreased | TRUE  |
-| Anaerotruncus                | decreased | increased | FALSE |
-| Bacillota                    | decreased | decreased | TRUE  |
-| Bacteroidales                | decreased | decreased | TRUE  |
-| Bacteroidia                  | decreased | decreased | TRUE  |
-| Bacteroidota                 | decreased | decreased | TRUE  |
-| Bifidobacterium              | increased | decreased | FALSE |
-| Bifidobacterium longum       | increased | decreased | FALSE |
-| Blautia                      | decreased | decreased | TRUE  |
-| Blautia wexlerae             | decreased | decreased | TRUE  |
-| Butyricimonas                | decreased | increased | FALSE |
-| Candida                      | decreased | decreased | TRUE  |
-| Clostridiaceae               | increased | decreased | FALSE |
-| Collinsella                  | increased | increased | TRUE  |
-| Collinsella aerofaciens      | increased | increased | TRUE  |
-| Coprococcus                  | decreased | decreased | TRUE  |
-| Desulfovibrio                | increased | increased | TRUE  |
-| Dorea                        | decreased | decreased | TRUE  |
-| Enterobacter                 | decreased | increased | FALSE |
-| Enterobacteriaceae           | increased | increased | TRUE  |
-| Enterococcus                 | increased | increased | TRUE  |
-| Erwinia                      | increased | increased | TRUE  |
-| Erysipelotrichaceae          | decreased | decreased | TRUE  |
-| Escherichia                  | decreased | increased | FALSE |
-| Eubacterium                  | increased | decreased | FALSE |
-| Faecalibacterium             | increased | decreased | FALSE |
-| Faecalibacterium prausnitzii | decreased | decreased | TRUE  |
-| Gemella haemolysans          | decreased | increased | FALSE |
-| Klebsiella                   | decreased | increased | FALSE |
-| Lachnospira                  | decreased | decreased | TRUE  |
-| Lachnospiraceae              | decreased | decreased | TRUE  |
-| Lactobacillaceae             | decreased | decreased | TRUE  |
-| Lactobacillus                | increased | decreased | FALSE |
-| Lautropia mirabilis          | increased | increased | TRUE  |
-| Leptotrichia sp.             | decreased | increased | FALSE |
-| Odoribacter                  | decreased | decreased | TRUE  |
-| Oscillospiraceae             | increased | decreased | FALSE |
-| Parabacteroides              | increased | increased | TRUE  |
-| Parabacteroides johnsonii    | increased | decreased | FALSE |
-| Peptococcaceae               | decreased | decreased | TRUE  |
-| Peptostreptococcaceae        | increased | decreased | FALSE |
-| Prevotella histicola         | increased | decreased | FALSE |
-| Prevotella pallens           | decreased | decreased | TRUE  |
-| Pseudobutyrivibrio           | increased | decreased | FALSE |
-| Pseudomonadota               | increased | increased | TRUE  |
-| Roseburia                    | decreased | decreased | TRUE  |
-| Rothia aeria                 | decreased | increased | FALSE |
-| Rothia dentocariosa          | decreased | increased | FALSE |
-| Ruminococcus bromii          | decreased | decreased | TRUE  |
-| Serratia                     | decreased | increased | FALSE |
-| Solobacterium moorei         | decreased | decreased | TRUE  |
-| Streptococcus sanguinis      | decreased | increased | FALSE |
-| Veillonella parvula          | decreased | increased | FALSE |
+| taxon                         | dir_16S   | dir_WMS   | agree |
+|:------------------------------|:----------|:----------|:------|
+| Acidaminococcaceae            | increased | increased | TRUE  |
+| Acidaminococcales             | increased | increased | TRUE  |
+| Acidimicrobiia                | increased | decreased | FALSE |
+| Actinomyces                   | increased | decreased | FALSE |
+| Actinomyces graevenitzii      | decreased | decreased | TRUE  |
+| Actinomycetaceae              | increased | increased | TRUE  |
+| Actinomycetota                | increased | decreased | FALSE |
+| Aeromonadales                 | increased | decreased | FALSE |
+| Aggregatibacter               | increased | decreased | FALSE |
+| Akkermansia                   | increased | increased | TRUE  |
+| Akkermansia muciniphila       | decreased | increased | FALSE |
+| Akkermansiaceae               | decreased | increased | FALSE |
+| Alistipes                     | decreased | increased | FALSE |
+| Allobaculum                   | decreased | increased | FALSE |
+| Alphaproteobacteria           | decreased | decreased | TRUE  |
+| Anaerococcus murdochii        | decreased | decreased | TRUE  |
+| Anaerostipes                  | decreased | increased | FALSE |
+| Atopobium                     | decreased | decreased | TRUE  |
+| Azotobacter group             | increased | decreased | FALSE |
+| Bacillus                      | decreased | increased | FALSE |
+| Bacteroides                   | decreased | increased | FALSE |
+| Bacteroides caccae            | increased | increased | TRUE  |
+| Bacteroides intestinalis      | decreased | decreased | TRUE  |
+| Bacteroides thetaiotaomicron  | increased | increased | TRUE  |
+| Bacteroides uniformis         | increased | increased | TRUE  |
+| Bacteroidota                  | increased | increased | TRUE  |
+| Barnesiella                   | decreased | increased | FALSE |
+| Betaproteobacteria            | increased | increased | TRUE  |
+| Bifidobacteriaceae            | decreased | increased | FALSE |
+| Bifidobacterium               | decreased | decreased | TRUE  |
+| Bifidobacterium adolescentis  | increased | increased | TRUE  |
+| Bifidobacterium bifidum       | decreased | increased | FALSE |
+| Bifidobacterium dentium       | decreased | decreased | TRUE  |
+| Bifidobacterium longum        | decreased | increased | FALSE |
+| Bilophila                     | decreased | increased | FALSE |
+| Blautia                       | increased | decreased | FALSE |
+| Blautia faecis                | decreased | decreased | TRUE  |
+| Burkholderiaceae              | increased | decreased | FALSE |
+| Burkholderiales               | increased | increased | TRUE  |
+| Butyricicoccus                | decreased | increased | FALSE |
+| Butyricimonas                 | decreased | increased | FALSE |
+| Campylobacterales             | decreased | increased | FALSE |
+| Capnocytophaga                | decreased | decreased | TRUE  |
+| Capnocytophaga gingivalis     | decreased | decreased | TRUE  |
+| Capnocytophaga sputigena      | increased | decreased | FALSE |
+| Cardiobacterium               | increased | decreased | FALSE |
+| Carnobacteriaceae             | decreased | decreased | TRUE  |
+| Caryophanaceae                | increased | decreased | FALSE |
+| Cloacibacterium               | increased | decreased | FALSE |
+| Clostridia                    | decreased | increased | FALSE |
+| Clostridium                   | increased | increased | TRUE  |
+| Collinsella                   | decreased | decreased | TRUE  |
+| Collinsella aerofaciens       | increased | increased | TRUE  |
+| Comamonadaceae                | increased | increased | TRUE  |
+| Coprococcus                   | increased | increased | TRUE  |
+| Coriobacteriaceae             | increased | decreased | FALSE |
+| Corynebacterium               | decreased | decreased | TRUE  |
+| Dialister                     | decreased | increased | FALSE |
+| Dialister invisus             | decreased | increased | FALSE |
+| Enterococcus                  | decreased | decreased | TRUE  |
+| Enterococcus faecalis         | decreased | decreased | TRUE  |
+| Enterococcus faecium          | decreased | decreased | TRUE  |
+| Epsilonproteobacteria         | increased | increased | TRUE  |
+| Erysipelotrichaceae           | increased | increased | TRUE  |
+| Erysipelotrichales            | increased | increased | TRUE  |
+| Erysipelotrichia              | increased | increased | TRUE  |
+| Escherichia/Shigella sp.      | increased | decreased | FALSE |
+| Ethanoligenens                | decreased | increased | FALSE |
+| Eubacteriales                 | decreased | increased | FALSE |
+| Faecalibacterium              | decreased | increased | FALSE |
+| Faecalibacterium prausnitzii  | decreased | decreased | TRUE  |
+| Flavobacteriaceae             | increased | decreased | FALSE |
+| Fusicatenibacter              | decreased | increased | FALSE |
+| Fusobacteriales               | increased | increased | TRUE  |
+| Fusobacteriia                 | increased | increased | TRUE  |
+| Fusobacteriota                | decreased | increased | FALSE |
+| Fusobacterium                 | increased | decreased | FALSE |
+| Gammaproteobacteria           | increased | decreased | FALSE |
+| Gemella                       | increased | decreased | FALSE |
+| Granulicatella                | increased | decreased | FALSE |
+| Granulicatella adiacens       | increased | decreased | FALSE |
+| Granulicatella elegans        | decreased | decreased | TRUE  |
+| Haemophilus                   | increased | decreased | FALSE |
+| Helicobacter                  | decreased | decreased | TRUE  |
+| Helicobacteraceae             | decreased | decreased | TRUE  |
+| Kingella                      | decreased | decreased | TRUE  |
+| Kingella denitrificans        | increased | decreased | FALSE |
+| Klebsiella                    | decreased | decreased | TRUE  |
+| Lachnospiraceae               | decreased | decreased | TRUE  |
+| Lactobacillaceae              | increased | decreased | FALSE |
+| Lactobacillales               | decreased | increased | FALSE |
+| Lactobacillus                 | increased | decreased | FALSE |
+| Lactobacillus crispatus       | decreased | increased | FALSE |
+| Lactobacillus gasseri         | decreased | increased | FALSE |
+| Lancefieldella parvula        | decreased | decreased | TRUE  |
+| Lautropia                     | increased | decreased | FALSE |
+| Leptotrichiaceae              | increased | increased | TRUE  |
+| Limosilactobacillus fermentum | decreased | increased | FALSE |
+| Limosilactobacillus reuteri   | increased | increased | TRUE  |
+| Megasphaera                   | increased | decreased | FALSE |
+| Metamycoplasma salivarium     | decreased | decreased | TRUE  |
+| Methanobacteriota             | decreased | increased | FALSE |
+| Morganella morganii           | decreased | decreased | TRUE  |
+| Mucispirillum                 | increased | increased | TRUE  |
+| Mycoplasma                    | increased | increased | TRUE  |
+| Mycoplasmataceae              | increased | increased | TRUE  |
+| Mycoplasmatota                | increased | increased | TRUE  |
+| Neisseria                     | increased | decreased | FALSE |
+| Neisseria subflava            | decreased | decreased | TRUE  |
+| Neisseriaceae                 | decreased | decreased | TRUE  |
+| Oscillibacter                 | decreased | increased | FALSE |
+| Oscillospiraceae              | decreased | increased | FALSE |
+| Oxalobacter formigenes        | increased | decreased | FALSE |
+| Parabacteroides               | increased | increased | TRUE  |
+| Parabacteroides distasonis    | decreased | increased | FALSE |
+| Paraprevotella                | decreased | decreased | TRUE  |
+| Parasutterella                | increased | increased | TRUE  |
+| Pasteurellaceae               | increased | decreased | FALSE |
+| Pasteurellales                | increased | increased | TRUE  |
+| Peptoniphilus                 | decreased | decreased | TRUE  |
+| Peptostreptococcaceae         | increased | increased | TRUE  |
+| Peptostreptococcus            | increased | increased | TRUE  |
+| Phascolarctobacterium         | decreased | increased | FALSE |
+| Phocaeicola dorei             | increased | increased | TRUE  |
+| Phocaeicola vulgatus          | decreased | increased | FALSE |
+| Porphyromonadaceae            | increased | decreased | FALSE |
+| Porphyromonas endodontalis    | decreased | decreased | TRUE  |
+| Prevotella                    | increased | decreased | FALSE |
+| Prevotella corporis           | decreased | decreased | TRUE  |
+| Prevotellaceae                | increased | decreased | FALSE |
+| Pseudomonadales               | increased | decreased | FALSE |
+| Pseudomonadota                | increased | decreased | FALSE |
+| Rikenella                     | increased | increased | TRUE  |
+| Rikenellaceae                 | decreased | increased | FALSE |
+| Roseburia                     | decreased | increased | FALSE |
+| Roseburia faecis              | increased | increased | TRUE  |
+| Roseburia intestinalis        | decreased | decreased | TRUE  |
+| Roseburia inulinivorans       | decreased | increased | FALSE |
+| Rothia                        | increased | increased | TRUE  |
+| Rothia mucilaginosa           | increased | increased | TRUE  |
+| Ruminococcus                  | decreased | increased | FALSE |
+| Saccharofermentans            | increased | increased | TRUE  |
+| Schaalia odontolytica         | decreased | decreased | TRUE  |
+| Sneathia                      | increased | increased | TRUE  |
+| Sphingomonadaceae             | decreased | decreased | TRUE  |
+| Sphingomonadales              | decreased | decreased | TRUE  |
+| Sphingomonas                  | increased | decreased | FALSE |
+| Staphylococcus                | increased | increased | TRUE  |
+| Streptococcus                 | decreased | decreased | TRUE  |
+| Streptococcus cristatus       | increased | decreased | FALSE |
+| Streptococcus gwangjuensis    | increased | decreased | FALSE |
+| Streptococcus intermedius     | decreased | decreased | TRUE  |
+| Streptococcus parasanguinis   | decreased | decreased | TRUE  |
+| Streptococcus pyogenes        | increased | decreased | FALSE |
+| Streptococcus salivarius      | increased | decreased | FALSE |
+| Streptococcus sanguinis       | increased | decreased | FALSE |
+| Streptococcus thermophilus    | increased | decreased | FALSE |
+| Succinivibrio                 | increased | decreased | FALSE |
+| Succinivibrionaceae           | increased | decreased | FALSE |
+| Sutterella                    | decreased | increased | FALSE |
+| Thomasclavelia cocleata       | decreased | increased | FALSE |
+| Treponema denticola           | decreased | decreased | TRUE  |
+| Veillonella                   | decreased | decreased | TRUE  |
+| Veillonella parvula           | increased | decreased | FALSE |
+| Verrucomicrobiales            | decreased | increased | FALSE |
+| Verrucomicrobiia              | decreased | increased | FALSE |
+| Verrucomicrobiota             | decreased | increased | FALSE |
+| \[Clostridium\] viride        | increased | decreased | FALSE |
+| \[Eubacterium\] infirmum      | increased | decreased | FALSE |
 
 ## Taxon Enrichment Analysis
 
@@ -627,7 +768,7 @@ enrichment.df <- taxon.freq %>%
 sum(enrichment.df$p_adj < 0.05)
 ```
 
-    ## [1] 160
+    ## [1] 270
 
 ``` r
 
@@ -636,21 +777,21 @@ knitr::kable(head(enrichment.df, 15))
 
 | taxon | total_studies | observed | expected | enrichment_ratio | log2_enrichment | p_value | p_adj |
 |:---|---:|---:|---:|---:|---:|---:|---:|
-| Bacillota | 17 | 17 | 0.2887768 | 58.86900 | 5.879436 | 0 | 0 |
-| Bacteroides | 17 | 17 | 0.2887768 | 58.86900 | 5.879436 | 0 | 0 |
-| Veillonella | 17 | 17 | 0.2887768 | 58.86900 | 5.879436 | 0 | 0 |
-| Prevotella | 16 | 16 | 0.2887768 | 55.40611 | 5.791973 | 0 | 0 |
-| Streptococcus | 16 | 16 | 0.2887768 | 55.40611 | 5.791973 | 0 | 0 |
-| Actinomycetota | 15 | 15 | 0.2887768 | 51.94323 | 5.698864 | 0 | 0 |
-| Bifidobacterium | 15 | 15 | 0.2887768 | 51.94323 | 5.698864 | 0 | 0 |
-| Lactobacillus | 15 | 15 | 0.2887768 | 51.94323 | 5.698864 | 0 | 0 |
-| Blautia | 14 | 14 | 0.2887768 | 48.48035 | 5.599328 | 0 | 0 |
-| Lachnospiraceae | 13 | 13 | 0.2887768 | 45.01747 | 5.492413 | 0 | 0 |
-| Oscillospiraceae | 13 | 13 | 0.2887768 | 45.01747 | 5.492413 | 0 | 0 |
-| Erysipelotrichaceae | 12 | 12 | 0.2887768 | 41.55459 | 5.376936 | 0 | 0 |
-| Faecalibacterium | 12 | 12 | 0.2887768 | 41.55459 | 5.376936 | 0 | 0 |
-| Haemophilus | 12 | 12 | 0.2887768 | 41.55459 | 5.376936 | 0 | 0 |
-| Eubacteriales | 11 | 11 | 0.2887768 | 38.09170 | 5.251405 | 0 | 0 |
+| Streptococcus | 30 | 30 | 0.3293532 | 91.08761 | 6.509183 | 0 | 0 |
+| Bacteroides | 26 | 26 | 0.3293532 | 78.94260 | 6.302732 | 0 | 0 |
+| Prevotella | 25 | 25 | 0.3293532 | 75.90634 | 6.246149 | 0 | 0 |
+| Lachnospiraceae | 23 | 23 | 0.3293532 | 69.83384 | 6.125854 | 0 | 0 |
+| Blautia | 19 | 19 | 0.3293532 | 57.68882 | 5.850220 | 0 | 0 |
+| Clostridium | 19 | 19 | 0.3293532 | 57.68882 | 5.850220 | 0 | 0 |
+| Lactobacillus | 19 | 19 | 0.3293532 | 57.68882 | 5.850220 | 0 | 0 |
+| Bifidobacterium | 18 | 18 | 0.3293532 | 54.65257 | 5.772217 | 0 | 0 |
+| Faecalibacterium | 18 | 18 | 0.3293532 | 54.65257 | 5.772217 | 0 | 0 |
+| Roseburia | 16 | 16 | 0.3293532 | 48.58006 | 5.602292 | 0 | 0 |
+| Staphylococcus | 16 | 16 | 0.3293532 | 48.58006 | 5.602292 | 0 | 0 |
+| Actinomycetota | 15 | 15 | 0.3293532 | 45.54381 | 5.509183 | 0 | 0 |
+| Bacillota | 15 | 15 | 0.3293532 | 45.54381 | 5.509183 | 0 | 0 |
+| Haemophilus | 15 | 15 | 0.3293532 | 45.54381 | 5.509183 | 0 | 0 |
+| Ruminococcus | 15 | 15 | 0.3293532 | 45.54381 | 5.509183 | 0 | 0 |
 
 ## Monte Carlo Critical N
 
@@ -667,60 +808,60 @@ criticalN
 ```
 
     ## $critical_n
-    ##   95% 
-    ## 35.05 
+    ## 95% 
+    ##  45 
     ## 
     ## $ci_lower
     ## 2.5% 
-    ##   35 
+    ##   44 
     ## 
     ## $ci_upper
     ## 97.5% 
-    ##    36 
+    ##    45 
     ## 
     ## $simulated_values
-    ##    [1] 29 28 24 32 28 27 37 24 28 31 28 31 30 30 27 37 33 25 31 35 28 27 29 29
-    ##   [25] 27 23 31 31 28 28 29 26 23 35 26 28 29 30 28 29 34 34 24 25 26 29 27 26
-    ##   [49] 27 31 27 29 33 25 27 35 34 30 32 34 34 35 27 25 26 27 26 27 24 32 28 30
-    ##   [73] 26 28 42 22 29 30 30 26 31 40 28 33 34 30 27 36 28 27 27 27 29 28 29 34
-    ##   [97] 29 39 25 32 29 29 28 34 26 26 32 27 26 24 31 29 26 29 37 28 26 30 25 29
-    ##  [121] 26 23 31 26 26 31 24 30 33 27 34 31 33 24 28 36 33 31 27 30 25 26 29 27
-    ##  [145] 33 31 32 32 23 31 26 29 27 26 25 35 24 30 37 29 32 31 28 26 32 29 31 38
-    ##  [169] 25 30 26 30 24 32 37 35 25 31 38 32 25 28 27 29 27 23 26 22 25 31 26 29
-    ##  [193] 28 31 28 27 29 32 24 36 29 26 27 26 35 29 27 33 26 26 25 32 34 32 32 25
-    ##  [217] 25 22 30 29 26 35 29 34 34 29 33 31 31 23 26 30 26 28 27 29 27 27 29 33
-    ##  [241] 28 23 24 26 35 30 33 32 37 26 35 27 30 31 26 33 32 27 29 32 31 29 32 37
-    ##  [265] 27 29 29 27 28 25 29 39 36 29 27 26 30 30 36 26 27 36 33 24 25 31 33 30
-    ##  [289] 29 23 29 33 27 26 26 27 27 25 35 26 24 27 29 27 25 28 35 24 31 36 28 28
-    ##  [313] 30 24 29 27 33 40 24 33 25 28 34 32 31 28 30 30 26 25 24 27 24 29 21 32
-    ##  [337] 34 26 29 30 25 30 33 32 34 33 36 29 25 36 25 24 31 30 23 28 26 26 25 27
-    ##  [361] 24 28 29 30 30 33 24 34 29 28 25 29 29 29 35 27 27 29 36 28 28 29 31 30
-    ##  [385] 30 27 24 29 29 25 24 25 32 25 32 28 26 35 27 33 31 30 25 37 28 29 32 30
-    ##  [409] 26 23 21 31 28 23 29 34 28 33 30 25 30 30 28 29 23 28 25 27 29 28 29 30
-    ##  [433] 30 28 24 28 29 31 34 29 26 29 26 24 31 38 32 29 27 34 38 25 23 27 28 34
-    ##  [457] 31 23 31 30 27 26 31 29 28 30 31 27 27 28 28 29 28 27 32 38 26 29 26 27
-    ##  [481] 28 30 34 29 33 26 29 27 27 26 29 27 29 29 32 26 29 26 27 24 29 27 26 24
-    ##  [505] 28 29 27 24 28 26 32 30 30 32 33 29 29 25 32 28 26 30 28 27 23 27 25 28
-    ##  [529] 24 29 32 25 26 32 29 27 29 28 32 28 35 32 23 27 37 25 26 31 33 29 24 28
-    ##  [553] 29 29 24 29 27 27 34 25 34 27 28 25 22 27 25 29 28 29 24 28 27 27 24 26
-    ##  [577] 26 30 28 30 23 26 31 28 36 40 27 27 28 26 29 28 24 26 34 28 25 25 28 30
-    ##  [601] 28 24 30 34 32 26 30 26 34 31 26 27 22 27 23 25 25 33 29 27 33 32 25 29
-    ##  [625] 30 31 31 29 35 33 30 28 33 37 27 30 33 26 29 36 30 28 34 27 36 28 34 29
-    ##  [649] 27 29 31 25 26 23 22 30 24 34 26 33 30 28 27 38 36 32 30 26 37 32 29 26
-    ##  [673] 31 32 34 25 25 28 26 32 31 27 26 26 23 22 22 39 29 24 23 27 26 25 39 26
-    ##  [697] 30 29 30 28 29 30 22 35 25 26 29 29 27 28 21 34 30 28 30 27 25 25 31 25
-    ##  [721] 31 27 28 30 28 24 25 30 25 25 24 28 29 26 27 26 28 35 27 29 30 34 27 33
-    ##  [745] 25 30 24 28 30 27 28 30 33 25 26 26 31 25 31 33 26 25 29 26 28 30 34 27
-    ##  [769] 30 25 28 25 25 27 32 30 28 35 27 29 26 30 23 31 29 33 30 23 29 26 24 27
-    ##  [793] 32 27 28 28 27 28 29 29 28 30 34 25 24 30 26 35 31 33 38 28 28 40 27 24
-    ##  [817] 26 29 27 27 25 26 27 26 34 24 32 33 27 30 28 30 29 22 31 28 36 27 27 30
-    ##  [841] 38 30 28 33 27 25 36 28 28 25 23 22 27 27 25 28 35 27 29 29 33 34 28 27
-    ##  [865] 29 34 32 24 32 27 31 24 25 26 29 32 29 27 27 26 29 34 25 35 27 30 24 33
-    ##  [889] 25 26 27 34 22 26 32 32 24 29 26 36 26 27 31 27 32 20 30 30 25 32 27 32
-    ##  [913] 32 22 22 30 27 27 27 28 23 28 26 29 31 31 27 31 32 31 23 30 28 27 27 27
-    ##  [937] 21 28 31 30 28 28 25 34 25 29 26 30 26 25 22 28 30 37 24 30 32 25 32 28
-    ##  [961] 27 25 27 26 28 22 33 25 29 37 30 28 26 25 32 32 29 25 33 22 35 33 41 36
-    ##  [985] 29 28 34 37 28 33 30 29 28 25 28 30 31 29 28 28
+    ##    [1] 38 35 36 35 37 33 40 37 37 35 39 39 44 33 39 35 34 42 30 37 41 39 33 37
+    ##   [25] 42 42 34 37 43 39 39 42 36 40 42 45 35 35 34 35 36 41 49 37 35 38 47 34
+    ##   [49] 31 41 38 37 40 40 39 40 46 33 38 36 41 50 37 39 40 41 42 38 36 38 35 41
+    ##   [73] 44 46 39 38 43 41 39 41 39 39 37 45 38 37 44 37 33 33 41 38 39 42 40 35
+    ##   [97] 39 45 39 43 44 39 46 41 38 48 33 35 37 42 40 39 32 42 39 35 37 37 43 40
+    ##  [121] 40 37 43 40 38 43 39 47 43 39 41 44 42 36 39 42 39 35 35 41 38 34 34 35
+    ##  [145] 33 34 39 40 40 41 37 42 38 36 43 37 39 41 37 39 42 42 36 36 34 35 40 40
+    ##  [169] 41 46 41 44 37 37 35 35 41 35 32 38 34 39 37 40 32 40 36 44 39 43 39 43
+    ##  [193] 41 34 43 37 35 36 42 37 38 38 40 41 32 37 47 40 40 40 37 38 38 48 38 44
+    ##  [217] 44 36 35 32 37 37 37 36 39 36 42 33 39 38 33 36 35 38 42 38 39 34 39 35
+    ##  [241] 46 38 35 34 41 39 38 38 38 33 29 41 33 32 41 41 42 41 40 40 39 42 45 35
+    ##  [265] 41 34 36 45 48 37 35 40 31 41 38 41 41 34 38 38 38 38 44 42 42 38 45 35
+    ##  [289] 45 41 36 46 37 32 37 35 35 36 40 38 37 43 42 40 40 38 47 40 38 39 35 34
+    ##  [313] 38 31 39 35 45 34 40 40 35 38 37 35 41 34 38 41 41 33 43 45 38 38 42 35
+    ##  [337] 40 44 32 39 37 45 34 35 41 41 38 36 39 36 38 35 46 37 40 40 33 42 43 35
+    ##  [361] 44 36 39 37 39 44 38 38 33 39 34 44 36 41 38 36 40 41 32 42 37 39 34 44
+    ##  [385] 39 41 40 34 38 37 45 42 41 39 39 40 39 37 36 36 38 36 36 42 36 41 39 39
+    ##  [409] 40 36 40 36 39 37 37 40 42 37 41 34 35 35 40 40 35 36 36 35 39 31 36 41
+    ##  [433] 34 36 38 34 38 38 38 37 36 44 40 53 40 33 39 40 37 36 41 34 38 39 37 39
+    ##  [457] 35 39 40 38 36 37 38 38 37 39 35 34 43 33 41 36 43 40 40 38 42 40 39 40
+    ##  [481] 41 40 40 35 40 41 33 44 39 36 39 32 39 44 41 35 31 32 44 37 38 37 39 44
+    ##  [505] 39 39 39 40 36 40 36 38 40 39 45 38 40 39 34 38 41 47 35 31 41 44 41 38
+    ##  [529] 35 37 40 40 35 45 39 36 43 38 37 41 38 38 40 35 43 37 35 35 36 35 40 39
+    ##  [553] 35 34 40 36 38 41 32 43 34 48 41 39 40 38 40 41 36 40 46 36 36 38 36 44
+    ##  [577] 35 36 38 32 37 38 40 37 35 34 38 41 40 41 39 44 36 38 42 39 38 37 36 37
+    ##  [601] 42 41 33 45 37 39 44 36 41 36 44 37 43 40 42 32 39 37 37 39 33 34 37 33
+    ##  [625] 36 37 39 38 37 36 40 35 41 36 48 38 42 44 39 44 38 37 39 36 41 31 38 40
+    ##  [649] 36 38 39 46 39 39 37 40 41 35 37 40 42 42 39 39 40 39 35 41 43 47 37 38
+    ##  [673] 38 40 35 42 33 36 39 37 44 38 37 40 33 41 34 37 40 38 35 42 31 35 34 39
+    ##  [697] 38 34 33 34 37 34 39 39 46 36 42 42 37 32 36 39 35 36 40 44 38 37 38 31
+    ##  [721] 33 33 51 33 39 40 39 35 41 38 37 34 40 36 43 44 38 35 45 41 36 35 37 43
+    ##  [745] 46 49 36 46 44 40 47 36 36 39 43 50 35 38 39 42 33 38 35 42 42 42 42 36
+    ##  [769] 45 38 39 41 36 35 38 36 37 38 37 39 37 36 36 34 32 40 42 41 42 39 36 33
+    ##  [793] 44 42 38 39 37 39 41 40 40 36 41 43 33 40 41 36 38 34 32 42 35 38 39 39
+    ##  [817] 39 40 41 35 41 37 35 43 38 42 35 37 38 37 37 44 36 43 34 36 37 41 44 35
+    ##  [841] 36 39 36 37 40 33 40 42 40 40 35 36 36 43 38 37 38 37 37 36 37 37 44 37
+    ##  [865] 39 41 36 39 41 34 43 39 37 42 43 38 40 35 39 39 40 36 37 42 36 42 35 43
+    ##  [889] 37 40 35 39 31 39 32 35 41 43 39 37 39 37 41 41 37 35 40 31 44 38 36 33
+    ##  [913] 36 35 37 39 35 45 40 41 39 42 40 36 41 39 36 36 35 37 35 41 45 32 40 37
+    ##  [937] 42 39 40 33 40 43 38 33 38 31 38 31 38 31 47 36 38 34 41 39 39 48 44 39
+    ##  [961] 38 48 34 39 37 39 36 38 42 42 38 39 35 40 35 38 44 47 38 37 37 47 38 36
+    ##  [985] 38 34 39 37 42 36 39 40 43 39 38 42 37 33 39 38
     ## 
     ## $alpha
     ## [1] 0.05
@@ -775,26 +916,26 @@ shared_taxa_counts %>%
 
 | Taxon Name | Total WH Studies | Total Distinct Conditions | Other Conditions it Often Appears In |
 |:---|---:|---:|:---|
-| Streptococcus | 347 | 214 | Granulomatosis with Polyangiitis, Diet, Autism |
-| Prevotella | 354 | 211 | Illness severity status, Antimicrobial agent, Obesity |
-| Lactobacillus | 335 | 201 | Antimicrobial agent, Oxygen, Illness severity status |
-| Bacteroides | 345 | 199 | Autism, Autoimmune disease, Obesity |
-| Lachnospiraceae | 331 | 199 | Autoimmune disease, Smoking behavior, Irritable bowel syndrome |
-| Bacillota | 313 | 190 | Type II diabetes mellitus, Autism, Autoimmune disease |
-| Faecalibacterium | 278 | 183 | Obesity, Autoimmune disease, Irritable bowel syndrome |
-| Oscillospiraceae | 273 | 183 | Autoimmune disease, Smoking behavior, Colorectal carcinoma |
-| Bifidobacterium | 275 | 177 | Food allergy, Irritable bowel syndrome, Autism |
-| Clostridium | 258 | 175 | Irritable bowel syndrome, Autism, Autoimmune disease |
-| Actinomycetota | 265 | 171 | Autism, Ethnic group,Place of residence measurement, Ulcerative colitis |
-| Pseudomonadota | 241 | 166 | Autism, Autoimmune disease, Ethnic group,Place of residence measurement |
-| Roseburia | 228 | 165 | Autoimmune disease, Smoking behavior, Irritable bowel syndrome |
-| Blautia | 246 | 164 | Autoimmune disease, Irritable bowel syndrome, Colorectal cancer |
-| Veillonella | 241 | 161 | Obesity, Antimicrobial agent, Oxygen |
-| Bacteroidota | 247 | 158 | Autism, Autoimmune disease, Irritable bowel syndrome |
-| Eubacteriales | 219 | 156 | Autoimmune disease, Colorectal carcinoma, Psoriasis |
-| Enterobacteriaceae | 213 | 155 | Autoimmune disease, Irritable bowel syndrome, Sampling site |
-| Haemophilus | 208 | 153 | Illness severity status, Diet, Autoimmune disease |
-| Alistipes | 198 | 148 | Autoimmune disease, Irritable bowel syndrome, Colorectal cancer |
+| Streptococcus | 557 | 334 | COVID-19, Health study participation, Diet |
+| Bacteroides | 548 | 321 | Health study participation, Irritable bowel syndrome, Autism |
+| Prevotella | 542 | 320 | COVID-19, Health study participation, Illness severity status |
+| Lachnospiraceae | 508 | 302 | Type II diabetes mellitus, Autoimmune disease, Smoking behavior |
+| Oscillospiraceae | 447 | 300 | Autism, Autoimmune disease, Obesity |
+| Bacillota | 468 | 296 | Parkinson’s disease, Irritable bowel syndrome, Type II diabetes mellitus |
+| Faecalibacterium | 411 | 287 | Health study participation, Autism, Autoimmune disease |
+| Lactobacillus | 485 | 284 | Health study participation, Antimicrobial agent, Oxygen |
+| Bifidobacterium | 428 | 270 | Health study participation, Parkinson’s disease, Food allergy |
+| Actinomycetota | 397 | 257 | Type II diabetes mellitus, Place of residence measurement,Ethnic group, Atopic eczema |
+| Bacteroidota | 393 | 246 | Irritable bowel syndrome, Autism, Autoimmune disease |
+| Pseudomonadota | 379 | 244 | Irritable bowel syndrome, Type II diabetes mellitus, Autism |
+| Blautia | 395 | 243 | Health study participation, Autoimmune disease, Irritable bowel syndrome |
+| Clostridium | 371 | 238 | Health study participation, Irritable bowel syndrome, Type II diabetes mellitus |
+| Veillonella | 352 | 229 | COVID-19, Health study participation, Antimicrobial agent |
+| Roseburia | 347 | 221 | Health study participation, Autoimmune disease, Smoking behavior |
+| Ruminococcus | 346 | 219 | Health study participation, Type II diabetes mellitus, Autoimmune disease |
+| Haemophilus | 311 | 209 | Health study participation, Illness severity status, Diet |
+| Fusobacterium | 306 | 207 | Health study participation, Antimicrobial agent, Autism |
+| Enterobacteriaceae | 312 | 206 | Type II diabetes mellitus, Autism, Smoking behavior |
 
 Top Pregnancy-Associated Taxa and Their Links to Other Conditions
 {.table}

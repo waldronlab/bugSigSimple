@@ -67,7 +67,7 @@
 
       <h1>Delivery Mode and the Meconium Microbiome</h1>
             
-            <h4 data-toc-skip class="date">09 November, 2026</h4>
+            <h4 data-toc-skip class="date">20 November, 2026</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/waldronlab/bugSigSimple/blob/main/vignettes/c-section_meconium_shaimaa.Rmd" class="external-link"><code>vignettes/c-section_meconium_shaimaa.Rmd</code></a></small>
       <div class="d-none name"><code>c-section_meconium_shaimaa.Rmd</code></div>
@@ -112,7 +112,7 @@ signatures and identify the most frequently reported taxa</li>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> </span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 7425   51</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 12086    57</span></span></code></pre>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "BSDB ID"                    "Study"                     </span></span>
@@ -120,27 +120,30 @@ signatures and identify the most frequently reported taxa</li>
 <span><span class="co">##  [5] "DOI"                        "URL"                       </span></span>
 <span><span class="co">##  [7] "Authors list"               "Title"                     </span></span>
 <span><span class="co">##  [9] "Journal"                    "Year"                      </span></span>
-<span><span class="co">## [11] "Keywords"                   "Experiment"                </span></span>
-<span><span class="co">## [13] "Location of subjects"       "Host species"              </span></span>
-<span><span class="co">## [15] "Body site"                  "UBERON ID"                 </span></span>
-<span><span class="co">## [17] "Condition"                  "EFO ID"                    </span></span>
-<span><span class="co">## [19] "Group 0 name"               "Group 1 name"              </span></span>
-<span><span class="co">## [21] "Group 1 definition"         "Group 0 sample size"       </span></span>
-<span><span class="co">## [23] "Group 1 sample size"        "Antibiotics exclusion"     </span></span>
-<span><span class="co">## [25] "Sequencing type"            "16S variable region"       </span></span>
-<span><span class="co">## [27] "Sequencing platform"        "Data transformation"       </span></span>
-<span><span class="co">## [29] "Statistical test"           "Significance threshold"    </span></span>
-<span><span class="co">## [31] "MHT correction"             "LDA Score above"           </span></span>
-<span><span class="co">## [33] "Matched on"                 "Confounders controlled for"</span></span>
-<span><span class="co">## [35] "Pielou"                     "Shannon"                   </span></span>
-<span><span class="co">## [37] "Chao1"                      "Simpson"                   </span></span>
-<span><span class="co">## [39] "Inverse Simpson"            "Richness"                  </span></span>
-<span><span class="co">## [41] "Signature page name"        "Source"                    </span></span>
-<span><span class="co">## [43] "Curated date"               "Curator"                   </span></span>
-<span><span class="co">## [45] "Revision editor"            "Description"               </span></span>
-<span><span class="co">## [47] "Abundance in Group 1"       "MetaPhlAn taxon names"     </span></span>
-<span><span class="co">## [49] "NCBI Taxonomy IDs"          "State"                     </span></span>
-<span><span class="co">## [51] "Reviewer"</span></span></code></pre>
+<span><span class="co">## [11] "Keywords"                   "Curation method"           </span></span>
+<span><span class="co">## [13] "Curation protocol"          "submittedBy"               </span></span>
+<span><span class="co">## [15] "submissionDate"             "Review state"              </span></span>
+<span><span class="co">## [17] "Quality control tag"        "Experiment"                </span></span>
+<span><span class="co">## [19] "Location of subjects"       "Host species"              </span></span>
+<span><span class="co">## [21] "Body site"                  "UBERON ID"                 </span></span>
+<span><span class="co">## [23] "Condition"                  "EFO ID"                    </span></span>
+<span><span class="co">## [25] "Group 0 name"               "Group 1 name"              </span></span>
+<span><span class="co">## [27] "Group 1 definition"         "Group 0 sample size"       </span></span>
+<span><span class="co">## [29] "Group 1 sample size"        "Antibiotics exclusion"     </span></span>
+<span><span class="co">## [31] "Sequencing type"            "16S variable region"       </span></span>
+<span><span class="co">## [33] "Sequencing platform"        "Data transformation"       </span></span>
+<span><span class="co">## [35] "Statistical test"           "Significance threshold"    </span></span>
+<span><span class="co">## [37] "MHT correction"             "LDA Score above"           </span></span>
+<span><span class="co">## [39] "Matched on"                 "Confounders controlled for"</span></span>
+<span><span class="co">## [41] "Pielou"                     "Shannon"                   </span></span>
+<span><span class="co">## [43] "Chao1"                      "Simpson"                   </span></span>
+<span><span class="co">## [45] "Inverse Simpson"            "Richness"                  </span></span>
+<span><span class="co">## [47] "Signature page name"        "Source"                    </span></span>
+<span><span class="co">## [49] "Curated date"               "Curator"                   </span></span>
+<span><span class="co">## [51] "Revision editor"            "Description"               </span></span>
+<span><span class="co">## [53] "Abundance in Group 1"       "MetaPhlAn taxon names"     </span></span>
+<span><span class="co">## [55] "NCBI Taxonomy IDs"          "State"                     </span></span>
+<span><span class="co">## [57] "Reviewer"</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="subsetting">Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"></a>
@@ -701,7 +704,7 @@ class
 </tr>
 <tr>
 <td style="text-align:left;">
-Bacillales
+Caryophanales
 </td>
 <td style="text-align:left;">
 order

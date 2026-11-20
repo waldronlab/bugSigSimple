@@ -45,7 +45,7 @@ breast_dat <- dat %>%
 nrow(breast_dat)
 ```
 
-    ## [1] 43
+    ## [1] 47
 
 ``` r
 
@@ -56,7 +56,7 @@ breast_dat %>%
 
 | Condition                      |   n |
 |:-------------------------------|----:|
-| Breast cancer                  |  33 |
+| Breast cancer                  |  37 |
 | Breast carcinoma               |   6 |
 | Breast cancer stage            |   2 |
 | HER2 Positive Breast Carcinoma |   2 |
@@ -73,11 +73,11 @@ knitr::kable(study.summary)
 
 | Body site    | Sequencing type |   n |
 |:-------------|:----------------|----:|
-| Breast       | 16S             |   8 |
+| Breast       | 16S             |  10 |
 | Feces        | 16S             |  22 |
 | Feces        | WMS             |   9 |
 | Feces,Saliva | 16S             |   2 |
-| Saliva       | 16S             |   2 |
+| Saliva       | 16S             |   4 |
 
 ``` r
 
@@ -93,9 +93,9 @@ breast_dat %>%
 | 2018 |   2 |
 | 2020 |   6 |
 | 2021 |   8 |
-| 2022 |   6 |
+| 2022 |   8 |
 | 2023 |   4 |
-| 2024 |  15 |
+| 2024 |  17 |
 
 The body site breakdown above shows how the evidence splits between
 breast tissue itself and other sites (most likely feces, reflecting
@@ -208,7 +208,7 @@ cat("WMS  - signatures:", nrow(breast.wms), "| studies:", n_distinct(breast.wms$
 cat("16S  - signatures:", nrow(breast.16s), "| studies:", n_distinct(breast.16s$PMID), "\n")
 ```
 
-    ## 16S  - signatures: 34 | studies: 7
+    ## 16S  - signatures: 38 | studies: 7
 
 ## Long-Format Taxon Table Setup
 
@@ -235,21 +235,21 @@ taxon.long <- purrr::map_dfr(seq_along(sigs.all), function(i) {
 cat("Long-format table successfully built with", nrow(taxon.long), "rows.\n")
 ```
 
-    ## Long-format table successfully built with 58971 rows.
+    ## Long-format table successfully built with 96257 rows.
 
 ``` r
 
 knitr::kable(head(taxon.long), caption = "Preview of the Structured Long-Format Taxon Table")
 ```
 
-| sig_id | taxon                      | PMID | Condition | Sequencing type | direction |
-|-------:|:---------------------------|-----:|:----------|:----------------|:----------|
-|      1 | Acinetobacter johnsonii    |   NA | Obesity   | WMS             | increased |
-|      1 | Anaerostipes               |   NA | Obesity   | WMS             | increased |
-|      1 | Anaerostipes caccae        |   NA | Obesity   | WMS             | increased |
-|      1 | Brachyspira hyodysenteriae |   NA | Obesity   | WMS             | increased |
-|      1 | Coprococcus                |   NA | Obesity   | WMS             | increased |
-|      1 | Allocoprococcus comes      |   NA | Obesity   | WMS             | increased |
+| sig_id | taxon         | PMID | Condition | Sequencing type | direction |
+|-------:|:--------------|-----:|:----------|:----------------|:----------|
+|      1 | Serratia      |   NA | COVID-19  | WMS             | increased |
+|      1 | Veillonella   |   NA | COVID-19  | WMS             | increased |
+|      2 | Enterobacter  |   NA | COVID-19  | WMS             | increased |
+|      2 | Prevotella    |   NA | COVID-19  | WMS             | increased |
+|      2 | Veillonella   |   NA | COVID-19  | WMS             | increased |
+|      2 | Streptococcus |   NA | COVID-19  | WMS             | increased |
 
 Preview of the Structured Long-Format Taxon Table {.table}
 
@@ -269,7 +269,7 @@ taxon.freq <- taxon.long %>%
 n_distinct(taxon.freq$taxon)
 ```
 
-    ## [1] 294
+    ## [1] 256
 
 ``` r
 
@@ -279,31 +279,31 @@ taxon.freq %>%
   knitr::kable()
 ```
 
-| taxon                                 | total_studies |
-|:--------------------------------------|--------------:|
-| Lachnospiraceae                       |             4 |
-| Prevotella                            |             4 |
-| Anaerostipes                          |             3 |
-| Bacillota                             |             3 |
-| Mediterraneibacter torques            |             3 |
-| Alistipes                             |             2 |
-| Bacteroides                           |             2 |
-| Bacteroidota                          |             2 |
-| Blautia                               |             2 |
-| Dialister                             |             2 |
-| Dorea longicatena                     |             2 |
-| Eggerthella                           |             2 |
-| Helotiales                            |             2 |
-| Methanobrevibacter                    |             2 |
-| Prevotellaceae                        |             2 |
-| Saccharomyces                         |             2 |
-| Saccharomycetaceae                    |             2 |
-| Saccharomycetales                     |             2 |
-| Saccharomycetes                       |             2 |
-| Trichosporonaceae                     |             2 |
-| Trichosporonales                      |             2 |
-| \[Clostridium\] leptum                |             2 |
-| uncultured Oscillospiraceae bacterium |             2 |
+| taxon                  | total_studies |
+|:-----------------------|--------------:|
+| Streptococcus          |             6 |
+| Bacteroides            |             5 |
+| Prevotella             |             5 |
+| Anaerobutyricum hallii |             4 |
+| Blautia                |             4 |
+| Clostridium            |             4 |
+| Collinsella            |             4 |
+| Faecalibacterium       |             4 |
+| Haemophilus            |             4 |
+| Romboutsia             |             4 |
+| Turicibacter           |             4 |
+| Acidaminococcus        |             3 |
+| Akkermansia            |             3 |
+| Anaerostipes           |             3 |
+| Anaerotruncus          |             3 |
+| Dorea                  |             3 |
+| Fusicatenibacter       |             3 |
+| Lachnospiraceae        |             3 |
+| Methanobrevibacter     |             3 |
+| Phascolarctobacterium  |             3 |
+| Prevotellaceae         |             3 |
+| Streptococcaceae       |             3 |
+| Sutterella             |             3 |
 
 ## Core Consensus Signature
 
@@ -334,15 +334,20 @@ core.sig <- concordance %>%
 nrow(core.sig)
 ```
 
-    ## [1] 0
+    ## [1] 5
 
 ``` r
 
 knitr::kable(core.sig)
 ```
 
-| taxon | n_studies | n_increased | n_decreased | concordance_pct | majority_dir |
-|-------|-----------|-------------|-------------|-----------------|--------------|
+| taxon         | n_studies | n_increased | n_decreased | concordance_pct | majority_dir |
+|:--------------|----------:|------------:|------------:|----------------:|:-------------|
+| Streptococcus |         5 |           2 |           4 |              80 | decreased    |
+| Prevotella    |         4 |           4 |           1 |             100 | increased    |
+| Romboutsia    |         4 |           4 |           0 |             100 | increased    |
+| Clostridium   |         3 |           3 |           1 |             100 | increased    |
+| Haemophilus   |         3 |           3 |           1 |             100 | increased    |
 
 ## Core Signature Visualisation
 
@@ -375,7 +380,7 @@ if (nrow(core.sig) > 0) {
 }
 ```
 
-    ## No taxa met the core-signature threshold at this sample size.
+![](WomensHealth_BreastCancer_vignette_files/figure-html/core-signature-plot-1.png)
 
 ## WMS vs 16S Concordance
 
@@ -400,7 +405,7 @@ platform.compare <- dir.by.platform %>%
 nrow(platform.compare)
 ```
 
-    ## [1] 8
+    ## [1] 12
 
 ``` r
 
@@ -413,16 +418,20 @@ if (nrow(platform.compare) > 0) {
 }
 ```
 
-| taxon                      | dir_16S   | dir_WMS   | agree |
-|:---------------------------|:----------|:----------|:------|
-| Bacillota                  | increased | decreased | FALSE |
-| Bacteroides                | increased | increased | TRUE  |
-| Bacteroidota               | decreased | increased | FALSE |
-| Dialister                  | increased | decreased | FALSE |
-| Dorea longicatena          | increased | increased | TRUE  |
-| Mediterraneibacter torques | decreased | increased | FALSE |
-| Prevotella                 | decreased | decreased | TRUE  |
-| \[Clostridium\] leptum     | increased | increased | TRUE  |
+| taxon                  | dir_16S   | dir_WMS   | agree |
+|:-----------------------|:----------|:----------|:------|
+| Clostridium            | increased | increased | TRUE  |
+| Coprobacillus          | increased | increased | TRUE  |
+| Escherichia coli       | increased | decreased | FALSE |
+| Gemella                | increased | decreased | FALSE |
+| Haemophilus            | increased | increased | TRUE  |
+| Lysobacteraceae        | increased | increased | TRUE  |
+| Pasteurellaceae        | increased | increased | TRUE  |
+| Peptostreptococcaceae  | increased | increased | TRUE  |
+| Prevotella             | increased | increased | TRUE  |
+| Pseudomonas aeruginosa | decreased | increased | FALSE |
+| Romboutsia             | increased | increased | TRUE  |
+| Streptococcus          | decreased | decreased | TRUE  |
 
 ## Taxon Enrichment Analysis
 
@@ -448,7 +457,7 @@ enrichment.df <- taxon.freq %>%
 sum(enrichment.df$p_adj < 0.05)
 ```
 
-    ## [1] 5
+    ## [1] 23
 
 ``` r
 
@@ -457,21 +466,21 @@ knitr::kable(head(enrichment.df, 15))
 
 | taxon | total_studies | observed | expected | enrichment_ratio | log2_enrichment | p_value | p_adj |
 |:---|---:|---:|---:|---:|---:|---:|---:|
-| Lachnospiraceae | 4 | 4 | 0.1462585 | 27.34884 | 4.773408 | 0.0000149 | 0.0021839 |
-| Prevotella | 4 | 4 | 0.1462585 | 27.34884 | 4.773408 | 0.0000149 | 0.0021839 |
-| Anaerostipes | 3 | 3 | 0.1462585 | 20.51163 | 4.358370 | 0.0004386 | 0.0257906 |
-| Bacillota | 3 | 3 | 0.1462585 | 20.51163 | 4.358370 | 0.0004386 | 0.0257906 |
-| Mediterraneibacter torques | 3 | 3 | 0.1462585 | 20.51163 | 4.358370 | 0.0004386 | 0.0257906 |
-| Alistipes | 2 | 2 | 0.1462585 | 13.67442 | 3.773408 | 0.0095236 | 0.1217367 |
-| Bacteroides | 2 | 2 | 0.1462585 | 13.67442 | 3.773408 | 0.0095236 | 0.1217367 |
-| Bacteroidota | 2 | 2 | 0.1462585 | 13.67442 | 3.773408 | 0.0095236 | 0.1217367 |
-| Blautia | 2 | 2 | 0.1462585 | 13.67442 | 3.773408 | 0.0095236 | 0.1217367 |
-| Dialister | 2 | 2 | 0.1462585 | 13.67442 | 3.773408 | 0.0095236 | 0.1217367 |
-| Dorea longicatena | 2 | 2 | 0.1462585 | 13.67442 | 3.773408 | 0.0095236 | 0.1217367 |
-| Eggerthella | 2 | 2 | 0.1462585 | 13.67442 | 3.773408 | 0.0095236 | 0.1217367 |
-| Helotiales | 2 | 2 | 0.1462585 | 13.67442 | 3.773408 | 0.0095236 | 0.1217367 |
-| Methanobrevibacter | 2 | 2 | 0.1462585 | 13.67442 | 3.773408 | 0.0095236 | 0.1217367 |
-| Prevotellaceae | 2 | 2 | 0.1462585 | 13.67442 | 3.773408 | 0.0095236 | 0.1217367 |
+| Streptococcus | 6 | 6 | 0.1679688 | 35.72093 | 5.158698 | 0.0000000 | 0.0000049 |
+| Bacteroides | 5 | 5 | 0.1679688 | 29.76744 | 4.895663 | 0.0000008 | 0.0000660 |
+| Prevotella | 5 | 5 | 0.1679688 | 29.76744 | 4.895663 | 0.0000008 | 0.0000660 |
+| Anaerobutyricum hallii | 4 | 4 | 0.1679688 | 23.81395 | 4.573735 | 0.0000254 | 0.0005920 |
+| Blautia | 4 | 4 | 0.1679688 | 23.81395 | 4.573735 | 0.0000254 | 0.0005920 |
+| Clostridium | 4 | 4 | 0.1679688 | 23.81395 | 4.573735 | 0.0000254 | 0.0005920 |
+| Collinsella | 4 | 4 | 0.1679688 | 23.81395 | 4.573735 | 0.0000254 | 0.0005920 |
+| Faecalibacterium | 4 | 4 | 0.1679688 | 23.81395 | 4.573735 | 0.0000254 | 0.0005920 |
+| Haemophilus | 4 | 4 | 0.1679688 | 23.81395 | 4.573735 | 0.0000254 | 0.0005920 |
+| Romboutsia | 4 | 4 | 0.1679688 | 23.81395 | 4.573735 | 0.0000254 | 0.0005920 |
+| Turicibacter | 4 | 4 | 0.1679688 | 23.81395 | 4.573735 | 0.0000254 | 0.0005920 |
+| Acidaminococcus | 3 | 3 | 0.1679688 | 17.86047 | 4.158698 | 0.0006544 | 0.0072840 |
+| Akkermansia | 3 | 3 | 0.1679688 | 17.86047 | 4.158698 | 0.0006544 | 0.0072840 |
+| Anaerostipes | 3 | 3 | 0.1679688 | 17.86047 | 4.158698 | 0.0006544 | 0.0072840 |
+| Anaerotruncus | 3 | 3 | 0.1679688 | 17.86047 | 4.158698 | 0.0006544 | 0.0072840 |
 
 ## Monte Carlo Critical N
 
@@ -500,48 +509,48 @@ criticalN
     ##    10 
     ## 
     ## $simulated_values
-    ##    [1]  7  7  7  8  7  8  7  8  7  7  7  6  9  7  7  7  7  7  9  7  8  6  9  8
-    ##   [25]  6  8  8  8  6  8  8  8  7  6  7  8  6  6  9  7  7  7  8  9  6  9  8  9
-    ##   [49]  7  7  8  8  7  8  7  6  7  7  8  7  8  9  8  9  9  9  8  8  7  7  9  8
-    ##   [73]  8  6  8  8  8  7  8  9  8  8  7  9  8  7  9  6  7 10  7  6  7  7  8  7
-    ##   [97]  8 10  7  7  7  7  7  8  6  8  8  7  7  7  8  8  8  8  7  8  7  8  8  9
-    ##  [121]  6  7  6  9  5  8  7  7  9  8 11  8  9  7  6  7  7  8  9  9  8  7  7  9
-    ##  [145]  6  8  7  6  8  7  7  7 11  7  6  8 10  9  8  8  8  9  8  7  9  8  9  7
-    ##  [169]  9  8  7  9  8  8  7 10  7  8  9  7  8  8  8  6  7  7  8  8  8  9  8  8
-    ##  [193]  9 12  7  9  9  7  9  6  7  8  9  7  8  8 10  8  6  8  7  8  9  7  7  7
-    ##  [217]  7  8  8 10  7  7  7  7  8  8  8 10  8  7  9  9  6  8  9  8 10  9  7  8
-    ##  [241]  9  8  9  9  7  8  7  6  8  9  7 10  8  7  7  8 10  7  8  7  8  8  8  6
-    ##  [265]  7  8  7  8  9 11  9  8  9  7  9  8  8  8  9  7  7  7  8  7  7  8  6 12
-    ##  [289]  7  9  9  7  7  8  6  8  7  9  7  9  7 10  9  8  7 11  7  7  8  9  9  7
-    ##  [313]  9 11  7  9 10  8  6  8  8  8  7  7  8  7  9 10  7  9  7  8  7  7  7  8
-    ##  [337] 10 10  8  8 10  9  9  6  7  7  6  8  6  8  9  8  7  9  7  7  6  7 10  6
-    ##  [361]  7  8  9  8  9  7  9  7  7  8  9  8  7  8  7  8  7  9  8  9  7  8  7  7
-    ##  [385]  8 11  9  7  7  7  9  7  9  8  7  7  7  9  7  7  9  7  6 10  7  8  8  7
-    ##  [409]  7  7  6  8  8  8 11  6 10  6  8  7  7  7  9  8  6 10  6  8  8 10  7 11
-    ##  [433]  8  7  6  7  7  8  8  8  8  8  8  7  7 10  7  8  8  7  9  7  6 10  7  7
-    ##  [457]  7  7  6  8  8  7  8  8  7  8  7  9  8  7  7  7  8  6  7  9 10  7  7  7
-    ##  [481]  8  7  9  7 10  8  8  8  8  7  7  8  8  9  7  7  6  9  6  8  8  7  9  6
-    ##  [505]  8  9  8  7  6  7  8  7 12  9  8  7  8  7  7  8  6  9  7  7  8  9  6  9
-    ##  [529]  8  6  8  8  7  9  8  7  7  7  7  9  8  7  8  7  9  7  7  8  9  7  6  7
-    ##  [553]  7  7  9  7  7  7  7 10  8  8  9  7  7 10  8  9  7  7  7  8  9  9  7  6
-    ##  [577]  6  8  7  6  7  9  7  8  9  7  7  7  8  9  9 10  8  7  7 10  7  9  7  7
-    ##  [601]  9  7 11  7  9  6  8  7  9  8  6  8  9  8  7  9  6  6  9  6  8  8  7  8
-    ##  [625] 11  6  9  8  7  8  8  9  8  7  7  6  8  6  8  7  7  9  6  7 12  8  7  8
-    ##  [649]  8  8  9  8  7  8  8  7  8  8  8  9  8  7  8  8  6  7  7  8  7  6  9  8
-    ##  [673]  7  8  7  6  8  7  9  8  7  8 10  8  7  7  6  7  9  8 12  8  7  8  7  7
-    ##  [697]  6  7  8  7  8  7  6  7  8  7  8  6  7  7  8  7  9  7  7  7  9  7  7  7
-    ##  [721]  8  7  8  6  7  9  8  7  9  9  8  9  6  7  7  9  8  7  7  7  9  8 10  8
-    ##  [745]  7  8  8  7  8  7 10  7  7  7  9  7 10  8  9  9  7 10  8  8  6  8  8  8
-    ##  [769]  8  7  7  7  8  9 10  8  8  7  8  8  9  8  6  7  8  8  9  8  9  9  6  9
-    ##  [793]  6 10  7 10  9  7  9  9  7  6  7  8  8  7  8  7  7  7  7  6  7  7  7  9
-    ##  [817] 10  8  8  8  7  9  9  9  8  8 10  8  8  8  7  9  8  7  6  6  8  9  8  8
-    ##  [841]  8  8  7  8  6  9  8  7  9 10  9  8  9  7  6  7  7  6  8  7  9  9  7 10
-    ##  [865]  8  8  8  8  8  7 10  8  8 11  8  7  6  8  8 10  8  7  7  8  7  7 10  9
-    ##  [889]  7  6  7  7  7  7  6  7  8  7  8  8  8  8  9  7  7  7  7  8  8  8  7  9
-    ##  [913]  8  8  6  8 11  7  8  8  8  7  8  7  6  7  9  7 10  6  8  7  7  7 10  8
-    ##  [937]  7  8  6  7  6  9 10  6  7  9  8  7  7  8  8  9  7  8  9  7  7  8  9  7
-    ##  [961]  8  9  9  9  8  7  8  6 10  7  8  7  9  7  7  7  9  8  8  7  8  6  6  8
-    ##  [985]  9 10  7  6  7  8  9  7  7  8  7  7  7  7  6  8
+    ##    [1]  7  7  9  8  7  8  6  7  8  8  8  7  7  7  7  8  7  9  7  8  6  7  7  9
+    ##   [25]  8  8  9  7  6  7  8  7  8  8  7  7  6  7  8  8  7  7  7  8  8  7  8  8
+    ##   [49]  8  7  8  8  8  9  7  8  8  6  7  8  9  9  7  8  7  7  7  7  8 10  7 11
+    ##   [73]  8  8  7  8  8  7  9  7  6  8  7 12  8  7  7 10  9  8  8  8  7  7  7 10
+    ##   [97]  7  7  6  8  8  7  7  6  7  8  8  7  8  8  8  8 10 10  9  8  8 10  7  8
+    ##  [121]  8  6  9  5  7  8  7  8  8 10 10  8  9  7  7  7  7  7  7  8  7  7  8  7
+    ##  [145]  8  8  7 10  7  7  8  7 10  8  8  9  8  7  7  7  8  7  7  8  8  9  7  9
+    ##  [169]  6  8  9  8  8  7  7  8  8  8  6  7  9  8  9  7  6  9  8  9  6  9  9 10
+    ##  [193]  7  7  7  7  8  8  7  7  6  8  9  9  8  7  7  8  9  8  9  8  7  7  8  9
+    ##  [217]  9  9  7  7  7  8  6  8  7  8  8  9  9  8  8  7  8  8 10  9  8 10  6  9
+    ##  [241]  9  7  7  7  8  7  8 10  7  9  8  7  7  7  8  7  7  8 10  8  7  8  7  7
+    ##  [265]  7  7  8 14  8  8  8  8  8  8  7  9  8  9  6  7  7  9  7  7 10  9  9 11
+    ##  [289]  7  8  8  8  6  8  8  8  8  9  8  7  8  7  7  7  7  6  8  8  6  9 10 10
+    ##  [313] 10  6  9  9  8  8  9  8  7 10  7  9  8  8  6  8  9  7  8  7  8  9 10  7
+    ##  [337]  9  9  8  8  6  7  9  6  8  7  7  8  8  9 10  9  8  7  6  8  7  7  6  7
+    ##  [361]  9  9  8  8  7  9  7  8  9 10  7  7  7  8  9 10  8  7  8  6  6  8  9  6
+    ##  [385]  9  7  9  9  7  7  7  7  7  6  7  8  7 10  7 10  8  9 10  8  8  7  9  8
+    ##  [409] 10  6  7  9  7  8 10  9  8  6  8 10  6  7  7  7  8  6  8  8  8  8  8  7
+    ##  [433]  9  7  7  6  8  8  9  8  9 12  8  6  8  7  7  8  7  9  8  7  8  7  6  8
+    ##  [457]  8  7  9  8  7  9  6  8  7  7  7  7  6  7  7  8 10  9  7  6 10  9  8  6
+    ##  [481]  9  8  8  7  9 10  6  9  6 10  8  7  7  9  6  9  5  9  9  8  8  9  9  8
+    ##  [505]  7  9  8 10  8  8 10  7  8  8  8  7  8  8 10  9  8  9  6 10  8  9  8  7
+    ##  [529]  6 10  9  7  6 10  9  8  7 10  7  7  7  7  7  9  6  7  6  6  7  9  8  8
+    ##  [553]  7  7  8  7  7  7  7  7  8  8  9  7  7  7  7 11  8  7  8  6  8  7  8  8
+    ##  [577] 10  7  6  8  7  8  9  8  9  8  7  9  7  7  8  7 11  6  8 10  5 15 10  8
+    ##  [601]  8  7  6  8  8  8  9  7  8  8  8  7 12  7  8  9  6  9  9  9  7  9  8  8
+    ##  [625]  8  7  8  8  6  9  8  8  6  7  8  9  7  9  9  9  7  6  7  7  9  8 10  7
+    ##  [649]  7  8  7  8 10  7  8  6  8  9  7 10  9  8  7  7  7  9  8  7  8  8  7  7
+    ##  [673]  7  8  8  8  7  6  6  8  7  8  7  7 10  9  8  9  8  8  8 10  9  6  8  6
+    ##  [697]  7  6  8  7  8  8  7  7  8  7  9  8  6  9  7  8  6  7  7  8  7  8  8 10
+    ##  [721]  8  8  8  6  8  6  6  6  7  7  7  7  7  7  9  7  7  7  7  8  8  8 10  8
+    ##  [745]  8  8  9  7  7  8  7  9  6  8  7  8  6  8  7  8  8  8  8  9  9 10  9  8
+    ##  [769]  8  7  7  6  9  8  9  7  8  8  9  8  9  7  9  9  9  7  8  8  8  9  7  8
+    ##  [793]  9  7 10  7 10  7  7  8  9 10  6  7  6  7  7  8  9  8  9  9  9  8  9  9
+    ##  [817]  8  8  9  7  8  9  8  8  9  8  7  6  7  8 11  9  7  7  7  9  8  7  8  7
+    ##  [841]  9  9  7  7  9  8  8 10  6  9  7  8  7  8  9  8  9  8  7 10  9  9  9  7
+    ##  [865]  7  9 10  7  8  7 10  7  9  9  7  7  8  8  7  9  7  8  7  8  7  6  6  7
+    ##  [889]  8  7  6  7 10  9  9  8  8  7  7  8  8  8  9  7  7  8  7  7  8  7  7  7
+    ##  [913]  9  9  7  8  7  7  8  7 10  7  9  7  8  8  8 10  7  8  7  8  6  8  6  6
+    ##  [937]  9  9  7  6 10  8  7  8  8  6  8  8  7  7  8  8  6  8  9 10  8  7  7  8
+    ##  [961] 11  8  8 10  9  6  8  8  7  8  8  7  8  7 12  8 10  9  7  8  7  8  7  9
+    ##  [985]  6  8  8  8  7  7  9  8  9  8  7  7  7  8  9  7
     ## 
     ## $alpha
     ## [1] 0.05
@@ -606,26 +615,26 @@ shared_taxa_counts %>%
 
 | Taxon Name | Total WH Studies | Total Distinct Conditions | Other Conditions it Often Appears In |
 |:---|---:|---:|:---|
-| Prevotella | 354 | 211 | Illness severity status, Antimicrobial agent, Obesity |
-| Lactobacillus | 335 | 201 | Antimicrobial agent, Oxygen, Illness severity status |
-| Bacteroides | 345 | 199 | Autism, Autoimmune disease, Obesity |
-| Lachnospiraceae | 331 | 199 | Autoimmune disease, Smoking behavior, Irritable bowel syndrome |
-| Bacillota | 313 | 190 | Type II diabetes mellitus, Autism, Autoimmune disease |
-| Faecalibacterium | 278 | 183 | Obesity, Autoimmune disease, Irritable bowel syndrome |
-| Bifidobacterium | 275 | 177 | Food allergy, Irritable bowel syndrome, Autism |
-| Clostridium | 258 | 175 | Irritable bowel syndrome, Autism, Autoimmune disease |
-| Actinomycetota | 265 | 171 | Autism, Ethnic group,Place of residence measurement, Ulcerative colitis |
-| Pseudomonadota | 241 | 166 | Autism, Autoimmune disease, Ethnic group,Place of residence measurement |
-| Roseburia | 228 | 165 | Autoimmune disease, Smoking behavior, Irritable bowel syndrome |
-| Blautia | 246 | 164 | Autoimmune disease, Irritable bowel syndrome, Colorectal cancer |
-| Veillonella | 241 | 161 | Obesity, Antimicrobial agent, Oxygen |
-| Bacteroidota | 247 | 158 | Autism, Autoimmune disease, Irritable bowel syndrome |
-| Enterobacteriaceae | 213 | 155 | Autoimmune disease, Irritable bowel syndrome, Sampling site |
-| Alistipes | 198 | 148 | Autoimmune disease, Irritable bowel syndrome, Colorectal cancer |
-| Ruminococcus | 218 | 147 | Autism, Autoimmune disease, Irritable bowel syndrome |
-| Parabacteroides | 208 | 145 | Autism, Autoimmune disease, Irritable bowel syndrome |
-| Clostridia | 188 | 140 | Type II diabetes mellitus, Autoimmune disease, Colorectal carcinoma |
-| Lactobacillaceae | 194 | 134 | Autoimmune disease, Antimicrobial agent, Psoriasis |
+| Streptococcus | 557 | 334 | COVID-19, Health study participation, Diet |
+| Bacteroides | 548 | 321 | Health study participation, Irritable bowel syndrome, Autism |
+| Prevotella | 542 | 320 | COVID-19, Health study participation, Illness severity status |
+| Lachnospiraceae | 508 | 302 | Type II diabetes mellitus, Autoimmune disease, Smoking behavior |
+| Oscillospiraceae | 447 | 300 | Autism, Autoimmune disease, Obesity |
+| Bacillota | 468 | 296 | Parkinson’s disease, Irritable bowel syndrome, Type II diabetes mellitus |
+| Faecalibacterium | 411 | 287 | Health study participation, Autism, Autoimmune disease |
+| Lactobacillus | 485 | 284 | Health study participation, Antimicrobial agent, Oxygen |
+| Bifidobacterium | 428 | 270 | Health study participation, Parkinson’s disease, Food allergy |
+| Actinomycetota | 397 | 257 | Type II diabetes mellitus, Place of residence measurement,Ethnic group, Atopic eczema |
+| Bacteroidota | 393 | 246 | Irritable bowel syndrome, Autism, Autoimmune disease |
+| Pseudomonadota | 379 | 244 | Irritable bowel syndrome, Type II diabetes mellitus, Autism |
+| Blautia | 395 | 243 | Health study participation, Autoimmune disease, Irritable bowel syndrome |
+| Clostridium | 371 | 238 | Health study participation, Irritable bowel syndrome, Type II diabetes mellitus |
+| Veillonella | 352 | 229 | COVID-19, Health study participation, Antimicrobial agent |
+| Roseburia | 347 | 221 | Health study participation, Autoimmune disease, Smoking behavior |
+| Ruminococcus | 346 | 219 | Health study participation, Type II diabetes mellitus, Autoimmune disease |
+| Haemophilus | 311 | 209 | Health study participation, Illness severity status, Diet |
+| Enterobacteriaceae | 312 | 206 | Type II diabetes mellitus, Autism, Smoking behavior |
+| Alistipes | 305 | 201 | Health study participation, Autoimmune disease, Irritable bowel syndrome |
 
 Top Breast-Cancer-Associated Taxa and Their Links to Other Women’s
 Health Conditions {.table}

@@ -115,7 +115,7 @@ consistent, human, non-tissue evidence)</li>
 <code class="sourceCode R"><span><span class="va">full.dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>cache <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">full.dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 7425   51</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 12086    57</span></span></code></pre>
 <p>The BugSigDB database was downloaded using the
 <code><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB()</a></code> function from the
 <strong>bugsigdbr</strong> package. The result contains all curated
@@ -132,7 +132,7 @@ site, sequencing platform, and abundance direction.</p>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="va">full.dat</span><span class="op">[</span><span class="va">ind1</span> <span class="op">&amp;</span> <span class="va">ind2</span>, <span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 7425   51</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 12086    57</span></span></code></pre>
 <p>Signatures without annotated taxa were removed to ensure that only
 complete microbial signatures were included in downstream analyses.</p>
 </div>
@@ -166,21 +166,25 @@ complete microbial signatures were included in downstream analyses.</p>
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">crc.dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 304</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 487</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">crc.dat</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html" class="external-link">count</a></span><span class="op">(</span><span class="va">Condition</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##                               Condition   n</span></span>
-<span><span class="co">## 1                     Colorectal cancer 227</span></span>
-<span><span class="co">## 2                    Colorectal adenoma  33</span></span>
-<span><span class="co">## 3                  Colorectal carcinoma  13</span></span>
-<span><span class="co">## 4             Colorectal adenocarcinoma   9</span></span>
-<span><span class="co">## 5          Metastatic colorectal cancer   7</span></span>
-<span><span class="co">## 6   Colorectal cancer,Diabetes mellitus   5</span></span>
-<span><span class="co">## 7       Nutraceutical,Colorectal cancer   4</span></span>
-<span><span class="co">## 8  Colorectal adenoma,Colorectal cancer   2</span></span>
-<span><span class="co">## 9           Colorectal cancer cell line   2</span></span>
-<span><span class="co">## 10      Colorectal cancer,Nutraceutical   2</span></span></code></pre>
+<pre><code><span><span class="co">##                                               Condition   n</span></span>
+<span><span class="co">## 1                                     Colorectal cancer 374</span></span>
+<span><span class="co">## 2                                    Colorectal adenoma  54</span></span>
+<span><span class="co">## 3                                  Colorectal carcinoma  13</span></span>
+<span><span class="co">## 4                          Metastatic colorectal cancer  12</span></span>
+<span><span class="co">## 5                             Colorectal adenocarcinoma  11</span></span>
+<span><span class="co">## 6                   Colorectal cancer,Diabetes mellitus   5</span></span>
+<span><span class="co">## 7                       Nutraceutical,Colorectal cancer   4</span></span>
+<span><span class="co">## 8                       Colorectal cancer,Nutraceutical   3</span></span>
+<span><span class="co">## 9                  Colorectal adenoma,Colorectal cancer   2</span></span>
+<span><span class="co">## 10 Colorectal adenoma,Non-alcoholic fatty liver disease   2</span></span>
+<span><span class="co">## 11                          Colorectal cancer cell line   2</span></span>
+<span><span class="co">## 12            Colorectal cancer,Peripheral nerve injury   2</span></span>
+<span><span class="co">## 13 Non-alcoholic fatty liver disease,Colorectal adenoma   2</span></span>
+<span><span class="co">## 14                Colorectal cancer,Response to placebo   1</span></span></code></pre>
 <p>To capture the complete body of evidence related to colorectal cancer
 (CRC), signatures were identified using both the primary disease
 terminology (colorectal cancer / neoplasms) and related terms covering
@@ -198,7 +202,7 @@ corresponded to a CRC-related disease were retained.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">crc.filtered</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 304</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 487</span></span></code></pre>
 <p>Exact duplicate records were removed using <code><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct()</a></code> to
 reduce redundancy before downstream analyses. This step retains unique
 CRC-associated microbial signatures while preserving the overall study
@@ -219,39 +223,83 @@ representation.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Feces</td>
-<td align="right">194</td>
+<td align="right">311</td>
 </tr>
 <tr class="even">
 <td align="left">Intestine</td>
-<td align="right">41</td>
+<td align="right">44</td>
 </tr>
 <tr class="odd">
 <td align="left">Colon</td>
-<td align="right">17</td>
+<td align="right">23</td>
 </tr>
 <tr class="even">
-<td align="left">Colorectum</td>
-<td align="right">15</td>
+<td align="left">Colorectal mucosa</td>
+<td align="right">23</td>
 </tr>
 <tr class="odd">
-<td align="left">Colorectal mucosa</td>
-<td align="right">12</td>
+<td align="left">Colorectum</td>
+<td align="right">16</td>
 </tr>
 <tr class="even">
+<td align="left">Saliva</td>
+<td align="right">12</td>
+</tr>
+<tr class="odd">
 <td align="left">Oral cavity</td>
 <td align="right">10</td>
 </tr>
+<tr class="even">
+<td align="left">feces</td>
+<td align="right">10</td>
+</tr>
 <tr class="odd">
-<td align="left">Saliva</td>
-<td align="right">9</td>
+<td align="left">Ascending colon,Colorectal mucosa,Sigmoid colon</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">Sigmoid colon</td>
+<td align="right">5</td>
+</tr>
+<tr class="odd">
+<td align="left">Ascending colon</td>
+<td align="right">4</td>
+</tr>
+<tr class="even">
+<td align="left">Colon,Rectum,Sigmoid colon</td>
+<td align="right">4</td>
+</tr>
+<tr class="odd">
+<td align="left">Colonic mucosa</td>
+<td align="right">4</td>
 </tr>
 <tr class="even">
 <td align="left">Intestinal mucosa</td>
 <td align="right">4</td>
 </tr>
 <tr class="odd">
+<td align="left">Ascending colon,Colorectal mucosa</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Ascending colon,Sigmoid colon,Colorectal mucosa</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Colorectal mucosa,Sigmoid colon</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Dorsum of tongue</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
 <td align="left">Mucosa of ascending colon</td>
 <td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Rectum</td>
+<td align="right">1</td>
 </tr>
 </tbody>
 </table>
@@ -264,7 +312,7 @@ representation.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">PMID</span> <span class="op">!=</span> <span class="fl">26397137</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">crc.filtered</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 192</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 309</span></span></code></pre>
 <p>CRC signatures in BugSigDB were curated from several body sites,
 including feces, mucosal tissue, and oral samples, as well as from a
 small number of mouse studies. To keep the downstream comparisons
@@ -291,12 +339,12 @@ of evidence for the gut microbiome in CRC.</p>
 <tr class="odd">
 <td align="left">Feces</td>
 <td align="left">16S</td>
-<td align="right">146</td>
+<td align="right">209</td>
 </tr>
 <tr class="even">
 <td align="left">Feces</td>
 <td align="left">WMS</td>
-<td align="right">46</td>
+<td align="right">100</td>
 </tr>
 </tbody>
 </table>
@@ -315,22 +363,22 @@ diversity of experimental designs represented in BugSigDB.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 6</span></span></span>
 <span><span class="co">##   `Taxon Name`       `Taxonomic Level` total_signatures increased_signatures</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> Lachnospiraceae    family                          24                    6</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> Peptostreptococcus genus                           24                   24</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> Parvimonas         genus                           23                   23</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span> Bacteroides        genus                           19                   10</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span> Clostridium        genus                           18                    6</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">6</span> Ruminococcus       genus                           18                    9</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> Parvimonas         genus                           29                   29</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> Peptostreptococcus genus                           27                   27</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> Bacteroides        genus                           27                   10</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> Clostridium        genus                           26                    8</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span> Lachnospiraceae    family                          26                    6</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">6</span> Ruminococcus       genus                           24                   11</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 2 more variables: decreased_signatures &lt;int&gt;, `Binomial Test pval` &lt;dbl&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">taxa.table</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
-<col width="16%">
+<col width="20%">
+<col width="13%">
 <col width="14%">
-<col width="15%">
-<col width="18%">
-<col width="18%">
+<col width="17%">
+<col width="17%">
 <col width="16%">
 </colgroup>
 <thead><tr class="header">
@@ -343,84 +391,84 @@ diversity of experimental designs represented in BugSigDB.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">Lachnospiraceae</td>
-<td align="left">family</td>
-<td align="right">24</td>
-<td align="right">6</td>
-<td align="right">18</td>
-<td align="right">2.3e-02</td>
+<td align="left">Parvimonas</td>
+<td align="left">genus</td>
+<td align="right">29</td>
+<td align="right">29</td>
+<td align="right">0</td>
+<td align="right">0.0e+00</td>
 </tr>
 <tr class="even">
 <td align="left">Peptostreptococcus</td>
 <td align="left">genus</td>
-<td align="right">24</td>
-<td align="right">24</td>
+<td align="right">27</td>
+<td align="right">27</td>
 <td align="right">0</td>
-<td align="right">1.0e-07</td>
+<td align="right">0.0e+00</td>
 </tr>
 <tr class="odd">
-<td align="left">Parvimonas</td>
-<td align="left">genus</td>
-<td align="right">23</td>
-<td align="right">23</td>
-<td align="right">0</td>
-<td align="right">2.0e-07</td>
-</tr>
-<tr class="even">
 <td align="left">Bacteroides</td>
 <td align="left">genus</td>
-<td align="right">19</td>
+<td align="right">27</td>
 <td align="right">10</td>
-<td align="right">9</td>
-<td align="right">1.0e+00</td>
+<td align="right">17</td>
+<td align="right">2.5e-01</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Clostridium</td>
 <td align="left">genus</td>
+<td align="right">26</td>
+<td align="right">8</td>
 <td align="right">18</td>
+<td align="right">7.6e-02</td>
+</tr>
+<tr class="odd">
+<td align="left">Lachnospiraceae</td>
+<td align="left">family</td>
+<td align="right">26</td>
 <td align="right">6</td>
-<td align="right">12</td>
-<td align="right">2.4e-01</td>
+<td align="right">20</td>
+<td align="right">9.4e-03</td>
 </tr>
 <tr class="even">
 <td align="left">Ruminococcus</td>
 <td align="left">genus</td>
-<td align="right">18</td>
-<td align="right">9</td>
-<td align="right">9</td>
-<td align="right">1.0e+00</td>
-</tr>
-<tr class="odd">
-<td align="left">Pseudomonadota</td>
-<td align="left">phylum</td>
-<td align="right">18</td>
-<td align="right">8</td>
-<td align="right">10</td>
-<td align="right">8.1e-01</td>
-</tr>
-<tr class="even">
-<td align="left">Porphyromonas</td>
-<td align="left">genus</td>
-<td align="right">17</td>
-<td align="right">15</td>
-<td align="right">2</td>
-<td align="right">2.3e-03</td>
-</tr>
-<tr class="odd">
-<td align="left">Rikenellaceae</td>
-<td align="left">family</td>
-<td align="right">17</td>
+<td align="right">24</td>
 <td align="right">11</td>
-<td align="right">6</td>
-<td align="right">3.3e-01</td>
+<td align="right">13</td>
+<td align="right">8.4e-01</td>
+</tr>
+<tr class="odd">
+<td align="left">Fusobacterium</td>
+<td align="left">genus</td>
+<td align="right">23</td>
+<td align="right">19</td>
+<td align="right">4</td>
+<td align="right">2.6e-03</td>
 </tr>
 <tr class="even">
-<td align="left">Coprococcus</td>
+<td align="left">Fusobacterium nucleatum</td>
+<td align="left">species</td>
+<td align="right">23</td>
+<td align="right">22</td>
+<td align="right">1</td>
+<td align="right">5.7e-06</td>
+</tr>
+<tr class="odd">
+<td align="left">Bacillota</td>
+<td align="left">phylum</td>
+<td align="right">22</td>
+<td align="right">13</td>
+<td align="right">9</td>
+<td align="right">5.2e-01</td>
+</tr>
+<tr class="even">
+<td align="left">Prevotella</td>
 <td align="left">genus</td>
-<td align="right">16</td>
-<td align="right">4</td>
-<td align="right">12</td>
-<td align="right">7.7e-02</td>
+<td align="right">22</td>
+<td align="right">11</td>
+<td align="right">11</td>
+<td align="right">1.0e+00</td>
 </tr>
 </tbody>
 </table>
@@ -437,10 +485,10 @@ studies.</p>
 <span><span class="va">crc.16s</span> <span class="op">&lt;-</span> <span class="va">crc.filtered</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">`Sequencing type`</span> <span class="op">==</span> <span class="st">"16S"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"WMS  - signatures:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">crc.wms</span><span class="op">)</span>, <span class="st">"| studies:"</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct</a></span><span class="op">(</span><span class="va">crc.wms</span><span class="op">$</span><span class="va">PMID</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## WMS  - signatures: 46 | studies: 9</span></span></code></pre>
+<pre><code><span><span class="co">## WMS  - signatures: 100 | studies: 18</span></span></code></pre>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="st">"16S  - signatures:"</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">crc.16s</span><span class="op">)</span>, <span class="st">"| studies:"</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct</a></span><span class="op">(</span><span class="va">crc.16s</span><span class="op">$</span><span class="va">PMID</span><span class="op">)</span>, <span class="st">"\n"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 16S  - signatures: 146 | studies: 40</span></span></code></pre>
+<pre><code><span><span class="co">## 16S  - signatures: 209 | studies: 57</span></span></code></pre>
 <p>Splitting by sequencing platform makes it possible to check later
 whether whole-metagenome shotgun (WMS) and 16S rRNA studies agree on the
 direction of the taxa they report.</p>
@@ -465,7 +513,7 @@ direction of the taxa they report.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>direction <span class="op">=</span> <span class="va">`Abundance in Group 1`</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">taxon.long</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 1960</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 2986</span></span></code></pre>
 <p>Each signature was expanded into one row per taxon and joined back to
 its study metadata (PMID, condition, sequencing type, and reported
 direction). This long-format table underlies all of the frequency,
@@ -484,7 +532,7 @@ concordance, enrichment, and co-occurrence analyses below.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">total_studies</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html" class="external-link">n_distinct</a></span><span class="op">(</span><span class="va">taxon.freq</span><span class="op">$</span><span class="va">taxon</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 639</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 907</span></span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">taxon.freq</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon</span>, <span class="va">total_studies</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -497,48 +545,44 @@ concordance, enrichment, and co-occurrence analyses below.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">Lachnospiraceae</td>
-<td align="right">18</td>
-</tr>
-<tr class="even">
 <td align="left">Bacteroides</td>
-<td align="right">13</td>
-</tr>
-<tr class="odd">
-<td align="left">Coprococcus</td>
-<td align="right">13</td>
+<td align="right">20</td>
 </tr>
 <tr class="even">
-<td align="left">Peptostreptococcus</td>
-<td align="right">13</td>
-</tr>
-<tr class="odd">
-<td align="left">Phascolarctobacterium</td>
-<td align="right">13</td>
-</tr>
-<tr class="even">
-<td align="left">Ruminococcus</td>
-<td align="right">13</td>
-</tr>
-<tr class="odd">
-<td align="left">Clostridium</td>
-<td align="right">12</td>
-</tr>
-<tr class="even">
-<td align="left">Porphyromonas</td>
-<td align="right">12</td>
+<td align="left">Lachnospiraceae</td>
+<td align="right">20</td>
 </tr>
 <tr class="odd">
 <td align="left">Fusobacterium</td>
-<td align="right">11</td>
+<td align="right">18</td>
 </tr>
 <tr class="even">
-<td align="left">Parvimonas</td>
-<td align="right">11</td>
+<td align="left">Ruminococcus</td>
+<td align="right">18</td>
 </tr>
 <tr class="odd">
-<td align="left">Streptococcus</td>
-<td align="right">11</td>
+<td align="left">Clostridium</td>
+<td align="right">17</td>
+</tr>
+<tr class="even">
+<td align="left">Faecalibacterium</td>
+<td align="right">17</td>
+</tr>
+<tr class="odd">
+<td align="left">Bacillota</td>
+<td align="right">16</td>
+</tr>
+<tr class="even">
+<td align="left">Coprococcus</td>
+<td align="right">16</td>
+</tr>
+<tr class="odd">
+<td align="left">Prevotella</td>
+<td align="right">16</td>
+</tr>
+<tr class="even">
+<td align="left">Roseburia</td>
+<td align="right">16</td>
 </tr>
 </tbody>
 </table>
@@ -571,12 +615,12 @@ significance.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">majority_dir</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">n_studies</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">core.sig</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 102</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 135</span></span></code></pre>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">core.sig</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
-<col width="37%">
+<col width="38%">
 <col width="9%">
 <col width="11%">
 <col width="11%">
@@ -594,166 +638,166 @@ significance.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Lachnospiraceae</td>
-<td align="right">15</td>
+<td align="right">18</td>
 <td align="right">6</td>
+<td align="right">14</td>
+<td align="right">77.8</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
+<td align="left">Faecalibacterium</td>
+<td align="right">16</td>
+<td align="right">3</td>
+<td align="right">14</td>
+<td align="right">87.5</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="odd">
+<td align="left">Clostridium</td>
+<td align="right">15</td>
+<td align="right">5</td>
 <td align="right">12</td>
 <td align="right">80.0</td>
 <td align="left">decreased</td>
 </tr>
 <tr class="even">
-<td align="left">Coprococcus</td>
-<td align="right">13</td>
+<td align="left">Lachnospira</td>
+<td align="right">15</td>
 <td align="right">3</td>
-<td align="right">10</td>
-<td align="right">76.9</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="odd">
-<td align="left">Clostridium</td>
-<td align="right">10</td>
-<td align="right">4</td>
-<td align="right">8</td>
-<td align="right">80.0</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="even">
-<td align="left">Roseburia</td>
-<td align="right">10</td>
-<td align="right">2</td>
-<td align="right">8</td>
+<td align="right">12</td>
 <td align="right">80.0</td>
 <td align="left">decreased</td>
 </tr>
 <tr class="odd">
 <td align="left">Clostridia</td>
+<td align="right">12</td>
+<td align="right">3</td>
 <td align="right">9</td>
-<td align="right">1</td>
-<td align="right">8</td>
-<td align="right">88.9</td>
+<td align="right">75.0</td>
 <td align="left">decreased</td>
 </tr>
 <tr class="even">
-<td align="left">Lachnospira</td>
+<td align="left">Bifidobacterium</td>
+<td align="right">11</td>
+<td align="right">3</td>
 <td align="right">9</td>
-<td align="right">2</td>
-<td align="right">8</td>
-<td align="right">88.9</td>
+<td align="right">81.8</td>
 <td align="left">decreased</td>
 </tr>
 <tr class="odd">
-<td align="left">Faecalibacterium</td>
-<td align="right">8</td>
-<td align="right">1</td>
-<td align="right">8</td>
-<td align="right">100.0</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="even">
-<td align="left">Anaerobutyricum hallii</td>
-<td align="right">7</td>
-<td align="right">1</td>
-<td align="right">6</td>
-<td align="right">85.7</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="odd">
-<td align="left">Blautia</td>
-<td align="right">7</td>
-<td align="right">1</td>
-<td align="right">6</td>
-<td align="right">85.7</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="even">
 <td align="left">Faecalibacterium prausnitzii</td>
-<td align="right">6</td>
+<td align="right">9</td>
 <td align="right">1</td>
-<td align="right">6</td>
+<td align="right">9</td>
 <td align="right">100.0</td>
 <td align="left">decreased</td>
 </tr>
+<tr class="even">
+<td align="left">Blautia</td>
+<td align="right">9</td>
+<td align="right">1</td>
+<td align="right">8</td>
+<td align="right">88.9</td>
+<td align="left">decreased</td>
+</tr>
 <tr class="odd">
+<td align="left">Anaerobutyricum hallii</td>
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="right">7</td>
+<td align="right">87.5</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
 <td align="left">Lachnospira eligens</td>
-<td align="right">6</td>
-<td align="right">0</td>
-<td align="right">6</td>
-<td align="right">100.0</td>
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="right">7</td>
+<td align="right">87.5</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="odd">
+<td align="left">Subdoligranulum</td>
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="right">7</td>
+<td align="right">87.5</td>
 <td align="left">decreased</td>
 </tr>
 <tr class="even">
 <td align="left">Actinomycetota</td>
+<td align="right">7</td>
+<td align="right">1</td>
 <td align="right">6</td>
-<td align="right">1</td>
-<td align="right">5</td>
-<td align="right">83.3</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="odd">
-<td align="left">Bifidobacterium</td>
-<td align="right">6</td>
-<td align="right">2</td>
-<td align="right">5</td>
-<td align="right">83.3</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="even">
-<td align="left">Subdoligranulum</td>
-<td align="right">6</td>
-<td align="right">1</td>
-<td align="right">5</td>
-<td align="right">83.3</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="odd">
-<td align="left">Butyricicoccus</td>
-<td align="right">5</td>
-<td align="right">2</td>
-<td align="right">4</td>
-<td align="right">80.0</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="even">
-<td align="left">Eubacteriales</td>
-<td align="right">5</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">80.0</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="odd">
-<td align="left">Eubacterium coprostanoligenes</td>
-<td align="right">5</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">80.0</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="even">
-<td align="left">Eubacterium ventriosum</td>
-<td align="right">5</td>
-<td align="right">1</td>
-<td align="right">4</td>
-<td align="right">80.0</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="odd">
-<td align="left">Bifidobacteriaceae</td>
-<td align="right">4</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">100.0</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="even">
-<td align="left">Bifidobacteriales</td>
-<td align="right">4</td>
-<td align="right">0</td>
-<td align="right">4</td>
-<td align="right">100.0</td>
+<td align="right">85.7</td>
 <td align="left">decreased</td>
 </tr>
 <tr class="odd">
 <td align="left">Romboutsia</td>
+<td align="right">7</td>
+<td align="right">1</td>
+<td align="right">6</td>
+<td align="right">85.7</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
+<td align="left">Roseburia intestinalis</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">100.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="odd">
+<td align="left">Bifidobacteriaceae</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">83.3</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
+<td align="left">Bifidobacteriales</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">5</td>
+<td align="right">83.3</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="odd">
+<td align="left">Segatella copri</td>
+<td align="right">6</td>
+<td align="right">2</td>
+<td align="right">5</td>
+<td align="right">83.3</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
+<td align="left">Bifidobacterium animalis</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">100.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="odd">
+<td align="left">Bifidobacterium longum</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">5</td>
+<td align="right">100.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
+<td align="left">Staphylococcus</td>
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">80.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="odd">
+<td align="left">Agathobacter</td>
 <td align="right">4</td>
 <td align="right">0</td>
 <td align="right">4</td>
@@ -761,7 +805,7 @@ significance.</p>
 <td align="left">decreased</td>
 </tr>
 <tr class="even">
-<td align="left">Roseburia intestinalis</td>
+<td align="left">Agathobacter rectalis</td>
 <td align="right">4</td>
 <td align="right">0</td>
 <td align="right">4</td>
@@ -769,6 +813,46 @@ significance.</p>
 <td align="left">decreased</td>
 </tr>
 <tr class="odd">
+<td align="left">Anaerostipes hadrus</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">100.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
+<td align="left">Bifidobacterium adolescentis</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">100.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="odd">
+<td align="left">Cyanobacteriota</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">100.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
+<td align="left">Fusicatenibacter</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">100.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="odd">
+<td align="left">Pseudocoprococcus catus</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">100.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
 <td align="left">Tyzzerella</td>
 <td align="right">4</td>
 <td align="right">0</td>
@@ -776,10 +860,34 @@ significance.</p>
 <td align="right">100.0</td>
 <td align="left">decreased</td>
 </tr>
-<tr class="even">
-<td align="left">Bilophila</td>
+<tr class="odd">
+<td align="left">Anaerotruncus</td>
 <td align="right">4</td>
-<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">75.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
+<td align="left">Bacteroides intestinalis</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">75.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="odd">
+<td align="left">Bacteroides thetaiotaomicron</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">75.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
+<td align="left">Bifidobacterium catenulatum</td>
+<td align="right">4</td>
+<td align="right">1</td>
 <td align="right">3</td>
 <td align="right">75.0</td>
 <td align="left">decreased</td>
@@ -793,7 +901,7 @@ significance.</p>
 <td align="left">decreased</td>
 </tr>
 <tr class="even">
-<td align="left">Klebsiella</td>
+<td align="left">Eubacterium coprostanoligenes</td>
 <td align="right">4</td>
 <td align="right">1</td>
 <td align="right">3</td>
@@ -809,7 +917,7 @@ significance.</p>
 <td align="left">decreased</td>
 </tr>
 <tr class="even">
-<td align="left">Oscillibacter</td>
+<td align="left">Micrococcaceae</td>
 <td align="right">4</td>
 <td align="right">1</td>
 <td align="right">3</td>
@@ -817,7 +925,7 @@ significance.</p>
 <td align="left">decreased</td>
 </tr>
 <tr class="odd">
-<td align="left">Staphylococcus</td>
+<td align="left">Neisseria</td>
 <td align="right">4</td>
 <td align="right">1</td>
 <td align="right">3</td>
@@ -825,7 +933,7 @@ significance.</p>
 <td align="left">decreased</td>
 </tr>
 <tr class="even">
-<td align="left">Agathobacter</td>
+<td align="left">Allocoprococcus comes</td>
 <td align="right">3</td>
 <td align="right">0</td>
 <td align="right">3</td>
@@ -833,15 +941,15 @@ significance.</p>
 <td align="left">decreased</td>
 </tr>
 <tr class="odd">
-<td align="left">Cyanobacteriota</td>
+<td align="left">Blautia obeum</td>
 <td align="right">3</td>
-<td align="right">1</td>
+<td align="right">0</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">decreased</td>
 </tr>
 <tr class="even">
-<td align="left">Fusicatenibacter</td>
+<td align="left">Coprobacillus</td>
 <td align="right">3</td>
 <td align="right">0</td>
 <td align="right">3</td>
@@ -849,14 +957,6 @@ significance.</p>
 <td align="left">decreased</td>
 </tr>
 <tr class="odd">
-<td align="left">Pseudocoprococcus catus</td>
-<td align="right">3</td>
-<td align="right">0</td>
-<td align="right">3</td>
-<td align="right">100.0</td>
-<td align="left">decreased</td>
-</tr>
-<tr class="even">
 <td align="left">Roseburia faecis</td>
 <td align="right">3</td>
 <td align="right">1</td>
@@ -864,7 +964,7 @@ significance.</p>
 <td align="right">100.0</td>
 <td align="left">decreased</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Streptococcus salivarius</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -872,56 +972,208 @@ significance.</p>
 <td align="right">100.0</td>
 <td align="left">decreased</td>
 </tr>
+<tr class="odd">
+<td align="left">Streptococcus thermophilus</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">3</td>
+<td align="right">100.0</td>
+<td align="left">decreased</td>
+</tr>
+<tr class="even">
+<td align="left">Fusobacterium</td>
+<td align="right">18</td>
+<td align="right">14</td>
+<td align="right">4</td>
+<td align="right">77.8</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Parvimonas</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
 <tr class="even">
 <td align="left">Peptostreptococcus</td>
-<td align="right">13</td>
-<td align="right">13</td>
+<td align="right">15</td>
+<td align="right">15</td>
 <td align="right">0</td>
 <td align="right">100.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
 <td align="left">Porphyromonas</td>
+<td align="right">15</td>
 <td align="right">12</td>
-<td align="right">11</td>
-<td align="right">1</td>
-<td align="right">91.7</td>
+<td align="right">3</td>
+<td align="right">80.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Parvimonas</td>
+<td align="left">Fusobacterium nucleatum</td>
+<td align="right">14</td>
+<td align="right">13</td>
+<td align="right">1</td>
+<td align="right">92.9</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Enterobacteriaceae</td>
+<td align="right">14</td>
+<td align="right">11</td>
+<td align="right">3</td>
+<td align="right">78.6</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Pseudomonadota</td>
+<td align="right">12</td>
+<td align="right">9</td>
+<td align="right">3</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Parvimonas micra</td>
 <td align="right">11</td>
 <td align="right">11</td>
 <td align="right">0</td>
 <td align="right">100.0</td>
 <td align="left">increased</td>
 </tr>
-<tr class="odd">
-<td align="left">Fusobacterium</td>
+<tr class="even">
+<td align="left">Fusobacteriota</td>
 <td align="right">11</td>
-<td align="right">10</td>
-<td align="right">1</td>
-<td align="right">90.9</td>
+<td align="right">9</td>
+<td align="right">2</td>
+<td align="right">81.8</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Parabacteroides</td>
+<td align="right">11</td>
+<td align="right">9</td>
+<td align="right">3</td>
+<td align="right">81.8</td>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Enterobacteriaceae</td>
+<td align="left">Gemella morbillorum</td>
 <td align="right">10</td>
-<td align="right">8</td>
-<td align="right">2</td>
-<td align="right">80.0</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Erysipelotrichaceae</td>
+<td align="left">Peptostreptococcus stomatis</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Solobacterium moorei</td>
+<td align="right">9</td>
+<td align="right">9</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Bacteroides fragilis</td>
+<td align="right">9</td>
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="right">88.9</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Eggerthella</td>
+<td align="right">9</td>
+<td align="right">8</td>
+<td align="right">1</td>
+<td align="right">88.9</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Lactobacillus</td>
+<td align="right">9</td>
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="right">88.9</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">[Clostridium] symbiosum</td>
+<td align="right">9</td>
+<td align="right">8</td>
+<td align="right">2</td>
+<td align="right">88.9</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Enterococcus</td>
+<td align="right">9</td>
+<td align="right">7</td>
+<td align="right">3</td>
+<td align="right">77.8</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Fusobacteriia</td>
+<td align="right">9</td>
+<td align="right">7</td>
+<td align="right">2</td>
+<td align="right">77.8</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Gemella</td>
+<td align="right">8</td>
+<td align="right">8</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Akkermansia</td>
+<td align="right">8</td>
+<td align="right">7</td>
+<td align="right">1</td>
+<td align="right">87.5</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Escherichia</td>
+<td align="right">8</td>
+<td align="right">7</td>
+<td align="right">1</td>
+<td align="right">87.5</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Akkermansia muciniphila</td>
 <td align="right">8</td>
 <td align="right">6</td>
-<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Enterobacterales</td>
+<td align="right">8</td>
+<td align="right">6</td>
+<td align="right">2</td>
 <td align="right">75.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Odoribacter</td>
+<td align="left">Escherichia/Shigella sp.</td>
 <td align="right">8</td>
 <td align="right">6</td>
 <td align="right">3</td>
@@ -929,123 +1181,91 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Fusobacterium nucleatum</td>
-<td align="right">7</td>
-<td align="right">7</td>
-<td align="right">0</td>
-<td align="right">100.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Parabacteroides</td>
-<td align="right">7</td>
-<td align="right">7</td>
-<td align="right">1</td>
-<td align="right">100.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
-<td align="left">[Clostridium] symbiosum</td>
-<td align="right">7</td>
-<td align="right">7</td>
-<td align="right">1</td>
-<td align="right">100.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Fusobacteriota</td>
-<td align="right">7</td>
-<td align="right">6</td>
-<td align="right">1</td>
-<td align="right">85.7</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
-<td align="left">Lactobacillus</td>
-<td align="right">7</td>
+<td align="left">Fusobacteriaceae</td>
+<td align="right">8</td>
 <td align="right">6</td>
 <td align="right">2</td>
-<td align="right">85.7</td>
+<td align="right">75.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Rikenellaceae</td>
-<td align="right">7</td>
+<td align="left">Fusobacteriales</td>
+<td align="right">8</td>
 <td align="right">6</td>
 <td align="right">2</td>
-<td align="right">85.7</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
-<td align="left">Akkermansia</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="right">1</td>
-<td align="right">100.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Parvimonas micra</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="right">0</td>
-<td align="right">100.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
-<td align="left">Peptostreptococcus stomatis</td>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="right">0</td>
-<td align="right">100.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Bacteroidota</td>
-<td align="right">6</td>
-<td align="right">5</td>
-<td align="right">1</td>
-<td align="right">83.3</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
-<td align="left">Corynebacterium</td>
-<td align="right">6</td>
-<td align="right">5</td>
-<td align="right">1</td>
-<td align="right">83.3</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Enterococcus</td>
-<td align="right">6</td>
-<td align="right">5</td>
-<td align="right">2</td>
-<td align="right">83.3</td>
+<td align="right">75.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
 <td align="left">Lactobacillales</td>
+<td align="right">8</td>
 <td align="right">6</td>
-<td align="right">5</td>
-<td align="right">2</td>
-<td align="right">83.3</td>
+<td align="right">3</td>
+<td align="right">75.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Porphyromonadaceae</td>
+<td align="left">Escherichia coli</td>
+<td align="right">7</td>
+<td align="right">7</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Peptostreptococcus anaerobius</td>
+<td align="right">7</td>
+<td align="right">7</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Bacilli</td>
+<td align="right">7</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">85.7</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Porphyromonas asaccharolytica</td>
+<td align="right">7</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">85.7</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Lactobacillaceae</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Prevotella intermedia</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Verrucomicrobiota</td>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">1</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Gammaproteobacteria</td>
 <td align="right">6</td>
 <td align="right">5</td>
 <td align="right">1</td>
 <td align="right">83.3</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
-<td align="left">Actinomyces</td>
-<td align="right">5</td>
-<td align="right">5</td>
-<td align="right">1</td>
-<td align="right">100.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
@@ -1057,7 +1277,7 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Eggerthella</td>
+<td align="left">Flavonifractor plautii</td>
 <td align="right">5</td>
 <td align="right">5</td>
 <td align="right">0</td>
@@ -1065,7 +1285,7 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Escherichia</td>
+<td align="left">Hungatella hathewayi</td>
 <td align="right">5</td>
 <td align="right">5</td>
 <td align="right">1</td>
@@ -1073,7 +1293,7 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Gemella</td>
+<td align="left">Odoribacter splanchnicus</td>
 <td align="right">5</td>
 <td align="right">5</td>
 <td align="right">0</td>
@@ -1081,59 +1301,75 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Gemella morbillorum</td>
+<td align="left">Streptococcus anginosus</td>
 <td align="right">5</td>
 <td align="right">5</td>
-<td align="right">0</td>
+<td align="right">1</td>
 <td align="right">100.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Porphyromonas asaccharolytica</td>
+<td align="left">Dialister pneumosintes</td>
 <td align="right">5</td>
-<td align="right">5</td>
-<td align="right">0</td>
-<td align="right">100.0</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">80.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
+<td align="left">Morganella</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">80.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Oscillospira</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">80.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Paraprevotella</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">80.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Proteus</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">80.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Selenomonadales</td>
+<td align="right">5</td>
+<td align="right">4</td>
+<td align="right">1</td>
+<td align="right">80.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
 <td align="left">Shigella</td>
 <td align="right">5</td>
-<td align="right">5</td>
+<td align="right">4</td>
 <td align="right">1</td>
-<td align="right">100.0</td>
+<td align="right">80.0</td>
 <td align="left">increased</td>
 </tr>
-<tr class="odd">
-<td align="left">Solobacterium moorei</td>
-<td align="right">5</td>
-<td align="right">5</td>
+<tr class="even">
+<td align="left">Alistipes onderdonkii</td>
+<td align="right">4</td>
+<td align="right">4</td>
 <td align="right">0</td>
 <td align="right">100.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Bacilli</td>
-<td align="right">5</td>
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="right">80.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
-<td align="left">Fusobacteriia</td>
-<td align="right">5</td>
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="right">80.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Selenomonas</td>
-<td align="right">5</td>
-<td align="right">4</td>
-<td align="right">1</td>
-<td align="right">80.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
@@ -1145,7 +1381,7 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Escherichia coli</td>
+<td align="left">Bacteroides salyersiae</td>
 <td align="right">4</td>
 <td align="right">4</td>
 <td align="right">0</td>
@@ -1153,7 +1389,7 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Flavonifractor plautii</td>
+<td align="left">Hungatella</td>
 <td align="right">4</td>
 <td align="right">4</td>
 <td align="right">0</td>
@@ -1161,7 +1397,7 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Megasphaera</td>
+<td align="left">Porphyromonas uenonis</td>
 <td align="right">4</td>
 <td align="right">4</td>
 <td align="right">0</td>
@@ -1169,39 +1405,135 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Morganella</td>
+<td align="left">Verrucomicrobiales</td>
 <td align="right">4</td>
 <td align="right">4</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Verrucomicrobiia</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">uncultured Oscillospiraceae bacterium</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Acinetobacter</td>
+<td align="right">4</td>
+<td align="right">3</td>
 <td align="right">1</td>
-<td align="right">100.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Peptostreptococcus anaerobius</td>
-<td align="right">4</td>
-<td align="right">4</td>
-<td align="right">0</td>
-<td align="right">100.0</td>
+<td align="right">75.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Prevotella intermedia</td>
+<td align="left">Anaerostipes caccae</td>
 <td align="right">4</td>
-<td align="right">4</td>
-<td align="right">0</td>
-<td align="right">100.0</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">75.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Verrucomicrobiota</td>
+<td align="left">Atopobium</td>
 <td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Bacteroides ovatus</td>
 <td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Christensenella</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Corynebacteriaceae</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Desulfovibrionaceae</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Eggerthella lenta</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Enterobacter</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Negativicutes</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Phocaeicola vulgatus</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Ralstonia</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">75.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Streptococcus lutetiensis</td>
+<td align="right">4</td>
+<td align="right">3</td>
 <td align="right">2</td>
-<td align="right">100.0</td>
+<td align="right">75.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Erysipelotrichales</td>
+<td align="left">Thomasclavelia</td>
 <td align="right">4</td>
 <td align="right">3</td>
 <td align="right">1</td>
@@ -1209,66 +1541,34 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Erysipelotrichia</td>
-<td align="right">4</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="right">75.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
-<td align="left">Fusobacteriaceae</td>
-<td align="right">4</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="right">75.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Fusobacteriales</td>
-<td align="right">4</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="right">75.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
-<td align="left">Gammaproteobacteria</td>
-<td align="right">4</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="right">75.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Lactobacillaceae</td>
-<td align="right">4</td>
-<td align="right">3</td>
-<td align="right">2</td>
-<td align="right">75.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
-<td align="left">Mediterraneibacter torques</td>
-<td align="right">4</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="right">75.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Oscillospira</td>
-<td align="right">4</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="right">75.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
 <td align="left">Abiotrophia</td>
 <td align="right">3</td>
 <td align="right">3</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Actinomycetaceae</td>
+<td align="right">3</td>
+<td align="right">3</td>
 <td align="right">1</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Aeromonas</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Alistipes finegoldii</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
 <td align="right">100.0</td>
 <td align="left">increased</td>
 </tr>
@@ -1281,7 +1581,7 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Bacteroides fragilis</td>
+<td align="left">Anaerococcus vaginalis</td>
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -1289,7 +1589,23 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Corynebacteriaceae</td>
+<td align="left">Bacteroides eggerthii</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Bifidobacterium breve</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Comamonadaceae</td>
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -1305,7 +1621,7 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Enterocloster bolteae</td>
+<td align="left">Eisenbergiella</td>
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -1313,7 +1629,7 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Hungatella</td>
+<td align="left">Klebsiella oxytoca</td>
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -1321,7 +1637,7 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Lachnoclostridium</td>
+<td align="left">Lachnospiraceae bacterium 3_1_57FAA_CT1</td>
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -1329,7 +1645,7 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Odoribacter splanchnicus</td>
+<td align="left">Methanobrevibacter smithii</td>
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -1345,15 +1661,15 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="odd">
-<td align="left">Porphyromonas uenonis</td>
+<td align="left">Parabacteroides distasonis</td>
 <td align="right">3</td>
 <td align="right">3</td>
-<td align="right">0</td>
+<td align="right">1</td>
 <td align="right">100.0</td>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Ralstonia</td>
+<td align="left">Parabacteroides merdae</td>
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -1369,7 +1685,23 @@ significance.</p>
 <td align="left">increased</td>
 </tr>
 <tr class="even">
-<td align="left">Streptococcus anginosus</td>
+<td align="left">Solobacterium</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="odd">
+<td align="left">Streptococcus oralis</td>
+<td align="right">3</td>
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">100.0</td>
+<td align="left">increased</td>
+</tr>
+<tr class="even">
+<td align="left">Tissierellia</td>
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -1378,30 +1710,6 @@ significance.</p>
 </tr>
 <tr class="odd">
 <td align="left">Verrucomicrobiaceae</td>
-<td align="right">3</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="right">100.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">Verrucomicrobiales</td>
-<td align="right">3</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="right">100.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="odd">
-<td align="left">Verrucomicrobiia</td>
-<td align="right">3</td>
-<td align="right">3</td>
-<td align="right">1</td>
-<td align="right">100.0</td>
-<td align="left">increased</td>
-</tr>
-<tr class="even">
-<td align="left">uncultured Oscillospiraceae bacterium</td>
 <td align="right">3</td>
 <td align="right">3</td>
 <td align="right">0</td>
@@ -1468,16 +1776,22 @@ platform.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>agree <span class="op">=</span> <span class="va">dir_WMS</span> <span class="op">==</span> <span class="va">dir_16S</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">platform.compare</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 99</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 222</span></span></code></pre>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">platform.compare</span><span class="op">$</span><span class="va">agree</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 78</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 142</span></span></code></pre>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fl">100</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">platform.compare</span><span class="op">$</span><span class="va">agree</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 78.8</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 64</span></span></code></pre>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">platform.compare</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
+<colgroup>
+<col width="61%">
+<col width="14%">
+<col width="14%">
+<col width="8%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">taxon</th>
 <th align="left">dir_16S</th>
@@ -1486,22 +1800,46 @@ platform.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="left">Acidaminococcaceae</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Acidaminococcus</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
 <td align="left">Acinetobacter</td>
 <td align="left">increased</td>
 <td align="left">decreased</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Actinomycetota</td>
-<td align="left">decreased</td>
+<td align="left">Actinomyces</td>
 <td align="left">increased</td>
+<td align="left">decreased</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Agathobacter rectalis</td>
+<td align="left">Actinomycetaceae</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Actinomycetota</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Aggregatibacter</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Akkermansia muciniphila</td>
@@ -1510,7 +1848,19 @@ platform.</p>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
+<td align="left">Alistipes</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
 <td align="left">Alistipes finegoldii</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Alistipes indistinctus</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
@@ -1524,8 +1874,20 @@ platform.</p>
 <tr class="odd">
 <td align="left">Alistipes putredinis</td>
 <td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Alistipes senegalensis</td>
+<td align="left">decreased</td>
 <td align="left">increased</td>
 <td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Allocoprococcus comes</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="even">
 <td align="left">Alloprevotella tannerae</td>
@@ -1546,25 +1908,73 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Anaerostipes</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Anaerostipes caccae</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Anaerostipes hadrus</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Anaerotruncus</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
 <td align="left">Anaerotruncus sp.</td>
 <td align="left">decreased</td>
 <td align="left">increased</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
+<td align="left">Atopobium</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
 <td align="left">Bacilli</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Bacillota</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Bacillus</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Bacteroides</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
+<tr class="odd">
+<td align="left">Bacteroides caccae</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
 <tr class="even">
-<td align="left">Bacteroides</td>
+<td align="left">Bacteroides eggerthii</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
@@ -1588,19 +1998,55 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
-<td align="left">Bacteroides ovatus</td>
+<td align="left">Bacteroides nordii</td>
 <td align="left">decreased</td>
 <td align="left">increased</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Bacteroides salyersiae</td>
+<td align="left">Bacteroides ovatus</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
+<td align="left">Bacteroides salyersiae</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Bacteroides sp.</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Bacteroides stercoris</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
 <td align="left">Bacteroides thetaiotaomicron</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Bacteroides uniformis</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Bacteroidota</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Bifidobacterium</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
@@ -1618,10 +2064,22 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Bifidobacterium breve</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
 <td align="left">Bifidobacterium catenulatum</td>
 <td align="left">increased</td>
 <td align="left">decreased</td>
 <td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Bifidobacterium dentium</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="even">
 <td align="left">Bifidobacterium longum</td>
@@ -1630,15 +2088,27 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
-<td align="left">Bilophila</td>
+<td align="left">Bifidobacterium pseudocatenulatum</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
+<td align="left">Bilophila</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
 <td align="left">Bilophila wadsworthia</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Blautia</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
@@ -1654,13 +2124,121 @@ platform.</p>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
+<td align="left">Burkholderiales</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Butyrivibrio</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
 <td align="left">Campylobacter rectus</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
+<td align="left">Caryophanales</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Christensenella</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Christensenellaceae</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Chryseobacterium</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Citrobacter</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Citrobacter freundii</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Clostridia</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Clostridiaceae</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Clostridiales Family XVII. Incertae Sedis</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Clostridiales bacterium 1_7_47FAA</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Clostridium</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
 <td align="left">Clostridium sp.</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Collinsella</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Collinsella aerofaciens</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Colwelliaceae</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Coprobacter</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Coprococcus</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
@@ -1668,8 +2246,8 @@ platform.</p>
 <tr class="odd">
 <td align="left">Desulfovibrio</td>
 <td align="left">decreased</td>
-<td align="left">increased</td>
-<td align="left">FALSE</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="even">
 <td align="left">Desulfovibrio desulfuricans</td>
@@ -1678,7 +2256,91 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Dialister</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Dialister pneumosintes</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Dorea</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Dorea formicigenerans</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
 <td align="left">Eggerthella</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Eggerthella lenta</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Enterobacter</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Enterobacterales</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Enterobacteriaceae</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Enterococcus</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Enterorhabdus</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Erysipelotrichaceae</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Erysipelotrichales</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Erysipelotrichia</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Escherichia</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
@@ -1690,10 +2352,22 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
-<td align="left">Eubacterium</td>
+<td align="left">Eubacteriaceae</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Eubacteriales</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Eubacterium</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Eubacterium ventriosum</td>
@@ -1702,21 +2376,33 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Facklamia</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
 <td align="left">Faecalibacterium</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Faecalibacterium prausnitzii</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Flavonifractor plautii</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Fusicatenibacter</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
@@ -1734,8 +2420,8 @@ platform.</p>
 <tr class="even">
 <td align="left">Fusobacterium</td>
 <td align="left">increased</td>
-<td align="left">increased</td>
-<td align="left">TRUE</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
 </tr>
 <tr class="odd">
 <td align="left">Fusobacterium nucleatum</td>
@@ -1756,9 +2442,33 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
+<td align="left">Gordonibacter</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
 <td align="left">Granulicatella adiacens</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Haemophilus</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Holdemanella biformis</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Holdemania</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
@@ -1774,19 +2484,55 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Intestinimonas</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Klebsiella</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
 <td align="left">Klebsiella oxytoca</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
-<td align="left">Lachnospira eligens</td>
+<td align="left">Lachnoanaerobaculum</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Lachnoclostridium</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Lachnospira</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Lachnospira eligens</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
 <td align="left">Lachnospira pectinoschiza</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Lachnospiraceae</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
@@ -1822,7 +2568,19 @@ platform.</p>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
+<td align="left">Lactococcus</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
 <td align="left">Leptotrichia</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Leyella stercorea</td>
 <td align="left">decreased</td>
 <td align="left">increased</td>
 <td align="left">FALSE</td>
@@ -1834,13 +2592,49 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
-<td align="left">Negativicutes</td>
-<td align="left">decreased</td>
+<td align="left">Megasphaera</td>
 <td align="left">increased</td>
+<td align="left">decreased</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
+<td align="left">Megasphaera elsdenii</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Methanobrevibacter smithii</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Mitsuokella</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Negativibacillus</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Negativicutes</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
 <td align="left">Neisseria</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Odoribacter</td>
 <td align="left">decreased</td>
 <td align="left">increased</td>
 <td align="left">FALSE</td>
@@ -1852,16 +2646,52 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
+<td align="left">Oscillibacter</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Oscillospiraceae</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Parabacteroides</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
 <td align="left">Parabacteroides distasonis</td>
 <td align="left">decreased</td>
 <td align="left">increased</td>
 <td align="left">FALSE</td>
 </tr>
-<tr class="odd">
-<td align="left">Paraprevotella</td>
+<tr class="even">
+<td align="left">Parabacteroides goldsteinii</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Parabacteroides merdae</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Parahaemophilus parainfluenzae</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Paraprevotella</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Parasutterella</td>
@@ -1890,62 +2720,98 @@ platform.</p>
 <tr class="even">
 <td align="left">Pasteurellaceae</td>
 <td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Pasteurellales</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Peptoniphilaceae</td>
+<td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Peptostreptococcaceae</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
 <td align="left">Peptostreptococcus</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Peptostreptococcus anaerobius</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Peptostreptococcus sp.</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Peptostreptococcus stomatis</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
+<tr class="even">
+<td align="left">Phocaeicola dorei</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
+</tr>
 <tr class="odd">
+<td align="left">Phocaeicola vulgatus</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
 <td align="left">Porphyromonadaceae</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Porphyromonas</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Porphyromonas asaccharolytica</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Porphyromonas somerae</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Porphyromonas uenonis</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Prevotella</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Prevotella intermedia</td>
@@ -1954,10 +2820,22 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Pseudobutyrivibrio</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
 <td align="left">Pseudocoprococcus catus</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Pseudoflavonifractor</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Pseudoflavonifractor capillosus</td>
@@ -1972,16 +2850,52 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
-<td align="left">Roseburia intestinalis</td>
+<td align="left">Pyramidobacter</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Ralstonia</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Robinsoniella</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
-<td align="left">Ruminococcus</td>
+<td align="left">Romboutsia</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Roseburia</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Roseburia intestinalis</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Roseburia inulinivorans</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Ruminococcus</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Ruminococcus bromii</td>
@@ -1990,22 +2904,46 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Ruminococcus sp. 5_1_39BFAA</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Salmonella</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Segatella copri</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
 <td align="left">Segatella oris</td>
 <td align="left">decreased</td>
 <td align="left">increased</td>
 <td align="left">FALSE</td>
 </tr>
-<tr class="even">
-<td align="left">Selenomonadales</td>
-<td align="left">decreased</td>
-<td align="left">increased</td>
-<td align="left">FALSE</td>
-</tr>
 <tr class="odd">
-<td align="left">Selenomonas</td>
+<td align="left">Selenomonadales</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Selenomonas</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Shigella</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Slackia sp.</td>
@@ -2014,13 +2952,25 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
-<td align="left">Solobacterium moorei</td>
+<td align="left">Solobacterium</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
+<td align="left">Solobacterium moorei</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
 <td align="left">Streptococcaceae</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Streptococcus</td>
 <td align="left">increased</td>
 <td align="left">decreased</td>
 <td align="left">FALSE</td>
@@ -2032,15 +2982,75 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
+<td align="left">Streptococcus lutetiensis</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Streptococcus mutans</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Streptococcus oralis</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Streptococcus parasanguinis</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
 <td align="left">Streptococcus salivarius</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Streptococcus thermophilus</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
 <td align="left">Subdoligranulum</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Subdoligranulum sp. 4_3_54A2FAA</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Sutterellaceae</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Synergistes sp. 3_1_syn1</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Thomasclavelia</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Tissierellales</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
@@ -2050,21 +3060,57 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
-<td align="left">Veillonella atypica</td>
+<td align="left">Turicibacter</td>
 <td align="left">increased</td>
-<td align="left">increased</td>
-<td align="left">TRUE</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Veillonella parvula</td>
+<td align="left">Veillonella</td>
 <td align="left">decreased</td>
 <td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">Veillonella atypica</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Veillonella dispar</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Veillonella parvula</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
 <td align="left">Veillonellaceae</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Veillonellales</td>
+<td align="left">increased</td>
+<td align="left">increased</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Victivallales</td>
+<td align="left">increased</td>
+<td align="left">decreased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">[Clostridium] leptum</td>
+<td align="left">decreased</td>
+<td align="left">decreased</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
@@ -2074,6 +3120,12 @@ platform.</p>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
+<td align="left">[Ruminococcus] lactaris</td>
+<td align="left">decreased</td>
+<td align="left">increased</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
 <td align="left">uncultured Oscillospiraceae bacterium</td>
 <td align="left">increased</td>
 <td align="left">increased</td>
@@ -2110,19 +3162,19 @@ sequencing approach may be driving the result.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">p_adj</span>, <span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">log2_enrichment</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">enrichment.df</span><span class="op">$</span><span class="va">p_adj</span> <span class="op">&lt;</span> <span class="fl">0.05</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 167</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 257</span></span></code></pre>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">enrichment.df</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="21%">
-<col width="13%">
-<col width="8%">
+<col width="19%">
+<col width="14%">
 <col width="9%">
+<col width="10%">
+<col width="17%">
 <col width="16%">
-<col width="15%">
-<col width="7%">
-<col width="5%">
+<col width="8%">
+<col width="6%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">taxon</th>
@@ -2136,152 +3188,152 @@ sequencing approach may be driving the result.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">Lachnospiraceae</td>
-<td align="right">18</td>
-<td align="right">18</td>
-<td align="right">0.3004695</td>
-<td align="right">59.90625</td>
-<td align="right">5.904635</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
 <td align="left">Bacteroides</td>
-<td align="right">13</td>
-<td align="right">13</td>
-<td align="right">0.3004695</td>
-<td align="right">43.26562</td>
-<td align="right">5.435149</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Coprococcus</td>
-<td align="right">13</td>
-<td align="right">13</td>
-<td align="right">0.3004695</td>
-<td align="right">43.26562</td>
-<td align="right">5.435149</td>
+<td align="right">20</td>
+<td align="right">20</td>
+<td align="right">0.3406836</td>
+<td align="right">58.70550</td>
+<td align="right">5.875424</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="left">Peptostreptococcus</td>
-<td align="right">13</td>
-<td align="right">13</td>
-<td align="right">0.3004695</td>
-<td align="right">43.26562</td>
-<td align="right">5.435149</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Phascolarctobacterium</td>
-<td align="right">13</td>
-<td align="right">13</td>
-<td align="right">0.3004695</td>
-<td align="right">43.26562</td>
-<td align="right">5.435149</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Ruminococcus</td>
-<td align="right">13</td>
-<td align="right">13</td>
-<td align="right">0.3004695</td>
-<td align="right">43.26562</td>
-<td align="right">5.435149</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="odd">
-<td align="left">Clostridium</td>
-<td align="right">12</td>
-<td align="right">12</td>
-<td align="right">0.3004695</td>
-<td align="right">39.93750</td>
-<td align="right">5.319672</td>
-<td align="right">0</td>
-<td align="right">0</td>
-</tr>
-<tr class="even">
-<td align="left">Porphyromonas</td>
-<td align="right">12</td>
-<td align="right">12</td>
-<td align="right">0.3004695</td>
-<td align="right">39.93750</td>
-<td align="right">5.319672</td>
+<td align="left">Lachnospiraceae</td>
+<td align="right">20</td>
+<td align="right">20</td>
+<td align="right">0.3406836</td>
+<td align="right">58.70550</td>
+<td align="right">5.875424</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
 <td align="left">Fusobacterium</td>
-<td align="right">11</td>
-<td align="right">11</td>
-<td align="right">0.3004695</td>
-<td align="right">36.60938</td>
-<td align="right">5.194141</td>
+<td align="right">18</td>
+<td align="right">18</td>
+<td align="right">0.3406836</td>
+<td align="right">52.83495</td>
+<td align="right">5.723421</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="left">Parvimonas</td>
-<td align="right">11</td>
-<td align="right">11</td>
-<td align="right">0.3004695</td>
-<td align="right">36.60938</td>
-<td align="right">5.194141</td>
+<td align="left">Ruminococcus</td>
+<td align="right">18</td>
+<td align="right">18</td>
+<td align="right">0.3406836</td>
+<td align="right">52.83495</td>
+<td align="right">5.723421</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
-<td align="left">Streptococcus</td>
-<td align="right">11</td>
-<td align="right">11</td>
-<td align="right">0.3004695</td>
-<td align="right">36.60938</td>
-<td align="right">5.194141</td>
+<td align="left">Clostridium</td>
+<td align="right">17</td>
+<td align="right">17</td>
+<td align="right">0.3406836</td>
+<td align="right">49.89968</td>
+<td align="right">5.640959</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="left">Enterobacteriaceae</td>
-<td align="right">10</td>
-<td align="right">10</td>
-<td align="right">0.3004695</td>
-<td align="right">33.28125</td>
-<td align="right">5.056638</td>
+<td align="left">Faecalibacterium</td>
+<td align="right">17</td>
+<td align="right">17</td>
+<td align="right">0.3406836</td>
+<td align="right">49.89968</td>
+<td align="right">5.640959</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
-<td align="left">Erysipelotrichaceae</td>
-<td align="right">10</td>
-<td align="right">10</td>
-<td align="right">0.3004695</td>
-<td align="right">33.28125</td>
-<td align="right">5.056638</td>
+<td align="left">Bacillota</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="right">0.3406836</td>
+<td align="right">46.96440</td>
+<td align="right">5.553496</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
 <tr class="even">
-<td align="left">Lachnospira</td>
-<td align="right">10</td>
-<td align="right">10</td>
-<td align="right">0.3004695</td>
-<td align="right">33.28125</td>
-<td align="right">5.056638</td>
+<td align="left">Coprococcus</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="right">0.3406836</td>
+<td align="right">46.96440</td>
+<td align="right">5.553496</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
 <tr class="odd">
+<td align="left">Prevotella</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="right">0.3406836</td>
+<td align="right">46.96440</td>
+<td align="right">5.553496</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
 <td align="left">Roseburia</td>
-<td align="right">10</td>
-<td align="right">10</td>
-<td align="right">0.3004695</td>
-<td align="right">33.28125</td>
-<td align="right">5.056638</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="right">0.3406836</td>
+<td align="right">46.96440</td>
+<td align="right">5.553496</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Lachnospira</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0.3406836</td>
+<td align="right">44.02913</td>
+<td align="right">5.460386</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Oscillospiraceae</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0.3406836</td>
+<td align="right">44.02913</td>
+<td align="right">5.460386</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Parvimonas</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0.3406836</td>
+<td align="right">44.02913</td>
+<td align="right">5.460386</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Peptostreptococcus</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0.3406836</td>
+<td align="right">44.02913</td>
+<td align="right">5.460386</td>
+<td align="right">0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Porphyromonas</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">0.3406836</td>
+<td align="right">44.02913</td>
+<td align="right">5.460386</td>
 <td align="right">0</td>
 <td align="right">0</td>
 </tr>
@@ -2333,194 +3385,139 @@ concordance threshold above.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">Coprococcus</td>
-<td align="left">Lachnospiraceae</td>
-<td align="right">9</td>
+<td align="left">Porphyromonas</td>
+<td align="left">Fusobacterium</td>
+<td align="right">11</td>
 </tr>
 <tr class="even">
 <td align="left">Peptostreptococcus</td>
 <td align="left">Parvimonas</td>
-<td align="right">9</td>
+<td align="right">11</td>
+</tr>
+<tr class="odd">
+<td align="left">Roseburia</td>
+<td align="left">Coprococcus</td>
+<td align="right">10</td>
+</tr>
+<tr class="even">
+<td align="left">Fusobacterium nucleatum</td>
+<td align="left">Parvimonas micra</td>
+<td align="right">10</td>
 </tr>
 <tr class="odd">
 <td align="left">Porphyromonas</td>
 <td align="left">Peptostreptococcus</td>
-<td align="right">8</td>
+<td align="right">9</td>
 </tr>
 <tr class="even">
-<td align="left">Porphyromonas</td>
-<td align="left">Fusobacterium</td>
-<td align="right">8</td>
-</tr>
-<tr class="odd">
 <td align="left">Streptococcus</td>
 <td align="left">Bacteroides</td>
-<td align="right">7</td>
-</tr>
-<tr class="even">
-<td align="left">Roseburia</td>
-<td align="left">Coprococcus</td>
-<td align="right">7</td>
+<td align="right">9</td>
 </tr>
 <tr class="odd">
+<td align="left">Bacteroides</td>
 <td align="left">Roseburia</td>
-<td align="left">Lachnospiraceae</td>
-<td align="right">7</td>
+<td align="right">9</td>
 </tr>
 <tr class="even">
 <td align="left">Clostridia</td>
 <td align="left">Lachnospiraceae</td>
-<td align="right">7</td>
+<td align="right">9</td>
 </tr>
 <tr class="odd">
+<td align="left">Coprococcus</td>
 <td align="left">Lachnospiraceae</td>
-<td align="left">Erysipelotrichaceae</td>
-<td align="right">7</td>
+<td align="right">9</td>
+</tr>
+<tr class="even">
+<td align="left">Lachnospiraceae</td>
+<td align="left">Enterobacteriaceae</td>
+<td align="right">9</td>
+</tr>
+<tr class="odd">
+<td align="left">Fusobacterium</td>
+<td align="left">Fusobacteriota</td>
+<td align="right">9</td>
+</tr>
+<tr class="even">
+<td align="left">Bacteroides</td>
+<td align="left">Coprococcus</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">Bacteroides</td>
+<td align="left">Lachnospiraceae</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="left">Roseburia</td>
+<td align="left">Lachnospiraceae</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">Coprococcus</td>
+<td align="left">Prevotella</td>
+<td align="right">8</td>
 </tr>
 <tr class="even">
 <td align="left">Coprococcus</td>
 <td align="left">Ruminococcus</td>
-<td align="right">7</td>
+<td align="right">8</td>
 </tr>
 <tr class="odd">
-<td align="left">Anaerostipes</td>
+<td align="left">Lachnospiraceae</td>
+<td align="left">Oscillospiraceae</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="left">Roseburia</td>
 <td align="left">Lachnospira</td>
-<td align="right">7</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">Ruminococcus</td>
+<td align="left">Lachnospira</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
+<td align="left">Ruminococcus</td>
+<td align="left">Clostridium</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">Lachnospira</td>
+<td align="left">Clostridium</td>
+<td align="right">8</td>
 </tr>
 <tr class="even">
 <td align="left">Porphyromonas</td>
 <td align="left">Parvimonas</td>
-<td align="right">7</td>
+<td align="right">8</td>
 </tr>
 <tr class="odd">
 <td align="left">Fusobacterium</td>
 <td align="left">Parvimonas</td>
-<td align="right">7</td>
+<td align="right">8</td>
 </tr>
 <tr class="even">
-<td align="left">Streptococcus</td>
 <td align="left">Roseburia</td>
-<td align="right">6</td>
+<td align="left">Bacillota</td>
+<td align="right">8</td>
 </tr>
 <tr class="odd">
-<td align="left">Bacteroides</td>
+<td align="left">Lachnospiraceae</td>
+<td align="left">Bacillota</td>
+<td align="right">8</td>
+</tr>
+<tr class="even">
 <td align="left">Roseburia</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Streptococcus</td>
-<td align="left">Clostridium</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">Streptococcus</td>
-<td align="left">Coprococcus</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Phascolarctobacterium</td>
-<td align="left">Coprococcus</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">Bacteroides</td>
-<td align="left">Lachnospiraceae</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Clostridium</td>
-<td align="left">Lachnospiraceae</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">Phascolarctobacterium</td>
-<td align="left">Lachnospiraceae</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Coprococcus</td>
-<td align="left">Erysipelotrichaceae</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">Roseburia</td>
-<td align="left">Anaerostipes</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Phascolarctobacterium</td>
-<td align="left">Anaerostipes</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">Coprococcus</td>
-<td align="left">Anaerostipes</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Peptostreptococcus</td>
-<td align="left">Ruminococcus</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">Lachnospiraceae</td>
-<td align="left">Ruminococcus</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Clostridium</td>
-<td align="left">Odoribacter</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">Lachnospiraceae</td>
-<td align="left">Odoribacter</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Lachnospiraceae</td>
-<td align="left">Oscillospiraceae</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">Roseburia</td>
-<td align="left">Lachnospira</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Phascolarctobacterium</td>
-<td align="left">Lachnospira</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">Coprococcus</td>
-<td align="left">Lachnospira</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Lachnospiraceae</td>
-<td align="left">Lachnospira</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">Lachnospiraceae</td>
-<td align="left">Enterobacteriaceae</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Peptostreptococcus</td>
-<td align="left">Fusobacterium</td>
-<td align="right">6</td>
-</tr>
-<tr class="odd">
-<td align="left">Lachnospiraceae</td>
-<td align="left">Fusobacterium</td>
-<td align="right">6</td>
-</tr>
-<tr class="even">
-<td align="left">Lachnospiraceae</td>
 <td align="left">Faecalibacterium</td>
-<td align="right">6</td>
+<td align="right">8</td>
+</tr>
+<tr class="odd">
+<td align="left">Lachnospira</td>
+<td align="left">Faecalibacterium</td>
+<td align="right">8</td>
 </tr>
 </tbody>
 </table>
@@ -2538,7 +3535,7 @@ concordance threshold above.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">n_coexclusion</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">co.excl</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 208</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 206</span></span></code></pre>
 <div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">co.excl</span>, <span class="fl">15</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -2549,79 +3546,79 @@ concordance threshold above.</p>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">Bacillota</td>
-<td align="left">Pseudomonadota</td>
-<td align="right">5</td>
-</tr>
-<tr class="even">
 <td align="left">Bacteroides</td>
 <td align="left">Lachnospiraceae</td>
-<td align="right">5</td>
-</tr>
-<tr class="odd">
-<td align="left">Enterobacteriaceae</td>
-<td align="left">Faecalibacterium</td>
-<td align="right">5</td>
-</tr>
-<tr class="even">
-<td align="left">Erysipelotrichaceae</td>
-<td align="left">Lachnospiraceae</td>
-<td align="right">5</td>
-</tr>
-<tr class="odd">
-<td align="left">Faecalibacterium</td>
-<td align="left">Parvimonas</td>
-<td align="right">5</td>
+<td align="right">7</td>
 </tr>
 <tr class="even">
 <td align="left">Lachnospira</td>
 <td align="left">Parvimonas</td>
-<td align="right">5</td>
+<td align="right">7</td>
 </tr>
 <tr class="odd">
-<td align="left">Lachnospiraceae</td>
-<td align="left">Parabacteroides</td>
-<td align="right">5</td>
+<td align="left">Actinomyces</td>
+<td align="left">Faecalibacterium</td>
+<td align="right">6</td>
 </tr>
 <tr class="even">
-<td align="left">Roseburia</td>
-<td align="left">Streptococcus</td>
-<td align="right">5</td>
-</tr>
-<tr class="odd">
-<td align="left">Alistipes</td>
-<td align="left">Streptococcus</td>
-<td align="right">4</td>
-</tr>
-<tr class="even">
-<td align="left">Anaerostipes</td>
-<td align="left">Lachnospiraceae</td>
-<td align="right">4</td>
+<td align="left">Actinomyces</td>
+<td align="left">Lachnospira</td>
+<td align="right">6</td>
 </tr>
 <tr class="odd">
 <td align="left">Bacillota</td>
-<td align="left">Porphyromonas</td>
-<td align="right">4</td>
+<td align="left">Pseudomonadota</td>
+<td align="right">6</td>
 </tr>
 <tr class="even">
 <td align="left">Bacteroides</td>
-<td align="left">Clostridium</td>
-<td align="right">4</td>
+<td align="left">Streptococcus</td>
+<td align="right">6</td>
 </tr>
 <tr class="odd">
+<td align="left">Enterobacteriaceae</td>
+<td align="left">Faecalibacterium</td>
+<td align="right">6</td>
+</tr>
+<tr class="even">
+<td align="left">Enterobacteriaceae</td>
+<td align="left">Lachnospiraceae</td>
+<td align="right">6</td>
+</tr>
+<tr class="odd">
+<td align="left">Actinomyces</td>
+<td align="left">Oscillibacter</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">Bacteroides</td>
+<td align="left">Bifidobacterium</td>
+<td align="right">5</td>
+</tr>
+<tr class="odd">
+<td align="left">Bacteroides</td>
+<td align="left">Coprococcus</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
 <td align="left">Bacteroides</td>
 <td align="left">Enterobacteriaceae</td>
-<td align="right">4</td>
-</tr>
-<tr class="even">
-<td align="left">Bacteroides</td>
-<td align="left">Odoribacter</td>
-<td align="right">4</td>
+<td align="right">5</td>
 </tr>
 <tr class="odd">
 <td align="left">Bacteroides</td>
-<td align="left">Oscillospiraceae</td>
-<td align="right">4</td>
+<td align="left">Odoribacter</td>
+<td align="right">5</td>
+</tr>
+<tr class="even">
+<td align="left">Bacteroides</td>
+<td align="left">Prevotella</td>
+<td align="right">5</td>
+</tr>
+<tr class="odd">
+<td align="left">Clostridium</td>
+<td align="left">Parvimonas</td>
+<td align="right">5</td>
 </tr>
 </tbody>
 </table>
@@ -2680,33 +3677,33 @@ relationships between taxa in the CRC gut environment.</p>
 <tbody>
 <tr class="odd">
 <td align="left">Crohn’s disease</td>
-<td align="right">260</td>
-<td align="right">148</td>
-<td align="right">0.197</td>
+<td align="right">371</td>
+<td align="right">244</td>
+<td align="right">0.236</td>
 </tr>
 <tr class="even">
 <td align="left">Ulcerative colitis</td>
-<td align="right">211</td>
-<td align="right">135</td>
-<td align="right">0.189</td>
+<td align="right">262</td>
+<td align="right">195</td>
+<td align="right">0.200</td>
 </tr>
 <tr class="odd">
 <td align="left">Non-alcoholic fatty liver disease</td>
-<td align="right">124</td>
-<td align="right">82</td>
-<td align="right">0.120</td>
+<td align="right">296</td>
+<td align="right">206</td>
+<td align="right">0.207</td>
 </tr>
 <tr class="even">
 <td align="left">Obesity</td>
-<td align="right">510</td>
-<td align="right">277</td>
+<td align="right">569</td>
+<td align="right">356</td>
 <td align="right">0.318</td>
 </tr>
 <tr class="odd">
 <td align="left">Colorectal adenoma</td>
-<td align="right">177</td>
-<td align="right">136</td>
-<td align="right">0.200</td>
+<td align="right">233</td>
+<td align="right">195</td>
+<td align="right">0.206</td>
 </tr>
 </tbody>
 </table>
@@ -2735,23 +3732,31 @@ common usage.</p>
 <tbody>
 <tr class="odd">
 <td align="left">China</td>
-<td align="right">28</td>
+<td align="right">41</td>
 </tr>
 <tr class="even">
 <td align="left">United States of America</td>
 <td align="right">5</td>
 </tr>
 <tr class="odd">
-<td align="left">Italy</td>
-<td align="right">2</td>
+<td align="left">Japan</td>
+<td align="right">4</td>
 </tr>
 <tr class="even">
-<td align="left">Japan</td>
-<td align="right">2</td>
+<td align="left">Italy</td>
+<td align="right">3</td>
 </tr>
 <tr class="odd">
 <td align="left">Austria</td>
-<td align="right">1</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="left">Spain</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="left">Taiwan</td>
+<td align="right">2</td>
 </tr>
 <tr class="even">
 <td align="left">Austria,Canada,China,France,Italy,United States of
@@ -2759,31 +3764,47 @@ America</td>
 <td align="right">1</td>
 </tr>
 <tr class="odd">
+<td align="left">Belgium</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
 <td align="left">Canada,United States of America</td>
 <td align="right">1</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">France</td>
 <td align="right">1</td>
 </tr>
+<tr class="even">
+<td align="left">India</td>
+<td align="right">1</td>
+</tr>
 <tr class="odd">
+<td align="left">Indonesia</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">Jordan</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Mali</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
 <td align="left">Morocco</td>
 <td align="right">1</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Norway</td>
 <td align="right">1</td>
 </tr>
-<tr class="odd">
-<td align="left">Spain</td>
-<td align="right">1</td>
-</tr>
 <tr class="even">
-<td align="left">Sweden</td>
+<td align="left">Singapore</td>
 <td align="right">1</td>
 </tr>
 <tr class="odd">
-<td align="left">Taiwan</td>
+<td align="left">Sweden</td>
 <td align="right">1</td>
 </tr>
 <tr class="even">
@@ -2857,9 +3878,9 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <span><span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="va">diagnostic.check</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="42%">
+<col width="43%">
 <col width="14%">
-<col width="11%">
+<col width="10%">
 <col width="17%">
 <col width="14%">
 </colgroup>
@@ -2874,166 +3895,222 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <tr class="odd">
 <td align="left">Lachnospiraceae</td>
 <td align="left">decreased</td>
-<td align="right">15</td>
-<td align="right">80.0</td>
+<td align="right">18</td>
+<td align="right">77.8</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Coprococcus</td>
+<td align="left">Faecalibacterium</td>
 <td align="left">decreased</td>
-<td align="right">13</td>
-<td align="right">76.9</td>
+<td align="right">16</td>
+<td align="right">87.5</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
 <td align="left">Clostridium</td>
 <td align="left">decreased</td>
-<td align="right">10</td>
+<td align="right">15</td>
 <td align="right">80.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Roseburia</td>
+<td align="left">Lachnospira</td>
 <td align="left">decreased</td>
-<td align="right">10</td>
+<td align="right">15</td>
 <td align="right">80.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
 <td align="left">Clostridia</td>
 <td align="left">decreased</td>
-<td align="right">9</td>
-<td align="right">88.9</td>
+<td align="right">12</td>
+<td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Lachnospira</td>
+<td align="left">Bifidobacterium</td>
 <td align="left">decreased</td>
-<td align="right">9</td>
-<td align="right">88.9</td>
+<td align="right">11</td>
+<td align="right">81.8</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Faecalibacterium</td>
-<td align="left">decreased</td>
-<td align="right">8</td>
-<td align="right">100.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">Anaerobutyricum hallii</td>
-<td align="left">decreased</td>
-<td align="right">7</td>
-<td align="right">85.7</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">Blautia</td>
-<td align="left">decreased</td>
-<td align="right">7</td>
-<td align="right">85.7</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
 <td align="left">Faecalibacterium prausnitzii</td>
 <td align="left">decreased</td>
-<td align="right">6</td>
+<td align="right">9</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
+<tr class="even">
+<td align="left">Blautia</td>
+<td align="left">decreased</td>
+<td align="right">9</td>
+<td align="right">88.9</td>
+<td align="left">FALSE</td>
+</tr>
 <tr class="odd">
+<td align="left">Anaerobutyricum hallii</td>
+<td align="left">decreased</td>
+<td align="right">8</td>
+<td align="right">87.5</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
 <td align="left">Lachnospira eligens</td>
 <td align="left">decreased</td>
-<td align="right">6</td>
-<td align="right">100.0</td>
+<td align="right">8</td>
+<td align="right">87.5</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Subdoligranulum</td>
+<td align="left">decreased</td>
+<td align="right">8</td>
+<td align="right">87.5</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
 <td align="left">Actinomycetota</td>
 <td align="left">decreased</td>
-<td align="right">6</td>
-<td align="right">83.3</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">Bifidobacterium</td>
-<td align="left">decreased</td>
-<td align="right">6</td>
-<td align="right">83.3</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">Subdoligranulum</td>
-<td align="left">decreased</td>
-<td align="right">6</td>
-<td align="right">83.3</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">Butyricicoccus</td>
-<td align="left">decreased</td>
-<td align="right">5</td>
-<td align="right">80.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">Eubacteriales</td>
-<td align="left">decreased</td>
-<td align="right">5</td>
-<td align="right">80.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">Eubacterium coprostanoligenes</td>
-<td align="left">decreased</td>
-<td align="right">5</td>
-<td align="right">80.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">Eubacterium ventriosum</td>
-<td align="left">decreased</td>
-<td align="right">5</td>
-<td align="right">80.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">Bifidobacteriaceae</td>
-<td align="left">decreased</td>
-<td align="right">4</td>
-<td align="right">100.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">Bifidobacteriales</td>
-<td align="left">decreased</td>
-<td align="right">4</td>
-<td align="right">100.0</td>
+<td align="right">7</td>
+<td align="right">85.7</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
 <td align="left">Romboutsia</td>
 <td align="left">decreased</td>
+<td align="right">7</td>
+<td align="right">85.7</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Roseburia intestinalis</td>
+<td align="left">decreased</td>
+<td align="right">6</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Bifidobacteriaceae</td>
+<td align="left">decreased</td>
+<td align="right">6</td>
+<td align="right">83.3</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Bifidobacteriales</td>
+<td align="left">decreased</td>
+<td align="right">6</td>
+<td align="right">83.3</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Segatella copri</td>
+<td align="left">decreased</td>
+<td align="right">6</td>
+<td align="right">83.3</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Bifidobacterium animalis</td>
+<td align="left">decreased</td>
+<td align="right">5</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Bifidobacterium longum</td>
+<td align="left">decreased</td>
+<td align="right">5</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Staphylococcus</td>
+<td align="left">decreased</td>
+<td align="right">5</td>
+<td align="right">80.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Agathobacter</td>
+<td align="left">decreased</td>
 <td align="right">4</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Roseburia intestinalis</td>
+<td align="left">Agathobacter rectalis</td>
 <td align="left">decreased</td>
 <td align="right">4</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
+<td align="left">Anaerostipes hadrus</td>
+<td align="left">decreased</td>
+<td align="right">4</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Bifidobacterium adolescentis</td>
+<td align="left">decreased</td>
+<td align="right">4</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Cyanobacteriota</td>
+<td align="left">decreased</td>
+<td align="right">4</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Fusicatenibacter</td>
+<td align="left">decreased</td>
+<td align="right">4</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Pseudocoprococcus catus</td>
+<td align="left">decreased</td>
+<td align="right">4</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
 <td align="left">Tyzzerella</td>
 <td align="left">decreased</td>
 <td align="right">4</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
+<tr class="odd">
+<td align="left">Anaerotruncus</td>
+<td align="left">decreased</td>
+<td align="right">4</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
 <tr class="even">
-<td align="left">Bilophila</td>
+<td align="left">Bacteroides intestinalis</td>
+<td align="left">decreased</td>
+<td align="right">4</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Bacteroides thetaiotaomicron</td>
+<td align="left">decreased</td>
+<td align="right">4</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Bifidobacterium catenulatum</td>
 <td align="left">decreased</td>
 <td align="right">4</td>
 <td align="right">75.0</td>
@@ -3047,7 +4124,7 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Klebsiella</td>
+<td align="left">Eubacterium coprostanoligenes</td>
 <td align="left">decreased</td>
 <td align="right">4</td>
 <td align="right">75.0</td>
@@ -3061,213 +4138,311 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Oscillibacter</td>
+<td align="left">Micrococcaceae</td>
 <td align="left">decreased</td>
 <td align="right">4</td>
 <td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Staphylococcus</td>
+<td align="left">Neisseria</td>
 <td align="left">decreased</td>
 <td align="right">4</td>
 <td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Agathobacter</td>
+<td align="left">Allocoprococcus comes</td>
 <td align="left">decreased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Cyanobacteriota</td>
+<td align="left">Blautia obeum</td>
 <td align="left">decreased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Fusicatenibacter</td>
+<td align="left">Coprobacillus</td>
 <td align="left">decreased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Pseudocoprococcus catus</td>
-<td align="left">decreased</td>
-<td align="right">3</td>
-<td align="right">100.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
 <td align="left">Roseburia faecis</td>
 <td align="left">decreased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Streptococcus salivarius</td>
 <td align="left">decreased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
+<tr class="odd">
+<td align="left">Streptococcus thermophilus</td>
+<td align="left">decreased</td>
+<td align="right">3</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Fusobacterium</td>
+<td align="left">increased</td>
+<td align="right">18</td>
+<td align="right">77.8</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Parvimonas</td>
+<td align="left">increased</td>
+<td align="right">15</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
 <tr class="even">
 <td align="left">Peptostreptococcus</td>
 <td align="left">increased</td>
-<td align="right">13</td>
+<td align="right">15</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
 <td align="left">Porphyromonas</td>
 <td align="left">increased</td>
-<td align="right">12</td>
-<td align="right">91.7</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">Parvimonas</td>
-<td align="left">increased</td>
-<td align="right">11</td>
-<td align="right">100.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">Fusobacterium</td>
-<td align="left">increased</td>
-<td align="right">11</td>
-<td align="right">90.9</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">Enterobacteriaceae</td>
-<td align="left">increased</td>
-<td align="right">10</td>
+<td align="right">15</td>
 <td align="right">80.0</td>
 <td align="left">FALSE</td>
 </tr>
-<tr class="odd">
-<td align="left">Erysipelotrichaceae</td>
+<tr class="even">
+<td align="left">Fusobacterium nucleatum</td>
 <td align="left">increased</td>
-<td align="right">8</td>
-<td align="right">75.0</td>
+<td align="right">14</td>
+<td align="right">92.9</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">Enterobacteriaceae</td>
+<td align="left">increased</td>
+<td align="right">14</td>
+<td align="right">78.6</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Odoribacter</td>
+<td align="left">Pseudomonadota</td>
 <td align="left">increased</td>
-<td align="right">8</td>
+<td align="right">12</td>
 <td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Fusobacterium nucleatum</td>
+<td align="left">Parvimonas micra</td>
 <td align="left">increased</td>
-<td align="right">7</td>
+<td align="right">11</td>
 <td align="right">100.0</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
-<td align="left">Parabacteroides</td>
-<td align="left">increased</td>
-<td align="right">7</td>
-<td align="right">100.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">[Clostridium] symbiosum</td>
-<td align="left">increased</td>
-<td align="right">7</td>
-<td align="right">100.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
 <td align="left">Fusobacteriota</td>
 <td align="left">increased</td>
-<td align="right">7</td>
-<td align="right">85.7</td>
+<td align="right">11</td>
+<td align="right">81.8</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Lactobacillus</td>
+<td align="left">Parabacteroides</td>
 <td align="left">increased</td>
-<td align="right">7</td>
-<td align="right">85.7</td>
+<td align="right">11</td>
+<td align="right">81.8</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Rikenellaceae</td>
+<td align="left">Gemella morbillorum</td>
 <td align="left">increased</td>
-<td align="right">7</td>
-<td align="right">85.7</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">Akkermansia</td>
-<td align="left">increased</td>
-<td align="right">6</td>
-<td align="right">100.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">Parvimonas micra</td>
-<td align="left">increased</td>
-<td align="right">6</td>
+<td align="right">10</td>
 <td align="right">100.0</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="odd">
 <td align="left">Peptostreptococcus stomatis</td>
 <td align="left">increased</td>
-<td align="right">6</td>
+<td align="right">10</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Bacteroidota</td>
+<td align="left">Solobacterium moorei</td>
 <td align="left">increased</td>
-<td align="right">6</td>
-<td align="right">83.3</td>
-<td align="left">FALSE</td>
+<td align="right">9</td>
+<td align="right">100.0</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="odd">
-<td align="left">Corynebacterium</td>
+<td align="left">Bacteroides fragilis</td>
 <td align="left">increased</td>
-<td align="right">6</td>
-<td align="right">83.3</td>
+<td align="right">9</td>
+<td align="right">88.9</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
+<td align="left">Eggerthella</td>
+<td align="left">increased</td>
+<td align="right">9</td>
+<td align="right">88.9</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Lactobacillus</td>
+<td align="left">increased</td>
+<td align="right">9</td>
+<td align="right">88.9</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">[Clostridium] symbiosum</td>
+<td align="left">increased</td>
+<td align="right">9</td>
+<td align="right">88.9</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
 <td align="left">Enterococcus</td>
 <td align="left">increased</td>
-<td align="right">6</td>
-<td align="right">83.3</td>
+<td align="right">9</td>
+<td align="right">77.8</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Fusobacteriia</td>
+<td align="left">increased</td>
+<td align="right">9</td>
+<td align="right">77.8</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Gemella</td>
+<td align="left">increased</td>
+<td align="right">8</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Akkermansia</td>
+<td align="left">increased</td>
+<td align="right">8</td>
+<td align="right">87.5</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Escherichia</td>
+<td align="left">increased</td>
+<td align="right">8</td>
+<td align="right">87.5</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Akkermansia muciniphila</td>
+<td align="left">increased</td>
+<td align="right">8</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Enterobacterales</td>
+<td align="left">increased</td>
+<td align="right">8</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Escherichia/Shigella sp.</td>
+<td align="left">increased</td>
+<td align="right">8</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Fusobacteriaceae</td>
+<td align="left">increased</td>
+<td align="right">8</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Fusobacteriales</td>
+<td align="left">increased</td>
+<td align="right">8</td>
+<td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
 <td align="left">Lactobacillales</td>
 <td align="left">increased</td>
-<td align="right">6</td>
-<td align="right">83.3</td>
+<td align="right">8</td>
+<td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Porphyromonadaceae</td>
+<td align="left">Escherichia coli</td>
 <td align="left">increased</td>
-<td align="right">6</td>
-<td align="right">83.3</td>
+<td align="right">7</td>
+<td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Actinomyces</td>
+<td align="left">Peptostreptococcus anaerobius</td>
 <td align="left">increased</td>
-<td align="right">5</td>
+<td align="right">7</td>
 <td align="right">100.0</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Bacilli</td>
+<td align="left">increased</td>
+<td align="right">7</td>
+<td align="right">85.7</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Porphyromonas asaccharolytica</td>
+<td align="left">increased</td>
+<td align="right">7</td>
+<td align="right">85.7</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Lactobacillaceae</td>
+<td align="left">increased</td>
+<td align="right">6</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Prevotella intermedia</td>
+<td align="left">increased</td>
+<td align="right">6</td>
+<td align="right">100.0</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">Verrucomicrobiota</td>
+<td align="left">increased</td>
+<td align="right">6</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Gammaproteobacteria</td>
+<td align="left">increased</td>
+<td align="right">6</td>
+<td align="right">83.3</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
@@ -3278,73 +4453,87 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Eggerthella</td>
+<td align="left">Flavonifractor plautii</td>
 <td align="left">increased</td>
 <td align="right">5</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Escherichia</td>
+<td align="left">Hungatella hathewayi</td>
 <td align="left">increased</td>
 <td align="right">5</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Gemella</td>
+<td align="left">Odoribacter splanchnicus</td>
 <td align="left">increased</td>
 <td align="right">5</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Gemella morbillorum</td>
+<td align="left">Streptococcus anginosus</td>
 <td align="left">increased</td>
 <td align="right">5</td>
 <td align="right">100.0</td>
-<td align="left">TRUE</td>
+<td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Porphyromonas asaccharolytica</td>
+<td align="left">Dialister pneumosintes</td>
 <td align="left">increased</td>
 <td align="right">5</td>
-<td align="right">100.0</td>
-<td align="left">TRUE</td>
+<td align="right">80.0</td>
+<td align="left">FALSE</td>
 </tr>
 <tr class="even">
+<td align="left">Morganella</td>
+<td align="left">increased</td>
+<td align="right">5</td>
+<td align="right">80.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Oscillospira</td>
+<td align="left">increased</td>
+<td align="right">5</td>
+<td align="right">80.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Paraprevotella</td>
+<td align="left">increased</td>
+<td align="right">5</td>
+<td align="right">80.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Proteus</td>
+<td align="left">increased</td>
+<td align="right">5</td>
+<td align="right">80.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Selenomonadales</td>
+<td align="left">increased</td>
+<td align="right">5</td>
+<td align="right">80.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
 <td align="left">Shigella</td>
 <td align="left">increased</td>
 <td align="right">5</td>
-<td align="right">100.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">Solobacterium moorei</td>
-<td align="left">increased</td>
-<td align="right">5</td>
-<td align="right">100.0</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">Bacilli</td>
-<td align="left">increased</td>
-<td align="right">5</td>
-<td align="right">80.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">Fusobacteriia</td>
-<td align="left">increased</td>
-<td align="right">5</td>
 <td align="right">80.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Selenomonas</td>
+<td align="left">Alistipes onderdonkii</td>
 <td align="left">increased</td>
-<td align="right">5</td>
-<td align="right">80.0</td>
+<td align="right">4</td>
+<td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
@@ -3355,116 +4544,172 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Escherichia coli</td>
+<td align="left">Bacteroides salyersiae</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Flavonifractor plautii</td>
+<td align="left">Hungatella</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Megasphaera</td>
+<td align="left">Porphyromonas uenonis</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Morganella</td>
+<td align="left">Verrucomicrobiales</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Peptostreptococcus anaerobius</td>
-<td align="left">increased</td>
-<td align="right">4</td>
-<td align="right">100.0</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">Prevotella intermedia</td>
-<td align="left">increased</td>
-<td align="right">4</td>
-<td align="right">100.0</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">Verrucomicrobiota</td>
+<td align="left">Verrucomicrobiia</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Erysipelotrichales</td>
+<td align="left">uncultured Oscillospiraceae bacterium</td>
 <td align="left">increased</td>
 <td align="right">4</td>
-<td align="right">75.0</td>
+<td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Erysipelotrichia</td>
+<td align="left">Acinetobacter</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Fusobacteriaceae</td>
+<td align="left">Anaerostipes caccae</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Fusobacteriales</td>
+<td align="left">Atopobium</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Gammaproteobacteria</td>
+<td align="left">Bacteroides ovatus</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Lactobacillaceae</td>
+<td align="left">Christensenella</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Mediterraneibacter torques</td>
+<td align="left">Corynebacteriaceae</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Oscillospira</td>
+<td align="left">Desulfovibrionaceae</td>
 <td align="left">increased</td>
 <td align="right">4</td>
 <td align="right">75.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
+<td align="left">Eggerthella lenta</td>
+<td align="left">increased</td>
+<td align="right">4</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Enterobacter</td>
+<td align="left">increased</td>
+<td align="right">4</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Negativicutes</td>
+<td align="left">increased</td>
+<td align="right">4</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Phocaeicola vulgatus</td>
+<td align="left">increased</td>
+<td align="right">4</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Ralstonia</td>
+<td align="left">increased</td>
+<td align="right">4</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Streptococcus lutetiensis</td>
+<td align="left">increased</td>
+<td align="right">4</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Thomasclavelia</td>
+<td align="left">increased</td>
+<td align="right">4</td>
+<td align="right">75.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
 <td align="left">Abiotrophia</td>
 <td align="left">increased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Actinomycetaceae</td>
+<td align="left">increased</td>
+<td align="right">3</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Aeromonas</td>
+<td align="left">increased</td>
+<td align="right">3</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Alistipes finegoldii</td>
+<td align="left">increased</td>
+<td align="right">3</td>
+<td align="right">100.0</td>
+<td align="left">TRUE</td>
 </tr>
 <tr class="even">
 <td align="left">Alloprevotella tannerae</td>
@@ -3474,14 +4719,28 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Bacteroides fragilis</td>
+<td align="left">Anaerococcus vaginalis</td>
 <td align="left">increased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Corynebacteriaceae</td>
+<td align="left">Bacteroides eggerthii</td>
+<td align="left">increased</td>
+<td align="right">3</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Bifidobacterium breve</td>
+<td align="left">increased</td>
+<td align="right">3</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Comamonadaceae</td>
 <td align="left">increased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
@@ -3495,28 +4754,28 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Enterocloster bolteae</td>
+<td align="left">Eisenbergiella</td>
 <td align="left">increased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Hungatella</td>
+<td align="left">Klebsiella oxytoca</td>
 <td align="left">increased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Lachnoclostridium</td>
+<td align="left">Lachnospiraceae bacterium 3_1_57FAA_CT1</td>
 <td align="left">increased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Odoribacter splanchnicus</td>
+<td align="left">Methanobrevibacter smithii</td>
 <td align="left">increased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
@@ -3530,14 +4789,14 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
-<td align="left">Porphyromonas uenonis</td>
+<td align="left">Parabacteroides distasonis</td>
 <td align="left">increased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Ralstonia</td>
+<td align="left">Parabacteroides merdae</td>
 <td align="left">increased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
@@ -3551,7 +4810,21 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
-<td align="left">Streptococcus anginosus</td>
+<td align="left">Solobacterium</td>
+<td align="left">increased</td>
+<td align="right">3</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="odd">
+<td align="left">Streptococcus oralis</td>
+<td align="left">increased</td>
+<td align="right">3</td>
+<td align="right">100.0</td>
+<td align="left">FALSE</td>
+</tr>
+<tr class="even">
+<td align="left">Tissierellia</td>
 <td align="left">increased</td>
 <td align="right">3</td>
 <td align="right">100.0</td>
@@ -3564,27 +4837,6 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <td align="right">100.0</td>
 <td align="left">FALSE</td>
 </tr>
-<tr class="even">
-<td align="left">Verrucomicrobiales</td>
-<td align="left">increased</td>
-<td align="right">3</td>
-<td align="right">100.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">Verrucomicrobiia</td>
-<td align="left">increased</td>
-<td align="right">3</td>
-<td align="right">100.0</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">uncultured Oscillospiraceae bacterium</td>
-<td align="left">increased</td>
-<td align="right">3</td>
-<td align="right">100.0</td>
-<td align="left">FALSE</td>
-</tr>
 </tbody>
 </table>
 <div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
@@ -3592,7 +4844,7 @@ gradually being supplemented or superseded by newer WMS studies.</p>
 <span>  <span class="st">"Known literature markers recovered in the core signature:"</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">diagnostic.check</span><span class="op">$</span><span class="va">known_marker</span><span class="op">)</span>, <span class="st">"of"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">known.crc.markers</span><span class="op">)</span>, <span class="st">"\n"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Known literature markers recovered in the core signature: 7 of 8</span></span></code></pre>
+<pre><code><span><span class="co">## Known literature markers recovered in the core signature: 8 of 8</span></span></code></pre>
 <p>As a lightweight sanity check (not a formal validation), the core
 consensus signature was cross-referenced against a small set of taxa
 repeatedly reported as CRC-associated in the oncomicrobiome literature
@@ -3618,59 +4870,59 @@ whichever markers are most relevant to your research question.</p>
 <span><span class="va">criticalN</span></span></code></pre></div>
 <pre><code><span><span class="co">## $critical_n</span></span>
 <span><span class="co">## 95% </span></span>
-<span><span class="co">##  33 </span></span>
+<span><span class="co">##  39 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $ci_lower</span></span>
 <span><span class="co">## 2.5% </span></span>
-<span><span class="co">##   32 </span></span>
+<span><span class="co">##   38 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $ci_upper</span></span>
 <span><span class="co">## 97.5% </span></span>
-<span><span class="co">##    33 </span></span>
+<span><span class="co">##    40 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $simulated_values</span></span>
-<span><span class="co">##    [1] 27 26 25 25 25 27 27 24 29 29 26 21 26 30 33 25 23 27 26 27 25 29 24 23</span></span>
-<span><span class="co">##   [25] 24 25 26 24 26 29 30 28 27 28 29 23 28 36 22 27 25 27 30 26 23 25 27 24</span></span>
-<span><span class="co">##   [49] 26 28 26 29 24 25 31 31 25 25 25 27 29 26 22 30 31 29 25 34 26 24 29 28</span></span>
-<span><span class="co">##   [73] 23 33 31 28 28 30 26 31 29 24 24 29 23 27 24 28 32 26 26 32 25 27 26 29</span></span>
-<span><span class="co">##   [97] 27 24 25 29 26 36 21 27 31 25 23 20 30 27 23 29 27 27 28 24 29 27 25 31</span></span>
-<span><span class="co">##  [121] 30 23 28 34 27 25 29 24 29 22 27 29 26 28 28 21 28 28 25 24 26 31 25 27</span></span>
-<span><span class="co">##  [145] 28 31 27 28 30 28 28 33 31 29 25 26 27 27 26 32 33 24 33 23 26 22 24 28</span></span>
-<span><span class="co">##  [169] 23 22 28 22 23 24 28 24 25 29 32 31 25 34 28 25 24 27 32 30 29 24 25 24</span></span>
-<span><span class="co">##  [193] 31 33 28 30 24 26 25 25 33 25 30 29 31 29 27 31 30 22 25 28 30 28 24 27</span></span>
-<span><span class="co">##  [217] 27 26 27 25 30 26 25 32 24 29 39 30 33 27 25 29 24 26 26 28 28 27 31 29</span></span>
-<span><span class="co">##  [241] 30 25 27 24 29 25 27 39 35 25 26 26 33 25 30 21 31 28 28 27 28 24 26 25</span></span>
-<span><span class="co">##  [265] 25 24 23 26 23 25 25 26 29 27 28 27 24 23 22 27 27 25 27 25 28 27 24 28</span></span>
-<span><span class="co">##  [289] 27 33 23 24 26 23 28 23 27 24 27 33 24 21 25 23 26 25 35 27 31 31 24 24</span></span>
-<span><span class="co">##  [313] 26 33 31 26 29 24 29 25 28 27 32 25 25 24 32 25 24 24 27 35 26 26 23 29</span></span>
-<span><span class="co">##  [337] 26 26 23 32 31 30 27 29 30 25 28 29 24 26 31 28 23 27 30 22 25 25 22 24</span></span>
-<span><span class="co">##  [361] 27 26 31 33 27 30 25 26 30 29 25 26 25 27 23 25 26 26 28 27 25 28 23 28</span></span>
-<span><span class="co">##  [385] 26 23 24 22 30 24 28 24 28 30 30 28 25 29 31 30 27 28 28 27 26 34 33 22</span></span>
-<span><span class="co">##  [409] 28 26 29 35 25 28 26 28 27 25 27 26 31 30 26 27 28 26 25 29 25 28 27 33</span></span>
-<span><span class="co">##  [433] 26 28 28 26 25 26 28 28 31 26 26 22 27 28 23 25 26 24 25 24 24 29 28 30</span></span>
-<span><span class="co">##  [457] 27 29 24 23 27 28 23 25 26 25 25 26 26 31 29 25 27 30 23 26 26 29 23 25</span></span>
-<span><span class="co">##  [481] 24 25 26 31 30 26 29 28 27 30 29 23 26 35 23 30 29 27 25 27 25 26 28 30</span></span>
-<span><span class="co">##  [505] 20 24 26 26 24 26 24 24 26 26 22 26 24 26 25 28 23 31 24 22 26 22 29 29</span></span>
-<span><span class="co">##  [529] 27 25 26 30 24 33 33 28 23 27 29 23 26 25 27 27 24 23 27 31 25 23 31 27</span></span>
-<span><span class="co">##  [553] 25 28 26 26 24 23 27 22 24 23 22 25 22 25 29 30 29 28 23 24 30 37 29 25</span></span>
-<span><span class="co">##  [577] 28 26 32 27 25 24 23 28 25 29 28 26 27 25 26 24 29 30 22 26 22 24 23 30</span></span>
-<span><span class="co">##  [601] 24 30 25 26 28 34 28 31 31 27 25 27 25 28 29 25 25 24 27 25 25 26 32 28</span></span>
-<span><span class="co">##  [625] 24 28 27 33 27 27 28 25 28 29 30 27 26 26 32 26 26 28 26 25 28 25 26 23</span></span>
-<span><span class="co">##  [649] 23 34 28 24 29 28 26 32 28 24 24 29 25 28 23 25 21 26 25 26 25 25 28 21</span></span>
-<span><span class="co">##  [673] 23 28 22 28 29 30 25 29 27 29 30 26 25 27 32 24 23 25 27 23 31 25 24 28</span></span>
-<span><span class="co">##  [697] 27 26 26 29 26 27 27 24 22 26 24 26 25 29 25 26 31 23 36 26 26 23 24 27</span></span>
-<span><span class="co">##  [721] 25 32 25 26 27 26 26 22 26 35 26 30 25 25 26 24 31 26 29 30 24 26 32 22</span></span>
-<span><span class="co">##  [745] 23 28 24 26 22 22 28 24 26 29 30 25 26 28 29 23 25 28 30 28 26 29 32 29</span></span>
-<span><span class="co">##  [769] 29 30 23 23 28 24 24 21 24 20 27 25 24 27 27 29 27 35 27 25 26 25 27 25</span></span>
-<span><span class="co">##  [793] 25 33 26 27 27 24 28 31 27 23 23 30 25 31 26 33 26 29 28 24 27 25 29 23</span></span>
-<span><span class="co">##  [817] 24 28 29 25 23 26 29 30 26 23 29 33 26 24 28 34 28 26 24 31 25 28 26 27</span></span>
-<span><span class="co">##  [841] 27 31 33 28 25 23 27 32 24 23 32 24 23 25 22 32 32 21 26 25 34 24 24 30</span></span>
-<span><span class="co">##  [865] 28 25 22 26 25 36 23 28 34 28 26 25 28 32 21 27 23 29 25 28 32 27 28 25</span></span>
-<span><span class="co">##  [889] 30 28 32 21 25 27 29 31 40 28 26 31 29 34 29 29 29 29 25 32 34 29 27 34</span></span>
-<span><span class="co">##  [913] 25 28 26 23 33 27 29 29 24 32 28 25 25 28 24 25 28 23 26 27 25 31 30 31</span></span>
-<span><span class="co">##  [937] 28 25 26 28 22 28 23 23 30 31 30 26 27 29 24 31 24 26 35 31 28 24 25 30</span></span>
-<span><span class="co">##  [961] 30 27 24 29 29 37 28 23 28 25 32 26 26 26 22 22 22 23 29 28 25 25 33 31</span></span>
-<span><span class="co">##  [985] 27 24 25 33 28 26 25 24 28 27 28 28 25 25 25 26</span></span>
+<span><span class="co">##    [1] 32 31 31 33 32 32 34 27 36 38 34 32 29 32 27 32 28 33 34 31 36 28 37 29</span></span>
+<span><span class="co">##   [25] 41 28 31 33 29 34 31 35 35 36 28 32 35 27 29 30 33 34 39 29 44 30 34 30</span></span>
+<span><span class="co">##   [49] 44 30 36 41 33 32 32 28 35 34 35 31 35 29 32 34 31 34 38 31 37 28 33 34</span></span>
+<span><span class="co">##   [73] 30 31 35 29 35 39 37 33 41 39 32 30 38 35 34 35 29 28 33 34 34 33 37 34</span></span>
+<span><span class="co">##   [97] 42 38 30 32 35 32 32 32 35 33 33 35 30 37 33 29 28 34 27 32 36 30 32 33</span></span>
+<span><span class="co">##  [121] 27 36 34 36 29 31 35 33 35 31 34 32 36 34 40 35 32 28 36 31 31 29 30 35</span></span>
+<span><span class="co">##  [145] 31 34 33 35 33 34 35 34 29 31 37 35 39 33 32 35 36 30 46 36 37 34 36 33</span></span>
+<span><span class="co">##  [169] 36 30 35 36 28 33 33 30 29 27 39 36 30 28 30 35 39 36 30 34 34 42 34 34</span></span>
+<span><span class="co">##  [193] 28 33 36 31 29 27 32 34 33 37 36 37 35 36 34 29 34 30 32 35 31 28 31 27</span></span>
+<span><span class="co">##  [217] 34 35 31 33 33 32 34 35 33 30 32 33 35 33 31 31 32 30 28 32 36 34 34 37</span></span>
+<span><span class="co">##  [241] 29 37 35 32 31 31 34 29 39 29 29 36 32 31 29 32 29 34 41 32 36 41 39 32</span></span>
+<span><span class="co">##  [265] 34 33 32 30 32 44 28 27 36 32 34 31 35 34 29 32 33 42 33 30 35 30 27 35</span></span>
+<span><span class="co">##  [289] 37 36 31 32 32 31 34 35 30 34 29 35 34 30 37 29 29 31 34 36 36 35 35 32</span></span>
+<span><span class="co">##  [313] 35 29 33 30 29 34 31 34 31 32 27 37 35 32 36 29 42 35 28 31 31 36 29 29</span></span>
+<span><span class="co">##  [337] 31 33 30 32 34 32 35 35 30 36 34 30 31 42 34 33 33 32 30 32 30 31 33 30</span></span>
+<span><span class="co">##  [361] 30 31 33 38 30 32 29 29 27 35 29 35 40 42 29 33 34 34 34 35 34 31 39 31</span></span>
+<span><span class="co">##  [385] 34 38 29 32 34 31 28 31 29 33 35 27 41 37 43 34 31 36 30 32 29 36 31 35</span></span>
+<span><span class="co">##  [409] 30 30 35 33 29 33 35 36 30 31 34 36 33 29 29 34 33 38 31 32 33 39 32 29</span></span>
+<span><span class="co">##  [433] 33 33 31 31 31 37 32 31 30 33 42 39 39 33 33 31 35 38 33 39 28 39 32 29</span></span>
+<span><span class="co">##  [457] 32 33 31 35 36 30 33 32 42 32 36 25 39 31 30 30 30 32 29 31 33 33 32 35</span></span>
+<span><span class="co">##  [481] 31 32 32 34 46 29 37 31 31 30 28 29 34 30 34 31 29 35 33 34 42 33 36 32</span></span>
+<span><span class="co">##  [505] 34 33 34 30 30 27 31 30 33 31 34 35 37 32 33 29 35 31 29 35 36 30 34 34</span></span>
+<span><span class="co">##  [529] 31 35 35 33 35 31 30 33 28 29 33 30 32 31 36 34 29 35 34 30 29 32 30 32</span></span>
+<span><span class="co">##  [553] 33 29 30 38 27 45 29 29 31 31 29 32 37 34 33 29 31 39 27 39 37 30 33 29</span></span>
+<span><span class="co">##  [577] 30 33 33 39 41 29 33 35 28 39 32 48 29 35 36 41 33 34 35 39 35 31 33 35</span></span>
+<span><span class="co">##  [601] 36 33 40 30 32 30 31 33 33 32 33 27 35 37 34 30 31 30 32 32 35 33 29 31</span></span>
+<span><span class="co">##  [625] 30 38 36 36 30 35 34 33 36 38 27 33 37 36 29 28 30 32 33 36 33 34 29 35</span></span>
+<span><span class="co">##  [649] 33 35 33 36 36 29 28 35 34 30 32 34 30 33 30 34 31 28 34 29 35 31 33 27</span></span>
+<span><span class="co">##  [673] 33 33 35 34 30 36 28 32 34 35 28 32 32 32 39 30 35 31 32 32 34 33 30 33</span></span>
+<span><span class="co">##  [697] 31 30 32 29 33 32 34 30 34 27 32 33 31 31 36 31 29 30 38 31 33 31 32 31</span></span>
+<span><span class="co">##  [721] 34 35 34 30 28 33 36 34 30 33 33 30 30 31 31 37 35 31 35 33 34 27 35 28</span></span>
+<span><span class="co">##  [745] 28 25 34 31 26 35 29 28 34 37 35 42 38 32 35 35 30 35 28 37 32 30 27 33</span></span>
+<span><span class="co">##  [769] 31 30 31 36 31 31 44 27 35 33 31 36 29 35 30 34 40 34 33 34 35 34 33 33</span></span>
+<span><span class="co">##  [793] 30 30 34 33 35 30 31 34 36 37 34 30 33 27 40 26 28 27 27 31 28 33 27 30</span></span>
+<span><span class="co">##  [817] 30 40 33 30 34 35 26 38 32 32 40 35 31 35 34 40 35 36 27 36 30 28 36 32</span></span>
+<span><span class="co">##  [841] 33 30 32 31 28 33 37 34 38 31 33 34 38 31 36 35 35 31 28 29 33 32 37 37</span></span>
+<span><span class="co">##  [865] 33 35 36 30 30 30 30 38 31 31 34 26 37 35 36 38 29 32 28 32 28 33 28 27</span></span>
+<span><span class="co">##  [889] 38 40 32 34 35 32 41 30 42 31 35 41 38 32 35 33 35 30 33 32 37 29 38 35</span></span>
+<span><span class="co">##  [913] 35 39 30 40 32 27 38 35 37 30 36 35 37 38 33 37 34 33 33 33 38 28 36 28</span></span>
+<span><span class="co">##  [937] 37 33 29 38 33 34 30 36 31 29 32 29 30 32 32 31 35 34 34 32 37 30 33 32</span></span>
+<span><span class="co">##  [961] 38 32 32 34 32 29 30 34 33 35 34 34 29 33 30 32 30 34 36 32 34 29 36 33</span></span>
+<span><span class="co">##  [985] 30 34 36 29 39 41 31 32 39 31 35 30 36 30 32 34</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## $alpha</span></span>
 <span><span class="co">## [1] 0.05</span></span>
@@ -3715,13 +4967,13 @@ required for statistical significance under random sampling.</p>
 <span><span class="va">allsigs</span> <span class="op">&lt;-</span> <span class="va">allsigs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">sapply</a></span><span class="op">(</span><span class="va">allsigs</span>, <span class="va">length</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 175</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 276</span></span></code></pre>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Pairwise overlaps</span></span>
 <span><span class="va">mydists</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcPairwiseOverlaps.html" class="external-link">calcPairwiseOverlaps</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">mydists</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 3037    8</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 6051    8</span></span></code></pre>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Jaccard similarity matrix</span></span>
 <span><span class="va">jmat</span> <span class="op">&lt;-</span> <span class="fu">BugSigDBStats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/BugSigDBStats/man/calcJaccardSimilarity.html" class="external-link">calcJaccardSimilarity</a></span><span class="op">(</span><span class="va">allsigs</span><span class="op">)</span></span>
@@ -3811,7 +5063,7 @@ analyses.</p>
 <span>  annotation_legend_side <span class="op">=</span> <span class="st">"right"</span>,</span>
 <span>  padding <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/unit.html" class="external-link">unit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">2</span>, <span class="fl">10</span><span class="op">)</span>, <span class="st">"mm"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="Colorectal_Cancer_Analysis_vignette_files/figure-html/heatmap-1.png" class="r-plt" alt="" width="4176"></p>
+<p><img src="Colorectal_Cancer_Analysis_vignette_files/figure-html/heatmap-1.png" class="r-plt" alt="" width="6309.12"></p>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save the heatmap as a high-resolution PNG, sized to match the</span></span>
 <span><span class="co"># on-screen version above so nothing is re-cropped on export</span></span>
@@ -3874,7 +5126,7 @@ across CRC studies.</p>
 <div class="section level2">
 <h2 id="discussion">Discussion<a class="anchor" aria-label="anchor" href="#discussion"></a>
 </h2>
-<p>This exploratory analysis identified 192 fecal, human-derived
+<p>This exploratory analysis identified 309 fecal, human-derived
 colorectal cancer microbial signatures curated in BugSigDB. Beyond the
 taxonomic summary, Monte Carlo critical-N estimation, and pairwise
 Jaccard similarity/heatmap/dendrogram analyses, several additional
@@ -3882,7 +5134,7 @@ layers of evidence were used to characterize a candidate “core”
 CRC-associated signature:</p>
 <ul>
 <li>A <strong>formal core-signature threshold</strong> (≥3 independent
-studies, ≥75% directional concordance) narrowed the taxon list to 102
+studies, ≥75% directional concordance) narrowed the taxon list to 135
 taxa with consistent evidence.</li>
 <li>
 <strong>WMS vs 16S concordance</strong> checked whether that

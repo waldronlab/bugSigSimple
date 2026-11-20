@@ -67,7 +67,7 @@
 
       <h1>The Endometriosis-associated Microbiome</h1>
             
-            <h4 data-toc-skip class="date">09 November, 2026</h4>
+            <h4 data-toc-skip class="date">20 November, 2026</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/waldronlab/bugSigSimple/blob/main/vignettes/fieldworkanalysis_samara.Rmd" class="external-link"><code>vignettes/fieldworkanalysis_samara.Rmd</code></a></small>
       <div class="d-none name"><code>fieldworkanalysis_samara.Rmd</code></div>
@@ -107,7 +107,7 @@ occuring by chance</li>
 <pre><code><span><span class="co">## ── <span style="font-weight: bold;">Attaching core tidyverse packages</span> ──────────────────────── tidyverse 2.0.0 ──</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">dplyr    </span> 1.2.1     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">readr    </span> 2.2.0</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">forcats  </span> 1.0.1     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">stringr  </span> 1.6.0</span></span>
-<span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 4.0.3     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.3.1</span></span>
+<span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">ggplot2  </span> 4.0.4     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tibble   </span> 3.3.1</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">lubridate</span> 1.9.5     <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">tidyr    </span> 1.3.2</span></span>
 <span><span class="co">## <span style="color: #00BB00;">✔</span> <span style="color: #0000BB;">purrr    </span> 1.2.2     </span></span>
 <span><span class="co">## ── <span style="font-weight: bold;">Conflicts</span> ────────────────────────────────────────── tidyverse_conflicts() ──</span></span>
@@ -128,10 +128,10 @@ occuring by chance</li>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://waldronlab.io/bugSigSimple">bugSigSimple</a></span><span class="op">)</span></span>
 <span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">bugsigdbr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bugsigdbr/man/importBugSigDB.html" class="external-link">importBugSigDB</a></span><span class="op">(</span>cache<span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Using cached version from 2026-11-09 16:32:08</span></span></code></pre>
+<pre><code><span><span class="co">## Using cached version from 2026-11-20 02:52:42</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 7425   51</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 12086    57</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##  [1] "BSDB ID"                    "Study"                     </span></span>
@@ -139,27 +139,30 @@ occuring by chance</li>
 <span><span class="co">##  [5] "DOI"                        "URL"                       </span></span>
 <span><span class="co">##  [7] "Authors list"               "Title"                     </span></span>
 <span><span class="co">##  [9] "Journal"                    "Year"                      </span></span>
-<span><span class="co">## [11] "Keywords"                   "Experiment"                </span></span>
-<span><span class="co">## [13] "Location of subjects"       "Host species"              </span></span>
-<span><span class="co">## [15] "Body site"                  "UBERON ID"                 </span></span>
-<span><span class="co">## [17] "Condition"                  "EFO ID"                    </span></span>
-<span><span class="co">## [19] "Group 0 name"               "Group 1 name"              </span></span>
-<span><span class="co">## [21] "Group 1 definition"         "Group 0 sample size"       </span></span>
-<span><span class="co">## [23] "Group 1 sample size"        "Antibiotics exclusion"     </span></span>
-<span><span class="co">## [25] "Sequencing type"            "16S variable region"       </span></span>
-<span><span class="co">## [27] "Sequencing platform"        "Data transformation"       </span></span>
-<span><span class="co">## [29] "Statistical test"           "Significance threshold"    </span></span>
-<span><span class="co">## [31] "MHT correction"             "LDA Score above"           </span></span>
-<span><span class="co">## [33] "Matched on"                 "Confounders controlled for"</span></span>
-<span><span class="co">## [35] "Pielou"                     "Shannon"                   </span></span>
-<span><span class="co">## [37] "Chao1"                      "Simpson"                   </span></span>
-<span><span class="co">## [39] "Inverse Simpson"            "Richness"                  </span></span>
-<span><span class="co">## [41] "Signature page name"        "Source"                    </span></span>
-<span><span class="co">## [43] "Curated date"               "Curator"                   </span></span>
-<span><span class="co">## [45] "Revision editor"            "Description"               </span></span>
-<span><span class="co">## [47] "Abundance in Group 1"       "MetaPhlAn taxon names"     </span></span>
-<span><span class="co">## [49] "NCBI Taxonomy IDs"          "State"                     </span></span>
-<span><span class="co">## [51] "Reviewer"</span></span></code></pre>
+<span><span class="co">## [11] "Keywords"                   "Curation method"           </span></span>
+<span><span class="co">## [13] "Curation protocol"          "submittedBy"               </span></span>
+<span><span class="co">## [15] "submissionDate"             "Review state"              </span></span>
+<span><span class="co">## [17] "Quality control tag"        "Experiment"                </span></span>
+<span><span class="co">## [19] "Location of subjects"       "Host species"              </span></span>
+<span><span class="co">## [21] "Body site"                  "UBERON ID"                 </span></span>
+<span><span class="co">## [23] "Condition"                  "EFO ID"                    </span></span>
+<span><span class="co">## [25] "Group 0 name"               "Group 1 name"              </span></span>
+<span><span class="co">## [27] "Group 1 definition"         "Group 0 sample size"       </span></span>
+<span><span class="co">## [29] "Group 1 sample size"        "Antibiotics exclusion"     </span></span>
+<span><span class="co">## [31] "Sequencing type"            "16S variable region"       </span></span>
+<span><span class="co">## [33] "Sequencing platform"        "Data transformation"       </span></span>
+<span><span class="co">## [35] "Statistical test"           "Significance threshold"    </span></span>
+<span><span class="co">## [37] "MHT correction"             "LDA Score above"           </span></span>
+<span><span class="co">## [39] "Matched on"                 "Confounders controlled for"</span></span>
+<span><span class="co">## [41] "Pielou"                     "Shannon"                   </span></span>
+<span><span class="co">## [43] "Chao1"                      "Simpson"                   </span></span>
+<span><span class="co">## [45] "Inverse Simpson"            "Richness"                  </span></span>
+<span><span class="co">## [47] "Signature page name"        "Source"                    </span></span>
+<span><span class="co">## [49] "Curated date"               "Curator"                   </span></span>
+<span><span class="co">## [51] "Revision editor"            "Description"               </span></span>
+<span><span class="co">## [53] "Abundance in Group 1"       "MetaPhlAn taxon names"     </span></span>
+<span><span class="co">## [55] "NCBI Taxonomy IDs"          "State"                     </span></span>
+<span><span class="co">## [57] "Reviewer"</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="subsetting">Subsetting<a class="anchor" aria-label="anchor" href="#subsetting"></a>
@@ -340,6 +343,35 @@ Adenomyosis,Endometriosis
 </td>
 <td style="text-align:left;">
 NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HernandesC._2020
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+case-control
+</td>
+<td style="text-align:left;">
+Endometriosis
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+32192080
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.3390/diagnostics10030163" class="external-link uri">https://doi.org/10.3390/diagnostics10030163</a>
+</td>
+<td style="text-align:left;">
+<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7151170/" class="external-link uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7151170/</a>
 </td>
 </tr>
 <tr>
@@ -540,7 +572,15 @@ Freq
 1301
 </td>
 <td style="text-align:right;">
-6
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1380
+</td>
+<td style="text-align:right;">
+5
 </td>
 </tr>
 <tr>
@@ -553,7 +593,23 @@ Freq
 </tr>
 <tr>
 <td style="text-align:left;">
+194
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 543
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+838
 </td>
 <td style="text-align:right;">
 4
@@ -585,7 +641,23 @@ Freq
 </tr>
 <tr>
 <td style="text-align:left;">
+1350
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 135621
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1375
 </td>
 <td style="text-align:right;">
 3
@@ -609,7 +681,23 @@ Freq
 </tr>
 <tr>
 <td style="text-align:left;">
+2050
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 28050
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+286
 </td>
 <td style="text-align:right;">
 3
@@ -633,14 +721,6 @@ Freq
 </tr>
 <tr>
 <td style="text-align:left;">
-838
-</td>
-<td style="text-align:right;">
-3
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 906
 </td>
 <td style="text-align:right;">
@@ -649,15 +729,7 @@ Freq
 </tr>
 <tr>
 <td style="text-align:left;">
-1350
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1380
+13687
 </td>
 <td style="text-align:right;">
 2
@@ -713,14 +785,6 @@ Freq
 </tr>
 <tr>
 <td style="text-align:left;">
-194
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 216851
 </td>
 <td style="text-align:right;">
@@ -737,39 +801,7 @@ Freq
 </tr>
 <tr>
 <td style="text-align:left;">
-286
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
 33038
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-33958
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-419014
-</td>
-<td style="text-align:right;">
-2
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-72294
 </td>
 <td style="text-align:right;">
 2
@@ -799,7 +831,7 @@ Freq
 1301
 </td>
 <td style="text-align:right;">
-5
+6
 </td>
 </tr>
 <tr>
@@ -821,6 +853,14 @@ Freq
 <tr>
 <td style="text-align:left;">
 1300
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1350
 </td>
 <td style="text-align:right;">
 3
@@ -852,26 +892,18 @@ Freq
 </tr>
 <tr>
 <td style="text-align:left;">
+286
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 469
 </td>
 <td style="text-align:right;">
 3
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-84107
-</td>
-<td style="text-align:right;">
-3
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1350
-</td>
-<td style="text-align:right;">
-2
 </td>
 </tr>
 </tbody>
@@ -895,6 +927,14 @@ Freq
 <tbody>
 <tr>
 <td style="text-align:left;">
+1380
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 168808
 </td>
 <td style="text-align:right;">
@@ -904,6 +944,22 @@ Freq
 <tr>
 <td style="text-align:left;">
 171549
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+194
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2050
 </td>
 <td style="text-align:right;">
 2
@@ -927,6 +983,14 @@ Freq
 </tr>
 <tr>
 <td style="text-align:left;">
+838
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 906
 </td>
 <td style="text-align:right;">
@@ -935,39 +999,7 @@ Freq
 </tr>
 <tr>
 <td style="text-align:left;">
-1185407
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1301
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1452070
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1508657
-</td>
-<td style="text-align:right;">
-1
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-1578
+1033
 </td>
 <td style="text-align:right;">
 1
@@ -1155,6 +1187,35 @@ NA
 </tr>
 <tr>
 <td style="text-align:left;">
+HernandesC._2020
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:left;">
+case-control
+</td>
+<td style="text-align:left;">
+Endometriosis
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+32192080
+</td>
+<td style="text-align:left;">
+<a href="https://doi.org/10.3390/diagnostics10030163" class="external-link uri">https://doi.org/10.3390/diagnostics10030163</a>
+</td>
+<td style="text-align:left;">
+<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7151170/" class="external-link uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7151170/</a>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 KhanK.N._2016
 </td>
 <td style="text-align:right;">
@@ -1309,16 +1370,16 @@ Streptococcus
 genus
 </td>
 <td style="text-align:right;">
-5
+6
 </td>
 <td style="text-align:right;">
-4
+5
 </td>
 <td style="text-align:right;">
 1
 </td>
 <td style="text-align:right;">
-0.37
+0.22
 </td>
 </tr>
 <tr>
@@ -1443,6 +1504,26 @@ family
 </tr>
 <tr>
 <td style="text-align:left;">
+Pseudomonas
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.25
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
 Alloscardovia
 </td>
 <td style="text-align:left;">
@@ -1483,82 +1564,22 @@ genus
 </tr>
 <tr>
 <td style="text-align:left;">
-Atopobium
+Aerococcus
 </td>
 <td style="text-align:left;">
 genus
 </td>
 <td style="text-align:right;">
-2
+3
 </td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:right;">
-0
+1
 </td>
 <td style="text-align:right;">
-0.50
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Staphylococcaceae
-</td>
-<td style="text-align:left;">
-family
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0.50
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Faecalibacterium
-</td>
-<td style="text-align:left;">
-genus
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0.50
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Ezakiella
-</td>
-<td style="text-align:left;">
-genus
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-0.50
+1.00
 </td>
 </tr>
 <tr>
@@ -1609,13 +1630,33 @@ Prevotella
 genus
 </td>
 <td style="text-align:right;">
-3
+4
 </td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:right;">
-1
+2
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Campylobacter
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2
 </td>
 <td style="text-align:right;">
 1.00
@@ -1663,7 +1704,27 @@ genus
 </tr>
 <tr>
 <td style="text-align:left;">
-Megasphaera
+Atopobium
+</td>
+<td style="text-align:left;">
+genus
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mobiluncus
 </td>
 <td style="text-align:left;">
 genus
@@ -1683,22 +1744,22 @@ genus
 </tr>
 <tr>
 <td style="text-align:left;">
-Lactobacillaceae
+Megasphaera
 </td>
 <td style="text-align:left;">
-family
+genus
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1
 </td>
 <td style="text-align:right;">
 2
 </td>
 <td style="text-align:right;">
-0
-</td>
-<td style="text-align:right;">
-2
-</td>
-<td style="text-align:right;">
-0.50
+1.00
 </td>
 </tr>
 </tbody>
@@ -2000,7 +2061,7 @@ for log-linear model<a class="anchor" aria-label="anchor" href="#create-a-data-f
 <span><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
 <span><span class="co">## (Intercept)     1.96        NaN     NaN      NaN</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Number of iterations in BFGS optimization: 20 </span></span>
+<span><span class="co">## Number of iterations in BFGS optimization: 25 </span></span>
 <span><span class="co">## Log-likelihood: -1.02e+05 on 5 Df</span></span></code></pre>
 <div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://www.stats.ox.ac.uk/pub/MASS4/" class="external-link">MASS</a></span><span class="op">)</span></span></code></pre></div>
@@ -2133,23 +2194,23 @@ for log-linear model<a class="anchor" aria-label="anchor" href="#create-a-data-f
 <span><span class="co">## </span></span>
 <span><span class="co">## Pearson residuals:</span></span>
 <span><span class="co">##     Min      1Q  Median      3Q     Max </span></span>
-<span><span class="co">## -0.1923 -0.1923 -0.1923 -0.1923  7.1121 </span></span>
+<span><span class="co">## -0.1898 -0.1898 -0.1898 -0.1898  7.0569 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Count model coefficients (negbin with log link):</span></span>
 <span><span class="co">##                 Estimate Std. Error z value Pr(&gt;|z|)</span></span>
-<span><span class="co">## (Intercept)    1.917e+01        NaN     NaN      NaN</span></span>
-<span><span class="co">## Lactobacillus -2.725e-07        NaN     NaN      NaN</span></span>
-<span><span class="co">## age            3.274e-02        NaN     NaN      NaN</span></span>
-<span><span class="co">## BMI           -4.033e-01        NaN     NaN      NaN</span></span>
-<span><span class="co">## Log(theta)    -9.618e-01        NaN     NaN      NaN</span></span>
+<span><span class="co">## (Intercept)    1.945e+01        NaN     NaN      NaN</span></span>
+<span><span class="co">## Lactobacillus -2.787e-07        NaN     NaN      NaN</span></span>
+<span><span class="co">## age            2.839e-02        NaN     NaN      NaN</span></span>
+<span><span class="co">## BMI           -4.084e-01        NaN     NaN      NaN</span></span>
+<span><span class="co">## Log(theta)    -9.837e-01        NaN     NaN      NaN</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Zero-inflation model coefficients (binomial with logit link):</span></span>
 <span><span class="co">##             Estimate Std. Error z value Pr(&gt;|z|)</span></span>
-<span><span class="co">## (Intercept)     1.91        NaN     NaN      NaN</span></span>
+<span><span class="co">## (Intercept)    1.921        NaN     NaN      NaN</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Theta = 0.3822 </span></span>
-<span><span class="co">## Number of iterations in BFGS optimization: 27 </span></span>
-<span><span class="co">## Log-likelihood: -131.9 on 6 Df</span></span></code></pre>
+<span><span class="co">## Theta = 0.3739 </span></span>
+<span><span class="co">## Number of iterations in BFGS optimization: 40 </span></span>
+<span><span class="co">## Log-likelihood: -131.8 on 6 Df</span></span></code></pre>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

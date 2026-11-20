@@ -31,7 +31,7 @@ library(tidyverse)
     ## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
     ## ✔ dplyr     1.2.1     ✔ readr     2.2.0
     ## ✔ forcats   1.0.1     ✔ stringr   1.6.0
-    ## ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+    ## ✔ ggplot2   4.0.4     ✔ tibble    3.3.1
     ## ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
     ## ✔ purrr     1.2.2     
     ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
@@ -63,14 +63,14 @@ library(bugSigSimple)
 dat <- bugsigdbr::importBugSigDB(cache= TRUE)
 ```
 
-    ## Using cached version from 2026-11-09 16:32:08
+    ## Using cached version from 2026-11-20 02:52:42
 
 ``` r
 
 dim(dat)
 ```
 
-    ## [1] 7425   51
+    ## [1] 12086    57
 
 ``` r
 
@@ -82,27 +82,30 @@ names(dat)
     ##  [5] "DOI"                        "URL"                       
     ##  [7] "Authors list"               "Title"                     
     ##  [9] "Journal"                    "Year"                      
-    ## [11] "Keywords"                   "Experiment"                
-    ## [13] "Location of subjects"       "Host species"              
-    ## [15] "Body site"                  "UBERON ID"                 
-    ## [17] "Condition"                  "EFO ID"                    
-    ## [19] "Group 0 name"               "Group 1 name"              
-    ## [21] "Group 1 definition"         "Group 0 sample size"       
-    ## [23] "Group 1 sample size"        "Antibiotics exclusion"     
-    ## [25] "Sequencing type"            "16S variable region"       
-    ## [27] "Sequencing platform"        "Data transformation"       
-    ## [29] "Statistical test"           "Significance threshold"    
-    ## [31] "MHT correction"             "LDA Score above"           
-    ## [33] "Matched on"                 "Confounders controlled for"
-    ## [35] "Pielou"                     "Shannon"                   
-    ## [37] "Chao1"                      "Simpson"                   
-    ## [39] "Inverse Simpson"            "Richness"                  
-    ## [41] "Signature page name"        "Source"                    
-    ## [43] "Curated date"               "Curator"                   
-    ## [45] "Revision editor"            "Description"               
-    ## [47] "Abundance in Group 1"       "MetaPhlAn taxon names"     
-    ## [49] "NCBI Taxonomy IDs"          "State"                     
-    ## [51] "Reviewer"
+    ## [11] "Keywords"                   "Curation method"           
+    ## [13] "Curation protocol"          "submittedBy"               
+    ## [15] "submissionDate"             "Review state"              
+    ## [17] "Quality control tag"        "Experiment"                
+    ## [19] "Location of subjects"       "Host species"              
+    ## [21] "Body site"                  "UBERON ID"                 
+    ## [23] "Condition"                  "EFO ID"                    
+    ## [25] "Group 0 name"               "Group 1 name"              
+    ## [27] "Group 1 definition"         "Group 0 sample size"       
+    ## [29] "Group 1 sample size"        "Antibiotics exclusion"     
+    ## [31] "Sequencing type"            "16S variable region"       
+    ## [33] "Sequencing platform"        "Data transformation"       
+    ## [35] "Statistical test"           "Significance threshold"    
+    ## [37] "MHT correction"             "LDA Score above"           
+    ## [39] "Matched on"                 "Confounders controlled for"
+    ## [41] "Pielou"                     "Shannon"                   
+    ## [43] "Chao1"                      "Simpson"                   
+    ## [45] "Inverse Simpson"            "Richness"                  
+    ## [47] "Signature page name"        "Source"                    
+    ## [49] "Curated date"               "Curator"                   
+    ## [51] "Revision editor"            "Description"               
+    ## [53] "Abundance in Group 1"       "MetaPhlAn taxon names"     
+    ## [55] "NCBI Taxonomy IDs"          "State"                     
+    ## [57] "Reviewer"
 
 ## Subsetting
 
@@ -148,6 +151,7 @@ bugSigSimple::createStudyTable(subset.dat) %>%
 | AtaB.\_2019 | 14 | 14 | prospective cohort | Endometriosis | 2 | 30778155 | <https://doi.org/10.1038/s41598-019-39700-6> | <https://pubmed.ncbi.nlm.nih.gov/30778155/> |
 | ChaoX.\_2021 | 37 | 66 | case-control | Endometriosis | 4 | 34268384 | <https://doi.org/10.21037/atm-20-4586> | NA |
 | ChenS.\_2020 | 14 | 120 | case-control | Adenomyosis,Endometriosis | 3 | 33313185 | <https://doi.org/10.21037/atm-20-1309> | NA |
+| HernandesC.\_2020 | 21 | 11 | case-control | Endometriosis | 6 | 32192080 | <https://doi.org/10.3390/diagnostics10030163> | <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7151170/> |
 | KhanK.N.\_2016 | 32 | 32 | case-control | Endometriosis | 5 | 26901400 | <https://doi.org/10.1016/j.ejogrb.2016.01.040> | NA |
 | LeeS.R.\_2021 | 45 | 45 | case-control | Endometriosis | 2 | 33925708 | <https://doi.org/10.3390/ijms22094608> | NA |
 | PerrottaA.R.\_2020 | 8 | 12 | cross-sectional observational, not case-control | Endometriosis | 2 | 32046455 | <https://doi.org/10.1007/s43032-019-00113-5> | NA |
@@ -165,36 +169,36 @@ BugSigDBStats::getMostFrequentTaxa(subset.dat, n=30) %>%
 
 | Var1    | Freq |
 |:--------|-----:|
-| 1301    |    6 |
+| 1301    |    7 |
+| 1380    |    5 |
 | 1578    |    4 |
+| 194     |    4 |
 | 543     |    4 |
+| 838     |    4 |
 | 84107   |    4 |
 | 119852  |    3 |
 | 1300    |    3 |
+| 1350    |    3 |
 | 135621  |    3 |
+| 1375    |    3 |
 | 171549  |    3 |
 | 1940338 |    3 |
+| 2050    |    3 |
 | 28050   |    3 |
+| 286     |    3 |
 | 39948   |    3 |
 | 469     |    3 |
-| 838     |    3 |
 | 906     |    3 |
-| 1350    |    2 |
-| 1380    |    2 |
+| 13687   |    2 |
 | 1508657 |    2 |
 | 1582879 |    2 |
 | 1654    |    2 |
 | 1663    |    2 |
 | 168808  |    2 |
 | 1743    |    2 |
-| 194     |    2 |
 | 216851  |    2 |
 | 2701    |    2 |
-| 286     |    2 |
 | 33038   |    2 |
-| 33958   |    2 |
-| 419014  |    2 |
-| 72294   |    2 |
 
 ``` r
 
@@ -206,16 +210,16 @@ BugSigDBStats::getMostFrequentTaxa(subset.dat, direction="UP") %>%
 
 | Var1    | Freq |
 |:--------|-----:|
-| 1301    |    5 |
+| 1301    |    6 |
 | 543     |    4 |
 | 119852  |    3 |
 | 1300    |    3 |
+| 1350    |    3 |
 | 135621  |    3 |
 | 1578    |    3 |
 | 1940338 |    3 |
+| 286     |    3 |
 | 469     |    3 |
-| 84107   |    3 |
-| 1350    |    2 |
 
 ``` r
 
@@ -225,18 +229,18 @@ BugSigDBStats::getMostFrequentTaxa(subset.dat, direction="DOWN") %>%
   scroll_box(height = "300px")
 ```
 
-| Var1    | Freq |
-|:--------|-----:|
-| 168808  |    2 |
-| 171549  |    2 |
-| 28050   |    2 |
-| 33958   |    2 |
-| 906     |    2 |
-| 1185407 |    1 |
-| 1301    |    1 |
-| 1452070 |    1 |
-| 1508657 |    1 |
-| 1578    |    1 |
+| Var1   | Freq |
+|:-------|-----:|
+| 1380   |    3 |
+| 168808 |    2 |
+| 171549 |    2 |
+| 194    |    2 |
+| 2050   |    2 |
+| 28050  |    2 |
+| 33958  |    2 |
+| 838    |    2 |
+| 906    |    2 |
+| 1033   |    1 |
 
 ## Excluding feces samples
 
@@ -275,6 +279,7 @@ bugSigSimple::createStudyTable(reproductive_sigs) %>%
 | AtaB.\_2019 | 14 | 14 | prospective cohort | Endometriosis | 2 | 30778155 | <https://doi.org/10.1038/s41598-019-39700-6> | <https://pubmed.ncbi.nlm.nih.gov/30778155/> |
 | ChaoX.\_2021 | 37 | 66 | case-control | Endometriosis | 4 | 34268384 | <https://doi.org/10.21037/atm-20-4586> | NA |
 | ChenS.\_2020 | 14 | 120 | case-control | Adenomyosis,Endometriosis | 3 | 33313185 | <https://doi.org/10.21037/atm-20-1309> | NA |
+| HernandesC.\_2020 | 21 | 11 | case-control | Endometriosis | 6 | 32192080 | <https://doi.org/10.3390/diagnostics10030163> | <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7151170/> |
 | KhanK.N.\_2016 | 32 | 32 | case-control | Endometriosis | 5 | 26901400 | <https://doi.org/10.1016/j.ejogrb.2016.01.040> | NA |
 | LeeS.R.\_2021 | 45 | 45 | case-control | Endometriosis | 2 | 33925708 | <https://doi.org/10.3390/ijms22094608> | NA |
 | PerrottaA.R.\_2020 | 8 | 12 | cross-sectional observational, not case-control | Endometriosis | 2 | 32046455 | <https://doi.org/10.1007/s43032-019-00113-5> | NA |
@@ -292,26 +297,26 @@ kableExtra::kbl(allfreqs) %>%
 
 | Taxon Name | Taxonomic Level | total_signatures | increased_signatures | decreased_signatures | Binomial Test pval |
 |:---|:---|---:|---:|---:|---:|
-| Streptococcus | genus | 5 | 4 | 1 | 0.37 |
+| Streptococcus | genus | 6 | 5 | 1 | 0.22 |
 | Coriobacteriaceae | family | 3 | 3 | 0 | 0.25 |
 | Streptococcaceae | family | 3 | 3 | 0 | 0.25 |
 | Enterobacteriaceae | family | 3 | 3 | 0 | 0.25 |
 | Escherichia/Shigella sp. | species | 3 | 3 | 0 | 0.25 |
 | Acinetobacter | genus | 3 | 3 | 0 | 0.25 |
 | Pseudomonadaceae | family | 3 | 3 | 0 | 0.25 |
+| Pseudomonas | genus | 3 | 3 | 0 | 0.25 |
 | Alloscardovia | genus | 2 | 2 | 0 | 0.50 |
 | Arthrobacter | genus | 2 | 2 | 0 | 0.50 |
-| Atopobium | genus | 2 | 2 | 0 | 0.50 |
-| Staphylococcaceae | family | 2 | 2 | 0 | 0.50 |
-| Faecalibacterium | genus | 2 | 2 | 0 | 0.50 |
-| Ezakiella | genus | 2 | 2 | 0 | 0.50 |
+| Aerococcus | genus | 3 | 2 | 1 | 1.00 |
 | Lactobacillus | genus | 3 | 2 | 1 | 1.00 |
 | Dialister | genus | 3 | 2 | 1 | 1.00 |
-| Prevotella | genus | 3 | 2 | 1 | 1.00 |
+| Prevotella | genus | 4 | 2 | 2 | 1.00 |
+| Campylobacter | genus | 4 | 2 | 2 | 1.00 |
 | Gardnerella | genus | 2 | 1 | 1 | 1.00 |
 | Propionibacterium | genus | 2 | 1 | 1 | 1.00 |
+| Atopobium | genus | 5 | 2 | 3 | 1.00 |
+| Mobiluncus | genus | 3 | 1 | 2 | 1.00 |
 | Megasphaera | genus | 3 | 1 | 2 | 1.00 |
-| Lactobacillaceae | family | 2 | 0 | 2 | 0.50 |
 
 ### Load HMP data from curatedMetagenomicData
 
@@ -688,7 +693,7 @@ summary (fit.ZIpois)
     ##             Estimate Std. Error z value Pr(>|z|)
     ## (Intercept)     1.96        NaN     NaN      NaN
     ## 
-    ## Number of iterations in BFGS optimization: 20 
+    ## Number of iterations in BFGS optimization: 25 
     ## Log-likelihood: -1.02e+05 on 5 Df
 
 ``` r
@@ -901,20 +906,20 @@ summary(fit.ZInegbin)
     ## 
     ## Pearson residuals:
     ##     Min      1Q  Median      3Q     Max 
-    ## -0.1923 -0.1923 -0.1923 -0.1923  7.1121 
+    ## -0.1898 -0.1898 -0.1898 -0.1898  7.0569 
     ## 
     ## Count model coefficients (negbin with log link):
     ##                 Estimate Std. Error z value Pr(>|z|)
-    ## (Intercept)    1.917e+01        NaN     NaN      NaN
-    ## Lactobacillus -2.725e-07        NaN     NaN      NaN
-    ## age            3.274e-02        NaN     NaN      NaN
-    ## BMI           -4.033e-01        NaN     NaN      NaN
-    ## Log(theta)    -9.618e-01        NaN     NaN      NaN
+    ## (Intercept)    1.945e+01        NaN     NaN      NaN
+    ## Lactobacillus -2.787e-07        NaN     NaN      NaN
+    ## age            2.839e-02        NaN     NaN      NaN
+    ## BMI           -4.084e-01        NaN     NaN      NaN
+    ## Log(theta)    -9.837e-01        NaN     NaN      NaN
     ## 
     ## Zero-inflation model coefficients (binomial with logit link):
     ##             Estimate Std. Error z value Pr(>|z|)
-    ## (Intercept)     1.91        NaN     NaN      NaN
+    ## (Intercept)    1.921        NaN     NaN      NaN
     ## 
-    ## Theta = 0.3822 
-    ## Number of iterations in BFGS optimization: 27 
-    ## Log-likelihood: -131.9 on 6 Df
+    ## Theta = 0.3739 
+    ## Number of iterations in BFGS optimization: 40 
+    ## Log-likelihood: -131.8 on 6 Df
